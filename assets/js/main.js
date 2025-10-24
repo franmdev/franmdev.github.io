@@ -2,9 +2,8 @@
 
 // --- Sistema 2: Ingeniería de Datos (Tu Pipeline Personal) ---
 function registerVisitor() {
-    // ⚠️ ATENCIÓN: Esta URL se cambiará al final por la URL de Azure.
-    // Por ahora, usamos la URL local para pruebas:
-    const API_URL = "http://localhost:7071/api/register_visitor";
+    // URL de funcion desplegada en Azure
+    const API_URL = "https://franmora-portfolio-api.azurewebsites.net/api/register_visitor";
 
     // NOTA: No necesitamos enviar la IP; el servidor (Azure) la detecta automáticamente.
 
