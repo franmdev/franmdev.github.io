@@ -1,73 +1,93 @@
 // assets/js/main.js
 
+// Variable global para guardar el token de Turnstile
+let turnstileToken = null;
+
+// --- Función llamada por Cloudflare Turnstile al validar ---
+function onTurnstileSuccess(token) {
+    console.log("Cloudflare Turnstile verificado con éxito. Token:", token);
+    turnstileToken = token; // Guardamos el token
+    // Ahora que tenemos el token, llamamos a nuestra API
+    registerVisitorAndLoadLinks();
+}
+
+// --- Función que llama a nuestra API de Azure ---
 function registerVisitorAndLoadLinks() {
     const API_URL = "https://franmora-portfolio-api.azurewebsites.net/api/register_visitor"; // URL de producción
-    const linksPlaceholder = document.getElementById('social-links-placeholder'); // El div donde irán los links
+    const linksPlaceholder = document.getElementById('social-links-placeholder');
 
     if (!linksPlaceholder) {
-        console.error("Error: No se encontró el elemento con ID 'social-links-placeholder' en el HTML.");
-        return; // Salir si el placeholder no existe
+        console.error("Error: Placeholder 'social-links-placeholder' no encontrado.");
+        return;
     }
+
+    // Asegurarnos de que tenemos un token antes de llamar a la API
+    if (!turnstileToken) {
+        console.error("Error: No se recibió el token de Turnstile. No se puede llamar a la API.");
+        // Opcional: Mostrar un mensaje al usuario
+        linksPlaceholder.textContent = "Error de verificación. Intente recargar la página.";
+        return;
+    }
+
+    console.log("Llamando a la API de Azure con el token de Turnstile...");
 
     fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Enviamos el path para el registro, aunque podríamos quitarlo si no lo usamos
-        body: JSON.stringify({ path: window.location.pathname })
+        // Enviamos el token de Turnstile y el path en el cuerpo
+        body: JSON.stringify({
+            path: window.location.pathname,
+            "cf-turnstile-response": turnstileToken // Nombre estándar esperado por Cloudflare
+        })
     })
         .then(response => {
+            // Revisamos primero si la API devolvió error (ej. 403 por Turnstile inválido, 500 por error interno)
             if (!response.ok) {
-                // Si la API devuelve error (ej. 500), lanzamos un error para ir al .catch
-                throw new Error(`Error ${response.status} de la API: ${response.statusText}`);
+                // Intentamos leer el mensaje de error si la API lo envió en JSON
+                return response.json().then(errorData => {
+                    throw new Error(`Error ${response.status} de la API: ${errorData.error || response.statusText}`);
+                }).catch(() => {
+                    // Si la respuesta no es JSON o hay otro error, lanzamos error genérico
+                    throw new Error(`Error ${response.status} de la API: ${response.statusText}`);
+                });
             }
-            return response.json(); // Convertimos la respuesta exitosa a JSON
+            // Si la respuesta es OK (200), la procesamos como JSON
+            return response.json();
         })
         .then(data => {
-            console.log("Respuesta de la API recibida:", data); // Log para depurar
+            console.log("Respuesta de la API recibida:", data);
 
             // Verificamos si la respuesta contiene los links sensibles
             if (data.sensitiveLinks && data.sensitiveLinks.linkedin && data.sensitiveLinks.github) {
-                console.log("País permitido. Mostrando links de LinkedIn y GitHub.");
+                console.log("API confirmó acceso permitido. Mostrando links.");
+                linksPlaceholder.innerHTML = ''; // Limpiar
 
-                // Limpiamos el placeholder por si acaso
-                linksPlaceholder.innerHTML = '';
-
-                // Creamos el enlace de LinkedIn
+                // Crear y añadir links (código igual que antes)
                 const linkedinLink = document.createElement('a');
                 linkedinLink.href = data.sensitiveLinks.linkedin;
                 linkedinLink.textContent = 'LinkedIn';
-                linkedinLink.target = '_blank'; // Abrir en nueva pestaña
-                linkedinLink.rel = 'noopener noreferrer'; // Buenas prácticas de seguridad
-                // Añadir clases CSS si quieres darle estilo (ej. con Tailwind)
-                // linkedinLink.classList.add('text-blue-500', 'hover:underline', 'mx-2'); 
+                linkedinLink.target = '_blank';
+                linkedinLink.rel = 'noopener noreferrer';
                 linksPlaceholder.appendChild(linkedinLink);
-
-                // Añadimos un separador simple (opcional)
                 linksPlaceholder.appendChild(document.createTextNode(' | '));
-
-                // Creamos el enlace de GitHub
                 const githubLink = document.createElement('a');
                 githubLink.href = data.sensitiveLinks.github;
                 githubLink.textContent = 'GitHub';
                 githubLink.target = '_blank';
                 githubLink.rel = 'noopener noreferrer';
-                // Añadir clases CSS
-                // githubLink.classList.add('text-gray-400', 'hover:underline', 'mx-2'); 
                 linksPlaceholder.appendChild(githubLink);
 
             } else {
-                console.log("País no permitido o links no recibidos. Links sensibles ocultos.");
-                // Opcional: Podrías mostrar un mensaje genérico o nada
-                linksPlaceholder.innerHTML = ''; // Asegurarse de que esté vacío
+                console.log("API indicó país no permitido o links no recibidos. Links ocultos.");
+                linksPlaceholder.innerHTML = ''; // Asegurar que esté vacío
             }
         })
         .catch(error => {
-            // Captura errores de red (fetch fallido) o errores lanzados desde .then()
-            console.error("No se pudo conectar o procesar la respuesta del servicio de Azure Functions.", error);
-            // Ocultar links o mostrar mensaje de error en el placeholder si falla la conexión
-            linksPlaceholder.innerHTML = '';
+            console.error("Error al conectar o procesar respuesta de Azure Functions:", error);
+            linksPlaceholder.innerHTML = 'No se pudo cargar el contenido.'; // Mensaje de error genérico
         });
+
+    // Limpiamos el token después de usarlo (opcional, por seguridad)
+    turnstileToken = null;
 }
 
-// Ejecutar la función cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', registerVisitorAndLoadLinks);
