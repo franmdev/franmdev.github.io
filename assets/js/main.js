@@ -1,93 +1,177 @@
 // assets/js/main.js
 
-// Variable global para guardar el token de Turnstile
-let turnstileToken = null;
+const API_URL = "https://franmora-portfolio-api.azurewebsites.net/api/register_visitor"; // URL de producción
+const TURNSTILE_SITE_KEY = "0x4AAAAAAB8sMLnvQf8wAXSD";
 
-// --- Función llamada por Cloudflare Turnstile al validar ---
-function onTurnstileSuccess(token) {
-    console.log("Cloudflare Turnstile verificado con éxito. Token:", token);
-    turnstileToken = token; // Guardamos el token
-    // Ahora que tenemos el token, llamamos a nuestra API
-    registerVisitorAndLoadLinks();
+// --- Elementos del DOM ---
+let loaderWrapper, blockedMessage, mainContent, turnstileWidgetDiv, socialLinksPlaceholder;
+
+// --- Función para renderizar los links (si se reciben) ---
+function renderSensitiveLinks(links) {
+    if (!socialLinksPlaceholder) {
+        socialLinksPlaceholder = document.getElementById('social-links-placeholder');
+        if (!socialLinksPlaceholder) return; // Salir si no existe
+    }
+
+    if (links && links.linkedin && links.github) {
+        console.log("País permitido. Mostrando links de LinkedIn y GitHub.");
+        linksPlaceholder.innerHTML = ''; // Limpiar
+
+        const linkedinLink = document.createElement('a');
+        linkedinLink.href = links.linkedin;
+        linkedinLink.textContent = 'LinkedIn';
+        linkedinLink.target = '_blank';
+        linkedinLink.rel = 'noopener noreferrer';
+        // (Añadir clases de estilo si es necesario)
+        linksPlaceholder.appendChild(linkedinLink);
+
+        linksPlaceholder.appendChild(document.createTextNode(' | '));
+
+        const githubLink = document.createElement('a');
+        githubLink.href = links.github;
+        githubLink.textContent = 'GitHub';
+        githubLink.target = '_blank';
+        githubLink.rel = 'noopener noreferrer';
+        linksPlaceholder.appendChild(githubLink);
+    } else {
+        console.log("País no permitido o links no recibidos. Links ocultos.");
+        linksPlaceholder.innerHTML = ''; // Asegurar que esté vacío
+    }
 }
 
-// --- Función que llama a nuestra API de Azure ---
-function registerVisitorAndLoadLinks() {
-    const API_URL = "https://franmora-portfolio-api.azurewebsites.net/api/register_visitor"; // URL de producción
-    const linksPlaceholder = document.getElementById('social-links-placeholder');
+// --- Funciones para cambiar el estado de la página ---
+function showLoader() {
+    if (loaderWrapper) loaderWrapper.style.display = 'block';
+    if (blockedMessage) blockedMessage.style.display = 'none';
+    if (mainContent) mainContent.style.display = 'none';
+}
 
-    if (!linksPlaceholder) {
-        console.error("Error: Placeholder 'social-links-placeholder' no encontrado.");
-        return;
-    }
+function showBlockedMessage() {
+    if (loaderWrapper) loaderWrapper.style.display = 'none';
+    if (blockedMessage) blockedMessage.style.display = 'block';
+    if (mainContent) mainContent.style.display = 'none';
+}
 
-    // Asegurarnos de que tenemos un token antes de llamar a la API
-    if (!turnstileToken) {
-        console.error("Error: No se recibió el token de Turnstile. No se puede llamar a la API.");
-        // Opcional: Mostrar un mensaje al usuario
-        linksPlaceholder.textContent = "Error de verificación. Intente recargar la página.";
-        return;
-    }
+function showMainContent() {
+    if (loaderWrapper) loaderWrapper.style.display = 'none';
+    if (blockedMessage) blockedMessage.style.display = 'none';
+    if (mainContent) mainContent.style.display = 'block';
+}
 
-    console.log("Llamando a la API de Azure con el token de Turnstile...");
+// --- CASO 2: Callback de Turnstile cuando la IP es nueva ---
+function onTurnstileSuccess(token) {
+    console.log("Turnstile verificado (IP nueva). Llamando a API para validación completa...");
+
+    // Ahora llamamos a la API con el token para la validación completa
+    fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            action: "validate_visit", // <- Acción de validación
+            "cf-turnstile-response": token
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => { throw new Error(err.error || `Error API: ${response.status}`); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Respuesta de validación completa recibida:", data);
+            if (data.status === "known_good" && data.sensitiveLinks.linkedin) {
+                // Éxito: IP nueva validada, es de Chile y limpia
+                showMainContent();
+                renderSensitiveLinks(data.sensitiveLinks);
+            } else {
+                // Fracaso: IP nueva validada, pero es sospechosa o no de Chile
+                showBlockedMessage();
+            }
+        })
+        .catch(error => {
+            console.error("Error en el flujo de validación (Turnstile):", error);
+            showBlockedMessage(); // Bloquear si la validación falla
+        });
+}
+
+// --- CASO 1: Chequeo inicial de IP al cargar la página ---
+function checkIpStatus() {
+    console.log("Realizando chequeo inicial de IP (Caché DB)...");
 
     fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Enviamos el token de Turnstile y el path en el cuerpo
-        body: JSON.stringify({
-            path: window.location.pathname,
-            "cf-turnstile-response": turnstileToken // Nombre estándar esperado por Cloudflare
-        })
+        body: JSON.stringify({ action: "check_ip" }) // <- Acción de chequeo
     })
         .then(response => {
-            // Revisamos primero si la API devolvió error (ej. 403 por Turnstile inválido, 500 por error interno)
             if (!response.ok) {
-                // Intentamos leer el mensaje de error si la API lo envió en JSON
-                return response.json().then(errorData => {
-                    throw new Error(`Error ${response.status} de la API: ${errorData.error || response.statusText}`);
-                }).catch(() => {
-                    // Si la respuesta no es JSON o hay otro error, lanzamos error genérico
-                    throw new Error(`Error ${response.status} de la API: ${response.statusText}`);
-                });
+                // Si la API falla en el chequeo, procedemos al flujo de validación completo
+                return { status: "needs_validation" };
             }
-            // Si la respuesta es OK (200), la procesamos como JSON
             return response.json();
         })
         .then(data => {
-            console.log("Respuesta de la API recibida:", data);
+            console.log("Respuesta de chequeo inicial recibida:", data.status);
 
-            // Verificamos si la respuesta contiene los links sensibles
-            if (data.sensitiveLinks && data.sensitiveLinks.linkedin && data.sensitiveLinks.github) {
-                console.log("API confirmó acceso permitido. Mostrando links.");
-                linksPlaceholder.innerHTML = ''; // Limpiar
+            switch (data.status) {
+                case "known_good":
+                    // CASO 1 (Éxito): IP conocida y limpia. Mostrar contenido, omitir Turnstile.
+                    console.log("Acceso rápido (Caché HIT - Limpio).");
+                    showMainContent();
+                    renderSensitiveLinks(data.sensitiveLinks);
+                    break;
 
-                // Crear y añadir links (código igual que antes)
-                const linkedinLink = document.createElement('a');
-                linkedinLink.href = data.sensitiveLinks.linkedin;
-                linkedinLink.textContent = 'LinkedIn';
-                linkedinLink.target = '_blank';
-                linkedinLink.rel = 'noopener noreferrer';
-                linksPlaceholder.appendChild(linkedinLink);
-                linksPlaceholder.appendChild(document.createTextNode(' | '));
-                const githubLink = document.createElement('a');
-                githubLink.href = data.sensitiveLinks.github;
-                githubLink.textContent = 'GitHub';
-                githubLink.target = '_blank';
-                githubLink.rel = 'noopener noreferrer';
-                linksPlaceholder.appendChild(githubLink);
+                case "known_bad":
+                    // CASO 1 (Fallo): IP conocida y sospechosa. Bloquear.
+                    console.warn("Acceso denegado (Caché HIT - Sospechoso).");
+                    showBlockedMessage();
+                    break;
 
-            } else {
-                console.log("API indicó país no permitido o links no recibidos. Links ocultos.");
-                linksPlaceholder.innerHTML = ''; // Asegurar que esté vacío
+                case "needs_validation":
+                    // CASO 2: IP nueva. Mostrar y ejecutar Turnstile.
+                    console.log("IP desconocida. Renderizando Turnstile para validación...");
+                    // Mostramos el contenido principal (que incluye el div de Turnstile)
+                    showMainContent();
+                    // Renderizamos el widget manualmente
+                    // (Asegúrate de que el div en index.html NO tenga data-callback)
+                    if (window.turnstile) {
+                        window.turnstile.render('#cf-turnstile-widget', { // Asegúrate de que el ID sea correcto
+                            sitekey: TURNSTILE_SITE_KEY,
+                            callback: onTurnstileSuccess,
+                        });
+                    } else {
+                        console.error("No se pudo cargar el script de Turnstile.");
+                        showBlockedMessage();
+                    }
+                    break;
+
+                default:
+                    // Error inesperado
+                    console.error("Respuesta inesperada de la API:", data);
+                    showBlockedMessage();
             }
         })
         .catch(error => {
-            console.error("Error al conectar o procesar respuesta de Azure Functions:", error);
-            linksPlaceholder.innerHTML = 'No se pudo cargar el contenido.'; // Mensaje de error genérico
+            // Error de red en el chequeo inicial.
+            console.error("Error fatal en el chequeo inicial de IP:", error);
+            // Decidimos fallar de forma segura (bloquear) si no podemos verificar
+            showBlockedMessage();
         });
-
-    // Limpiamos el token después de usarlo (opcional, por seguridad)
-    turnstileToken = null;
 }
 
+// --- Punto de Entrada ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Obtenemos los elementos del DOM una vez
+    loaderWrapper = document.getElementById('loader-wrapper');
+    blockedMessage = document.getElementById('blocked-message');
+    mainContent = document.getElementById('main-content');
+    // IMPORTANTE: Asegúrate de que tu div de Turnstile tenga este ID
+    turnstileWidgetDiv = document.getElementById('cf-turnstile-widget');
+    socialLinksPlaceholder = document.getElementById('social-links-placeholder');
+
+    // Ocultamos todo menos el loader
+    showLoader();
+
+    // Iniciamos el flujo de validación
+    checkIpStatus();
+});
