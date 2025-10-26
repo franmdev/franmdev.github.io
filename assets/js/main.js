@@ -22,26 +22,26 @@ function renderSensitiveLinks(links) {
 
     if (links && links.linkedin && links.github) {
         console.log("Acceso permitido. Mostrando links de LinkedIn y GitHub.");
-        linksPlaceholder.innerHTML = ''; // Limpiar por si acaso
+        socialLinksPlaceholder.innerHTML = ''; // Limpiar por si acaso
 
         const linkedinLink = document.createElement('a');
         linkedinLink.href = links.linkedin;
         linkedinLink.textContent = 'LinkedIn';
-        linkedinLink.target = '_blank';
-        linkedinLink.rel = 'noopener noreferrer';
-        linksPlaceholder.appendChild(linkedinLink);
+        linkedinLink.target = '_blank'; // Abrir en nueva pestaña
+        linkedinLink.rel = 'noopener noreferrer'; // Buenas prácticas de seguridad
+        socialLinksPlaceholder.appendChild(linkedinLink);
 
-        linksPlaceholder.appendChild(document.createTextNode(' | '));
+        socialLinksPlaceholder.appendChild(document.createTextNode(' | '));
 
         const githubLink = document.createElement('a');
         githubLink.href = links.github;
         githubLink.textContent = 'GitHub';
         githubLink.target = '_blank';
         githubLink.rel = 'noopener noreferrer';
-        linksPlaceholder.appendChild(githubLink);
+        socialLinksPlaceholder.appendChild(githubLink);
     } else {
         console.log("Acceso permitido, pero no se recibieron links (país no permitido o error). Links ocultos.");
-        linksPlaceholder.innerHTML = '';
+        socialLinksPlaceholder.innerHTML = ''; // Asegurarse de que esté vacío
     }
 }
 
@@ -72,6 +72,10 @@ function showMainContent() {
 function onTurnstileValidation(token) {
     console.log("Turnstile verificado (IP nueva). Llamando a API para validación completa...");
 
+    // Mostramos el loader OTRA VEZ mientras esperamos la validación completa
+    showLoader();
+
+    // Ahora llamamos a la API con el token para la validación completa
     fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -81,27 +85,37 @@ function onTurnstileValidation(token) {
         })
     })
         .then(response => {
+            // Manejar errores de red o HTTP (ej. 500, 403)
             if (!response.ok) {
+                // Intentar leer el error JSON que envía el backend
                 return response.json().then(err => {
+                    // Lanzar un error para ser capturado por .catch()
                     throw new Error(err.error || `Error API: ${response.status}`);
                 }).catch(() => {
+                    // Si la respuesta de error no es JSON
                     throw new Error(`Error API: ${response.status} ${response.statusText}`);
                 });
             }
-            return response.json();
+            return response.json(); // Convertir la respuesta OK a JSON
         })
         .then(data => {
             console.log("Respuesta de validación completa recibida:", data);
 
+            // El backend responde "known_good" si la validación completa fue exitosa
+            // Y "known_bad" si falló (ej. VPN detectado en Chile)
             if (data.status === "known_good") {
-                renderSensitiveLinks(data.sensitiveLinks);
+                // Éxito: IP nueva validada, es de Chile y limpia
+                showMainContent(); // Mostrar contenido
+                renderSensitiveLinks(data.sensitiveLinks); // Renderizar links
             } else {
+                // Fracaso: IP nueva validada, pero es sospechosa o no de Chile
                 showBlockedMessage();
             }
         })
         .catch(error => {
+            // Captura errores de red o errores lanzados desde .then()
             console.error("Error en el flujo de validación (Turnstile):", error);
-            showBlockedMessage();
+            showBlockedMessage(); // Bloquear si la validación falla
         });
 }
 
@@ -109,17 +123,21 @@ function onTurnstileValidation(token) {
  * CASO 1: Chequeo inicial de IP. Se llama al cargar la página.
  * Pregunta al backend si ya conoce esta IP.
  */
-function initialIpCheck() { // <-- EL NOMBRE DE LA FUNCIÓN ES 'initialIpCheck'
+function initialIpCheck() {
     console.log("Realizando chequeo inicial de IP (Caché DB)...");
 
+    // Llamada inicial a la API solo con la acción "check_ip"
     fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: "check_ip" })
+        body: JSON.stringify({ action: "check_ip" }) // <- Acción de solo chequeo
     })
         .then(response => {
             if (!response.ok) {
-                console.warn("Chequeo inicial de IP falló. Forzando validación completa.");
+                // Si la API falla en el chequeo (ej. 500), no podemos confiar en el caché.
+                // Forzamos el flujo de validación completo como fallback.
+                console.warn("Chequeo inicial de IP falló. Forzando validación completa (needs_validation).");
+                // Devolvemos un objeto que simula la respuesta de "needs_validation"
                 return { status: "needs_validation" };
             }
             return response.json();
@@ -129,10 +147,11 @@ function initialIpCheck() { // <-- EL NOMBRE DE LA FUNCIÓN ES 'initialIpCheck'
 
             switch (data.status) {
                 case "known_good":
-                    // CASO 1 (Éxito): IP conocida y limpia. Mostrar contenido, OMITIR Turnstile.
+                    // CASO 1 (Éxito): IP conocida y limpia. 
+                    // Mostrar contenido, OMITIR Turnstile.
                     console.log("Acceso rápido (Caché HIT - Limpio).");
                     showMainContent();
-                    renderSensitiveLinks(data.sensitiveLinks);
+                    renderSensitiveLinks(data.sensitiveLinks); // Renderizar links (si los hay)
                     break;
 
                 case "known_bad":
@@ -144,17 +163,23 @@ function initialIpCheck() { // <-- EL NOMBRE DE LA FUNCIÓN ES 'initialIpCheck'
                 case "needs_validation":
                     // CASO 2: IP nueva. Mostrar contenido y ejecutar Turnstile.
                     console.log("IP desconocida. Renderizando Turnstile para validación...");
+                    // Mostramos el contenido principal (que incluye el div de Turnstile)
                     showMainContent();
 
+                    // Renderizamos el widget manualmente
                     try {
+                        // Esperamos que el script api.js de Turnstile ya esté cargado
                         if (window.turnstile) {
-                            // Usamos el ID 'cf-turnstile-widget' que definiste en el HTML
                             window.turnstile.render('#cf-turnstile-widget', {
                                 sitekey: TURNSTILE_SITE_KEY,
-                                callback: onTurnstileValidation,
+                                callback: onTurnstileValidation, // Llamar a esta función cuando se complete
                             });
+                            // IMPORTANTE: Ocultamos el loader, ya que Turnstile
+                            // ahora es visible y el usuario debe interactuar (o será invisible)
+                            // No podemos ocultarlo, showMainContent ya lo hizo.
                         } else {
-                            console.error("Error: Objeto 'turnstile' no encontrado.");
+                            // Esto puede pasar si el script de Turnstile aún no se carga
+                            console.error("Error: Objeto 'turnstile' no encontrado. Reintentando...");
                             setTimeout(() => {
                                 if (window.turnstile) {
                                     window.turnstile.render('#cf-turnstile-widget', {
@@ -165,7 +190,7 @@ function initialIpCheck() { // <-- EL NOMBRE DE LA FUNCIÓN ES 'initialIpCheck'
                                     console.error("Fallo definitivo al cargar Turnstile.");
                                     showBlockedMessage();
                                 }
-                            }, 1000);
+                            }, 1500); // Esperar 1.5 seg por si el script api.js estaba lento
                         }
                     } catch (e) {
                         console.error("Error al renderizar Turnstile:", e);
@@ -174,29 +199,32 @@ function initialIpCheck() { // <-- EL NOMBRE DE LA FUNCIÓN ES 'initialIpCheck'
                     break;
 
                 default:
+                    // Error inesperado en la respuesta JSON
                     console.error("Respuesta inesperada de la API:", data);
                     showBlockedMessage();
             }
         })
         .catch(error => {
+            // Error de red en el chequeo inicial (ej. API caída, sin internet)
             console.error("Error fatal en el chequeo inicial de IP (fetch fallido):", error);
+            // Fallamos de forma segura (bloquear) si no podemos verificar
             showBlockedMessage();
         });
 }
 
 // --- Punto de Entrada ---
+// Se ejecuta cuando la estructura HTML de la página está lista.
 document.addEventListener('DOMContentLoaded', () => {
-    // Obtenemos las referencias a los elementos del DOM
+    // Obtenemos las referencias a los elementos del DOM AHORA
     loaderWrapper = document.getElementById('loader-wrapper');
     blockedMessage = document.getElementById('blocked-message');
     mainContent = document.getElementById('main-content');
     turnstileWidgetDiv = document.getElementById('cf-turnstile-widget');
-    socialLinksPlaceholder = document.getElementById('social-links-placeholder');
+    socialLinksPlaceholder = document.getElementById('social-links-placeholder'); // <-- ASIGNACIÓN
 
     // Mostramos el loader
     showLoader();
 
-    // --- CORRECCIÓN ---
-    // Llamamos a la función con el nombre correcto: 'initialIpCheck'
+    // Iniciamos el flujo
     initialIpCheck();
 });

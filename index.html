@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Francisco Mora - Portafolio</title>
     <style>
-        /* (Tu CSS actual está bien, solo aseguramos que los estados ocultos/visibles funcionen) */
+        /* (Tu CSS no cambia) */
         body {
             background-color: #121212;
             color: #e0e0e0;
@@ -66,8 +66,8 @@
         gtag('config', 'G-QVW5058EVE');
     </script>
 
-    <!-- El script de Turnstile se carga aquí, pero se renderizará manualmente -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <!-- CAMBIO: El script de Turnstile se carga con ?render=explicit -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
 <body>
@@ -89,25 +89,20 @@
         <h1>Portafolio Francisco Mora</h1>
         <p>Bienvenido...</p>
 
-        <!-- El div de Turnstile (AHORA SIN data-callback y con un ID) -->
-        <!-- Lo llamaremos manualmente desde JS si es necesario -->
-        <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"></div>
+        <!-- CAMBIO: Quitamos 'data-callback' y nos aseguramos de que el ID esté presente -->
+        <!-- 'data-turnstile-render="explicit"' es una doble confirmación (opcional) -->
+        <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"
+            data-turnstile-render="explicit">
+        </div>
 
         <!-- El placeholder para los links -->
         <div id="social-links-placeholder"></div>
 
-        <!-- El footer de atribución (si usas ipapi.is y lo requiere, o bórralo) -->
-        <!-- 
-        <footer style="font-size: 0.8em; color: grey; text-align: center; margin-top: 50px;">
-            <p>This site uses ... IP geolocation web service.</p>
-        </footer>
-        -->
+        <!-- (Tu footer de atribución, si lo tienes) -->
 
     </div> <!-- Fin de #main-content -->
 
-    <!-- TU SCRIPT PRINCIPAL AHORA DEBE IR AL FINAL DEL BODY -->
-    <!-- Esto soluciona el error 'checkIpStatus is not defined' porque el script se carga -->
-    <!-- después de que los elementos del DOM (loader-wrapper, etc.) existen. -->
+    <!-- CAMBIO CLAVE: main.js se carga al final del body -->
     <script src="assets/js/main.js"></script>
 </body>
 
