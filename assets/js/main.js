@@ -44,7 +44,7 @@ function renderSensitiveLinks(links) {
         // githubLink.classList.add('text-gray-400', 'hover:underline', 'mx-2'); 
         linksPlaceholder.appendChild(githubLink);
     } else {
-        console.log("Acceso permitido, pero no se recibieron links (posiblemente país no permitido). Links ocultos.");
+        console.log("Acceso permitido, pero no se recibieron links (país no permitido o error). Links ocultos.");
         linksPlaceholder.innerHTML = ''; // Asegurarse de que esté vacío
     }
 }
@@ -137,7 +137,8 @@ function initialIpCheck() {
             if (!response.ok) {
                 // Si la API falla en el chequeo (ej. 500), no podemos confiar en el caché.
                 // Forzamos el flujo de validación completo como fallback.
-                console.warning("Chequeo inicial de IP falló. Forzando validación completa.");
+                console.warn("Chequeo inicial de IP falló. Forzando validación completa.");
+                // Devolvemos un objeto que simula la respuesta de "needs_validation"
                 return { status: "needs_validation" };
             }
             return response.json();
@@ -168,6 +169,7 @@ function initialIpCheck() {
 
                     // Renderizamos el widget manualmente
                     try {
+                        // Esperamos que el script api.js de Turnstile ya esté cargado
                         if (window.turnstile) {
                             window.turnstile.render('#cf-turnstile-widget', {
                                 sitekey: TURNSTILE_SITE_KEY,
