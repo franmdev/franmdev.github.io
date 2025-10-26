@@ -5,59 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Francisco Mora - Portafolio</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="assets/css/custom.css" rel="stylesheet">
     <style>
-        /* (Tu CSS no cambia) */
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        /* Estilos MÍNIMOS para la lógica de carga (Podrían ir en custom.css) */
+        #loader-wrapper,
+        #blocked-message {
+            min-height: 100vh;
+            /* Asegura que ocupen toda la pantalla */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
             text-align: center;
-        }
-
-        .container {
-            max-width: 600px;
             padding: 20px;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            color: #ffffff;
-        }
-
-        p {
-            font-size: 1.2rem;
-            color: #bbbbbb;
-        }
-
-        .links a {
-            color: #0099ff;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 0 15px;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Estilos para los estados de la página */
-        #loader-wrapper,
-        #blocked-message,
+        /* Ocultamos main-content inicialmente */
         #main-content {
-            width: 100%;
-        }
-
-        #blocked-message {
-            color: red;
+            display: none;
         }
     </style>
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -66,43 +37,87 @@
         gtag('config', 'G-QVW5058EVE');
     </script>
 
-    <!-- CAMBIO: El script de Turnstile se carga con ?render=explicit -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
-<body>
-    <!-- ESTADO 1: Cargando (se muestra por defecto) -->
-    <div id="loader-wrapper" style="text-align: center; padding: 50px;">
-        <p>Validando conexión segura...</p>
+<body class="bg-gray-900 text-gray-200 font-sans">
+    <div id="loader-wrapper" class="bg-gray-900 text-gray-300">
+        <p class="text-lg">Validando conexión segura...</p>
     </div>
 
-    <!-- ESTADO 2: Bloqueado (oculto por defecto) -->
-    <div id="blocked-message" style="display: none; text-align: center; padding: 50px;">
-        <h2>Acceso Denegado</h2>
-        <p>Lo sentimos, no podemos mostrar el contenido completo desde esta ubicación por razones de seguridad.</p>
+    <div id="blocked-message" style="display: none;" class="bg-gray-900 text-red-500">
+        <h2 class="text-3xl font-bold mb-4">Acceso Denegado</h2>
+        <p class="text-lg">Lo sentimos, no podemos mostrar el contenido completo desde esta ubicación por razones de
+            seguridad.</p>
     </div>
 
-    <!-- ESTADO 3: Contenido Principal (oculto por defecto) -->
-    <div id="main-content" style="display: none;" class="container">
+    <div id="main-content">
+        <header id="hero" class="bg-gray-800 py-16 md:py-24 text-center">
+            <div class="container mx-auto px-6">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">Francisco Mora</h1>
+                <p class="text-lg md:text-xl text-blue-400 mb-6">Ingeniero Civil Industrial | Data Engineer & RPA
+                    Developer</p>
+                <p class="max-w-2xl mx-auto text-gray-300 mb-8">
+                    Apasionado por transformar datos crudos en insights accionables y automatizar procesos para impulsar
+                    la eficiencia operativa.
+                </p>
+                <div class="space-x-4">
+                    <a href="#contact"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded transition duration-300">
+                        Contáctame
+                    </a>
+                    <a href="/ruta/a/tu/cv.pdf" download
+                        class="border border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white font-bold py-2 px-6 rounded transition duration-300">
+                        Descargar CV
+                    </a>
+                </div>
+            </div>
+        </header>
 
-        <!-- TODO TU CONTENIDO ACTUAL VA AQUÍ -->
-        <h1>Portafolio Francisco Mora</h1>
-        <p>Bienvenido...</p>
+        <section id="about" class="py-16 md:py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-white mb-10">Sobre Mí</h2>
+                <p class="text-center text-gray-400">(Contenido sobre mí irá aquí: foto, texto...)</p>
+            </div>
+        </section>
 
-        <!-- CAMBIO: Quitamos 'data-callback' y nos aseguramos de que el ID esté presente -->
-        <!-- 'data-turnstile-render="explicit"' es una doble confirmación (opcional) -->
-        <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"
-            data-turnstile-render="explicit">
+        <section id="projects" class="py-16 md:py-20 bg-gray-800">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-white mb-10">Proyectos Destacados</h2>
+                <p class="text-center text-gray-400">(Las tarjetas de los proyectos irán aquí...)</p>
+            </div>
+        </section>
+
+        <section id="skills" class="py-16 md:py-20 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-white mb-10">Habilidades y Herramientas</h2>
+                <p class="text-center text-gray-400">(Listado o grid de habilidades irá aquí...)</p>
+            </div>
+        </section>
+
+        <section id="contact" class="py-16 md:py-20 bg-gray-800">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-white mb-6">Contacto</h2>
+                <p class="text-center text-gray-400 mb-8">(Información de contacto o formulario irá aquí...)</p>
+
+                <div id="social-links-placeholder" class="mt-8 space-x-4">
+                </div>
+            </div>
+        </section>
+
+        <div class="container mx-auto px-6 py-10 flex justify-center">
+            <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"
+                data-turnstile-render="explicit">
+            </div>
         </div>
 
-        <!-- El placeholder para los links -->
-        <div id="social-links-placeholder"></div>
+        <footer class="bg-gray-900 py-6 mt-10 border-t border-gray-700">
+            <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
+                &copy; 2025 Francisco Mora. Todos los derechos reservados.
+            </div>
+        </footer>
 
-        <!-- (Tu footer de atribución, si lo tienes) -->
-
-    </div> <!-- Fin de #main-content -->
-
-    <!-- CAMBIO CLAVE: main.js se carga al final del body -->
+    </div>
     <script src="assets/js/main.js"></script>
 </body>
 
