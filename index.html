@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Francisco Mora - Portafolio</title>
     <style>
+        /* (Tu CSS actual está bien, solo aseguramos que los estados ocultos/visibles funcionen) */
         body {
             background-color: #121212;
             color: #e0e0e0;
@@ -43,6 +44,17 @@
         .links a:hover {
             text-decoration: underline;
         }
+
+        /* Estilos para los estados de la página */
+        #loader-wrapper,
+        #blocked-message,
+        #main-content {
+            width: 100%;
+        }
+
+        #blocked-message {
+            color: red;
+        }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -51,10 +63,10 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-QVW5058EVE');
     </script>
-    <script src="assets/js/main.js"></script>
+
+    <!-- El script de Turnstile se carga aquí, pero se renderizará manualmente -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
@@ -62,31 +74,32 @@
     <!-- ESTADO 1: Cargando (se muestra por defecto) -->
     <div id="loader-wrapper" style="text-align: center; padding: 50px;">
         <p>Validando conexión segura...</p>
-        <!-- Puedes añadir un spinner CSS aquí si quieres -->
     </div>
 
     <!-- ESTADO 2: Bloqueado (oculto por defecto) -->
-    <div id="blocked-message" style="display: none; text-align: center; padding: 50px; color: red;">
+    <div id="blocked-message" style="display: none; text-align: center; padding: 50px;">
         <h2>Acceso Denegado</h2>
         <p>Lo sentimos, no podemos mostrar el contenido completo desde esta ubicación por razones de seguridad.</p>
     </div>
 
     <!-- ESTADO 3: Contenido Principal (oculto por defecto) -->
-    <div id="main-content" style="display: none;">
+    <div id="main-content" style="display: none;" class="container">
 
         <!-- TODO TU CONTENIDO ACTUAL VA AQUÍ -->
         <h1>Portafolio Francisco Mora</h1>
         <p>Bienvenido...</p>
 
-        <!-- El div de Turnstile (ahora sin callback) -->
-        <!-- Widget Invisible de Cloudflare Turnstile -->
-        <div class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"></div>
+        <!-- El div de Turnstile (AHORA SIN data-callback y con un ID) -->
+        <!-- Lo llamaremos manualmente desde JS si es necesario -->
+        <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"></div>
 
         <!-- El placeholder para los links -->
         <div id="social-links-placeholder"></div>
 
     </div> <!-- Fin de #main-content -->
-</body>
 
+    <!-- TU SCRIPT PRINCIPAL AHORA DEBE IR AL FINAL DEL BODY -->
+    <script src="assets/js/main.js"></script>
+</body>
 
 </html>
