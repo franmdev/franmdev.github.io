@@ -96,9 +96,18 @@
         <!-- El placeholder para los links -->
         <div id="social-links-placeholder"></div>
 
+        <!-- El footer de atribución (si usas ipapi.is y lo requiere, o bórralo) -->
+        <!-- 
+        <footer style="font-size: 0.8em; color: grey; text-align: center; margin-top: 50px;">
+            <p>This site uses ... IP geolocation web service.</p>
+        </footer>
+        -->
+
     </div> <!-- Fin de #main-content -->
 
     <!-- TU SCRIPT PRINCIPAL AHORA DEBE IR AL FINAL DEL BODY -->
+    <!-- Esto soluciona el error 'checkIpStatus is not defined' porque el script se carga -->
+    <!-- después de que los elementos del DOM (loader-wrapper, etc.) existen. -->
     <script src="assets/js/main.js"></script>
 </body>
 
