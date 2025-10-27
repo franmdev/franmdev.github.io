@@ -1,34 +1,110 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Francisco Mora - Portafolio</title>
+    <title>Francisco Mora - Full Stack Data Professional</title>
 
+    <!-- Google Fonts: Merriweather (Hugo Coder font) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link href="assets/css/custom.css" rel="stylesheet">
+    <!-- Tailwind Config CORREGIDO -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Dark mode colors (Hugo Coder)
+                        'coder-bg': '#212121',
+                        'coder-bg-light': '#2d2d2d',
+                        'coder-text': '#f5f5f5',
+                        'coder-text-secondary': '#b3b3b3',
+                        'coder-accent': '#42a5f5',
+                        'coder-border': '#424242',
+
+                        // Light mode colors
+                        'light-bg': '#ffffff',
+                        'light-text': '#212121',
+                        'light-text-secondary': '#757575',
+                        'light-accent': '#1976d2',
+                        'light-border': '#e0e0e0',
+                    },
+                    fontFamily: {
+                        // CORRECTO: Hugo Coder usa Merriweather
+                        'sans': ['Merriweather', 'Georgia', 'serif'],
+                        'mono': ['Fira Code', 'Courier New', 'monospace'],
+                    },
+                    maxWidth: {
+                        'coder': '700px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos Custom -->
     <style>
-        /* Estilos MÍNIMOS para la lógica de carga (Podrían ir en custom.css) */
+        /* Validation wrappers */
         #loader-wrapper,
         #blocked-message {
             min-height: 100vh;
-            /* Asegura que ocupen toda la pantalla */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
         }
 
-        /* Ocultamos main-content inicialmente */
         #main-content {
+            display: none;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Hover effect Hugo Coder style */
+        .hover-coder:hover {
+            background-color: rgba(66, 165, 245, 0.05);
+        }
+
+        /* Link hover Hugo Coder style */
+        .link-coder {
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .link-coder:hover {
+            text-decoration: underline;
+        }
+
+        /* Turnstile container */
+        #cf-turnstile-container {
             display: none;
         }
     </style>
 
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -37,88 +113,276 @@
         gtag('config', 'G-QVW5058EVE');
     </script>
 
+    <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
-<body class="bg-gray-900 text-gray-200 font-sans">
-    <div id="loader-wrapper" class="bg-gray-900 text-gray-300">
-        <p class="text-lg">Validando conexión segura...</p>
-    </div>
+<body class="bg-white dark:bg-coder-bg text-light-text dark:text-coder-text font-sans">
 
-    <div id="blocked-message" style="display: none;" class="bg-gray-900 text-red-500">
-        <h2 class="text-3xl font-bold mb-4">Acceso Denegado</h2>
-        <p class="text-lg">Lo sentimos, no podemos mostrar el contenido completo desde esta ubicación por razones de
-            seguridad.</p>
-    </div>
+    <!-- ======== NAVBAR ======== -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-coder-bg border-b border-light-border dark:border-coder-border">
+        <div class="max-w-coder mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo/Name -->
+                <a href="/"
+                    class="text-xl font-bold text-light-accent dark:text-coder-accent hover:opacity-80 transition">
+                    francisco.mora
+                </a>
 
-    <div id="main-content">
-        <header id="hero" class="bg-gray-800 py-16 md:py-24 text-center">
-            <div class="container mx-auto px-6">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">Francisco Mora</h1>
-                <p class="text-lg md:text-xl text-blue-400 mb-6">Ingeniero Civil Industrial | Data Engineer & RPA
-                    Developer</p>
-                <p class="max-w-2xl mx-auto text-gray-300 mb-8">
-                    Apasionado por transformar datos crudos en insights accionables y automatizar procesos para impulsar
-                    la eficiencia operativa.
-                </p>
-                <div class="space-x-4">
-                    <a href="#contact"
-                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded transition duration-300">
-                        Contáctame
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
+                        Inicio
                     </a>
-                    <a href="/ruta/a/tu/cv.pdf" download
-                        class="border border-blue-600 text-blue-400 hover:bg-blue-600 hover:text-white font-bold py-2 px-6 rounded transition duration-300">
-                        Descargar CV
+                    <a href="/projects.html"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
+                        Proyectos
                     </a>
+                    <a href="/about.html"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
+                        Sobre Mí
+                    </a>
+                    <button id="dark-toggle"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition text-xl">
+                        <span class="dark-icon">☀️</span>
+                        <span class="light-icon hidden">🌙</span>
+                    </button>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-light-text dark:text-coder-text">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
-        </header>
 
-        <section id="about" class="py-16 md:py-20 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-10">Sobre Mí</h2>
-                <p class="text-center text-gray-400">(Contenido sobre mí irá aquí: foto, texto...)</p>
-            </div>
-        </section>
-
-        <section id="projects" class="py-16 md:py-20 bg-gray-800">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-10">Proyectos Destacados</h2>
-                <p class="text-center text-gray-400">(Las tarjetas de los proyectos irán aquí...)</p>
-            </div>
-        </section>
-
-        <section id="skills" class="py-16 md:py-20 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold text-center text-white mb-10">Habilidades y Herramientas</h2>
-                <p class="text-center text-gray-400">(Listado o grid de habilidades irá aquí...)</p>
-            </div>
-        </section>
-
-        <section id="contact" class="py-16 md:py-20 bg-gray-800">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-white mb-6">Contacto</h2>
-                <p class="text-center text-gray-400 mb-8">(Información de contacto o formulario irá aquí...)</p>
-
-                <div id="social-links-placeholder" class="mt-8 space-x-4">
-                </div>
-            </div>
-        </section>
-
-        <div class="container mx-auto px-6 py-10 flex justify-center">
-            <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"
-                data-turnstile-render="explicit">
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="/"
+                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">Inicio</a>
+                <a href="/projects.html"
+                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">Proyectos</a>
+                <a href="/about.html"
+                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">Sobre
+                    Mí</a>
             </div>
         </div>
+    </nav>
 
-        <footer class="bg-gray-900 py-6 mt-10 border-t border-gray-700">
-            <div class="container mx-auto px-6 text-center text-gray-500 text-sm">
-                &copy; 2025 Francisco Mora. Todos los derechos reservados.
-            </div>
-        </footer>
-
+    <!-- ======== VALIDATION FLOW (TU CÓDIGO DE SEGURIDAD) ======== -->
+    <div id="loader-wrapper" class="bg-white dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary">
+        <p class="text-lg mb-4">Validando conexión segura...</p>
+        <svg class="animate-spin h-8 w-8 text-light-accent dark:text-coder-accent" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+        </svg>
     </div>
-    <script src="assets/js/main.js"></script>
+
+    <!-- Turnstile container (FUERA del loader) -->
+    <div id="cf-turnstile-container"
+        class="fixed top-0 left-0 width-100 h-screen flex flex-col justify-center items-center bg-white dark:bg-coder-bg"
+        style="display: none; z-index: 9998;">
+        <p class="text-lg mb-8 text-light-text-secondary dark:text-coder-text-secondary">Se requiere verificación
+            adicional...</p>
+        <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"></div>
+    </div>
+
+
+    <!-- Blocked Message -->
+    <div id="blocked-message" style="display: none;" class="bg-white dark:bg-coder-bg text-red-500">
+        <h2 class="text-3xl font-bold mb-4">Acceso Denegado</h2>
+        <p class="text-lg text-light-text-secondary dark:text-coder-text-secondary">
+            Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
+        </p>
+    </div>
+
+    <!-- ======== MAIN CONTENT ======== -->
+    <main id="main-content">
+
+        <!-- HERO SECTION (Hugo Coder style: minimalista) -->
+        <section class="py-32">
+            <div class="max-w-coder mx-auto px-6 text-center">
+                <h1 class="text-5xl md:text-6xl font-bold text-light-text dark:text-coder-text mb-6">
+                    Francisco Mora
+                </h1>
+                <p class="text-xl md:text-2xl text-light-text-secondary dark:text-coder-text-secondary mb-8">
+                    Full Stack Data Professional
+                </p>
+                <p
+                    class="text-lg text-light-text-secondary dark:text-coder-text-secondary mb-12 leading-relaxed max-w-2xl mx-auto">
+                    Ingeniero Civil Industrial + Informático especializado en transformar modelos ML
+                    en sistemas productivos escalables. De matemática avanzada a arquitectura en la nube.
+                </p>
+
+                <!-- Social Links -->
+                <div class="flex justify-center space-x-6 text-2xl">
+                    <a href="https://github.com/tuusuario" target="_blank"
+                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
+                        title="GitHub">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/in/tuusuario" target="_blank"
+                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
+                        title="LinkedIn">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                    <a href="mailto:francisco@example.com"
+                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
+                        title="Email">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS PREVIEW SECTION -->
+        <section class="py-16 bg-gray-50 dark:bg-coder-bg-light">
+            <div class="max-w-coder mx-auto px-6">
+                <h2 class="text-3xl font-bold text-light-text dark:text-coder-text mb-12">
+                    Proyectos Destacados
+                </h2>
+
+                <!-- Projects List (Hugo Coder style: simple) -->
+                <div class="space-y-8">
+
+                    <!-- Project 1: Este Portafolio -->
+                    <article
+                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
+                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
+                            2024-10-26
+                        </time>
+                        <h3 class="text-2xl font-bold mt-2 mb-3">
+                            <a href="/projects.html#portfolio"
+                                class="link-coder text-light-accent dark:text-coder-accent">
+                                Este Portafolio: Full Stack Data System
+                            </a>
+                        </h3>
+                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
+                            Arquitectura Web | Seguridad | Data Pipeline
+                        </p>
+                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
+                            Sistema completo con validación en 5 capas, Azure Functions, PostgreSQL,
+                            Cloudflare WAF y analytics en tiempo real. Demuestra arquitectura de producción.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Azure</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PostgreSQL</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Cloudflare</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Proyecto de Título -->
+                    <article
+                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
+                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
+                            2024-09-15
+                        </time>
+                        <h3 class="text-2xl font-bold mt-2 mb-3">
+                            <a href="/projects.html#ml" class="link-coder text-light-accent dark:text-coder-accent">
+                                [Tu Proyecto de Título]: ML en Producción
+                            </a>
+                        </h3>
+                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
+                            Machine Learning | Deployment | Python
+                        </p>
+                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
+                            Modelo de Machine Learning deployado en producción con pipeline automatizado,
+                            monitoreo y optimización continua.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Scikit-learn</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">FastAPI</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: ETL Pipeline -->
+                    <article
+                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
+                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
+                            2024-08-10
+                        </time>
+                        <h3 class="text-2xl font-bold mt-2 mb-3">
+                            <a href="/projects.html#etl" class="link-coder text-light-accent dark:text-coder-accent">
+                                ETL Pipeline Escalable
+                            </a>
+                        </h3>
+                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
+                            Data Engineering | Apache Airflow | PySpark
+                        </p>
+                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
+                            Pipeline de datos con Apache Airflow y Spark para procesamiento de 2.5M+ registros.
+                            Reducción de tiempo: 6h → 45min.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Airflow</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Spark</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PostgreSQL</span>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- View All Projects Link -->
+                <div class="mt-12 text-center">
+                    <a href="/projects.html"
+                        class="link-coder inline-block text-light-accent dark:text-coder-accent font-bold text-lg">
+                        Ver todos los proyectos →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======== FOOTER ======== -->
+    <footer class="py-12 bg-white dark:bg-coder-bg border-t border-light-border dark:border-coder-border">
+        <div class="max-w-coder mx-auto px-6">
+            <div class="text-center text-light-text-secondary dark:text-coder-text-secondary text-sm">
+                <p class="mb-4">
+                    © 2025 Francisco Mora ·
+                    <a href="https://github.com/tuusuario" target="_blank"
+                        class="hover:text-light-accent dark:hover:text-coder-accent link-coder">GitHub</a> ·
+                    <a href="https://linkedin.com/in/tuusuario" target="_blank"
+                        class="hover:text-light-accent dark:hover:text-coder-accent link-coder">LinkedIn</a>
+                </p>
+                <p class="text-xs">
+                    Hecho con 💙 usando HTML + Tailwind (inspirado en Hugo Coder)
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======== SCRIPTS ======== -->
+    <script src="/assets/js/dark-mode.js"></script>
+    <script src="/assets/js/mobile-menu.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>
 
 </html>

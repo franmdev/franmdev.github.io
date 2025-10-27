@@ -1,230 +1,233 @@
 // assets/js/main.js
 
 // --- CONFIGURACIÓN ---
-// URL de producción de tu API
 const API_URL = "https://franmora-portfolio-api.azurewebsites.net/api/register_visitor";
-// Clave PÚBLICA (Site Key) de Cloudflare Turnstile
-const TURNSTILE_SITE_KEY = "0x4AAAAAAB8sMLnvQf8wAXSD"; // ¡Asegúrate de que esta sea tu Site Key!
+const TURNSTILE_SITE_KEY = "0x4AAAAAAB8sMLnvQf8wAXSD";
+const SESSION_VALIDITY_MINUTES = 30; // ¿Cuánto tiempo dura la sesión sin revalidar?
 // --- FIN CONFIGURACIÓN ---
 
 // --- Variables Globales del DOM ---
 let loaderWrapper, blockedMessage, mainContent, turnstileWidgetDiv, socialLinksPlaceholder;
 
-/**
- * Inserta dinámicamente los enlaces de LinkedIn y GitHub en el placeholder.
- * @param {object} links - Objeto con las URLs { linkedin: "...", github: "..." }
- */
-function renderSensitiveLinks(links) {
-    if (!socialLinksPlaceholder) {
-        console.error("Error: Placeholder 'social-links-placeholder' no encontrado al renderizar.");
-        return;
+// --- Funciones para cambiar estado UI ---
+function showLoader(message = "Validando conexión segura...") {
+    if (loaderWrapper) {
+        loaderWrapper.style.display = 'flex'; // Usar flex para centrar
+        const p = loaderWrapper.querySelector('p');
+        if (p) p.textContent = message;
     }
-
-    if (links && links.linkedin && links.github) {
-        console.log("Acceso permitido. Mostrando links de LinkedIn y GitHub.");
-        socialLinksPlaceholder.innerHTML = ''; // Limpiar por si acaso
-
-        const linkedinLink = document.createElement('a');
-        linkedinLink.href = links.linkedin;
-        linkedinLink.textContent = 'LinkedIn';
-        linkedinLink.target = '_blank'; // Abrir en nueva pestaña
-        linkedinLink.rel = 'noopener noreferrer'; // Buenas prácticas de seguridad
-        socialLinksPlaceholder.appendChild(linkedinLink);
-
-        socialLinksPlaceholder.appendChild(document.createTextNode(' | '));
-
-        const githubLink = document.createElement('a');
-        githubLink.href = links.github;
-        githubLink.textContent = 'GitHub';
-        githubLink.target = '_blank';
-        githubLink.rel = 'noopener noreferrer';
-        socialLinksPlaceholder.appendChild(githubLink);
-    } else {
-        console.log("Acceso permitido, pero no se recibieron links (país no permitido o error). Links ocultos.");
-        socialLinksPlaceholder.innerHTML = ''; // Asegurarse de que esté vacío
-    }
-}
-
-// --- Funciones para cambiar el estado de la página ---
-function showLoader() {
-    if (loaderWrapper) loaderWrapper.style.display = 'block';
     if (blockedMessage) blockedMessage.style.display = 'none';
     if (mainContent) mainContent.style.display = 'none';
+    // Ocultar Turnstile si está visible
+    if (turnstileWidgetDiv) turnstileWidgetDiv.style.display = 'none';
 }
 
 function showBlockedMessage() {
     if (loaderWrapper) loaderWrapper.style.display = 'none';
-    if (blockedMessage) blockedMessage.style.display = 'block';
+    if (blockedMessage) blockedMessage.style.display = 'flex'; // Usar flex
     if (mainContent) mainContent.style.display = 'none';
+    if (turnstileWidgetDiv) turnstileWidgetDiv.style.display = 'none';
 }
 
 function showMainContent() {
     if (loaderWrapper) loaderWrapper.style.display = 'none';
     if (blockedMessage) blockedMessage.style.display = 'none';
-    if (mainContent) mainContent.style.display = 'block';
+    if (mainContent) mainContent.style.display = 'block'; // O 'flex' si usas flexbox
+    // No necesitamos mostrar Turnstile aquí necesariamente
+}
+
+// --- Funciones de Lógica ---
+
+/**
+ * Renderiza los links sociales si existen.
+ */
+function renderSensitiveLinks(links) {
+    socialLinksPlaceholder = socialLinksPlaceholder || document.getElementById('social-links-placeholder'); // Asegurarse de tener la referencia
+    if (!socialLinksPlaceholder) {
+        console.error("Error: Placeholder 'social-links-placeholder' no encontrado.");
+        return;
+    }
+    socialLinksPlaceholder.innerHTML = ''; // Limpiar
+
+    if (links && links.linkedin && links.github) {
+        console.log("Acceso permitido. Mostrando links.");
+        // Crear y añadir links (ejemplo con clases Tailwind básicas)
+        const linkedIn = `<a href="${links.linkedin}" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-coder-accent hover:underline mx-2">LinkedIn</a>`;
+        const github = `<a href="${links.github}" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-coder-accent hover:underline mx-2">GitHub</a>`;
+        socialLinksPlaceholder.innerHTML = `${linkedIn} | ${github}`;
+    } else {
+        console.log("Acceso permitido, pero no se recibieron links (país no permitido o caché). Links ocultos.");
+    }
 }
 
 /**
- * CASO 2: Callback de Turnstile. Se llama cuando el widget
- * invisible de Turnstile se completa (solo para IPs nuevas).
- * @param {string} token - El token generado por Cloudflare Turnstile.
+ * Verifica si hay una sesión Turnstile válida en sessionStorage.
+ */
+function checkSessionValidity() {
+    const timestampStr = sessionStorage.getItem('turnstilePassed');
+    if (!timestampStr) return false;
+
+    const timestamp = parseInt(timestampStr, 10);
+    const now = Date.now();
+    const minutesPassed = (now - timestamp) / (1000 * 60);
+
+    if (minutesPassed < SESSION_VALIDITY_MINUTES) {
+        console.log("Sesión Turnstile válida encontrada en sessionStorage.");
+        return true;
+    } else {
+        console.log("Sesión Turnstile expirada. Revalidando...");
+        sessionStorage.removeItem('turnstilePassed'); // Limpiar sesión expirada
+        return false;
+    }
+}
+
+/**
+ * Callback de Turnstile. Se llama DESPUÉS de que el usuario pasa el desafío.
  */
 function onTurnstileValidation(token) {
-    console.log("Turnstile verificado (IP nueva). Llamando a API para validación completa...");
+    console.log("Turnstile verificado (IP nueva/sesión expirada). Llamando a API para validación completa...");
+    showLoader("Verificación completada. Finalizando..."); // Mensaje mientras llama a API
 
-    // Mostramos el loader OTRA VEZ mientras esperamos la validación completa
-    showLoader();
-
-    // Ahora llamamos a la API con el token para la validación completa
     fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            action: "validate_visit", // <- Acción de validación completa
-            "cf-turnstile-response": token // El token de Turnstile
+            action: "validate_visit",
+            "cf-turnstile-response": token
         })
     })
-        .then(response => {
-            // Manejar errores de red o HTTP (ej. 500, 403)
-            if (!response.ok) {
-                // Intentar leer el error JSON que envía el backend
-                return response.json().then(err => {
-                    // Lanzar un error para ser capturado por .catch()
-                    throw new Error(err.error || `Error API: ${response.status}`);
-                }).catch(() => {
-                    // Si la respuesta de error no es JSON
-                    throw new Error(`Error API: ${response.status} ${response.statusText}`);
-                });
-            }
-            return response.json(); // Convertir la respuesta OK a JSON
-        })
+        .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
         .then(data => {
             console.log("Respuesta de validación completa recibida:", data);
-
-            // El backend responde "known_good" si la validación completa fue exitosa
-            // Y "known_bad" si falló (ej. VPN detectado en Chile)
             if (data.status === "known_good") {
-                // Éxito: IP nueva validada, es de Chile y limpia
-                showMainContent(); // Mostrar contenido
-                renderSensitiveLinks(data.sensitiveLinks); // Renderizar links
-            } else {
-                // Fracaso: IP nueva validada, pero es sospechosa o no de Chile
+                console.log("Validación completa exitosa. Guardando sesión.");
+                sessionStorage.setItem('turnstilePassed', Date.now()); // Guardar sesión VÁLIDA
+                showMainContent();
+                renderSensitiveLinks(data.sensitiveLinks);
+            } else { // known_bad u otro estado de error del backend
+                console.warn("Validación completa fallida o acceso denegado por backend.");
                 showBlockedMessage();
             }
         })
         .catch(error => {
-            // Captura errores de red o errores lanzados desde .then()
-            console.error("Error en el flujo de validación (Turnstile):", error);
-            showBlockedMessage(); // Bloquear si la validación falla
+            console.error("Error en el fetch de validación completa (Turnstile):", error);
+            showBlockedMessage();
         });
 }
 
 /**
- * CASO 1: Chequeo inicial de IP. Se llama al cargar la página.
- * Pregunta al backend si ya conoce esta IP.
+ * Renderiza el widget de Turnstile (ahora se hace ANTES de mostrar main-content).
+ */
+/**
+ * Renderiza el widget de Turnstile.
+ */
+function renderTurnstileWidget() {
+    console.log("IP desconocida/sesión expirada. Renderizando Turnstile...");
+
+    // Ocultar loader
+    if (loaderWrapper) loaderWrapper.style.display = 'none';
+    if (blockedMessage) blockedMessage.style.display = 'none';
+    if (mainContent) mainContent.style.display = 'none';
+
+    // Mostrar Turnstile container
+    const turnstileContainer = document.getElementById('cf-turnstile-container');
+    if (turnstileContainer) {
+        turnstileContainer.style.display = 'flex';
+    }
+
+    try {
+        if (window.turnstile) {
+            console.log("Renderizando widget Turnstile...");
+            window.turnstile.render('#cf-turnstile-widget', {
+                sitekey: TURNSTILE_SITE_KEY,
+                callback: onTurnstileValidation,
+            });
+            console.log("✅ Turnstile renderizado exitosamente");
+        } else {
+            console.error("Objeto 'turnstile' no disponible. Reintentando...");
+            setTimeout(renderTurnstileWidget, 500);
+        }
+    } catch (e) {
+        console.error("Error al renderizar Turnstile:", e);
+        showBlockedMessage();
+    }
+}
+
+
+
+/**
+ * Chequeo inicial de IP (llamado si no hay sesión válida).
  */
 function initialIpCheck() {
-    console.log("Realizando chequeo inicial de IP (Caché DB)...");
+    console.log("Realizando chequeo inicial de IP (API check_ip)...");
+    showLoader(); // Asegurarse de mostrar loader
 
-    // Llamada inicial a la API solo con la acción "check_ip"
     fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: "check_ip" }) // <- Acción de solo chequeo
+        body: JSON.stringify({ action: "check_ip" })
     })
-        .then(response => {
-            if (!response.ok) {
-                // Si la API falla en el chequeo (ej. 500), no podemos confiar en el caché.
-                // Forzamos el flujo de validación completo como fallback.
-                console.warn("Chequeo inicial de IP falló. Forzando validación completa (needs_validation).");
-                // Devolvemos un objeto que simula la respuesta de "needs_validation"
-                return { status: "needs_validation" };
-            }
-            return response.json();
-        })
+        .then(response => response.ok ? response.json() : Promise.reject(`Error API: ${response.status}`))
         .then(data => {
             console.log("Respuesta de chequeo inicial recibida:", data.status);
-
             switch (data.status) {
                 case "known_good":
-                    // CASO 1 (Éxito): IP conocida y limpia. 
-                    // Mostrar contenido, OMITIR Turnstile.
-                    console.log("Acceso rápido (Caché HIT - Limpio).");
+                    console.log("Acceso rápido (Caché DB - Limpio).");
+                    // Opcional: Podríamos guardar sesión aquí también para futuras cargas de página
+                    // sessionStorage.setItem('turnstilePassed', Date.now());
                     showMainContent();
-                    renderSensitiveLinks(data.sensitiveLinks); // Renderizar links (si los hay)
+                    renderSensitiveLinks(data.sensitiveLinks);
                     break;
-
                 case "known_bad":
-                    // CASO 1 (Fallo): IP conocida y sospechosa (o no-CL). Bloquear.
-                    console.warn("Acceso denegado (Caché HIT - Sospechoso o País Bloqueado).");
+                    console.warn("Acceso denegado (Caché DB - Sospechoso o País Bloqueado).");
                     showBlockedMessage();
                     break;
-
                 case "needs_validation":
-                    // CASO 2: IP nueva. Mostrar contenido y ejecutar Turnstile.
-                    console.log("IP desconocida. Renderizando Turnstile para validación...");
-                    // Mostramos el contenido principal (que incluye el div de Turnstile)
-                    showMainContent();
-
-                    // Renderizamos el widget manualmente
-                    try {
-                        // Esperamos que el script api.js de Turnstile ya esté cargado
-                        if (window.turnstile) {
-                            window.turnstile.render('#cf-turnstile-widget', {
-                                sitekey: TURNSTILE_SITE_KEY,
-                                callback: onTurnstileValidation, // Llamar a esta función cuando se complete
-                            });
-                            // IMPORTANTE: Ocultamos el loader, ya que Turnstile
-                            // ahora es visible y el usuario debe interactuar (o será invisible)
-                            // No podemos ocultarlo, showMainContent ya lo hizo.
-                        } else {
-                            // Esto puede pasar si el script de Turnstile aún no se carga
-                            console.error("Error: Objeto 'turnstile' no encontrado. Reintentando...");
-                            setTimeout(() => {
-                                if (window.turnstile) {
-                                    window.turnstile.render('#cf-turnstile-widget', {
-                                        sitekey: TURNSTILE_SITE_KEY,
-                                        callback: onTurnstileValidation,
-                                    });
-                                } else {
-                                    console.error("Fallo definitivo al cargar Turnstile.");
-                                    showBlockedMessage();
-                                }
-                            }, 1500); // Esperar 1.5 seg por si el script api.js estaba lento
-                        }
-                    } catch (e) {
-                        console.error("Error al renderizar Turnstile:", e);
-                        showBlockedMessage();
-                    }
+                    // ¡AQUÍ ejecutamos Turnstile ANTES de mostrar main-content!
+                    renderTurnstileWidget();
                     break;
-
                 default:
-                    // Error inesperado en la respuesta JSON
-                    console.error("Respuesta inesperada de la API:", data);
+                    console.error("Respuesta inesperada de la API (check_ip):", data);
                     showBlockedMessage();
             }
         })
         .catch(error => {
-            // Error de red en el chequeo inicial (ej. API caída, sin internet)
             console.error("Error fatal en el chequeo inicial de IP (fetch fallido):", error);
-            // Fallamos de forma segura (bloquear) si no podemos verificar
             showBlockedMessage();
         });
 }
 
 // --- Punto de Entrada ---
-// Se ejecuta cuando la estructura HTML de la página está lista.
 document.addEventListener('DOMContentLoaded', () => {
-    // Obtenemos las referencias a los elementos del DOM AHORA
+    // Referencias al DOM (mejor obtenerlas una vez)
     loaderWrapper = document.getElementById('loader-wrapper');
     blockedMessage = document.getElementById('blocked-message');
     mainContent = document.getElementById('main-content');
-    turnstileWidgetDiv = document.getElementById('cf-turnstile-widget');
-    socialLinksPlaceholder = document.getElementById('social-links-placeholder'); // <-- ASIGNACIÓN
+    // Turnstile y Social Links se buscarán cuando se necesiten
 
-    // Mostramos el loader
-    showLoader();
+    // NUEVA LÓGICA: ¿Hay sesión válida?
+    if (checkSessionValidity()) {
+        // ¡Sí! Saltar validación y mostrar contenido directamente
+        showMainContent();
+        // AÚN necesitamos llamar a la API para obtener los links (pero SIN validación)
+        // Podríamos crear un nuevo endpoint 'get_links' o reutilizar 'check_ip'
+        // Por simplicidad, reusaremos check_ip sabiendo que el backend responderá rápido (cache hit)
+        console.log("Sesión válida, obteniendo links sociales...");
+        fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: "check_ip" }) // Asume que backend responderá rápido
+        })
+            .then(response => response.ok ? response.json() : Promise.reject('Error obteniendo links'))
+            .then(data => {
+                if (data.sensitiveLinks) {
+                    renderSensitiveLinks(data.sensitiveLinks);
+                }
+            })
+            .catch(error => console.error("Error obteniendo links sociales en sesión válida:", error));
 
-    // Iniciamos el flujo
-    initialIpCheck();
+    } else {
+        // No hay sesión válida, iniciar flujo completo
+        initialIpCheck();
+    }
 });

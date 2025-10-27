@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí - Francisco Mora</title>
+
+    <!-- Google Fonts: Merriweather -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'coder-bg': '#212121',
+                        'coder-bg-light': '#2d2d2d',
+                        'coder-text': '#f5f5f5',
+                        'coder-text-secondary': '#b3b3b3',
+                        'coder-accent': '#42a5f5',
+                        'coder-border': '#424242',
+                        'light-bg': '#ffffff',
+                        'light-text': '#212121',
+                        'light-text-secondary': '#757575',
+                        'light-accent': '#1976d2',
+                        'light-border': '#e0e0e0',
+                    },
+                    fontFamily: {
+                        'sans': ['Merriweather', 'Georgia', 'serif'],
+                        'mono': ['Fira Code', 'Courier New', 'monospace'],
+                    },
+                    maxWidth: {
+                        'coder': '700px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        #loader-wrapper,
+        #blocked-message {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+        }
+
+        #main-content {
+            display: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+    </style>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-QVW5058EVE');
+    </script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</head>
+
+<body class="bg-white dark:bg-coder-bg text-light-text dark:text-coder-text font-sans">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-coder-bg border-b border-light-border dark:border-coder-border">
+        <div class="max-w-coder mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="text-xl font-bold text-light-accent dark:text-coder-accent hover:opacity-80">
+                    francisco.mora
+                </a>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
+                        Inicio
+                    </a>
+                    <a href="/projects.html"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
+                        Proyectos
+                    </a>
+                    <a href="/about.html" class="text-light-accent dark:text-coder-accent font-semibold">
+                        Sobre Mí
+                    </a>
+                    <button id="dark-toggle"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
+                        <span class="dark-icon">☀️</span>
+                        <span class="light-icon hidden">🌙</span>
+                    </button>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden text-light-text dark:text-coder-text">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="/" class="block py-2 text-light-text dark:text-coder-text">Inicio</a>
+                <a href="/projects.html" class="block py-2 text-light-text dark:text-coder-text">Proyectos</a>
+                <a href="/about.html" class="block py-2 text-light-accent dark:text-coder-accent font-semibold">Sobre
+                    Mí</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- VALIDATION FLOW -->
+    <div id="loader-wrapper" class="bg-white dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary">
+        <p class="text-lg mb-4">Validando conexión segura...</p>
+        <svg class="animate-spin h-8 w-8 text-light-accent dark:text-coder-accent" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+        </svg>
+        <div id="cf-turnstile-container" class="mt-8" style="display: none;">
+            <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"></div>
+        </div>
+    </div>
+
+    <div id="blocked-message" style="display: none;" class="bg-white dark:bg-coder-bg text-red-500">
+        <h2 class="text-3xl font-bold mb-4">Acceso Denegado</h2>
+        <p class="text-lg text-light-text-secondary dark:text-coder-text-secondary">
+            Lo sentimos, no podemos mostrar el contenido desde esta ubicación.
+        </p>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+        <div class="max-w-coder mx-auto px-6 py-16 md:py-20">
+            <h1 class="text-4xl md:text-5xl font-bold text-light-text dark:text-coder-text mb-12">
+                Sobre Mí
+            </h1>
+
+            <!-- Bio Section -->
+            <div class="prose prose-lg dark:prose-invert max-w-none mb-16">
+                <p class="text-lg text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
+                    Soy <strong>Ingeniero Civil Industrial</strong> e <strong>Ingeniero en Informática</strong>
+                    de la Universidad Técnica Federico Santa María (UTFSM), complementado con un
+                    <strong>Diplomado en Análisis de Datos</strong> de la Universidad del Desarrollo (UDD).
+                </p>
+
+                <p class="text-lg text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
+                    Me posiciono como un <strong>Full Stack Data Professional</strong>, enfocando mi carrera
+                    en la intersección del <strong>Machine Learning</strong>, la <strong>Ingeniería de Datos</strong>
+                    y la <strong>Inteligencia de Negocios</strong>.
+                </p>
+
+                <p class="text-lg text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
+                    Mi fortaleza radica en combinar una sólida base matemática y analítica con habilidades
+                    prácticas de ingeniería de software para construir soluciones de datos <strong>end-to-end</strong>:
+                    desde el modelado predictivo hasta su implementación en <strong>sistemas productivos escalables y
+                        seguros</strong>.
+                </p>
+            </div>
+
+            <!-- Skills Section -->
+            <section id="skills" class="mb-16">
+                <h2
+                    class="text-3xl font-bold text-light-text dark:text-coder-text mb-8 border-b border-light-border dark:border-coder-border pb-2">
+                    Habilidades Técnicas
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-light-accent dark:text-coder-accent mb-4">
+                            ML & Data Science
+                        </h3>
+                        <ul class="space-y-2 text-light-text-secondary dark:text-coder-text-secondary">
+                            <li>• Python (Pandas, NumPy, Scikit-learn)</li>
+                            <li>• Modelos Predictivos (XGBoost, LGBM)</li>
+                            <li>• Feature Engineering</li>
+                            <li>• Análisis Estadístico (R)</li>
+                            <li>• TensorFlow/PyTorch (básico)</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-light-accent dark:text-coder-accent mb-4">
+                            Data Engineering
+                        </h3>
+                        <ul class="space-y-2 text-light-text-secondary dark:text-coder-text-secondary">
+                            <li>• SQL (PostgreSQL, MySQL)</li>
+                            <li>• ETL/ELT Pipelines</li>
+                            <li>• Apache Airflow</li>
+                            <li>• PySpark</li>
+                            <li>• Cloud (Azure, GCP)</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-light-accent dark:text-coder-accent mb-4">
+                            BI & Visualization
+                        </h3>
+                        <ul class="space-y-2 text-light-text-secondary dark:text-coder-text-secondary">
+                            <li>• Power BI</li>
+                            <li>• Tableau</li>
+                            <li>• Dashboard Design</li>
+                            <li>• Storytelling con Datos</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-light-accent dark:text-coder-accent mb-4">
+                            DevOps & Tools
+                        </h3>
+                        <ul class="space-y-2 text-light-text-secondary dark:text-coder-text-secondary">
+                            <li>• Git & GitHub</li>
+                            <li>• Docker (básico)</li>
+                            <li>• CI/CD</li>
+                            <li>• API REST</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Architecture Section -->
+            <section id="architecture"
+                class="mb-16 p-8 bg-gray-50 dark:bg-coder-bg-light rounded-lg border border-light-border dark:border-coder-border">
+                <h2 class="text-2xl font-bold text-light-text dark:text-coder-text mb-4">
+                    Arquitectura de Este Portafolio
+                </h2>
+                <p class="text-light-text-secondary dark:text-coder-text-secondary mb-6 leading-relaxed">
+                    Este sitio web es, en sí mismo, un proyecto demostrativo de mis habilidades full-stack.
+                    Combina un frontend estático desplegado globalmente con un backend serverless seguro
+                    y una base de datos para analytics en tiempo real.
+                </p>
+
+                <!-- AQUÍ PUEDES PONER TU DIAGRAMA -->
+                <div class="my-6 border border-light-border dark:border-coder-border rounded-lg overflow-hidden">
+                    <img src="/assets/images/diagrama-arquitectura.png" alt="Arquitectura del Portafolio"
+                        class="w-full">
+                </div>
+
+                <div class="text-center mt-6">
+                    <a href="https://github.com/tuusuario/portafolio" target="_blank"
+                        class="inline-block text-light-accent dark:text-coder-accent hover:underline font-semibold">
+                        Leer documentación técnica completa (README) →
+                    </a>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="text-center">
+                <h2 class="text-3xl font-bold text-light-text dark:text-coder-text mb-6">
+                    Conectemos
+                </h2>
+                <p class="text-light-text-secondary dark:text-coder-text-secondary mb-4 text-lg">
+                    Disponible para oportunidades y colaboraciones.
+                </p>
+                <p class="mb-8">
+                    <a href="mailto:franciscomoracb@gmail.com"
+                        class="text-xl text-light-accent dark:text-coder-accent hover:underline font-semibold">
+                        example@example.com
+                    </a>
+                </p>
+
+                <!-- Social Links -->
+                <div class="flex justify-center space-x-6 text-2xl">
+                    <a href="https://github.com/tuusuario" target="_blank"
+                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                    <a href="https://linkedin.com/in/tuusuario" target="_blank"
+                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-12 bg-white dark:bg-coder-bg border-t border-light-border dark:border-coder-border">
+        <div class="max-w-coder mx-auto px-6">
+            <div class="text-center text-light-text-secondary dark:text-coder-text-secondary text-sm">
+                <p class="mb-4">
+                    © 2025 Francisco Mora ·
+                    <a href="https://github.com/tuusuario"
+                        class="hover:text-light-accent dark:hover:text-coder-accent">GitHub</a> ·
+                    <a href="https://linkedin.com/in/tuusuario"
+                        class="hover:text-light-accent dark:hover:text-coder-accent">LinkedIn</a>
+                </p>
+                <p class="text-xs">
+                    Hecho con 💙 usando HTML + Tailwind (inspirado en Hugo Coder)
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/dark-mode.js"></script>
+    <script src="/assets/js/mobile-menu.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>
