@@ -37,7 +37,6 @@
                         'light-border': '#e0e0e0',
                     },
                     fontFamily: {
-                        // CORRECTO: Hugo Coder usa Merriweather
                         'sans': ['Merriweather', 'Georgia', 'serif'],
                         'mono': ['Fira Code', 'Courier New', 'monospace'],
                     },
@@ -51,8 +50,146 @@
 
     <!-- Estilos Custom -->
     <style>
-        /* Validation wrappers */
-        #loader-wrapper,
+        /* ===== LOADER (Pantalla de validación inicial) ===== */
+        #loader-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: linear-gradient(135deg, rgba(33, 33, 33, 0.98), rgba(45, 45, 45, 0.98));
+        }
+
+        /* ===== MODAL DE VALIDACIÓN (PROFESIONAL - CENTRADO) ===== */
+
+        /* Overlay oscuro de fondo (bloquea interacción pero VISIBLE) */
+        .validation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            /* MÁS TRANSPARENTE: 0.85 → 0.5 */
+            z-index: 9998;
+            /* REMOVER: backdrop-filter: blur(5px); */
+        }
+
+        /* Modal centrado */
+        #validation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .validation-modal-content {
+            background: #212121;
+            border-radius: 12px;
+            padding: 48px 64px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            /* SOMBRA MÁS PRONUNCIADA */
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: modalFadeIn 0.3s ease;
+            position: relative;
+            /* IMPORTANTE: Asegurar que esté sobre overlay */
+            z-index: 10000;
+            /* MÁS ALTO QUE overlay (9998) y modal (9999) */
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Texto del modal */
+        .validation-text h2 {
+            color: #42a5f5;
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .validation-text p {
+            color: #b3b3b3;
+            font-size: 16px;
+            margin-bottom: 32px;
+            font-weight: 400;
+            /* AGREGADO: Peso normal */
+        }
+
+        /* Turnstile centrado y VISIBLE */
+        .turnstile-widget-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            filter: none;
+            /* ASEGURAR que no tenga blur */
+            opacity: 1;
+            /* ASEGURAR que sea visible */
+        }
+
+        /* Animar Turnstile cuando aparece */
+        #cf-turnstile-widget {
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .validation-modal-content {
+                padding: 32px 24px;
+                width: 95%;
+                margin: 20px;
+                /* AGREGADO: Margen en mobile */
+            }
+
+            .validation-text h2 {
+                font-size: 24px;
+            }
+
+            .validation-text p {
+                font-size: 14px;
+                margin-bottom: 24px;
+            }
+        }
+
+
+        /* ===== BLOCKED MESSAGE ===== */
         #blocked-message {
             min-height: 100vh;
             display: flex;
@@ -67,10 +204,19 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
+            background: linear-gradient(135deg, rgba(33, 33, 33, 0.98), rgba(45, 45, 45, 0.98));
         }
 
+        /* ===== MAIN CONTENT (oculto inicialmente) ===== */
         #main-content {
             display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        #main-content.visible {
+            display: block;
+            opacity: 1;
         }
 
         /* Smooth scrolling */
@@ -98,9 +244,40 @@
             text-decoration: underline;
         }
 
-        /* Turnstile container */
-        #cf-turnstile-container {
-            display: none;
+        /* ===== SPINNER DE VALIDACIÓN ===== */
+        .validation-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .validation-spinner svg {
+            color: #42a5f5;
+        }
+
+        .validation-spinner p {
+            color: #b3b3b3;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        /* Animar Turnstile cuando aparece */
+        #cf-turnstile-widget {
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 
@@ -172,7 +349,7 @@
         </div>
     </nav>
 
-    <!-- ======== VALIDATION FLOW (TU CÓDIGO DE SEGURIDAD) ======== -->
+    <!-- ======== LOADER (Pantalla inicial) ======== -->
     <div id="loader-wrapper" class="bg-white dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary">
         <p class="text-lg mb-4">Validando conexión segura...</p>
         <svg class="animate-spin h-8 w-8 text-light-accent dark:text-coder-accent" xmlns="http://www.w3.org/2000/svg"
@@ -184,17 +361,36 @@
         </svg>
     </div>
 
-    <!-- Turnstile container (FUERA del loader) -->
-    <div id="cf-turnstile-container"
-        class="fixed top-0 left-0 width-100 h-screen flex flex-col justify-center items-center bg-white dark:bg-coder-bg"
-        style="display: none; z-index: 9998;">
-        <p class="text-lg mb-8 text-light-text-secondary dark:text-coder-text-secondary">Se requiere verificación
-            adicional...</p>
-        <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"></div>
+    <!-- ======== MODAL DE VALIDACIÓN (PROFESIONAL - CENTRADO) ======== -->
+    <div id="validation-modal" style="display: none;">
+        <!-- Overlay oscuro de fondo -->
+        <div class="validation-overlay"></div>
+
+        <!-- Modal centrado -->
+        <div class="validation-modal-content">
+            <div class="validation-text">
+                <h2>Verificación de Seguridad</h2>
+                <p>Por favor, complete la verificación para continuar</p>
+            </div>
+
+            <!-- Spinner de carga (visible si la API tarda) -->
+            <div id="validation-spinner" class="validation-spinner" style="display: none;">
+                <svg class="animate-spin h-6 w-6 text-coder-accent" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                <p style="margin-top: 12px; color: #b3b3b3;">Validando...</p>
+            </div>
+
+            <!-- Turnstile Widget (centrado) -->
+            <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
+        </div>
     </div>
 
-
-    <!-- Blocked Message -->
+    <!-- ======== BLOCKED MESSAGE ======== -->
     <div id="blocked-message" style="display: none;" class="bg-white dark:bg-coder-bg text-red-500">
         <h2 class="text-3xl font-bold mb-4">Acceso Denegado</h2>
         <p class="text-lg text-light-text-secondary dark:text-coder-text-secondary">

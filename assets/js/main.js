@@ -1,63 +1,58 @@
-// assets/js/main.js
+// assets/js/main.js - Flujo de Validación Profesional SIN REFRESH
 
 // --- CONFIGURACIÓN ---
 const API_URL = "https://franmora-portfolio-api.azurewebsites.net/api/register_visitor";
 const TURNSTILE_SITE_KEY = "0x4AAAAAAB8sMLnvQf8wAXSD";
-const SESSION_VALIDITY_MINUTES = 30; // ¿Cuánto tiempo dura la sesión sin revalidar?
+const SESSION_VALIDITY_MINUTES = 30;
 // --- FIN CONFIGURACIÓN ---
 
 // --- Variables Globales del DOM ---
-let loaderWrapper, blockedMessage, mainContent, turnstileWidgetDiv, socialLinksPlaceholder;
+let loaderWrapper, blockedMessage, mainContent, validationModal;
 
 // --- Funciones para cambiar estado UI ---
 function showLoader(message = "Validando conexión segura...") {
     if (loaderWrapper) {
-        loaderWrapper.style.display = 'flex'; // Usar flex para centrar
+        loaderWrapper.style.display = 'flex';
         const p = loaderWrapper.querySelector('p');
         if (p) p.textContent = message;
     }
     if (blockedMessage) blockedMessage.style.display = 'none';
     if (mainContent) mainContent.style.display = 'none';
-    // Ocultar Turnstile si está visible
-    if (turnstileWidgetDiv) turnstileWidgetDiv.style.display = 'none';
+    if (validationModal) validationModal.style.display = 'none';
 }
 
 function showBlockedMessage() {
     if (loaderWrapper) loaderWrapper.style.display = 'none';
-    if (blockedMessage) blockedMessage.style.display = 'flex'; // Usar flex
+    if (blockedMessage) blockedMessage.style.display = 'flex';
     if (mainContent) mainContent.style.display = 'none';
-    if (turnstileWidgetDiv) turnstileWidgetDiv.style.display = 'none';
+    if (validationModal) validationModal.style.display = 'none';
 }
 
 function showMainContent() {
     if (loaderWrapper) loaderWrapper.style.display = 'none';
     if (blockedMessage) blockedMessage.style.display = 'none';
-    if (mainContent) mainContent.style.display = 'block'; // O 'flex' si usas flexbox
-    // No necesitamos mostrar Turnstile aquí necesariamente
-}
+    if (validationModal) validationModal.style.display = 'none';
 
-// --- Funciones de Lógica ---
+    if (mainContent) {
+        mainContent.style.opacity = '0';
+        mainContent.style.display = 'block';
+        mainContent.style.transition = 'opacity 0.4s ease';
+
+        // Trigger reflow para activar transición
+        mainContent.offsetHeight;
+        mainContent.style.opacity = '1';
+    }
+}
 
 /**
  * Renderiza los links sociales si existen.
  */
 function renderSensitiveLinks(links) {
-    socialLinksPlaceholder = socialLinksPlaceholder || document.getElementById('social-links-placeholder'); // Asegurarse de tener la referencia
-    if (!socialLinksPlaceholder) {
-        console.error("Error: Placeholder 'social-links-placeholder' no encontrado.");
+    if (!links || (!links.linkedin && !links.github)) {
+        console.log("No hay links sensibles para mostrar.");
         return;
     }
-    socialLinksPlaceholder.innerHTML = ''; // Limpiar
-
-    if (links && links.linkedin && links.github) {
-        console.log("Acceso permitido. Mostrando links.");
-        // Crear y añadir links (ejemplo con clases Tailwind básicas)
-        const linkedIn = `<a href="${links.linkedin}" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-coder-accent hover:underline mx-2">LinkedIn</a>`;
-        const github = `<a href="${links.github}" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-coder-accent hover:underline mx-2">GitHub</a>`;
-        socialLinksPlaceholder.innerHTML = `${linkedIn} | ${github}`;
-    } else {
-        console.log("Acceso permitido, pero no se recibieron links (país no permitido o caché). Links ocultos.");
-    }
+    console.log("Links sensibles habilitados:", links);
 }
 
 /**
@@ -72,22 +67,74 @@ function checkSessionValidity() {
     const minutesPassed = (now - timestamp) / (1000 * 60);
 
     if (minutesPassed < SESSION_VALIDITY_MINUTES) {
-        console.log("Sesión Turnstile válida encontrada en sessionStorage.");
+        console.log("✅ Sesión Turnstile válida encontrada en sessionStorage.");
         return true;
     } else {
-        console.log("Sesión Turnstile expirada. Revalidando...");
-        sessionStorage.removeItem('turnstilePassed'); // Limpiar sesión expirada
+        console.log("⏰ Sesión Turnstile expirada. Revalidando...");
+        sessionStorage.removeItem('turnstilePassed');
         return false;
     }
 }
 
 /**
- * Callback de Turnstile. Se llama DESPUÉS de que el usuario pasa el desafío.
+ * Renderiza el widget de Turnstile en modal centrado (PROFESIONAL)
+ */
+function renderTurnstileWidget() {
+    console.log("🔒 IP desconocida/sesión expirada. Renderizando Turnstile en modal...");
+
+    // Ocultar todo lo demás
+    if (loaderWrapper) loaderWrapper.style.display = 'none';
+    if (blockedMessage) blockedMessage.style.display = 'none';
+    if (mainContent) mainContent.style.display = 'none';
+
+    // Mostrar modal de validación
+    if (validationModal) {
+        validationModal.style.display = 'flex';
+        validationModal.style.opacity = '1';
+    }
+
+    // Mostrar Turnstile, ocultar spinner
+    const turnstileWidget = document.getElementById('cf-turnstile-widget');
+    const spinner = document.getElementById('validation-spinner');
+
+    if (spinner) spinner.style.display = 'none';
+    if (turnstileWidget) turnstileWidget.style.display = 'flex';
+
+    // Renderizar Turnstile dentro del modal
+    try {
+        if (window.turnstile) {
+            console.log("📍 Renderizando widget Turnstile en modal centrado...");
+            window.turnstile.render('#cf-turnstile-widget', {
+                sitekey: TURNSTILE_SITE_KEY,
+                callback: onTurnstileValidation,
+                theme: 'dark',
+                size: 'normal',
+            });
+            console.log("✅ Turnstile renderizado exitosamente en modal");
+        } else {
+            console.error("❌ Objeto 'turnstile' no disponible. Reintentando...");
+            setTimeout(renderTurnstileWidget, 500);
+        }
+    } catch (e) {
+        console.error("❌ Error al renderizar Turnstile:", e);
+        showBlockedMessage();
+    }
+}
+
+/**
+ * Callback de Turnstile - Se llama DESPUÉS de que el usuario pasa el desafío
  */
 function onTurnstileValidation(token) {
-    console.log("Turnstile verificado (IP nueva/sesión expirada). Llamando a API para validación completa...");
-    showLoader("Verificación completada. Finalizando..."); // Mensaje mientras llama a API
+    console.log("✅ Turnstile verificado por usuario. Validando con backend...");
 
+    // Mostrar spinner de "Validando..."
+    const spinner = document.getElementById('validation-spinner');
+    const turnstileWidget = document.getElementById('cf-turnstile-widget');
+
+    if (spinner) spinner.style.display = 'flex';
+    if (turnstileWidget) turnstileWidget.style.display = 'none'; // Ocultar Turnstile mientras valida
+
+    // Llamar a API para validación completa
     fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -98,69 +145,81 @@ function onTurnstileValidation(token) {
     })
         .then(response => response.ok ? response.json() : response.json().then(err => Promise.reject(err)))
         .then(data => {
-            console.log("Respuesta de validación completa recibida:", data);
+            console.log("📦 Respuesta de validación completa recibida:", data.status);
             if (data.status === "known_good") {
-                console.log("Validación completa exitosa. Guardando sesión.");
-                sessionStorage.setItem('turnstilePassed', Date.now()); // Guardar sesión VÁLIDA
-                showMainContent();
-                renderSensitiveLinks(data.sensitiveLinks);
-            } else { // known_bad u otro estado de error del backend
-                console.warn("Validación completa fallida o acceso denegado por backend.");
-                showBlockedMessage();
+                console.log("✅ Backend validó exitosamente. Guardando sesión...");
+                sessionStorage.setItem('turnstilePassed', Date.now());
+
+                // ✅ SOLUCIÓN PROFESIONAL: Transición suave SIN REFRESH
+                hideValidationModalSmooth(data);
+            } else {
+                console.warn("❌ Validación fallida o acceso denegado por backend.");
+                showFailedValidation();
             }
         })
         .catch(error => {
-            console.error("Error en el fetch de validación completa (Turnstile):", error);
-            showBlockedMessage();
+            console.error("❌ Error en validación completa (Turnstile):", error);
+            showFailedValidation();
         });
 }
 
 /**
- * Renderiza el widget de Turnstile (ahora se hace ANTES de mostrar main-content).
+ * Oculta modal de forma PROFESIONAL con animación suave (SIN REFRESH)
  */
-/**
- * Renderiza el widget de Turnstile.
- */
-function renderTurnstileWidget() {
-    console.log("IP desconocida/sesión expirada. Renderizando Turnstile...");
+function hideValidationModalSmooth(data) {
+    const modal = document.getElementById('validation-modal');
 
-    // Ocultar loader
-    if (loaderWrapper) loaderWrapper.style.display = 'none';
-    if (blockedMessage) blockedMessage.style.display = 'none';
-    if (mainContent) mainContent.style.display = 'none';
+    console.log("🎬 Iniciando transición suave del modal...");
 
-    // Mostrar Turnstile container
-    const turnstileContainer = document.getElementById('cf-turnstile-container');
-    if (turnstileContainer) {
-        turnstileContainer.style.display = 'flex';
-    }
+    // Fade out suave
+    modal.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    modal.style.opacity = '0';
+    modal.style.transform = 'translateY(20px)';
 
-    try {
-        if (window.turnstile) {
-            console.log("Renderizando widget Turnstile...");
-            window.turnstile.render('#cf-turnstile-widget', {
-                sitekey: TURNSTILE_SITE_KEY,
-                callback: onTurnstileValidation,
-            });
-            console.log("✅ Turnstile renderizado exitosamente");
-        } else {
-            console.error("Objeto 'turnstile' no disponible. Reintentando...");
-            setTimeout(renderTurnstileWidget, 500);
+    setTimeout(() => {
+        console.log("🧹 Limpiando Turnstile del DOM...");
+
+        // Limpiar Turnstile completamente
+        const widget = document.getElementById('cf-turnstile-widget');
+        if (widget) {
+            widget.innerHTML = '';
+            console.log("✓ Widget HTML limpiado");
         }
-    } catch (e) {
-        console.error("Error al renderizar Turnstile:", e);
-        showBlockedMessage();
-    }
+
+        // Extra: Eliminar iframes residuales de Cloudflare
+        document.querySelectorAll('iframe[src*="challenges.cloudflare"]').forEach(el => {
+            el.remove();
+            console.log("✓ iframe de Cloudflare eliminado");
+        });
+
+        // Ocultar modal
+        modal.style.display = 'none';
+
+        // Mostrar contenido principal con fade in
+        console.log("🎨 Mostrando contenido principal...");
+        showMainContent();
+
+        // Renderizar links sensibles
+        renderSensitiveLinks(data.sensitiveLinks);
+
+        console.log("✨ Modal oculto. Contenido mostrado. (SIN REFRESH - PROFESIONAL)");
+    }, 400);
 }
 
-
+/**
+ * Muestra mensaje de fallo de validación
+ */
+function showFailedValidation() {
+    if (validationModal) validationModal.style.display = 'none';
+    showBlockedMessage();
+}
 
 /**
- * Chequeo inicial de IP (llamado si no hay sesión válida).
+ * Chequeo inicial de IP (API check_ip)
  */
 function initialIpCheck() {
-    console.log("Realizando chequeo inicial de IP (API check_ip)...");
-    showLoader(); // Asegurarse de mostrar loader
+    console.log("🔍 Realizando chequeo inicial de IP (API check_ip)...");
+    showLoader();
 
     fetch(API_URL, {
         method: 'POST',
@@ -169,54 +228,61 @@ function initialIpCheck() {
     })
         .then(response => response.ok ? response.json() : Promise.reject(`Error API: ${response.status}`))
         .then(data => {
-            console.log("Respuesta de chequeo inicial recibida:", data.status);
+            console.log("📊 Respuesta de chequeo inicial recibida:", data.status);
+
             switch (data.status) {
                 case "known_good":
-                    console.log("Acceso rápido (Caché DB - Limpio).");
-                    // Opcional: Podríamos guardar sesión aquí también para futuras cargas de página
-                    // sessionStorage.setItem('turnstilePassed', Date.now());
+                    console.log("⚡ Acceso rápido (Caché DB - Limpio). Mostrando contenido...");
                     showMainContent();
                     renderSensitiveLinks(data.sensitiveLinks);
                     break;
+
                 case "known_bad":
-                    console.warn("Acceso denegado (Caché DB - Sospechoso o País Bloqueado).");
+                    console.warn("🚫 Acceso denegado (Caché DB - Sospechoso o País Bloqueado).");
                     showBlockedMessage();
                     break;
+
                 case "needs_validation":
-                    // ¡AQUÍ ejecutamos Turnstile ANTES de mostrar main-content!
+                    console.log("🛡️ IP nueva detectada. Requiere validación con Turnstile.");
                     renderTurnstileWidget();
                     break;
+
                 default:
-                    console.error("Respuesta inesperada de la API (check_ip):", data);
+                    console.error("❓ Respuesta inesperada de la API (check_ip):", data);
                     showBlockedMessage();
             }
         })
         .catch(error => {
-            console.error("Error fatal en el chequeo inicial de IP (fetch fallido):", error);
+            console.error("❌ Error fatal en chequeo inicial de IP (fetch fallido):", error);
             showBlockedMessage();
         });
 }
 
-// --- Punto de Entrada ---
+/**
+ * Punto de entrada - DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', () => {
-    // Referencias al DOM (mejor obtenerlas una vez)
+    console.log("=== INICIANDO VALIDACIÓN DE SEGURIDAD ===");
+
+    // Referencias al DOM (obtenerlas una vez)
     loaderWrapper = document.getElementById('loader-wrapper');
     blockedMessage = document.getElementById('blocked-message');
     mainContent = document.getElementById('main-content');
-    // Turnstile y Social Links se buscarán cuando se necesiten
+    validationModal = document.getElementById('validation-modal');
+
+    console.log("✓ Referencias del DOM obtenidas");
 
     // NUEVA LÓGICA: ¿Hay sesión válida?
     if (checkSessionValidity()) {
-        // ¡Sí! Saltar validación y mostrar contenido directamente
+        // ✅ SÍ! Sesión válida, saltar validación y mostrar contenido directo
+        console.log("✨ Sesión válida encontrada. Mostrando contenido sin validación...");
         showMainContent();
-        // AÚN necesitamos llamar a la API para obtener los links (pero SIN validación)
-        // Podríamos crear un nuevo endpoint 'get_links' o reutilizar 'check_ip'
-        // Por simplicidad, reusaremos check_ip sabiendo que el backend responderá rápido (cache hit)
-        console.log("Sesión válida, obteniendo links sociales...");
+
+        // Obtener links (opcional, para mantener consistencia)
         fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: "check_ip" }) // Asume que backend responderá rápido
+            body: JSON.stringify({ action: "check_ip" })
         })
             .then(response => response.ok ? response.json() : Promise.reject('Error obteniendo links'))
             .then(data => {
@@ -224,10 +290,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     renderSensitiveLinks(data.sensitiveLinks);
                 }
             })
-            .catch(error => console.error("Error obteniendo links sociales en sesión válida:", error));
+            .catch(error => console.error("⚠️ Error obteniendo links:", error));
 
     } else {
-        // No hay sesión válida, iniciar flujo completo
+        // ❌ NO hay sesión válida, iniciar flujo completo
+        console.log("🔄 No hay sesión válida. Iniciando flujo de validación completo...");
         initialIpCheck();
     }
+
+    console.log("=== VALIDACIÓN LISTA ===");
 });
