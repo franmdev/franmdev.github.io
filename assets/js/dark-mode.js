@@ -1,9 +1,11 @@
-// Dark mode toggle - Funciona perfectamente
+// Dark mode toggle - Sincronizado con SVG Icons PaperMod
 document.addEventListener('DOMContentLoaded', () => {
     const html = document.documentElement;
     const toggleBtn = document.getElementById('dark-toggle');
+    const moon = document.getElementById('moon');
+    const sun = document.getElementById('sun');
 
-    if (!toggleBtn) return;
+    if (!toggleBtn || !moon || !sun) return;
 
     // Lee preferencia guardada o usa 'dark' por defecto
     const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -11,12 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Aplica el tema inicial
     if (savedTheme === 'dark') {
         html.classList.add('dark');
+        moon.style.display = 'none';
+        sun.style.display = 'block';
     } else {
         html.classList.remove('dark');
+        moon.style.display = 'block';
+        sun.style.display = 'none';
     }
-
-    // Actualiza el icono inicial
-    updateIcon(savedTheme);
 
     // Toggle al hacer click
     toggleBtn.addEventListener('click', () => {
@@ -25,28 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (newTheme === 'dark') {
             html.classList.add('dark');
+            moon.style.display = 'none';
+            sun.style.display = 'block';
         } else {
             html.classList.remove('dark');
+            moon.style.display = 'block';
+            sun.style.display = 'none';
         }
 
         localStorage.setItem('theme', newTheme);
-        updateIcon(newTheme);
     });
-
-    function updateIcon(theme) {
-        const darkIcon = toggleBtn.querySelector('.dark-icon');
-        const lightIcon = toggleBtn.querySelector('.light-icon');
-
-        if (!darkIcon || !lightIcon) return;
-
-        if (theme === 'dark') {
-            // Dark mode activo: muestra sol (para cambiar a light)
-            darkIcon.classList.remove('hidden');
-            lightIcon.classList.add('hidden');
-        } else {
-            // Light mode activo: muestra luna (para cambiar a dark)
-            darkIcon.classList.add('hidden');
-            lightIcon.classList.remove('hidden');
-        }
-    }
 });

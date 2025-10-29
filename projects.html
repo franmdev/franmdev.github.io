@@ -6,44 +6,252 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyectos - Francisco Mora</title>
 
-    <!-- Google Fonts: Merriweather -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        'coder-bg': '#212121',
-                        'coder-bg-light': '#2d2d2d',
-                        'coder-text': '#f5f5f5',
-                        'coder-text-secondary': '#b3b3b3',
-                        'coder-accent': '#42a5f5',
-                        'coder-border': '#424242',
-                        'light-bg': '#ffffff',
-                        'light-text': '#212121',
-                        'light-text-secondary': '#757575',
-                        'light-accent': '#1976d2',
-                        'light-border': '#e0e0e0',
+                        'pm-bg': '#1d1e20',
+                        'pm-entry': '#2e2e33',
+                        'pm-primary': '#dadadb',
+                        'pm-secondary': '#9b9c9d',
+                        'pm-tertiary': '#414244',
+                        'pm-accent': '#ffffff',
+                        'pm-border': '#333333',
+                        'pm-light-bg': '#ffffff',
+                        'pm-light-entry': '#ffffff',
+                        'pm-light-primary': '#1e1e1e',
+                        'pm-light-secondary': '#6c6c6c',
+                        'pm-light-tertiary': '#e6e6e6',
+                        'pm-light-accent': '#ffffff',
+                        'pm-light-border': '#eeeeee',
                     },
                     fontFamily: {
-                        'sans': ['Merriweather', 'Georgia', 'serif'],
-                        'mono': ['Fira Code', 'Courier New', 'monospace'],
+                        'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
                     },
-                    maxWidth: {
-                        'coder': '700px',
-                    }
                 }
             }
         }
     </script>
 
     <style>
-        #loader-wrapper,
+        /* ===== PAPERMOD EXACT VARIABLES ===== */
+        :root {
+            --gap: 24px;
+            --content-gap: 20px;
+            --nav-width: 1024px;
+            --main-width: 720px;
+            --header-height: 60px;
+            --footer-height: 60px;
+            --radius: 8px;
+        }
+
+        /* ===== BASE ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 0;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        * {
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* ===== NAVBAR (PAPERMOD EXACT) ===== */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: calc(var(--nav-width) + var(--gap) * 2);
+            margin-inline-start: auto;
+            margin-inline-end: auto;
+            line-height: var(--header-height);
+            width: 100%;
+            padding: 0 var(--gap);
+        }
+
+        nav a {
+            display: block;
+        }
+
+        .logo,
+        #menu {
+            display: flex;
+            margin: auto var(--gap);
+        }
+
+        .logo {
+            flex-wrap: inherit;
+        }
+
+        .logo a {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        button#dark-toggle {
+            font-size: 26px;
+            margin: auto 4px;
+            padding: 0;
+            font: inherit;
+            background: 0 0;
+            border: 0;
+            cursor: pointer;
+        }
+
+        #menu {
+            list-style: none;
+            word-break: keep-all;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        #menu li+li {
+            margin-inline-start: var(--gap);
+        }
+
+        #menu a {
+            font-size: 16px;
+        }
+
+        /* ===== MAIN CONTAINER (PAPERMOD EXACT) ===== */
+        main {
+            position: relative;
+            min-height: calc(100vh - var(--header-height) - var(--footer-height));
+            max-width: calc(var(--main-width) + var(--gap) * 2);
+            margin: auto;
+            padding: var(--gap);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            font-size: 12px;
+            max-width: calc(var(--main-width) + var(--gap) * 2);
+            margin: auto;
+            padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
+            text-align: center;
+            line-height: 24px;
+        }
+
+        footer a {
+            border-bottom: 1px solid;
+        }
+
+        footer a:hover {
+            border-bottom: 1px solid;
+        }
+
+        /* ===== LOADERS & MODALS ===== */
+        #loader-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: linear-gradient(135deg, rgba(29, 30, 32, 0.98), rgba(46, 46, 51, 0.98));
+        }
+
+        .validation-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+        }
+
+        #validation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .validation-modal-content {
+            background: #2e2e33;
+            border-radius: 8px;
+            padding: 48px 64px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: modalFadeIn 0.3s ease;
+            position: relative;
+            z-index: 10000;
+            border: 1px solid #333333;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .validation-text h2 {
+            color: #dadadb;
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .validation-text p {
+            color: #9b9c9d;
+            font-size: 16px;
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        /* ===== VALIDATION SPINNER ===== */
+        .validation-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .validation-spinner svg {
+            color: #dadadb;
+        }
+
+        .validation-spinner p {
+            color: #9b9c9d;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        /* ===== BLOCKED MESSAGE ===== */
         #blocked-message {
             min-height: 100vh;
             display: flex;
@@ -58,22 +266,18 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
+            background: linear-gradient(135deg, rgba(29, 30, 32, 0.98), rgba(46, 46, 51, 0.98));
         }
 
         #main-content {
             display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        * {
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        .hover-coder:hover {
-            background-color: rgba(66, 165, 245, 0.05);
+        #main-content.visible {
+            display: block;
+            opacity: 1;
         }
 
         .link-coder {
@@ -84,6 +288,81 @@
         .link-coder:hover {
             text-decoration: underline;
         }
+
+        /* ===== THEME TOGGLE ===== */
+        #moon {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        #sun {
+            display: none !important;
+            opacity: 0 !important;
+        }
+
+        html.dark #moon {
+            display: none !important;
+            opacity: 0 !important;
+        }
+
+        html.dark #sun {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        #moon,
+        #sun {
+            transition: all 0.3s ease !important;
+        }
+
+        /* ===== CONTENT SPECIFIC ===== */
+        .project-article {
+            padding-bottom: var(--gap);
+            margin-bottom: var(--gap);
+            border-bottom: 1px solid;
+        }
+
+        .project-article:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 28px;
+            line-height: 1.3;
+            font-weight: 700;
+            margin: 16px 0 12px 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .project-tag {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: var(--radius);
+            background: rgba(212, 212, 211, 0.05);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            :root {
+                --gap: 14px;
+            }
+
+            #menu {
+                margin: 0;
+            }
+        }
     </style>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
@@ -93,344 +372,375 @@
         gtag('js', new Date());
         gtag('config', 'G-QVW5058EVE');
     </script>
+
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
-<body class="bg-white dark:bg-coder-bg text-light-text dark:text-coder-text font-sans">
+<body class="bg-pm-light-bg dark:bg-pm-bg text-pm-light-primary dark:text-pm-primary font-sans">
 
-    <!-- NAVBAR -->
-    <nav class="sticky top-0 z-50 bg-white dark:bg-coder-bg border-b border-light-border dark:border-coder-border">
-        <div class="max-w-coder mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="/" class="text-xl font-bold text-light-accent dark:text-coder-accent hover:opacity-80">
-                    francisco.mora
-                </a>
-
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="/"
-                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
-                        Inicio
-                    </a>
-                    <a href="/projects.html" class="text-light-accent dark:text-coder-accent font-semibold">
-                        Proyectos
-                    </a>
-                    <a href="/about.html"
-                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
-                        Sobre Mí
-                    </a>
-                    <button id="dark-toggle"
-                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
-                        <span class="dark-icon">☀️</span>
-                        <span class="light-icon hidden">🌙</span>
-                    </button>
-                </div>
-
-                <button id="mobile-menu-btn" class="md:hidden text-light-text dark:text-coder-text">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-
-            <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
-                <a href="/" class="block py-2 text-light-text dark:text-coder-text">Inicio</a>
-                <a href="/projects.html"
-                    class="block py-2 text-light-accent dark:text-coder-accent font-semibold">Proyectos</a>
-                <a href="/about.html" class="block py-2 text-light-text dark:text-coder-text">Sobre Mí</a>
-            </div>
+    <nav class="sticky top-0 z-50 bg-pm-light-bg dark:bg-pm-bg">
+        <div class="logo">
+            <a href="/"
+                class="text-pm-light-primary dark:text-pm-primary hover:opacity-80 transition">francisco.mora</a>
+            <button id="dark-toggle" class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition">
+                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display: block;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display: none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
         </div>
+        <ul id="menu">
+            <li><a href="/"
+                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Inicio</span></a>
+            </li>
+            <li><a href="/projects.html"
+                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Proyectos</span></a>
+            </li>
+            <li><a href="/about.html"
+                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Sobre
+                        Mí</span></a></li>
+        </ul>
     </nav>
 
-    <!-- VALIDATION FLOW -->
-    <div id="loader-wrapper" class="bg-white dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary">
-        <p class="text-lg mb-4">Validando conexión segura...</p>
-        <svg class="animate-spin h-8 w-8 text-light-accent dark:text-coder-accent" xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 24 24">
+    <div id="loader-wrapper">
+        <p class="text-lg mb-4 text-pm-secondary">Validando conexión segura...</p>
+        <svg class="animate-spin h-8 w-8 text-pm-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
             </path>
         </svg>
-        <div id="cf-turnstile-container" class="mt-8" style="display: none;">
-            <div id="cf-turnstile-widget" class="cf-turnstile" data-sitekey="0x4AAAAAAB8sMLnvQf8wAXSD"></div>
+    </div>
+
+    <div id="validation-modal" style="display: none;">
+        <div class="validation-overlay"></div>
+        <div class="validation-modal-content">
+            <div class="validation-text">
+                <h2>Verificación de Seguridad</h2>
+                <p>Por favor, complete la verificación para continuar</p>
+            </div>
+
+            <div id="validation-spinner" class="validation-spinner" style="display: none;">
+                <svg class="animate-spin h-6 w-6 text-pm-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                <p style="margin-top: 12px;">Validando...</p>
+            </div>
+
+            <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
     </div>
 
-    <div id="blocked-message" style="display: none;" class="bg-white dark:bg-coder-bg text-red-500">
-        <h2 class="text-3xl font-bold mb-4">Acceso Denegado</h2>
-        <p class="text-lg text-light-text-secondary dark:text-coder-text-secondary">
-            Lo sentimos, no podemos mostrar el contenido desde esta ubicación.
+    <!-- ======== BLOCKED MESSAGE ======== -->
+    <div id="blocked-message" style="display: none;" class="text-pm-light-primary dark:text-pm-primary">
+        <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Acceso Denegado</h2>
+        <p class="text-pm-light-secondary dark:text-pm-secondary">
+            Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
         </p>
     </div>
 
-    <!-- MAIN CONTENT -->
     <main id="main-content">
-        <div class="max-w-coder mx-auto px-6 py-16 md:py-20">
-            <h1 class="text-4xl md:text-5xl font-bold text-light-text dark:text-coder-text mb-16">
-                Proyectos
-            </h1>
+        <h1 style="font-size: 42px; line-height: 1.3; font-weight: 700; margin: 0 0 32px 0;"
+            class="text-pm-light-primary dark:text-pm-primary">
+            Proyectos
+        </h1>
 
-            <div class="space-y-12">
+        <!-- Project 1: Este Portafolio -->
+        <article id="portfolio" class="project-article" style="border-bottom: 1px solid;"
+            class="border-pm-light-border dark:border-pm-border">
+            <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;"
+                class="text-pm-light-secondary dark:text-pm-secondary">
+                2024-10-26
+            </time>
+            <h2 class="text-pm-light-primary dark:text-pm-primary">
+                Este Portafolio: Full Stack Data System
+            </h2>
+            <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
+                class="text-pm-light-secondary dark:text-pm-secondary">
+                Arquitectura Web | Seguridad | Data Pipeline
+            </p>
 
-                <!-- Project 1: Este Portafolio -->
-                <article id="portfolio" class="border-b border-light-border dark:border-coder-border pb-12">
-                    <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
-                        2024-10-26
-                    </time>
-                    <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-3">
-                        <span class="text-light-text dark:text-coder-text">
-                            Este Portafolio: Full Stack Data System
-                        </span>
-                    </h2>
-                    <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
-                        Arquitectura Web | Seguridad | Data Pipeline
-                    </p>
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Problema
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
+                Construir un portafolio que no fuera solo una "vitrina", sino un proyecto demostrable
+                de arquitectura web full-stack, seguridad y data engineering.
+            </p>
 
-                    <div class="prose prose-lg dark:prose-invert max-w-none">
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Problema</h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
-                            Construir un portafolio que no fuera solo una "vitrina", sino un proyecto demostrable
-                            de arquitectura web full-stack, seguridad y data engineering.
-                        </p>
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Solución
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 12px;">
+                Sistema completo con:
+            </p>
+            <ul class="text-pm-light-secondary dark:text-pm-secondary"
+                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
+                <li><strong>Frontend:</strong> GitHub Pages (estático, CDN global)</li>
+                <li><strong>Backend:</strong> Azure Functions (serverless Python)</li>
+                <li><strong>Base de datos:</strong> PostgreSQL en Azure (analytics en tiempo real)</li>
+                <li><strong>Seguridad:</strong> Defensa en 5 capas (Cloudflare WAF, Turnstile, ipapi.is, Rate Limit,
+                    Caché DB)</li>
+                <li><strong>Flujo dinámico:</strong> Validación inteligente con "Fast Pass" para usuarios de confianza
+                </li>
+            </ul>
 
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Solución</h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
-                            Sistema completo con:
-                        </p>
-                        <ul
-                            class="list-disc list-inside text-light-text-secondary dark:text-coder-text-secondary space-y-2">
-                            <li><strong>Frontend:</strong> GitHub Pages (estático, CDN global)</li>
-                            <li><strong>Backend:</strong> Azure Functions (serverless Python)</li>
-                            <li><strong>Base de datos:</strong> PostgreSQL en Azure (analytics en tiempo real)</li>
-                            <li><strong>Seguridad:</strong> Defensa en 5 capas (Cloudflare WAF, Turnstile, ipapi.is,
-                                Rate Limit, Caché DB)</li>
-                            <li><strong>Flujo dinámico:</strong> Validación inteligente con "Fast Pass" para usuarios de
-                                confianza</li>
-                        </ul>
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Resultados
+            </h3>
+            <ul class="text-pm-light-secondary dark:text-pm-secondary"
+                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
+                <li>✅ Seguridad: 99.9% bloqueo de tráfico malicioso</li>
+                <li>✅ Performance: &lt;200ms response time</li>
+                <li>✅ Costo: Optimizado a tier gratuito (B1ms PostgreSQL)</li>
+                <li>✅ Analytics: Recolección en tiempo real de datos de navegación</li>
+            </ul>
 
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Resultados</h3>
-                        <ul
-                            class="list-disc list-inside text-light-text-secondary dark:text-coder-text-secondary space-y-2">
-                            <li>✅ Seguridad: 99.9% bloqueo de tráfico malicioso</li>
-                            <li>✅ Performance: &lt;200ms response time</li>
-                            <li>✅ Costo: Optimizado a tier gratuito (B1ms PostgreSQL)</li>
-                            <li>✅ Analytics: Recolección en tiempo real de datos de navegación</li>
-                        </ul>
-
-                        <div class="mt-8 flex gap-4">
-                            <a href="https://github.com/tuusuario/portafolio" target="_blank"
-                                class="link-coder inline-block text-light-accent dark:text-coder-accent font-semibold">
-                                Ver Código en GitHub →
-                            </a>
-                            <a href="/about.html#architecture"
-                                class="link-coder inline-block text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent">
-                                Ver Arquitectura Completa →
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 flex flex-wrap gap-2">
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Azure
-                            Functions</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PostgreSQL</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Cloudflare</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">GitHub
-                            Pages</span>
-                    </div>
-                </article>
-
-                <!-- Project 2: ML Título -->
-                <article id="ml" class="border-b border-light-border dark:border-coder-border pb-12">
-                    <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
-                        2024-09-15
-                    </time>
-                    <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-3">
-                        <span class="text-light-text dark:text-coder-text">
-                            [Tu Proyecto de Título]: ML en Producción
-                        </span>
-                    </h2>
-                    <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
-                        Machine Learning | Deployment | Python
-                    </p>
-
-                    <div class="prose prose-lg dark:prose-invert max-w-none">
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Problema</h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
-                            [Descripción del problema empresarial que resolviste con tu proyecto de título]
-                        </p>
-
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Solución ML</h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
-                            Modelo de Machine Learning deployado con pipeline automatizado, incluyendo...
-                        </p>
-
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Ingeniería de
-                            Producción</h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
-                            [Cómo deployaste el modelo, arquitectura, monitoreo, etc.]
-                        </p>
-
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Resultados</h3>
-                        <ul
-                            class="list-disc list-inside text-light-text-secondary dark:text-coder-text-secondary space-y-2">
-                            <li>Métrica 1: [Accuracy, performance, etc.]</li>
-                            <li>Métrica 2: [ROI, tiempo ahorrado, etc.]</li>
-                        </ul>
-
-                        <div class="mt-8">
-                            <a href="https://github.com/tuusuario/proyecto-titulo" target="_blank"
-                                class="link-coder inline-block text-light-accent dark:text-coder-accent font-semibold">
-                                Ver Código en GitHub →
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 flex flex-wrap gap-2">
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Scikit-learn</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">FastAPI</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Docker</span>
-                    </div>
-                </article>
-
-                <!-- Project 3: ETL Pipeline -->
-                <article id="etl" class="border-b border-light-border dark:border-coder-border pb-12">
-                    <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
-                        2024-08-10
-                    </time>
-                    <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-3">
-                        <span class="text-light-text dark:text-coder-text">
-                            ETL Pipeline Escalable
-                        </span>
-                    </h2>
-                    <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
-                        Data Engineering | Apache Airflow | PySpark
-                    </p>
-
-                    <div class="prose prose-lg dark:prose-invert max-w-none">
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Problema</h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
-                            Procesamiento de 2.5M+ registros tardaba 6 horas, bloqueando análisis críticos.
-                        </p>
-
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Solución</h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
-                            Pipeline orquestado con Apache Airflow + PySpark para procesamiento distribuido...
-                        </p>
-
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Resultados</h3>
-                        <ul
-                            class="list-disc list-inside text-light-text-secondary dark:text-coder-text-secondary space-y-2">
-                            <li>⏱️ Tiempo: 6h → 45min (86% reducción)</li>
-                            <li>💰 Costo: Optimizado procesamiento paralelo</li>
-                            <li>📈 Escalabilidad: Preparado para 10M+ registros</li>
-                        </ul>
-
-                        <div class="mt-8">
-                            <a href="https://github.com/tuusuario/etl-pipeline" target="_blank"
-                                class="link-coder inline-block text-light-accent dark:text-coder-accent font-semibold">
-                                Ver Código en GitHub →
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 flex flex-wrap gap-2">
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Apache
-                            Airflow</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PySpark</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PostgreSQL</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
-                    </div>
-                </article>
-
-                <!-- Project 4: BI Dashboard -->
-                <article id="bi" class="pb-12">
-                    <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
-                        2024-07-20
-                    </time>
-                    <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-3">
-                        <span class="text-light-text dark:text-coder-text">
-                            Dashboard Analítico Interactivo
-                        </span>
-                    </h2>
-                    <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
-                        Business Intelligence | Power BI | SQL
-                    </p>
-
-                    <div class="prose prose-lg dark:prose-invert max-w-none">
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Pregunta de Negocio
-                        </h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
-                            [Qué quería saber el negocio]
-                        </p>
-
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Análisis</h3>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed">
-                            Dashboard interactivo con Power BI mostrando insights en tiempo real...
-                        </p>
-
-                        <!-- AQUÍ PUEDES EMBEDER POWER BI -->
-                        <div
-                            class="my-8 border border-light-border dark:border-coder-border rounded-lg overflow-hidden">
-                            <iframe width="100%" height="600" src="[TU_POWER_BI_EMBED_URL]" frameborder="0"
-                                allowfullscreen="true">
-                            </iframe>
-                        </div>
-
-                        <h3 class="text-xl font-bold text-light-text dark:text-coder-text mt-6 mb-3">Insights Clave</h3>
-                        <ul
-                            class="list-disc list-inside text-light-text-secondary dark:text-coder-text-secondary space-y-2">
-                            <li>Insight 1</li>
-                            <li>Insight 2</li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-6 flex flex-wrap gap-2">
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Power
-                            BI</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">SQL</span>
-                        <span
-                            class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
-                    </div>
-                </article>
-
+            <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+                <a href="https://github.com/tuusuario/portafolio" target="_blank"
+                    class="link-coder text-pm-light-primary dark:text-pm-primary hover:opacity-70"
+                    style="font-weight: 600; font-size: 16px;">
+                    Ver Código en GitHub →
+                </a>
+                <a href="/about.html#architecture"
+                    class="link-coder text-pm-light-secondary dark:text-pm-secondary hover:opacity-70"
+                    style="font-size: 16px;">
+                    Ver Arquitectura Completa →
+                </a>
             </div>
-        </div>
+
+            <div class="project-tags">
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Azure Functions</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">PostgreSQL</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Cloudflare</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Python</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">GitHub Pages</span>
+            </div>
+        </article>
+
+        <!-- Project 2: ML Título -->
+        <article id="ml" class="project-article" style="border-bottom: 1px solid;"
+            class="border-pm-light-border dark:border-pm-border">
+            <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;"
+                class="text-pm-light-secondary dark:text-pm-secondary">
+                2024-09-15
+            </time>
+            <h2 class="text-pm-light-primary dark:text-pm-primary">
+                [Tu Proyecto de Título]: ML en Producción
+            </h2>
+            <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
+                class="text-pm-light-secondary dark:text-pm-secondary">
+                Machine Learning | Deployment | Python
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Problema
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
+                [Descripción del problema empresarial que resolviste con tu proyecto de título]
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Solución ML
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
+                Modelo de Machine Learning deployado con pipeline automatizado, incluyendo validación cruzada,
+                tuning de hiperparámetros, y monitoreo en tiempo real de performance.
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Ingeniería de Producción
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
+                [Cómo deployaste el modelo, arquitectura, monitoreo, versionado, etc.]
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Resultados
+            </h3>
+            <ul class="text-pm-light-secondary dark:text-pm-secondary"
+                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
+                <li>Métrica 1: [Accuracy, F1-Score, etc.]</li>
+                <li>Métrica 2: [ROI, tiempo ahorrado, etc.]</li>
+            </ul>
+
+            <div style="margin-top: 24px;">
+                <a href="https://github.com/tuusuario/proyecto-titulo" target="_blank"
+                    class="link-coder text-pm-light-primary dark:text-pm-primary hover:opacity-70"
+                    style="font-weight: 600; font-size: 16px;">
+                    Ver Código en GitHub →
+                </a>
+            </div>
+
+            <div class="project-tags">
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Python</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Scikit-learn</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">FastAPI</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Docker</span>
+            </div>
+        </article>
+
+        <!-- Project 3: ETL Pipeline -->
+        <article id="etl" class="project-article" style="border-bottom: 1px solid;"
+            class="border-pm-light-border dark:border-pm-border">
+            <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;"
+                class="text-pm-light-secondary dark:text-pm-secondary">
+                2024-08-10
+            </time>
+            <h2 class="text-pm-light-primary dark:text-pm-primary">
+                ETL Pipeline Escalable
+            </h2>
+            <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
+                class="text-pm-light-secondary dark:text-pm-secondary">
+                Data Engineering | Apache Airflow | PySpark
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Problema
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
+                Procesamiento de 2.5M+ registros tardaba 6 horas, bloqueando análisis críticos y retrasando
+                decisiones de negocio.
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Solución
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
+                Pipeline orquestado con Apache Airflow + PySpark para procesamiento distribuido paralelo,
+                optimizando I/O y reduciendo compute time.
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Resultados
+            </h3>
+            <ul class="text-pm-light-secondary dark:text-pm-secondary"
+                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
+                <li>⏱️ Tiempo: 6h → 45min (86% reducción)</li>
+                <li>💰 Costo: Optimizado procesamiento paralelo</li>
+                <li>📈 Escalabilidad: Preparado para 10M+ registros</li>
+            </ul>
+
+            <div style="margin-top: 24px;">
+                <a href="https://github.com/tuusuario/etl-pipeline" target="_blank"
+                    class="link-coder text-pm-light-primary dark:text-pm-primary hover:opacity-70"
+                    style="font-weight: 600; font-size: 16px;">
+                    Ver Código en GitHub →
+                </a>
+            </div>
+
+            <div class="project-tags">
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Apache Airflow</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">PySpark</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">PostgreSQL</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Python</span>
+            </div>
+        </article>
+
+        <!-- Project 4: BI Dashboard -->
+        <article id="bi" class="project-article">
+            <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;"
+                class="text-pm-light-secondary dark:text-pm-secondary">
+                2024-07-20
+            </time>
+            <h2 class="text-pm-light-primary dark:text-pm-primary">
+                Dashboard Analítico Interactivo
+            </h2>
+            <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
+                class="text-pm-light-secondary dark:text-pm-secondary">
+                Business Intelligence | Power BI | SQL
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Pregunta de Negocio
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
+                [Qué quería saber el negocio - KPIs, métricas, comportamientos a analizar]
+            </p>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Análisis
+            </h3>
+            <p class="text-pm-light-secondary dark:text-pm-secondary"
+                style="font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
+                Dashboard interactivo con Power BI mostrando insights en tiempo real, segmentación por métricas,
+                y drilldown capabilities para exploración profunda de datos.
+            </p>
+
+            <div style="margin: 24px 0; border: 1px solid; border-radius: 8px; overflow: hidden;"
+                class="border-pm-light-border dark:border-pm-border">
+                <iframe width="100%" height="600" src="[TU_POWER_BI_EMBED_URL]" frameborder="0" allowfullscreen="true">
+                </iframe>
+            </div>
+
+            <h3 class="text-pm-light-primary dark:text-pm-primary"
+                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
+                Insights Clave
+            </h3>
+            <ul class="text-pm-light-secondary dark:text-pm-secondary"
+                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
+                <li>Insight 1: [Patrón o hallazgo importante]</li>
+                <li>Insight 2: [Otro patrón o recomendación]</li>
+                <li>Insight 3: [Impacto en negocio]</li>
+            </ul>
+
+            <div class="project-tags">
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Power BI</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">SQL</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Python</span>
+                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">DAX</span>
+            </div>
+        </article>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="py-12 bg-white dark:bg-coder-bg border-t border-light-border dark:border-coder-border">
-        <div class="max-w-coder mx-auto px-6">
-            <div class="text-center text-light-text-secondary dark:text-coder-text-secondary text-sm">
-                <p class="mb-4">
-                    © 2025 Francisco Mora ·
-                    <a href="https://github.com/tuusuario"
-                        class="hover:text-light-accent dark:hover:text-coder-accent">GitHub</a> ·
-                    <a href="https://linkedin.com/in/tuusuario"
-                        class="hover:text-light-accent dark:hover:text-coder-accent">LinkedIn</a>
-                </p>
-                <p class="text-xs">
-                    Hecho con 💙 usando HTML + Tailwind (inspirado en Hugo Coder)
-                </p>
-            </div>
-        </div>
+    <footer class="bg-pm-light-bg dark:bg-pm-bg text-pm-light-secondary dark:text-pm-secondary">
+        <p style="margin: 12px 0;">
+            © 2025 Francisco Mora ·
+            <a href="https://github.com/tuusuario" target="_blank" class="link-coder">GitHub</a> ·
+            <a href="https://linkedin.com/in/tuusuario" target="_blank" class="link-coder">LinkedIn</a>
+        </p>
+        <p style="font-size: 12px; margin: 12px 0;">
+            Hecho con 💙 usando HTML + Tailwind (inspirado en PaperMod)
+        </p>
     </footer>
 
     <script src="/assets/js/dark-mode.js"></script>

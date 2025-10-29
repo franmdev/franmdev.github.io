@@ -6,51 +6,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Francisco Mora - Full Stack Data Professional</title>
 
-    <!-- Google Fonts: Merriweather (Hugo Coder font) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind Config CORREGIDO -->
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        // Dark mode colors (Hugo Coder)
-                        'coder-bg': '#212121',
-                        'coder-bg-light': '#2d2d2d',
-                        'coder-text': '#f5f5f5',
-                        'coder-text-secondary': '#b3b3b3',
-                        'coder-accent': '#42a5f5',
-                        'coder-border': '#424242',
-
-                        // Light mode colors
-                        'light-bg': '#ffffff',
-                        'light-text': '#212121',
-                        'light-text-secondary': '#757575',
-                        'light-accent': '#1976d2',
-                        'light-border': '#e0e0e0',
+                        'pm-bg': '#1d1e20',
+                        'pm-entry': '#2e2e33',
+                        'pm-primary': '#dadadb',
+                        'pm-secondary': '#9b9c9d',
+                        'pm-tertiary': '#414244',
+                        'pm-accent': '#ffffff',
+                        'pm-border': '#333333',
+                        'pm-light-bg': '#ffffff',
+                        'pm-light-entry': '#ffffff',
+                        'pm-light-primary': '#1e1e1e',
+                        'pm-light-secondary': '#6c6c6c',
+                        'pm-light-tertiary': '#e6e6e6',
+                        'pm-light-accent': '#ffffff',
+                        'pm-light-border': '#eeeeee',
                     },
                     fontFamily: {
-                        'sans': ['Merriweather', 'Georgia', 'serif'],
-                        'mono': ['Fira Code', 'Courier New', 'monospace'],
+                        'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
                     },
-                    maxWidth: {
-                        'coder': '700px',
-                    }
                 }
             }
         }
     </script>
 
-    <!-- Estilos Custom -->
     <style>
-        /* ===== LOADER (Pantalla de validación inicial) ===== */
+        /* ===== PAPERMOD EXACT VARIABLES ===== */
+        :root {
+            --gap: 24px;
+            --content-gap: 20px;
+            --nav-width: 1024px;
+            --main-width: 720px;
+            --header-height: 60px;
+            --footer-height: 60px;
+            --radius: 8px;
+        }
+
+        /* ===== BASE ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 0;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        * {
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* ===== NAVBAR (PAPERMOD EXACT) ===== */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: calc(var(--nav-width) + var(--gap) * 2);
+            margin-inline-start: auto;
+            margin-inline-end: auto;
+            line-height: var(--header-height);
+            width: 100%;
+            padding: 0 var(--gap);
+        }
+
+        nav a {
+            display: block;
+        }
+
+        .logo,
+        #menu {
+            display: flex;
+            margin: auto var(--gap);
+        }
+
+        .logo {
+            flex-wrap: inherit;
+        }
+
+        .logo a {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        button#dark-toggle {
+            font-size: 26px;
+            margin: auto 4px;
+            padding: 0;
+            font: inherit;
+            background: 0 0;
+            border: 0;
+            cursor: pointer;
+        }
+
+        #menu {
+            list-style: none;
+            word-break: keep-all;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        #menu li+li {
+            margin-inline-start: var(--gap);
+        }
+
+        #menu a {
+            font-size: 16px;
+        }
+
+        /* ===== MAIN CONTAINER (PAPERMOD EXACT) ===== */
+        main {
+            position: relative;
+            min-height: calc(100vh - var(--header-height) - var(--footer-height));
+            max-width: calc(var(--main-width) + var(--gap) * 2);
+            margin: auto;
+            padding: var(--gap);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 320px;
+            margin: var(--gap) 0 calc(var(--gap) * 2) 0;
+            padding: var(--gap) 0;
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            line-height: 1.3;
+            font-weight: 700;
+            margin: 0 0 16px 0;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            margin: 12px 0;
+        }
+
+        .hero-description {
+            margin: 32px 0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            padding: 10px;
+        }
+
+        .social-links svg {
+            height: 26px;
+            width: 26px;
+        }
+
+        /* ===== PROJECTS SECTION ===== */
+        .projects-section {
+            padding: var(--gap) 0;
+        }
+
+        .article-card {
+            position: relative;
+            margin-bottom: var(--gap);
+            padding: var(--gap);
+            border-radius: var(--radius);
+            transition: transform .1s;
+            border: 1px solid;
+        }
+
+        .article-card:active {
+            transform: scale(.96);
+        }
+
+        .entry-header h2 {
+            font-size: 24px;
+            line-height: 1.3;
+        }
+
+        .entry-content {
+            margin: 8px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+        }
+
+        .entry-footer {
+            font-size: 13px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            font-size: 12px;
+            max-width: calc(var(--main-width) + var(--gap) * 2);
+            margin: auto;
+            padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
+            text-align: center;
+            line-height: 24px;
+        }
+
+        footer a {
+            border-bottom: 1px solid;
+        }
+
+        footer a:hover {
+            border-bottom: 1px solid;
+        }
+
+        /* ===== LOADERS & MODALS ===== */
         #loader-wrapper {
             min-height: 100vh;
             display: flex;
@@ -65,25 +250,19 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background: linear-gradient(135deg, rgba(33, 33, 33, 0.98), rgba(45, 45, 45, 0.98));
+            background: linear-gradient(135deg, rgba(29, 30, 32, 0.98), rgba(46, 46, 51, 0.98));
         }
 
-        /* ===== MODAL DE VALIDACIÓN (PROFESIONAL - CENTRADO) ===== */
-
-        /* Overlay oscuro de fondo (bloquea interacción pero VISIBLE) */
         .validation-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            /* MÁS TRANSPARENTE: 0.85 → 0.5 */
             z-index: 9998;
-            /* REMOVER: backdrop-filter: blur(5px); */
         }
 
-        /* Modal centrado */
         #validation-modal {
             position: fixed;
             top: 0;
@@ -97,19 +276,17 @@
         }
 
         .validation-modal-content {
-            background: #212121;
-            border-radius: 12px;
+            background: #2e2e33;
+            border-radius: 8px;
             padding: 48px 64px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-            /* SOMBRA MÁS PRONUNCIADA */
             text-align: center;
             max-width: 500px;
             width: 90%;
             animation: modalFadeIn 0.3s ease;
             position: relative;
-            /* IMPORTANTE: Asegurar que esté sobre overlay */
             z-index: 10000;
-            /* MÁS ALTO QUE overlay (9998) y modal (9999) */
+            border: 1px solid #333333;
         }
 
         @keyframes modalFadeIn {
@@ -124,70 +301,38 @@
             }
         }
 
-        /* Texto del modal */
         .validation-text h2 {
-            color: #42a5f5;
+            color: #dadadb;
             font-size: 28px;
             margin-bottom: 12px;
             font-weight: 600;
         }
 
         .validation-text p {
-            color: #b3b3b3;
+            color: #9b9c9d;
             font-size: 16px;
             margin-bottom: 32px;
             font-weight: 400;
-            /* AGREGADO: Peso normal */
         }
 
-        /* Turnstile centrado y VISIBLE */
-        .turnstile-widget-center {
+        /* ===== VALIDATION SPINNER ===== */
+        .validation-spinner {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            margin: 0 auto;
-            filter: none;
-            /* ASEGURAR que no tenga blur */
-            opacity: 1;
-            /* ASEGURAR que sea visible */
+            justify-content: center;
+            padding: 20px;
         }
 
-        /* Animar Turnstile cuando aparece */
-        #cf-turnstile-widget {
-            animation: fadeInUp 0.4s ease;
+        .validation-spinner svg {
+            color: #dadadb;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .validation-spinner p {
+            color: #9b9c9d;
+            font-size: 14px;
+            margin-top: 12px;
         }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .validation-modal-content {
-                padding: 32px 24px;
-                width: 95%;
-                margin: 20px;
-                /* AGREGADO: Margen en mobile */
-            }
-
-            .validation-text h2 {
-                font-size: 24px;
-            }
-
-            .validation-text p {
-                font-size: 14px;
-                margin-bottom: 24px;
-            }
-        }
-
 
         /* ===== BLOCKED MESSAGE ===== */
         #blocked-message {
@@ -204,10 +349,9 @@
             width: 100%;
             height: 100%;
             z-index: 9999;
-            background: linear-gradient(135deg, rgba(33, 33, 33, 0.98), rgba(45, 45, 45, 0.98));
+            background: linear-gradient(135deg, rgba(29, 30, 32, 0.98), rgba(46, 46, 51, 0.98));
         }
 
-        /* ===== MAIN CONTENT (oculto inicialmente) ===== */
         #main-content {
             display: none;
             opacity: 0;
@@ -219,22 +363,6 @@
             opacity: 1;
         }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Smooth transitions */
-        * {
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        /* Hover effect Hugo Coder style */
-        .hover-coder:hover {
-            background-color: rgba(66, 165, 245, 0.05);
-        }
-
-        /* Link hover Hugo Coder style */
         .link-coder {
             text-decoration: none;
             transition: color 0.2s ease;
@@ -244,44 +372,58 @@
             text-decoration: underline;
         }
 
-        /* ===== SPINNER DE VALIDACIÓN ===== */
-        .validation-spinner {
+        /* ===== THEME TOGGLE ===== */
+        #moon {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        #sun {
+            display: none !important;
+            opacity: 0 !important;
+        }
+
+        html.dark #moon {
+            display: none !important;
+            opacity: 0 !important;
+        }
+
+        html.dark #sun {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        #moon,
+        #sun {
+            transition: all 0.3s ease !important;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            :root {
+                --gap: 14px;
+            }
+
+            .hero-section {
+                min-height: 260px;
+            }
+
+            #menu {
+                margin: 0;
+            }
+        }
+
+        /* ===== TURNSTILE CENTRADO (AGREGADO AL <style>) ===== */
+        .turnstile-widget-center {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
-        }
-
-        .validation-spinner svg {
-            color: #42a5f5;
-        }
-
-        .validation-spinner p {
-            color: #b3b3b3;
-            font-size: 14px;
-            margin-top: 12px;
-        }
-
-        /* Animar Turnstile cuando aparece */
-        #cf-turnstile-widget {
-            animation: fadeInUp 0.4s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            align-items: center;
+            margin: 0 auto;
+            filter: none;
+            opacity: 1;
         }
     </style>
 
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -290,81 +432,53 @@
         gtag('config', 'G-QVW5058EVE');
     </script>
 
-    <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
-<body class="bg-white dark:bg-coder-bg text-light-text dark:text-coder-text font-sans">
+<body class="bg-pm-light-bg dark:bg-pm-bg text-pm-light-primary dark:text-pm-primary font-sans">
 
-    <!-- ======== NAVBAR (Tailwind + PaperMod Visual) ======== -->
-    <nav class="sticky top-0 z-50 bg-white dark:bg-coder-bg border-b border-light-border dark:border-coder-border">
-        <div class="max-w-coder mx-auto px-6" style="padding: 12px 24px;">
-            <div class="flex justify-between items-center">
-
-                <!-- IZQUIERDA: Logo + Toggle -->
-                <div class="flex items-center gap-6">
-                    <a href="/"
-                        class="text-2xl font-bold text-light-accent dark:text-coder-accent hover:opacity-80 transition"
-                        style="letter-spacing: -0.5px;">
-                        francisco.mora
-                    </a>
-                    <button id="dark-toggle"
-                        class="p-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition"
-                        style="font-size: 20px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
-                        <span class="dark-icon">☀️</span>
-                        <span class="light-icon hidden">🌙</span>
-                    </button>
-                </div>
-
-                <!-- DERECHA: Desktop Menu -->
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="/" style="font-size: 16px; font-weight: 500;"
-                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
-                        Inicio
-                    </a>
-                    <a href="/projects.html" style="font-size: 16px; font-weight: 500;"
-                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
-                        Proyectos
-                    </a>
-                    <a href="/about.html" style="font-size: 16px; font-weight: 500;"
-                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
-                        Sobre Mí
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden text-light-text dark:text-coder-text p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="hidden md:hidden mt-3 space-y-2 pb-2">
-                <a href="/" style="font-size: 16px;"
-                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
-                    Inicio
-                </a>
-                <a href="/projects.html" style="font-size: 16px;"
-                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
-                    Proyectos
-                </a>
-                <a href="/about.html" style="font-size: 16px;"
-                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
-                    Sobre Mí
-                </a>
-            </div>
+    <nav class="sticky top-0 z-50 bg-pm-light-bg dark:bg-pm-bg">
+        <div class="logo">
+            <a href="/"
+                class="text-pm-light-primary dark:text-pm-primary hover:opacity-80 transition">francisco.mora</a>
+            <button id="dark-toggle" class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition">
+                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display: block;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    style="display: none;">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
         </div>
+        <ul id="menu">
+            <li><a href="/"
+                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Inicio</span></a>
+            </li>
+            <li><a href="/projects.html"
+                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Proyectos</span></a>
+            </li>
+            <li><a href="/about.html"
+                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Sobre
+                        Mí</span></a></li>
+        </ul>
     </nav>
 
-
-    <!-- ======== LOADER (Pantalla inicial) ======== -->
-    <div id="loader-wrapper" class="bg-white dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary">
-        <p class="text-lg mb-4">Validando conexión segura...</p>
-        <svg class="animate-spin h-8 w-8 text-light-accent dark:text-coder-accent" xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 24 24">
+    <div id="loader-wrapper">
+        <p class="text-lg mb-4 text-pm-secondary">Validando conexión segura...</p>
+        <svg class="animate-spin h-8 w-8 text-pm-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
@@ -372,12 +486,8 @@
         </svg>
     </div>
 
-    <!-- ======== MODAL DE VALIDACIÓN (PROFESIONAL - CENTRADO) ======== -->
     <div id="validation-modal" style="display: none;">
-        <!-- Overlay oscuro de fondo -->
         <div class="validation-overlay"></div>
-
-        <!-- Modal centrado -->
         <div class="validation-modal-content">
             <div class="validation-text">
                 <h2>Verificación de Seguridad</h2>
@@ -386,68 +496,55 @@
 
             <!-- Spinner de carga (visible si la API tarda) -->
             <div id="validation-spinner" class="validation-spinner" style="display: none;">
-                <svg class="animate-spin h-6 w-6 text-coder-accent" xmlns="http://www.w3.org/2000/svg" fill="none"
+                <svg class="animate-spin h-6 w-6 text-pm-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor"
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                     </path>
                 </svg>
-                <p style="margin-top: 12px; color: #b3b3b3;">Validando...</p>
+                <p style="margin-top: 12px;">Validando...</p>
             </div>
 
-            <!-- Turnstile Widget (centrado) -->
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
     </div>
 
     <!-- ======== BLOCKED MESSAGE ======== -->
-    <div id="blocked-message" style="display: none;" class="bg-white dark:bg-coder-bg text-red-500">
-        <h2 class="text-3xl font-bold mb-4">Acceso Denegado</h2>
-        <p class="text-lg text-light-text-secondary dark:text-coder-text-secondary">
+    <div id="blocked-message" style="display: none;" class="text-pm-light-primary dark:text-pm-primary">
+        <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Acceso Denegado</h2>
+        <p class="text-pm-light-secondary dark:text-pm-secondary">
             Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
         </p>
     </div>
 
-    <!-- ======== MAIN CONTENT ======== -->
     <main id="main-content">
-
-        <!-- HERO SECTION (Hugo Coder style: minimalista) -->
-        <section class="py-32">
-            <div class="max-w-coder mx-auto px-6 text-center">
-                <h1 class="text-5xl md:text-6xl font-bold text-light-text dark:text-coder-text mb-6">
-                    Francisco Mora
-                </h1>
-                <p class="text-xl md:text-2xl text-light-text-secondary dark:text-coder-text-secondary mb-8">
-                    Full Stack Data Professional
-                </p>
-                <p
-                    class="text-lg text-light-text-secondary dark:text-coder-text-secondary mb-12 leading-relaxed max-w-2xl mx-auto">
-                    Ingeniero Civil Industrial + Informático especializado en transformar modelos ML
-                    en sistemas productivos escalables. De matemática avanzada a arquitectura en la nube.
+        <article class="hero-section">
+            <div class="hero-content">
+                <h1 class="text-pm-light-primary dark:text-pm-primary">Francisco Mora</h1>
+                <p class="hero-subtitle text-pm-light-secondary dark:text-pm-secondary">Full Stack Data Professional</p>
+                <p class="hero-description text-pm-light-secondary dark:text-pm-secondary">
+                    Ingeniero Civil Industrial + Informático especializado en transformar modelos ML en sistemas
+                    productivos escalables. De matemática avanzada a arquitectura en la nube.
                 </p>
 
-                <!-- Social Links -->
-                <div class="flex justify-center space-x-6 text-2xl">
+                <div class="social-links">
                     <a href="https://github.com/tuusuario" target="_blank"
-                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
-                        title="GitHub">
+                        class="text-pm-light-secondary dark:text-pm-secondary hover:opacity-70 transition">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                         </svg>
                     </a>
                     <a href="https://linkedin.com/in/tuusuario" target="_blank"
-                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
-                        title="LinkedIn">
+                        class="text-pm-light-secondary dark:text-pm-secondary hover:opacity-70 transition">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                         </svg>
                     </a>
                     <a href="mailto:francisco@example.com"
-                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
-                        title="Email">
+                        class="text-pm-light-secondary dark:text-pm-secondary hover:opacity-70 transition">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -455,138 +552,104 @@
                     </a>
                 </div>
             </div>
-        </section>
+        </article>
 
-        <!-- PROJECTS PREVIEW SECTION -->
-        <section class="py-16 bg-gray-50 dark:bg-coder-bg-light">
-            <div class="max-w-coder mx-auto px-6">
-                <h2 class="text-3xl font-bold text-light-text dark:text-coder-text mb-12">
-                    Proyectos Destacados
-                </h2>
+        <section class="projects-section">
+            <h2 style="font-size: 32px; line-height: 1.3; font-weight: 700; margin: 0 0 32px 0;"
+                class="text-pm-light-primary dark:text-pm-primary">
+                Proyectos Destacados
+            </h2>
 
-                <!-- Projects List (Hugo Coder style: simple) -->
-                <div class="space-y-8">
-
-                    <!-- Project 1: Este Portafolio -->
-                    <article
-                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
-                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
-                            2024-10-26
-                        </time>
-                        <h3 class="text-2xl font-bold mt-2 mb-3">
-                            <a href="/projects.html#portfolio"
-                                class="link-coder text-light-accent dark:text-coder-accent">
-                                Este Portafolio: Full Stack Data System
-                            </a>
-                        </h3>
-                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
-                            Arquitectura Web | Seguridad | Data Pipeline
-                        </p>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
-                            Sistema completo con validación en 5 capas, Azure Functions, PostgreSQL,
-                            Cloudflare WAF y analytics en tiempo real. Demuestra arquitectura de producción.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Azure</span>
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PostgreSQL</span>
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Cloudflare</span>
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
-                        </div>
-                    </article>
-
-                    <!-- Project 2: Proyecto de Título -->
-                    <article
-                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
-                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
-                            2024-09-15
-                        </time>
-                        <h3 class="text-2xl font-bold mt-2 mb-3">
-                            <a href="/projects.html#ml" class="link-coder text-light-accent dark:text-coder-accent">
-                                [Tu Proyecto de Título]: ML en Producción
-                            </a>
-                        </h3>
-                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
-                            Machine Learning | Deployment | Python
-                        </p>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
-                            Modelo de Machine Learning deployado en producción con pipeline automatizado,
-                            monitoreo y optimización continua.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Scikit-learn</span>
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">FastAPI</span>
-                        </div>
-                    </article>
-
-                    <!-- Project 3: ETL Pipeline -->
-                    <article
-                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
-                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
-                            2024-08-10
-                        </time>
-                        <h3 class="text-2xl font-bold mt-2 mb-3">
-                            <a href="/projects.html#etl" class="link-coder text-light-accent dark:text-coder-accent">
-                                ETL Pipeline Escalable
-                            </a>
-                        </h3>
-                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
-                            Data Engineering | Apache Airflow | PySpark
-                        </p>
-                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
-                            Pipeline de datos con Apache Airflow y Spark para procesamiento de 2.5M+ registros.
-                            Reducción de tiempo: 6h → 45min.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Airflow</span>
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Spark</span>
-                            <span
-                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PostgreSQL</span>
-                        </div>
-                    </article>
-
-                </div>
-
-                <!-- View All Projects Link -->
-                <div class="mt-12 text-center">
-                    <a href="/projects.html"
-                        class="link-coder inline-block text-light-accent dark:text-coder-accent font-bold text-lg">
-                        Ver todos los proyectos →
+            <article
+                class="article-card bg-pm-light-entry dark:bg-pm-entry border-pm-light-border dark:border-pm-border">
+                <time
+                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;"
+                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    2024-10-26
+                </time>
+                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;"
+                    class="text-pm-light-primary dark:text-pm-primary">
+                    <a href="/projects.html#portfolio" class="link-coder text-pm-light-primary dark:text-pm-primary">
+                        Este Portafolio: Full Stack Data System
                     </a>
-                </div>
+                </h3>
+                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
+                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    Arquitectura Web | Seguridad | Data Pipeline
+                </p>
+                <p class="entry-content text-pm-light-secondary dark:text-pm-secondary">
+                    Sistema completo con validación en 5 capas, Azure Functions, PostgreSQL, Cloudflare WAF y analytics
+                    en tiempo real. Demuestra arquitectura de producción.
+                </p>
+            </article>
+
+            <article
+                class="article-card bg-pm-light-entry dark:bg-pm-entry border-pm-light-border dark:border-pm-border">
+                <time
+                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;"
+                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    2024-09-15
+                </time>
+                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;"
+                    class="text-pm-light-primary dark:text-pm-primary">
+                    <a href="/projects.html#ml" class="link-coder text-pm-light-primary dark:text-pm-primary">
+                        [Tu Proyecto de Título]: ML en Producción
+                    </a>
+                </h3>
+                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
+                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    Machine Learning | Deployment | Python
+                </p>
+                <p class="entry-content text-pm-light-secondary dark:text-pm-secondary">
+                    Modelo de Machine Learning deployado en producción con pipeline automatizado, monitoreo y
+                    optimización continua.
+                </p>
+            </article>
+
+            <article
+                class="article-card bg-pm-light-entry dark:bg-pm-entry border-pm-light-border dark:border-pm-border">
+                <time
+                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;"
+                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    2024-08-10
+                </time>
+                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;"
+                    class="text-pm-light-primary dark:text-pm-primary">
+                    <a href="/projects.html#etl" class="link-coder text-pm-light-primary dark:text-pm-primary">
+                        ETL Pipeline Escalable
+                    </a>
+                </h3>
+                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
+                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    Data Engineering | Apache Airflow | PySpark
+                </p>
+                <p class="entry-content text-pm-light-secondary dark:text-pm-secondary">
+                    Pipeline de datos con Apache Airflow y Spark para procesamiento de 2.5M+ registros. Reducción de
+                    tiempo: 6h → 45min.
+                </p>
+            </article>
+
+            <div style="margin-top: 48px;">
+                <a href="/projects.html"
+                    class="link-coder text-pm-light-primary dark:text-pm-primary font-bold hover:opacity-70"
+                    style="font-size: 16px;">
+                    Ver todos los proyectos →
+                </a>
             </div>
         </section>
-
     </main>
 
-    <!-- ======== FOOTER ======== -->
-    <footer class="py-12 bg-white dark:bg-coder-bg border-t border-light-border dark:border-coder-border">
-        <div class="max-w-coder mx-auto px-6">
-            <div class="text-center text-light-text-secondary dark:text-coder-text-secondary text-sm">
-                <p class="mb-4">
-                    © 2025 Francisco Mora ·
-                    <a href="https://github.com/tuusuario" target="_blank"
-                        class="hover:text-light-accent dark:hover:text-coder-accent link-coder">GitHub</a> ·
-                    <a href="https://linkedin.com/in/tuusuario" target="_blank"
-                        class="hover:text-light-accent dark:hover:text-coder-accent link-coder">LinkedIn</a>
-                </p>
-                <p class="text-xs">
-                    Hecho con 💙 usando HTML + Tailwind (inspirado en Hugo Coder)
-                </p>
-            </div>
-        </div>
+    <footer class="bg-pm-light-bg dark:bg-pm-bg text-pm-light-secondary dark:text-pm-secondary">
+        <p style="margin: 12px 0;">
+            © 2025 Francisco Mora ·
+            <a href="https://github.com/tuusuario" target="_blank" class="link-coder">GitHub</a> ·
+            <a href="https://linkedin.com/in/tuusuario" target="_blank" class="link-coder">LinkedIn</a>
+        </p>
+        <p style="font-size: 12px; margin: 12px 0;">
+            Hecho con 💙 usando HTML + Tailwind (inspirado en PaperMod)
+        </p>
     </footer>
 
-    <!-- ======== SCRIPTS ======== -->
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/mobile-menu.js"></script>
     <script src="/assets/js/main.js"></script>
