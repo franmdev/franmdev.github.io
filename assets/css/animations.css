@@ -1,0 +1,215 @@
+/* ========================================
+   ANIMATIONS.CSS - Capa 6: Animaciones y UI de Validación
+   Keyframes y estilos para el modal de seguridad
+   ======================================== */
+
+/* ===== KEYFRAMES ===== */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== LOADER WRAPPER (Inicial) ===== */
+#loader-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    /* Fondo oscuro específico para el loader */
+    background: linear-gradient(135deg, rgba(29, 30, 32, 0.98), rgba(46, 46, 51, 0.98));
+}
+
+#loader-wrapper p {
+    color: var(--secondary);
+    /* CORREGIDO: Usando variable */
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* ===== VALIDATION MODAL (Turnstile) ===== */
+.validation-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+#validation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.validation-modal-content {
+    background: var(--entry);
+    /* CORREGIDO: Usando variable (se verá oscuro en modo dark) */
+    border-radius: var(--radius);
+    padding: 48px 64px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    animation: modalFadeIn 0.3s ease;
+    position: relative;
+    z-index: 10000;
+    border: 1px solid var(--border);
+    /* CORREGIDO: Usando variable */
+}
+
+.validation-text h2 {
+    color: var(--primary);
+    /* CORREGIDO: Usando variable */
+    font-size: 28px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.validation-text p {
+    color: var(--secondary);
+    /* CORREGIDO: Usando variable */
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+/* ===== TURNSTILE WIDGET ===== */
+.turnstile-widget-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    filter: none;
+    opacity: 1;
+}
+
+#cf-turnstile-widget {
+    animation: fadeInUp 0.4s ease;
+}
+
+/* ===== VALIDATION SPINNER (Dentro del modal) ===== */
+.validation-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.validation-spinner svg {
+    width: 24px;
+    height: 24px;
+    color: var(--primary);
+    /* CORREGIDO: Usando variable */
+    animation: spin 1s linear infinite;
+}
+
+.validation-spinner p {
+    color: var(--secondary);
+    /* CORREGIDO: Usando variable */
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+/* ===== MAIN CONTENT VISIBILITY (Controlado por JS) ===== */
+#main-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#main-content.visible {
+    display: block;
+    opacity: 1;
+}
+
+/* ===== BLOCKED MESSAGE (Final) ===== */
+#blocked-message {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    /* Fondo oscuro específico, igual que el loader */
+    background: linear-gradient(135deg, rgba(29, 30, 32, 0.98), rgba(46, 46, 51, 0.98));
+}
+
+#blocked-message h2 {
+    color: var(--primary);
+    /* CORREGIDO: Usando variable */
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+#blocked-message p {
+    color: var(--secondary);
+    /* CORREGIDO: Usando variable */
+    font-size: 18px;
+}
+
+/* Estilos para el SVG del loader inicial */
+#loader-wrapper svg {
+    animation: spin 1s linear infinite;
+    width: 32px;
+    /* 2rem (h-8 w-8) */
+    height: 32px;
+    /* 2rem (h-8 w-8) */
+    color: var(--primary);
+}
+
+#loader-wrapper svg .opacity-25 {
+    opacity: 0.25;
+}
+
+#loader-wrapper svg .opacity-75 {
+    opacity: 0.75;
+}

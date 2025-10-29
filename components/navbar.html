@@ -1,40 +1,36 @@
-<div class="container mx-auto px-6 py-4">
-    <div class="flex justify-between items-center">
-        <a href="/" class="text-2xl font-bold dark:text-coder-accent text-blue-600 hover:opacity-80 transition-opacity">
-            FRANCISCOMORA </a>
-
-        <div class="hidden md:flex space-x-6 items-center">
-            <a href="/index.html"
-                class="text-gray-800 dark:text-gray-300 dark:hover:text-coder-accent hover:text-blue-600 transition-colors">Inicio</a>
-            <a href="/about.html"
-                class="text-gray-800 dark:text-gray-300 dark:hover:text-coder-accent hover:text-blue-600 transition-colors">Sobre
-                Mí</a>
-            <a href="/projects.html"
-                class="text-gray-800 dark:text-gray-300 dark:hover:text-coder-accent hover:text-blue-600 transition-colors">Proyectos</a>
-            <a href="#contact"
-                class="text-gray-800 dark:text-gray-300 dark:hover:text-coder-accent hover:text-blue-600 transition-colors">Contacto</a>
-            <button id="dark-mode-toggle" aria-label="Toggle Dark Mode"
-                class="dark:text-gray-300 text-gray-800 dark:hover:text-coder-accent hover:text-blue-600 transition-colors">
-            </button>
-        </div>
-
-        <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-gray-300 focus:outline-none"
-            aria-label="Abrir menú">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+<div class="sticky top-0 z-50 bg-pm-light-bg dark:bg-pm-bg">
+    <div class="logo">
+        <a href="/" class="text-pm-light-primary dark:text-pm-primary hover:opacity-80 transition">francisco.mora</a>
+        <button id="dark-toggle" class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition">
+            <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="display: block;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="display: none;">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
             </svg>
         </button>
     </div>
-</div>
-
-<div id="mobile-menu" class="md:hidden hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
-    <a href="/index.html"
-        class="block px-6 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Inicio</a>
-    <a href="/about.html"
-        class="block px-6 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Sobre Mí</a>
-    <a href="/projects.html"
-        class="block px-6 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Proyectos</a>
-    <a href="#contact"
-        class="block px-6 py-3 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Contacto</a>
+    <ul id="menu">
+        <li><a href="/"
+                class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Inicio</span></a>
+        </li>
+        <li><a href="/pages/projects.html"
+                class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Proyectos</span></a>
+        </li>
+        <li><a href="/pages/about.html"
+                class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Sobre
+                    Mí</span></a></li>
+    </ul>
 </div>

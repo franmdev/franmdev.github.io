@@ -15,8 +15,8 @@
     --radius: 8px;
 
     /* Light Mode Colors - PaperMod */
-    --theme: #ffffff;
-    --entry: #ffffff;
+    --theme: #f8f4f4;
+    --entry: #f8f4f4;
     --primary: #1e1e1e;
     --secondary: #6c6c6c;
     --tertiary: #e6e6e6;
@@ -152,7 +152,7 @@ nav {
     top: 0;
     z-index: 50;
     background: var(--theme);
-    border-bottom: 1px solid var(--border);
+    /*border-bottom: 1px solid var(--border); borde inferior nav*/
     transition: background-color 0.2s ease, border-color 0.2s ease;
     display: flex;
     flex-wrap: wrap;

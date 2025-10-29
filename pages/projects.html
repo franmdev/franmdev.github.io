@@ -9,39 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'pm-bg': '#1d1e20',
-                        'pm-entry': '#2e2e33',
-                        'pm-primary': '#dadadb',
-                        'pm-secondary': '#9b9c9d',
-                        'pm-tertiary': '#414244',
-                        'pm-accent': '#ffffff',
-                        'pm-border': '#333333',
-                        'pm-light-bg': '#ffffff',
-                        'pm-light-entry': '#ffffff',
-                        'pm-light-primary': '#1e1e1e',
-                        'pm-light-secondary': '#6c6c6c',
-                        'pm-light-tertiary': '#e6e6e6',
-                        'pm-light-accent': '#ffffff',
-                        'pm-light-border': '#eeeeee',
-                    },
-                    fontFamily: {
-                        'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-
-    <!-- ✅ PAPERMOD STYLES (EXTERNO) -->
-    <link rel="stylesheet" href="/assets/css/papermod_style.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
@@ -54,45 +22,43 @@
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
-<body class="bg-pm-light-bg dark:bg-pm-bg text-pm-light-primary dark:text-pm-primary font-sans">
+<body>
 
-    <nav class="sticky top-0 z-50 bg-pm-light-bg dark:bg-pm-bg">
-        <div class="logo">
-            <a href="/"
-                class="text-pm-light-primary dark:text-pm-primary hover:opacity-80 transition">francisco.mora</a>
-            <button id="dark-toggle" class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition">
-                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    style="display: block;">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    style="display: none;">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-            </button>
-        </div>
-        <ul id="menu">
-            <li><a href="/"
-                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Inicio</span></a>
-            </li>
-            <li><a href="/projects.html"
-                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Proyectos</span></a>
-            </li>
-            <li><a href="/about.html"
-                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Sobre
-                        Mí</span></a></li>
-        </ul>
-    </nav>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <a href="/">francisco.mora</a>
+                <button id="dark-toggle">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" style="display: block;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" style="display: none;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+            <ul id="menu">
+                <li><a href="/"><span>Inicio</span></a>
+                </li>
+                <li><a href="/pages/projects.html"><span>Proyectos</span></a>
+                </li>
+                <li><a href="/pages/about.html"><span>Sobre Mí</span></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <div id="loader-wrapper">
         <p class="text-lg mb-4 text-pm-secondary">Validando conexión segura...</p>
@@ -204,7 +170,7 @@
                     style="font-weight: 600; font-size: 16px;">
                     Ver Código en GitHub →
                 </a>
-                <a href="/about.html#architecture"
+                <a href="/pages/about.html#architecture"
                     class="link-coder text-pm-light-secondary dark:text-pm-secondary hover:opacity-70"
                     style="font-size: 16px;">
                     Ver Arquitectura Completa →
@@ -410,20 +376,12 @@
         </article>
     </main>
 
-    <footer class="bg-pm-light-bg dark:bg-pm-bg text-pm-light-secondary dark:text-pm-secondary">
-        <p style="margin: 12px 0;">
-            © 2025 Francisco Mora ·
-            <a href="https://github.com/tuusuario" target="_blank" class="link-coder">GitHub</a> ·
-            <a href="https://linkedin.com/in/tuusuario" target="_blank" class="link-coder">LinkedIn</a>
-        </p>
-        <p style="font-size: 12px; margin: 12px 0;">
-            Hecho con 💙 usando HTML + Tailwind (inspirado en PaperMod)
-        </p>
-    </footer>
+    <footer></footer>
 
-    <script src="/assets/js/dark-mode.js"></script>
-    <script src="/assets/js/mobile-menu.js"></script>
-    <script src="/assets/js/main.js"></script>
+    <script src="../assets/js/load-components.js"></script>
+    <script src="../assets/js/dark-mode.js"></script>
+    <script src="../assets/js/mobile-menu.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

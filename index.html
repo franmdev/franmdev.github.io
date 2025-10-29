@@ -9,40 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'pm-bg': '#1d1e20',
-                        'pm-entry': '#2e2e33',
-                        'pm-primary': '#dadadb',
-                        'pm-secondary': '#9b9c9d',
-                        'pm-tertiary': '#414244',
-                        'pm-accent': '#ffffff',
-                        'pm-border': '#333333',
-                        'pm-light-bg': '#ffffff',
-                        'pm-light-entry': '#ffffff',
-                        'pm-light-primary': '#1e1e1e',
-                        'pm-light-secondary': '#6c6c6c',
-                        'pm-light-tertiary': '#e6e6e6',
-                        'pm-light-accent': '#ffffff',
-                        'pm-light-border': '#eeeeee',
-                    },
-                    fontFamily: {
-                        'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-
-    <!-- ✅ PAPERMOD STYLES (EXTERNO) -->
-    <link rel="stylesheet" href="/assets/css/papermod_style.css">
-
+    <link rel="stylesheet" href="assets/css/main.css">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
@@ -55,50 +22,47 @@
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
-<body class="bg-pm-light-bg dark:bg-pm-bg text-pm-light-primary dark:text-pm-primary font-sans">
+<body class="list" id="top">
 
-    <nav class="sticky top-0 z-50 bg-pm-light-bg dark:bg-pm-bg">
-        <div class="logo">
-            <a href="/"
-                class="text-pm-light-primary dark:text-pm-primary hover:opacity-80 transition">francisco.mora</a>
-            <button id="dark-toggle" class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition">
-                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    style="display: block;">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    style="display: none;">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-            </button>
-        </div>
-        <ul id="menu">
-            <li><a href="/"
-                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Inicio</span></a>
-            </li>
-            <li><a href="/projects.html"
-                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Proyectos</span></a>
-            </li>
-            <li><a href="/about.html"
-                    class="text-pm-light-primary dark:text-pm-primary hover:opacity-70 transition"><span>Sobre
-                        Mí</span></a></li>
-        </ul>
-    </nav>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <a href="/">francisco.mora</a>
+                <button id="dark-toggle">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" style="display: block;">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" style="display: none;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+            <ul id="menu">
+                <li><a href="/"><span>Inicio</span></a>
+                </li>
+                <li><a href="/pages/projects.html"><span>Proyectos</span></a>
+                </li>
+                <li><a href="/pages/about.html"><span>Sobre Mí</span></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <div id="loader-wrapper">
-        <p class="text-lg mb-4 text-pm-secondary">Validando conexión segura...</p>
-        <svg class="animate-spin h-8 w-8 text-pm-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24">
+        <p>Validando conexión segura...</p>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
@@ -116,8 +80,7 @@
 
             <!-- Spinner de carga (visible si la API tarda) -->
             <div id="validation-spinner" class="validation-spinner" style="display: none;">
-                <svg class="animate-spin h-6 w-6 text-pm-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor"
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
@@ -131,9 +94,9 @@
     </div>
 
     <!-- ======== BLOCKED MESSAGE ======== -->
-    <div id="blocked-message" style="display: none;" class="text-pm-light-primary dark:text-pm-primary">
+    <div id="blocked-message" style="display: none;">
         <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Acceso Denegado</h2>
-        <p class="text-pm-light-secondary dark:text-pm-secondary">
+        <p>
             Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
         </p>
     </div>
@@ -141,31 +104,28 @@
     <main id="main-content">
         <article class="hero-section">
             <div class="hero-content">
-                <h1 class="text-pm-light-primary dark:text-pm-primary">Francisco Mora</h1>
-                <p class="hero-subtitle text-pm-light-secondary dark:text-pm-secondary">Full Stack Data Professional</p>
-                <p class="hero-description text-pm-light-secondary dark:text-pm-secondary">
+                <h1>Francisco Mora</h1>
+                <p class="hero-subtitle">Full Stack Data Professional</p>
+                <p class="hero-description">
                     Ingeniero Civil Industrial + Informático especializado en transformar modelos ML en sistemas
                     productivos escalables. De matemática avanzada a arquitectura en la nube.
                 </p>
 
                 <div class="social-links">
-                    <a href="https://github.com/tuusuario" target="_blank"
-                        class="text-pm-light-secondary dark:text-pm-secondary hover:opacity-70 transition">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <a href="https://github.com/tuusuario" target="_blank">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                         </svg>
                     </a>
-                    <a href="https://linkedin.com/in/tuusuario" target="_blank"
-                        class="text-pm-light-secondary dark:text-pm-secondary hover:opacity-70 transition">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <a href="https://linkedin.com/in/tuusuario" target="_blank">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
                             <path
                                 d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                         </svg>
                     </a>
-                    <a href="mailto:francisco@example.com"
-                        class="text-pm-light-secondary dark:text-pm-secondary hover:opacity-70 transition">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <a href="mailto:francisco@example.com">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
@@ -175,101 +135,94 @@
         </article>
 
         <section class="projects-section">
-            <h2 style="font-size: 32px; line-height: 1.3; font-weight: 700; margin: 0 0 32px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
+            <h2 style="font-size: 32px; line-height: 1.3; font-weight: 700; margin: 0 0 32px 0;">
                 Proyectos Destacados
             </h2>
 
-            <article
-                class="article-card bg-pm-light-entry dark:bg-pm-entry border-pm-light-border dark:border-pm-border">
+            <article class="article-card">
                 <time
-                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;"
-                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;">
                     2024-10-26
                 </time>
-                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;"
-                    class="text-pm-light-primary dark:text-pm-primary">
-                    <a href="/projects.html#portfolio" class="link-coder text-pm-light-primary dark:text-pm-primary">
+                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;">
+                    <a href="/projects.html#portfolio" class="link-coder">
                         Este Portafolio: Full Stack Data System
                     </a>
                 </h3>
-                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
-                    class="text-pm-light-secondary dark:text-pm-secondary">
+                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;">
                     Arquitectura Web | Seguridad | Data Pipeline
                 </p>
                 <p class="entry-content text-pm-light-secondary dark:text-pm-secondary">
                     Sistema completo con validación en 5 capas, Azure Functions, PostgreSQL, Cloudflare WAF y analytics
                     en tiempo real. Demuestra arquitectura de producción.
                 </p>
+                <div class="tags-list">
+                    <span class="tag">Azure</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Cloudflare</span>
+                    <span class="tag">Python</span>
+                </div>
             </article>
 
-            <article
-                class="article-card bg-pm-light-entry dark:bg-pm-entry border-pm-light-border dark:border-pm-border">
+            <article class="article-card">
                 <time
-                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;"
-                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;">
                     2024-09-15
                 </time>
-                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;"
-                    class="text-pm-light-primary dark:text-pm-primary">
-                    <a href="/projects.html#ml" class="link-coder text-pm-light-primary dark:text-pm-primary">
+                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;">
+                    <a href="/pages/projects.html#ml" class="link-coder">
                         [Tu Proyecto de Título]: ML en Producción
                     </a>
                 </h3>
-                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
-                    class="text-pm-light-secondary dark:text-pm-secondary">
+                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;">
                     Machine Learning | Deployment | Python
                 </p>
-                <p class="entry-content text-pm-light-secondary dark:text-pm-secondary">
+                <p class="entry-content">
                     Modelo de Machine Learning deployado en producción con pipeline automatizado, monitoreo y
                     optimización continua.
                 </p>
+                <div class="tags-list">
+                    <span class="tag">Python</span>
+                    <span class="tag">Scikit-learn</span>
+                    <span class="tag">FastAPI</span>
+                </div>
             </article>
 
-            <article
-                class="article-card bg-pm-light-entry dark:bg-pm-entry border-pm-light-border dark:border-pm-border">
+            <article class="article-card">
                 <time
-                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;"
-                    class="text-pm-light-secondary dark:text-pm-secondary">
+                    style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 12px;">
                     2024-08-10
                 </time>
-                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;"
-                    class="text-pm-light-primary dark:text-pm-primary">
-                    <a href="/projects.html#etl" class="link-coder text-pm-light-primary dark:text-pm-primary">
+                <h3 style="font-size: 24px; font-weight: 600; margin: 0 0 8px 0;">
+                    <a href="/pages/projects.html#etl" class="link-coder">
                         ETL Pipeline Escalable
                     </a>
                 </h3>
-                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
-                    class="text-pm-light-secondary dark:text-pm-secondary">
+                <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;">
                     Data Engineering | Apache Airflow | PySpark
                 </p>
-                <p class="entry-content text-pm-light-secondary dark:text-pm-secondary">
+                <p class="entry-content">
                     Pipeline de datos con Apache Airflow y Spark para procesamiento de 2.5M+ registros. Reducción de
                     tiempo: 6h → 45min.
                 </p>
+                <div class="tags-list">
+                    <span class="tag">Airflow</span>
+                    <span class="tag">Spark</span>
+                    <span class="tag">PostgreSQL</span>
+                </div>
             </article>
 
             <div style="margin-top: 48px;">
-                <a href="/projects.html"
-                    class="link-coder text-pm-light-primary dark:text-pm-primary font-bold hover:opacity-70"
-                    style="font-size: 16px;">
+                <a href="/pages/projects.html" class="link-coder" style="font-size: 16px;">
                     Ver todos los proyectos →
                 </a>
             </div>
         </section>
     </main>
 
-    <footer class="bg-pm-light-bg dark:bg-pm-bg text-pm-light-secondary dark:text-pm-secondary">
-        <p style="margin: 12px 0;">
-            © 2025 Francisco Mora ·
-            <a href="https://github.com/tuusuario" target="_blank" class="link-coder">GitHub</a> ·
-            <a href="https://linkedin.com/in/tuusuario" target="_blank" class="link-coder">LinkedIn</a>
-        </p>
-        <p style="font-size: 12px; margin: 12px 0;">
-            Hecho con 💙 usando HTML + Tailwind (inspirado en PaperMod)
-        </p>
-    </footer>
+    <footer></footer>
 
+    <script src="/assets/js/load-components.js"></script>
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/mobile-menu.js"></script>
     <script src="/assets/js/main.js"></script>

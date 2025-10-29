@@ -1,0 +1,74 @@
+/* ========================================
+   RESPONSIVE.CSS - Capa 7: Media Queries
+   Breakpoints y estilos responsive
+   ======================================== */
+
+/* ===== TABLET BREAKPOINT (768px) ===== */
+@media (max-width: 768px) {
+    :root {
+        --gap: 14px;
+    }
+
+    .hero-section {
+        min-height: 260px;
+    }
+
+    nav #menu {
+        margin: 0;
+    }
+
+    main {
+        padding: var(--gap);
+    }
+
+    .projects-section h2 {
+        font-size: 28px;
+    }
+
+    .article-card h3 {
+        font-size: 20px;
+    }
+
+    .validation-modal-content {
+        padding: 32px 24px;
+        width: 95%;
+    }
+
+    .validation-text h2 {
+        font-size: 24px;
+    }
+
+    .validation-text p {
+        font-size: 14px;
+    }
+}
+
+/* ===== MOBILE BREAKPOINT (480px) ===== */
+@media (max-width: 480px) {
+    body {
+        font-size: 16px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .projects-section h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .article-card h3 {
+        font-size: 18px;
+    }
+
+    /* Ajuste semántico para los tags */
+    .tag {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    main {
+        padding: 12px;
+    }
+}

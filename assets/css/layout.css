@@ -1,0 +1,168 @@
+/* ========================================
+   LAYOUT.CSS - Capa 3: Page Structure
+   Layout de nav, main, footer
+   ======================================== */
+
+/* ===== NAVBAR LAYOUT ===== */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--theme);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    line-height: var(--header-height);
+    width: 100%;
+    padding: 0 var(--gap);
+}
+
+nav a {
+    display: block;
+    color: var(--primary);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+nav a:hover {
+    opacity: 0.7;
+    text-decoration: none;
+}
+
+/* ===== NAV LOGO ===== */
+nav .logo {
+    display: flex;
+    margin: auto var(--gap);
+    flex-wrap: inherit;
+}
+
+nav .logo a {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* ===== NAV MENU ===== */
+nav #menu {
+    display: flex;
+    list-style: none;
+    word-break: keep-all;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: auto var(--gap);
+}
+
+nav #menu li+li {
+    margin-inline-start: var(--gap);
+}
+
+nav #menu a {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ===== DARK MODE TOGGLE ===== */
+#dark-toggle {
+    font-size: 26px;
+    margin: auto 4px;
+    padding: 0;
+    font: inherit;
+    background: 0;
+    border: 0;
+    cursor: pointer;
+    color: var(--primary);
+    transition: opacity 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dark-toggle:hover {
+    opacity: 0.7;
+}
+
+/* ===== MOON/SUN ICON VISIBILITY ===== */
+#moon,
+#sun {
+    transition: all 0.3s ease !important;
+    width: 26px;
+    height: 18px;
+}
+
+html.dark #moon {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+html.dark #sun {
+    display: block !important;
+    opacity: 1 !important;
+}
+
+html:not(.dark) #moon {
+    display: block !important;
+    opacity: 1 !important;
+}
+
+html:not(.dark) #sun {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+/* ===== MAIN CONTAINER ===== */
+main {
+    position: relative;
+    min-height: calc(100vh - var(--header-height) - var(--footer-height));
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: auto;
+    padding: var(--gap);
+}
+
+/* ===== FOOTER LAYOUT ===== */
+footer {
+    font-size: 12px;
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: auto;
+    padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
+    text-align: center;
+    line-height: 24px;
+    background: var(--theme);
+    border-top: 1px solid var(--border);
+    color: var(--secondary);
+}
+
+footer p {
+    margin: 12px 0;
+    font-size: 14px;
+}
+
+footer p:last-child {
+    font-size: 12px;
+}
+
+footer a {
+    color: var(--secondary);
+    border-bottom: 1px solid var(--secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    text-decoration: none;
+}
+
+/* Gris claro para modo light */
+body.list {
+    background: var(--code-bg);
+}
+
+/* Oscuro principal para modo dark */
+html.dark body.list {
+    background: var(--theme);
+}

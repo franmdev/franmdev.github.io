@@ -1,0 +1,190 @@
+/* ========================================
+   COMPONENTS.CSS - Capa 4: Componentes BEM
+   Bloques reutilizables (SMACSS + BEM)
+   ======================================== */
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 320px;
+    margin: var(--gap) 0 calc(var(--gap) * 2) 0;
+    padding: var(--gap) 0;
+}
+
+.hero-content h1 {
+    font-size: 42px;
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    margin: 12px 0;
+    color: var(--secondary);
+}
+
+.hero-description {
+    margin: 32px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--secondary);
+}
+
+/* ===== SOCIAL LINKS ===== */
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.social-links a {
+    display: inline-flex;
+    padding: 10px;
+    color: var(--secondary);
+    transition: opacity 0.2s ease;
+}
+
+.social-links a:hover {
+    opacity: 0.7;
+    text-decoration: none;
+}
+
+.social-links svg {
+    height: 26px;
+    width: 26px;
+}
+
+/* ===== PROJECTS SECTION ===== */
+.projects-section {
+    padding: var(--gap) 0;
+}
+
+.projects-section h2 {
+    font-size: 32px;
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 0 0 32px 0;
+}
+
+/* ===== ARTICLE CARD (BEM Pattern) ===== */
+.article-card {
+    position: relative;
+    margin-bottom: var(--gap);
+    padding: var(--gap);
+    border-radius: var(--radius);
+    transition: transform 0.1s;
+    border: 1px solid var(--border);
+    background: var(--entry);
+    /* Aplicamos el fondo de entrada */
+}
+
+.article-card:active {
+    transform: scale(0.96);
+}
+
+.article-card time {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 12px;
+    color: var(--secondary);
+}
+
+.article-card h3 {
+    font-size: 24px;
+    line-height: 1.3;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.article-card h3 a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.article-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.article-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 8px 0;
+}
+
+.entry-content {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    color: var(--secondary);
+}
+
+.entry-footer {
+    font-size: 13px;
+}
+
+/* ===== TAGS/BADGES (Clase Semántica) ===== */
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    /* Equivalente a gap-2 de Tailwind */
+    margin-top: 16px;
+}
+
+.tag {
+    font-size: 12px;
+    padding: 6px 12px;
+    background: var(--code-bg);
+    color: var(--secondary);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    font-weight: 500;
+}
+
+/* ===== LINK STYLES ===== */
+.link-coder {
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link-coder:hover {
+    text-decoration: underline;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-center {
+    text-align: center;
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.border-top {
+    border-top: 1px solid var(--border);
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--border);
+}
+
+/* ... al final de la regla .link-coder:hover ... */
+
+/* Estilo para el link "Ver todos los proyectos" */
+.projects-section a.link-coder {
+    font-weight: 700;
+    /* Reemplaza font-bold */
+    font-size: 16px;
+}
