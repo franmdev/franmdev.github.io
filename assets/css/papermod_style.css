@@ -1,11 +1,11 @@
 /* ========================================
    PAPERMOD_STYLE.CSS - Francisco Mora Portfolio
-   PaperMod Theme Implementation
+   PaperMod Visual Design + Tailwind Integration
    ======================================== */
 
 /* ===== CSS VARIABLES (PaperMod Theme) ===== */
 :root {
-    /* Spacing */
+    /* Spacing - PaperMod Standard */
     --gap: 24px;
     --content-gap: 20px;
     --nav-width: 1024px;
@@ -14,7 +14,7 @@
     --footer-height: 60px;
     --radius: 8px;
 
-    /* Light Mode Colors */
+    /* Light Mode Colors - PaperMod */
     --theme: rgb(255, 255, 255);
     --entry: rgb(255, 255, 255);
     --primary: rgb(30, 30, 30);
@@ -28,7 +28,7 @@
 }
 
 :root[data-theme="dark"] {
-    /* Dark Mode Colors */
+    /* Dark Mode Colors - PaperMod */
     --theme: rgb(29, 30, 32);
     --entry: rgb(46, 46, 51);
     --primary: rgb(218, 218, 219);
@@ -146,21 +146,115 @@ textarea {
     user-select: text;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR (PaperMod Visual) ===== */
 nav {
     position: sticky;
     top: 0;
     z-index: 50;
     background: var(--theme);
     border-bottom: 1px solid var(--border);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 nav a {
     color: var(--primary);
     text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 nav a:hover {
+    opacity: 0.7;
+}
+
+nav>div {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: 0 auto;
+}
+
+/* Logo styling */
+nav a[href="/"] {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Menu links */
+nav .hidden.md\:flex a {
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+
+nav .hidden.md\:flex a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.2s ease;
+}
+
+nav .hidden.md\:flex a:hover::after {
+    width: 100%;
+}
+
+/* Dark toggle button */
+#dark-toggle {
+    padding: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--primary);
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dark-toggle:hover {
+    opacity: 0.6;
+}
+
+#dark-toggle span {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile menu button */
+#mobile-menu-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--primary);
+    padding: 8px;
+}
+
+#mobile-menu {
+    display: none;
+}
+
+#mobile-menu.active {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#mobile-menu a {
+    display: block;
+    padding: 12px 0;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 16px;
+    transition: opacity 0.2s ease;
+}
+
+#mobile-menu a:hover {
     opacity: 0.7;
 }
 
@@ -178,76 +272,24 @@ section {
     margin: 0 auto;
 }
 
-/* ===== HERO SECTION ===== */
-section.hero {
-    text-align: center;
-    padding: 60px 0 40px 0;
+section.py-32 {
+    padding: 80px var(--gap);
 }
 
-section.hero h1 {
-    font-size: 40px;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-section.hero .subtitle {
-    font-size: 20px;
-    color: var(--secondary);
-    margin-bottom: 24px;
-}
-
-section.hero .description {
-    font-size: 18px;
-    color: var(--secondary);
-    max-width: 600px;
-    margin: 0 auto 36px;
-    line-height: 1.6;
-}
-
-/* ===== SOCIAL LINKS ===== */
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 40px;
-}
-
-.social-links a {
-    display: inline-flex;
-    padding: 8px;
-    border-radius: var(--radius);
-}
-
-.social-links a:hover {
-    opacity: 0.6;
-}
-
-.social-links svg {
-    width: 28px;
-    height: 28px;
-    stroke-width: 1.5px;
-}
-
-/* ===== BACKGROUND SECTIONS ===== */
-section.bg-light {
-    background: var(--code-bg);
+section.py-16 {
+    padding: 64px var(--gap);
 }
 
 section h2 {
     font-size: 32px;
     margin-bottom: 32px;
     font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 /* ===== ARTICLES/CARDS ===== */
-.articles-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
 .article-card {
-    padding-bottom: var(--content-gap);
+    padding: 20px 0;
     border-bottom: 1px solid var(--border);
     transition: opacity 0.2s ease;
 }
@@ -260,7 +302,7 @@ section h2 {
     border-bottom: none;
 }
 
-.article-card .date {
+.article-card time {
     display: block;
     color: var(--secondary);
     font-size: 12px;
@@ -273,10 +315,12 @@ section h2 {
     font-size: 24px;
     margin-bottom: 12px;
     font-weight: 600;
+    line-height: 1.3;
 }
 
 .article-card h3 a {
     color: var(--primary);
+    text-decoration: none;
 }
 
 .article-card h3 a:hover {
@@ -296,46 +340,29 @@ section h2 {
     line-height: 1.6;
 }
 
-/* ===== TAGS ===== */
-.article-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
+/* ===== TAGS/BADGES ===== */
+.flex.flex-wrap.gap-2 {
+    margin-top: 16px;
 }
 
-.tag {
+.flex.flex-wrap.gap-2 span {
     font-size: 12px;
     padding: 6px 12px;
     background: var(--code-bg);
     color: var(--secondary);
     border-radius: var(--radius);
     border: 1px solid var(--border);
-}
-
-/* ===== CTA LINK ===== */
-.cta-link {
-    display: inline-block;
-    margin-top: 24px;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--primary);
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-}
-
-.cta-link:hover {
-    opacity: 0.7;
-    text-decoration: underline;
+    font-weight: 500;
 }
 
 /* ===== FOOTER ===== */
 footer {
     background: var(--theme);
     border-top: 1px solid var(--border);
-    padding: var(--gap) 0;
+    padding: 48px var(--gap);
     text-align: center;
     color: var(--secondary);
+    margin-top: 40px;
 }
 
 footer p {
@@ -344,19 +371,23 @@ footer p {
 }
 
 footer p:last-child {
-    font-size: 13px;
+    font-size: 12px;
+    color: var(--secondary);
 }
 
 footer a {
     color: var(--secondary);
     text-decoration: none;
+    border-bottom: 1px solid var(--secondary);
+    transition: all 0.2s ease;
 }
 
 footer a:hover {
-    text-decoration: underline;
+    color: var(--primary);
+    border-bottom-color: var(--primary);
 }
 
-/* ===== VALIDATION MODAL (Custom Security) ===== */
+/* ===== VALIDATION MODAL (mantiene funcionalidad) ===== */
 #loader-wrapper {
     min-height: 100vh;
     display: flex;
@@ -530,32 +561,14 @@ footer a:hover {
     font-size: 18px;
 }
 
-/* ===== THEME TOGGLE ===== */
-#dark-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 8px;
-    transition: opacity 0.2s ease;
-}
-
-#dark-toggle:hover {
-    opacity: 0.6;
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    section.hero h1 {
-        font-size: 36px;
+    section.py-32 {
+        padding: 48px var(--gap);
     }
 
-    section.hero .subtitle {
-        font-size: 18px;
-    }
-
-    section.hero .description {
-        font-size: 16px;
+    section.py-16 {
+        padding: 32px var(--gap);
     }
 
     section h2 {
@@ -578,6 +591,10 @@ footer a:hover {
     .validation-text p {
         font-size: 14px;
     }
+
+    nav {
+        padding: 8px 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -585,32 +602,26 @@ footer a:hover {
         font-size: 16px;
     }
 
-    section.hero h1 {
-        font-size: 28px;
+    section.py-32 {
+        padding: 32px 12px;
     }
 
-    section.hero .subtitle {
-        font-size: 16px;
-    }
-
-    section.hero .description {
-        font-size: 15px;
+    section.py-16 {
+        padding: 24px 12px;
     }
 
     section h2 {
         font-size: 24px;
+        margin-bottom: 20px;
     }
 
     .article-card h3 {
         font-size: 18px;
     }
 
-    .article-tags {
+    .flex.flex-wrap.gap-2 span {
         font-size: 11px;
-    }
-
-    .social-links {
-        gap: 16px;
+        padding: 4px 8px;
     }
 
     .main {
@@ -633,14 +644,4 @@ footer a:hover {
 
 .border-bottom {
     border-bottom: 1px solid var(--border);
-}
-
-.flex {
-    display: flex;
-}
-
-.flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }

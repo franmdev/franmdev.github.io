@@ -78,7 +78,9 @@
             width: 100vw;
             height: 100vh;
             background: rgba(0, 0, 0, 0.5);
+            /* MÁS TRANSPARENTE: 0.85 → 0.5 */
             z-index: 9998;
+            /* REMOVER: backdrop-filter: blur(5px); */
         }
 
         /* Modal centrado */
@@ -99,12 +101,15 @@
             border-radius: 12px;
             padding: 48px 64px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            /* SOMBRA MÁS PRONUNCIADA */
             text-align: center;
             max-width: 500px;
             width: 90%;
             animation: modalFadeIn 0.3s ease;
             position: relative;
+            /* IMPORTANTE: Asegurar que esté sobre overlay */
             z-index: 10000;
+            /* MÁS ALTO QUE overlay (9998) y modal (9999) */
         }
 
         @keyframes modalFadeIn {
@@ -132,6 +137,7 @@
             font-size: 16px;
             margin-bottom: 32px;
             font-weight: 400;
+            /* AGREGADO: Peso normal */
         }
 
         /* Turnstile centrado y VISIBLE */
@@ -141,7 +147,9 @@
             align-items: center;
             margin: 0 auto;
             filter: none;
+            /* ASEGURAR que no tenga blur */
             opacity: 1;
+            /* ASEGURAR que sea visible */
         }
 
         /* Animar Turnstile cuando aparece */
@@ -167,6 +175,7 @@
                 padding: 32px 24px;
                 width: 95%;
                 margin: 20px;
+                /* AGREGADO: Margen en mobile */
             }
 
             .validation-text h2 {
@@ -178,6 +187,7 @@
                 margin-bottom: 24px;
             }
         }
+
 
         /* ===== BLOCKED MESSAGE ===== */
         #blocked-message {
@@ -253,329 +263,20 @@
             margin-top: 12px;
         }
 
-        /* ===== ESTILOS PAPERMOD ===== */
-
-        /* Header con altura fija como PaperMod */
-        .header {
-            height: 60px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
+        /* Animar Turnstile cuando aparece */
+        #cf-turnstile-widget {
+            animation: fadeInUp 0.4s ease;
         }
 
-        /* Navegación horizontal como PaperMod */
-        .nav {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            max-width: calc(700px + 48px);
-            margin: 0 auto;
-            width: 100%;
-            padding: 0 24px;
-            line-height: 60px;
-        }
-
-        .nav a {
-            display: block;
-        }
-
-        .logo {
-            display: flex;
-            margin: 0 auto;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .logo a {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .logo-switches {
-            display: inline-flex;
-            margin: 0 4px;
-            align-items: center;
-        }
-
-        button#dark-toggle {
-            font-size: 26px;
-            margin: 0 4px;
-            padding: 0;
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-
-        #menu {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            overflow-x: auto;
-            white-space: nowrap;
-            word-break: keep-all;
-        }
-
-        #menu li+li {
-            margin-left: 24px;
-        }
-
-        #menu a {
-            font-size: 16px;
-            display: block;
-        }
-
-        /* Variables CSS para PaperMod style */
-        :root {
-            --gap: 24px;
-            --content-gap: 20px;
-            --nav-width: 1024px;
-            --main-width: 720px;
-            --header-height: 60px;
-            --footer-height: 60px;
-            --radius: 8px;
-
-            /* Light Mode */
-            --theme: rgb(255, 255, 255);
-            --entry: rgb(255, 255, 255);
-            --primary: rgb(30, 30, 30);
-            --secondary: rgb(108, 108, 108);
-            --tertiary: rgb(214, 214, 214);
-            --content: rgb(31, 31, 31);
-            --code-block-bg: rgb(28, 29, 33);
-            --code-bg: rgb(245, 245, 245);
-            --border: rgb(238, 238, 238);
-
-            color-scheme: light;
-        }
-
-        html.dark {
-            --theme: rgb(29, 30, 32);
-            --entry: rgb(46, 46, 51);
-            --primary: rgb(218, 218, 219);
-            --secondary: rgb(155, 156, 157);
-            --tertiary: rgb(65, 66, 68);
-            --content: rgb(196, 196, 197);
-            --code-block-bg: rgb(46, 46, 51);
-            --code-bg: rgb(55, 56, 62);
-            --border: rgb(51, 51, 51);
-
-            color-scheme: dark;
-        }
-
-        /* Main content con ancho PaperMod */
-        main {
-            position: relative;
-            min-height: calc(100vh - var(--header-height) - var(--footer-height));
-            max-width: calc(var(--main-width) + var(--gap) * 2);
-            margin: 0 auto;
-            padding: var(--gap);
-        }
-
-        /* First entry / Hero Section como PaperMod */
-        .first-entry {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 320px;
-            margin: var(--gap) 0 calc(var(--gap) * 2) 0;
-        }
-
-        .first-entry .entry-header {
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-        }
-
-        .first-entry .entry-header h1 {
-            font-size: 34px;
-            line-height: 1.3;
-            color: var(--primary);
-            margin: 0;
-        }
-
-        .first-entry .entry-content {
-            margin: 14px 0;
-            font-size: 16px;
-            color: var(--secondary);
-            line-height: 1.6;
-            -webkit-line-clamp: 3;
-        }
-
-        .entry-content p {
-            margin: 0 0 16px 0;
-        }
-
-        .entry-content ul {
-            margin: 16px 0;
-            padding-left: 20px;
-        }
-
-        .entry-content ul li {
-            margin-bottom: 8px;
-        }
-
-        /* Post entry como PaperMod */
-        .post-entry {
-            position: relative;
-            margin-bottom: var(--gap);
-            padding: var(--gap);
-            background: var(--entry);
-            border-radius: var(--radius);
-            transition: transform 0.1s;
-            border: 1px solid var(--border);
-        }
-
-        .post-entry:active {
-            transform: scale(0.96);
-        }
-
-        .post-entry:hover {
-            border-color: var(--tertiary);
-        }
-
-        .entry-header h2 {
-            font-size: 24px;
-            line-height: 1.3;
-            color: var(--primary);
-            margin: 0 0 8px 0;
-        }
-
-        .entry-content {
-            margin: 8px 0;
-            color: var(--secondary);
-            font-size: 14px;
-            line-height: 1.6;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-        }
-
-        .entry-footer {
-            color: var(--secondary);
-            font-size: 13px;
-            margin-top: 8px;
-        }
-
-        .entry-link {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            z-index: 1;
-        }
-
-        /* Social icons */
-        .social-icons {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .social-icons a {
-            display: inline-flex;
-            padding: 10px;
-            color: var(--primary);
-            border: none;
-            text-decoration: none;
-        }
-
-        .social-icons a svg {
-            height: 26px;
-            width: 26px;
-            fill: currentColor;
-        }
-
-        .social-icons a:hover {
-            opacity: 0.8;
-        }
-
-        /* Tags en proyectos */
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .project-tags span {
-            font-size: 12px;
-            background: var(--code-bg);
-            color: var(--secondary);
-            padding: 6px 12px;
-            border-radius: 4px;
-        }
-
-        /* Footer como PaperMod */
-        footer {
-            max-width: calc(var(--main-width) + var(--gap) * 2);
-            margin: 0 auto;
-            padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
-            text-align: center;
-            font-size: 12px;
-            color: var(--secondary);
-            line-height: 24px;
-            border-top: 1px solid var(--border);
-        }
-
-        footer a {
-            color: inherit;
-            border-bottom: 1px solid var(--secondary);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            border-bottom: 1px solid var(--primary);
-            color: var(--primary);
-        }
-
-        footer span {
-            margin-left: 1px;
-            margin-right: 1px;
-        }
-
-        /* Responsive */
-        @media screen and (max-width: 768px) {
-            :root {
-                --gap: 14px;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
             }
 
-            .first-entry {
-                min-height: 260px;
-            }
-
-            .nav {
-                max-width: 100%;
-            }
-
-            #menu {
-                margin-left: auto;
-            }
-        }
-
-        @media screen and (max-width: 640px) {
-            .logo a {
-                font-size: 20px;
-            }
-
-            #menu {
-                display: none;
-            }
-
-            button#dark-toggle {
-                margin-left: auto;
-            }
-
-            .first-entry .entry-header h1 {
-                font-size: 28px;
-            }
-
-            .entry-header h2 {
-                font-size: 20px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -595,6 +296,70 @@
 
 <body class="bg-white dark:bg-coder-bg text-light-text dark:text-coder-text font-sans">
 
+    <!-- ======== NAVBAR (Tailwind + PaperMod Visual) ======== -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-coder-bg border-b border-light-border dark:border-coder-border">
+        <div class="max-w-coder mx-auto px-6" style="padding: 12px 24px;">
+            <div class="flex justify-between items-center">
+
+                <!-- IZQUIERDA: Logo + Toggle -->
+                <div class="flex items-center gap-6">
+                    <a href="/"
+                        class="text-2xl font-bold text-light-accent dark:text-coder-accent hover:opacity-80 transition"
+                        style="letter-spacing: -0.5px;">
+                        francisco.mora
+                    </a>
+                    <button id="dark-toggle"
+                        class="p-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition"
+                        style="font-size: 20px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                        <span class="dark-icon">☀️</span>
+                        <span class="light-icon hidden">🌙</span>
+                    </button>
+                </div>
+
+                <!-- DERECHA: Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="/" style="font-size: 16px; font-weight: 500;"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
+                        Inicio
+                    </a>
+                    <a href="/projects.html" style="font-size: 16px; font-weight: 500;"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
+                        Proyectos
+                    </a>
+                    <a href="/about.html" style="font-size: 16px; font-weight: 500;"
+                        class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
+                        Sobre Mí
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-light-text dark:text-coder-text p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-3 space-y-2 pb-2">
+                <a href="/" style="font-size: 16px;"
+                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
+                    Inicio
+                </a>
+                <a href="/projects.html" style="font-size: 16px;"
+                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
+                    Proyectos
+                </a>
+                <a href="/about.html" style="font-size: 16px;"
+                    class="block py-2 text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent">
+                    Sobre Mí
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
     <!-- ======== LOADER (Pantalla inicial) ======== -->
     <div id="loader-wrapper" class="bg-white dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary">
         <p class="text-lg mb-4">Validando conexión segura...</p>
@@ -607,15 +372,19 @@
         </svg>
     </div>
 
-    <!-- ======== MODAL DE VALIDACIÓN ======== -->
+    <!-- ======== MODAL DE VALIDACIÓN (PROFESIONAL - CENTRADO) ======== -->
     <div id="validation-modal" style="display: none;">
+        <!-- Overlay oscuro de fondo -->
         <div class="validation-overlay"></div>
+
+        <!-- Modal centrado -->
         <div class="validation-modal-content">
             <div class="validation-text">
                 <h2>Verificación de Seguridad</h2>
                 <p>Por favor, complete la verificación para continuar</p>
             </div>
 
+            <!-- Spinner de carga (visible si la API tarda) -->
             <div id="validation-spinner" class="validation-spinner" style="display: none;">
                 <svg class="animate-spin h-6 w-6 text-coder-accent" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24">
@@ -627,6 +396,7 @@
                 <p style="margin-top: 12px; color: #b3b3b3;">Validando...</p>
             </div>
 
+            <!-- Turnstile Widget (centrado) -->
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
     </div>
@@ -640,185 +410,180 @@
     </div>
 
     <!-- ======== MAIN CONTENT ======== -->
-    <div id="main-content">
+    <main id="main-content">
 
-        <!-- ======== HEADER / NAVEGACIÓN (PaperMod Style) ======== -->
-        <header
-            class="header sticky top-0 z-50 bg-white dark:bg-coder-bg border-b border-light-border dark:border-coder-border">
-            <nav class="nav">
-                <!-- Logo -->
-                <div class="logo">
-                    <a href="/" class="text-light-accent dark:text-coder-accent hover:opacity-80 transition"
-                        title="francisco.mora (Alt + H)" accesskey="h">
-                        francisco.mora
+        <!-- HERO SECTION (Hugo Coder style: minimalista) -->
+        <section class="py-32">
+            <div class="max-w-coder mx-auto px-6 text-center">
+                <h1 class="text-5xl md:text-6xl font-bold text-light-text dark:text-coder-text mb-6">
+                    Francisco Mora
+                </h1>
+                <p class="text-xl md:text-2xl text-light-text-secondary dark:text-coder-text-secondary mb-8">
+                    Full Stack Data Professional
+                </p>
+                <p
+                    class="text-lg text-light-text-secondary dark:text-coder-text-secondary mb-12 leading-relaxed max-w-2xl mx-auto">
+                    Ingeniero Civil Industrial + Informático especializado en transformar modelos ML
+                    en sistemas productivos escalables. De matemática avanzada a arquitectura en la nube.
+                </p>
+
+                <!-- Social Links -->
+                <div class="flex justify-center space-x-6 text-2xl">
+                    <a href="https://github.com/tuusuario" target="_blank"
+                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
+                        title="GitHub">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
                     </a>
-                    <div class="logo-switches">
-                        <button id="dark-toggle" accesskey="t" title="Toggle theme (Alt + T)" aria-label="Toggle theme">
-                            <span class="dark-icon">☀️</span>
-                            <span class="light-icon hidden">🌙</span>
-                        </button>
-                    </div>
+                    <a href="https://linkedin.com/in/tuusuario" target="_blank"
+                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
+                        title="LinkedIn">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                    <a href="mailto:francisco@example.com"
+                        class="text-light-text-secondary dark:text-coder-text-secondary hover:text-light-accent dark:hover:text-coder-accent transition"
+                        title="Email">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS PREVIEW SECTION -->
+        <section class="py-16 bg-gray-50 dark:bg-coder-bg-light">
+            <div class="max-w-coder mx-auto px-6">
+                <h2 class="text-3xl font-bold text-light-text dark:text-coder-text mb-12">
+                    Proyectos Destacados
+                </h2>
+
+                <!-- Projects List (Hugo Coder style: simple) -->
+                <div class="space-y-8">
+
+                    <!-- Project 1: Este Portafolio -->
+                    <article
+                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
+                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
+                            2024-10-26
+                        </time>
+                        <h3 class="text-2xl font-bold mt-2 mb-3">
+                            <a href="/projects.html#portfolio"
+                                class="link-coder text-light-accent dark:text-coder-accent">
+                                Este Portafolio: Full Stack Data System
+                            </a>
+                        </h3>
+                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
+                            Arquitectura Web | Seguridad | Data Pipeline
+                        </p>
+                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
+                            Sistema completo con validación en 5 capas, Azure Functions, PostgreSQL,
+                            Cloudflare WAF y analytics en tiempo real. Demuestra arquitectura de producción.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Azure</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PostgreSQL</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Cloudflare</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Proyecto de Título -->
+                    <article
+                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
+                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
+                            2024-09-15
+                        </time>
+                        <h3 class="text-2xl font-bold mt-2 mb-3">
+                            <a href="/projects.html#ml" class="link-coder text-light-accent dark:text-coder-accent">
+                                [Tu Proyecto de Título]: ML en Producción
+                            </a>
+                        </h3>
+                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
+                            Machine Learning | Deployment | Python
+                        </p>
+                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
+                            Modelo de Machine Learning deployado en producción con pipeline automatizado,
+                            monitoreo y optimización continua.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Python</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Scikit-learn</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">FastAPI</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: ETL Pipeline -->
+                    <article
+                        class="hover-coder p-4 rounded-lg border border-transparent hover:border-light-border dark:hover:border-coder-border">
+                        <time class="text-sm text-light-text-secondary dark:text-coder-text-secondary">
+                            2024-08-10
+                        </time>
+                        <h3 class="text-2xl font-bold mt-2 mb-3">
+                            <a href="/projects.html#etl" class="link-coder text-light-accent dark:text-coder-accent">
+                                ETL Pipeline Escalable
+                            </a>
+                        </h3>
+                        <p class="text-sm text-light-text-secondary dark:text-coder-text-secondary mb-4 italic">
+                            Data Engineering | Apache Airflow | PySpark
+                        </p>
+                        <p class="text-light-text-secondary dark:text-coder-text-secondary leading-relaxed mb-4">
+                            Pipeline de datos con Apache Airflow y Spark para procesamiento de 2.5M+ registros.
+                            Reducción de tiempo: 6h → 45min.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Airflow</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">Spark</span>
+                            <span
+                                class="text-xs bg-gray-200 dark:bg-coder-bg text-light-text-secondary dark:text-coder-text-secondary px-3 py-1 rounded">PostgreSQL</span>
+                        </div>
+                    </article>
+
                 </div>
 
-                <!-- Menu Desktop -->
-                <ul id="menu">
-                    <li>
-                        <a href="/"
-                            class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
-                            <span>Inicio</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/projects.html"
-                            class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
-                            <span>Proyectos</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/about.html"
-                            class="text-light-text dark:text-coder-text hover:text-light-accent dark:hover:text-coder-accent transition">
-                            <span>Sobre Mí</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
-        <!-- ======== MAIN ======== -->
-        <main>
-
-            <!-- HERO SECTION (PaperMod style) -->
-            <article class="first-entry home-info">
-                <header class="entry-header">
-                    <h1>Francisco Mora</h1>
-                </header>
-                <div class="entry-content">
-                    <p>👋 Full Stack Data Professional</p>
-                    <p>
-                        Ingeniero Civil Industrial + Informático especializado en transformar modelos ML
-                        en sistemas productivos escalables. De matemática avanzada a arquitectura en la nube.
-                    </p>
+                <!-- View All Projects Link -->
+                <div class="mt-12 text-center">
+                    <a href="/projects.html"
+                        class="link-coder inline-block text-light-accent dark:text-coder-accent font-bold text-lg">
+                        Ver todos los proyectos →
+                    </a>
                 </div>
-                <footer class="entry-footer">
-                    <div class="social-icons">
-                        <a href="https://github.com/tuusuario" target="_blank" rel="noopener noreferrer me"
-                            title="View Source on Github">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                                </path>
-                            </svg>
-                        </a>
-                        <a href="https://linkedin.com/in/tuusuario" target="_blank" rel="noopener noreferrer me"
-                            title="LinkedIn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                            </svg>
-                        </a>
-                        <a href="mailto:francisco@example.com" title="Email">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                        </a>
-                    </div>
-                </footer>
-            </article>
+            </div>
+        </section>
 
-            <!-- PROJECTS SECTION (PaperMod style) -->
-            <article class="post-entry">
-                <header class="entry-header">
-                    <h2>
-                        <a href="/projects.html#portfolio" class="link-coder text-light-accent dark:text-coder-accent">
-                            Este Portafolio: Full Stack Data System
-                        </a>
-                    </h2>
-                </header>
-                <div class="entry-content">
-                    <p>
-                        Sistema completo con validación en 5 capas, Azure Functions, PostgreSQL,
-                        Cloudflare WAF y analytics en tiempo real. Demuestra arquitectura de producción.
-                    </p>
-                </div>
-                <footer class="entry-footer">
-                    <span title="2024-10-26">October 26, 2024</span>
-                    <div class="project-tags">
-                        <span>Azure</span>
-                        <span>PostgreSQL</span>
-                        <span>Cloudflare</span>
-                        <span>Python</span>
-                    </div>
-                </footer>
-                <a class="entry-link" aria-label="post link to Este Portafolio: Full Stack Data System"
-                    href="/projects.html#portfolio"></a>
-            </article>
+    </main>
 
-            <article class="post-entry">
-                <header class="entry-header">
-                    <h2>
-                        <a href="/projects.html#ml" class="link-coder text-light-accent dark:text-coder-accent">
-                            [Tu Proyecto de Título]: ML en Producción
-                        </a>
-                    </h2>
-                </header>
-                <div class="entry-content">
-                    <p>
-                        Modelo de Machine Learning deployado en producción con pipeline automatizado,
-                        monitoreo y optimización continua.
-                    </p>
-                </div>
-                <footer class="entry-footer">
-                    <span title="2024-09-15">September 15, 2024</span>
-                    <div class="project-tags">
-                        <span>Python</span>
-                        <span>Scikit-learn</span>
-                        <span>FastAPI</span>
-                    </div>
-                </footer>
-                <a class="entry-link" aria-label="post link to [Tu Proyecto de Título]: ML en Producción"
-                    href="/projects.html#ml"></a>
-            </article>
-
-            <article class="post-entry">
-                <header class="entry-header">
-                    <h2>
-                        <a href="/projects.html#etl" class="link-coder text-light-accent dark:text-coder-accent">
-                            ETL Pipeline Escalable
-                        </a>
-                    </h2>
-                </header>
-                <div class="entry-content">
-                    <p>
-                        Pipeline de datos con Apache Airflow y Spark para procesamiento de 2.5M+ registros.
-                        Reducción de tiempo: 6h → 45min.
-                    </p>
-                </div>
-                <footer class="entry-footer">
-                    <span title="2024-08-10">August 10, 2024</span>
-                    <div class="project-tags">
-                        <span>Airflow</span>
-                        <span>Spark</span>
-                        <span>PostgreSQL</span>
-                    </div>
-                </footer>
-                <a class="entry-link" aria-label="post link to ETL Pipeline Escalable" href="/projects.html#etl"></a>
-            </article>
-
-        </main>
-
-    </div>
-
-    <!-- ======== FOOTER (PaperMod Style) ======== -->
-    <footer>
-        <span>© <a href="https://github.com/tuusuario">Francisco Mora</a></span> ·
-        <span>
-            Powered by
-            <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-            <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-        </span>
+    <!-- ======== FOOTER ======== -->
+    <footer class="py-12 bg-white dark:bg-coder-bg border-t border-light-border dark:border-coder-border">
+        <div class="max-w-coder mx-auto px-6">
+            <div class="text-center text-light-text-secondary dark:text-coder-text-secondary text-sm">
+                <p class="mb-4">
+                    © 2025 Francisco Mora ·
+                    <a href="https://github.com/tuusuario" target="_blank"
+                        class="hover:text-light-accent dark:hover:text-coder-accent link-coder">GitHub</a> ·
+                    <a href="https://linkedin.com/in/tuusuario" target="_blank"
+                        class="hover:text-light-accent dark:hover:text-coder-accent link-coder">LinkedIn</a>
+                </p>
+                <p class="text-xs">
+                    Hecho con 💙 usando HTML + Tailwind (inspirado en Hugo Coder)
+                </p>
+            </div>
+        </div>
     </footer>
 
     <!-- ======== SCRIPTS ======== -->
