@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!toggleBtn || !moon || !sun) return;
 
     // Lee preferencia guardada o usa 'dark' por defecto
-    //const savedTheme = localStorage.getItem('theme') || 'dark';
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    // Modo light por defecto
+    //const savedTheme = localStorage.getItem('theme') || 'light';
 
     // Aplica el tema inicial
     if (savedTheme === 'dark') {
