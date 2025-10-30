@@ -188,3 +188,69 @@
     /* Reemplaza font-bold */
     font-size: 16px;
 }
+
+/* ===== THEME TOGGLE (Anterior #dark-toggle) ===== */
+.theme-toggle #moon {
+    display: block;
+}
+
+.theme-toggle #sun {
+    display: none;
+}
+
+html.dark .theme-toggle #moon {
+    display: none;
+}
+
+html.dark .theme-toggle #sun {
+    display: block;
+}
+
+/* ===== ARTICLE CARD TIMES ===== */
+.article-card time {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+/* ===== ARTICLE CARD HEADINGS ===== */
+.article-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+/* ===== METADATA PARA TARJETAS ===== */
+.card-meta {
+    font-size: 14px;
+    font-style: italic;
+    margin: 8px 0;
+    line-height: 1.4;
+    color: var(--secondary);
+}
+
+/* ===== SECTION HEADINGS ===== */
+.projects-section h2 {
+    font-size: 32px;
+    line-height: 1.3;
+    font-weight: 700;
+    margin: 0 0 32px 0;
+}
+
+/* ===== BLOCKED MESSAGE HEADINGS ===== */
+.blocked-message h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* ===== VIEW ALL PROJECTS CONTAINER ===== */
+.view-all-projects {
+    margin-top: 48px;
+}
+
+.view-all-projects a {
+    font-size: 16px;
+}

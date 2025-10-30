@@ -1,55 +1,55 @@
-/* ========================================
-   MAIN.CSS - Punto de Entrada CSS
-   Importa todos los archivos CSS en orden ITCSS
-   ========================================
-   
-   ARQUITECTURA CSS - ITCSS + BEM
-   
-   ORDEN DE IMPORTACIÓN (Específica ascendente):
-   1. Variables     → Colores, espacios, tipografía
-   2. Base          → Reset, estilos HTML base
-   3. Layout        → Estructura de página
-   4. Components    → Bloques reutilizables BEM
-   5. Projects      → Estilos específicos proyectos
-   6. Animations    → Keyframes, transiciones
-   7. Responsive    → Media queries
-   
-   ESPECIFICIDAD: Incrementa gradualmente
-   - Variables:   Especificidad 0
-   - Base:        Especificidad baja (elementos HTML)
-   - Layout:      Especificidad media (layout principal)
-   - Components:  Especificidad media-alta (clases BEM)
-   - Projects:    Especificidad alta (specifics)
-   - Animations:  Especificidad baja (keyframes)
-   - Responsive:  Especificidad igual a anterior (media queries)
-   
-   VENTAJAS:
-   ✓ Mantenibilidad clara y explícita
-   ✓ Escalable sin conflictos CSS
-   ✓ Fácil agregar nuevos proyectos
-   ✓ Debugging simplificado
-   ✓ Performance optimizado
-   ✓ SIN PÉRDIDA DE FUNCIONALIDAD
-   
-======================================== */
+   /* ========================================
+      MAIN.CSS - Punto de Entrada CSS
+      Importa todos los archivos CSS en orden ITCSS
+      ========================================
+      
+      ARQUITECTURA CSS - ITCSS + BEM
+      
+      ORDEN DE IMPORTACIÓN (Específica ascendente):
+      1. Variables     → Colores, espacios, tipografía
+      2. Base          → Reset, estilos HTML base
+      3. Layout        → Estructura de página
+      4. Components    → Bloques reutilizables BEM
+      5. Projects      → Estilos específicos proyectos
+      6. Animations    → Keyframes, transiciones
+      7. Responsive    → Media queries
+      
+      ESPECIFICIDAD: Incrementa gradualmente
+      - Variables:   Especificidad 0
+      - Base:        Especificidad baja (elementos HTML)
+      - Layout:      Especificidad media (layout principal)
+      - Components:  Especificidad media-alta (clases BEM)
+      - Projects:    Especificidad alta (specifics)
+      - Animations:  Especificidad baja (keyframes)
+      - Responsive:  Especificidad igual a anterior (media queries)
+      
+      VENTAJAS:
+      ✓ Mantenibilidad clara y explícita
+      ✓ Escalable sin conflictos CSS
+      ✓ Fácil agregar nuevos proyectos
+      ✓ Debugging simplificado
+      ✓ Performance optimizado
+      ✓ SIN PÉRDIDA DE FUNCIONALIDAD
+      
+   ======================================== */
 
-/* CAPA 1: Variables CSS */
-@import url('./variables.css');
+   /* CAPA 1: Variables CSS */
+   @import url('./variables.css');
 
-/* CAPA 2: Base & Reset */
-@import url('./base.css');
+   /* CAPA 2: Base & Reset */
+   @import url('./base.css');
 
-/* CAPA 3: Layout (nav, main, footer) */
-@import url('./layout.css');
+   /* CAPA 3: Layout (nav, main, footer) */
+   @import url('./layout.css');
 
-/* CAPA 4: Componentes Reutilizables */
-@import url('./components.css');
+   /* CAPA 4: Componentes Reutilizables */
+   @import url('./components.css');
 
-/* CAPA 5: Estilos Específicos para Proyectos */
-@import url('./projects.css');
+   /* CAPA 5: Estilos Específicos para Proyectos */
+   @import url('./projects.css');
 
-/* CAPA 6: Animaciones & Transiciones */
-@import url('./animations.css');
+   /* CAPA 6: Animaciones & Transiciones */
+   @import url('./animations.css');
 
-/* CAPA 7: Responsive & Media Queries */
-@import url('./responsive.css');
+   /* CAPA 7: Responsive & Media Queries */
+   @import url('./responsive.css');

@@ -1,7 +1,7 @@
 // Dark mode toggle - Sincronizado con SVG Icons PaperMod
 document.addEventListener('DOMContentLoaded', () => {
     const html = document.documentElement;
-    const toggleBtn = document.getElementById('dark-toggle');
+    const toggleBtn = document.querySelector('.theme-toggle');
     const moon = document.getElementById('moon');
     const sun = document.getElementById('sun');
 

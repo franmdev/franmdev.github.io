@@ -21,7 +21,7 @@ window.tailwindConfig = {
                 'pm-light-secondary': '#6c6c6c',
                 'pm-light-tertiary': '#f8f4f4',
                 'pm-light-accent': '#ffffff',
-                'pm-light-border': '#f8f4f4',
+                'pm-light-border': '#eeeeee',
             },
             fontFamily: {
                 'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
