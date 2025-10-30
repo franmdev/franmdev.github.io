@@ -28,15 +28,15 @@
         <nav class="nav">
             <div class="logo">
                 <a href="/">francisco.mora</a>
-                <button id="dark-toggle">
+                <button class="theme-toggle">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" style="display: block;">
+                        stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                     <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" style="display: none;">
+                        stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -61,11 +61,10 @@
     </header>
 
     <div id="loader-wrapper">
-        <p class="text-lg mb-4 text-pm-secondary">Validando conexión segura...</p>
-        <svg class="animate-spin h-8 w-8 text-pm-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor"
+        <p>Validando conexión segura...</p>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
             </path>
         </svg>
@@ -79,15 +78,15 @@
                 <p>Por favor, complete la verificación para continuar</p>
             </div>
 
-            <div id="validation-spinner" class="validation-spinner" style="display: none;">
-                <svg class="animate-spin h-6 w-6 text-pm-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor"
+            <!-- Spinner de carga (visible si la API tarda) -->
+            <div class="validation-spinner" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path fill="currentColor"
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                     </path>
                 </svg>
-                <p style="margin-top: 12px;">Validando...</p>
+                <p>Validando...</p>
             </div>
 
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
@@ -95,9 +94,9 @@
     </div>
 
     <!-- ======== BLOCKED MESSAGE ======== -->
-    <div id="blocked-message" style="display: none;" class="text-pm-light-primary dark:text-pm-primary">
-        <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 12px;">Acceso Denegado</h2>
-        <p class="text-pm-light-secondary dark:text-pm-secondary">
+    <div id="blocked-message" style="display: none;">
+        <h2>Acceso Denegado</h2>
+        <p>
             Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
         </p>
     </div>
