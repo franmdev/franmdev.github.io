@@ -39,3 +39,11 @@ html.dark {
     --border: rgb(51, 51, 51);
     color-scheme: dark;
 }
+
+.list {
+    background: var(--code-bg);
+}
+
+html.dark .list {
+    background: var(--theme);
+}
