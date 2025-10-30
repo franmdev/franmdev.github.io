@@ -35,7 +35,7 @@
 }
 
 /* ===== LOADER WRAPPER (Inicial) ===== */
-.loader-wrapper {
+#loader-wrapper {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -53,7 +53,7 @@
     background: linear-gradient(135deg, rgba(29, 30, 32, 0.98), rgba(46, 46, 51, 0.98));
 }
 
-.loader-wrapper p {
+#loader-wrapper p {
     color: var(--secondary);
     /* CORREGIDO: Usando variable */
     font-size: 18px;
@@ -71,7 +71,7 @@
     z-index: 9998;
 }
 
-.validation-modal {
+#validation-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -119,17 +119,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     margin: 0 auto;
-    padding: 20px;
     filter: none;
     opacity: 1;
 }
 
 #cf-turnstile-widget {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
     animation: fadeInUp 0.4s ease;
 }
 
@@ -146,11 +141,13 @@
     width: 24px;
     height: 24px;
     color: var(--primary);
+    /* CORREGIDO: Usando variable */
     animation: spin 1s linear infinite;
 }
 
 .validation-spinner p {
     color: var(--secondary);
+    /* CORREGIDO: Usando variable */
     font-size: 14px;
     margin-top: 12px;
 }
@@ -168,7 +165,7 @@
 }
 
 /* ===== BLOCKED MESSAGE (Final) ===== */
-.blocked-message {
+#blocked-message {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -186,31 +183,33 @@
     background: linear-gradient(135deg, rgba(29, 30, 32, 0.98), rgba(46, 46, 51, 0.98));
 }
 
-.blocked-message h2 {
+#blocked-message h2 {
     color: var(--primary);
     /* CORREGIDO: Usando variable */
     font-size: 32px;
     margin-bottom: 20px;
 }
 
-.blocked-message p {
+#blocked-message p {
     color: var(--secondary);
     /* CORREGIDO: Usando variable */
     font-size: 18px;
 }
 
 /* Estilos para el SVG del loader inicial */
-.loader-wrapper svg {
+#loader-wrapper svg {
     animation: spin 1s linear infinite;
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    /* 2rem (h-8 w-8) */
+    height: 32px;
+    /* 2rem (h-8 w-8) */
     color: var(--primary);
 }
 
-.loader-wrapper svg circle {
+#loader-wrapper svg .opacity-25 {
     opacity: 0.25;
 }
 
-.loader-wrapper svg path {
+#loader-wrapper svg .opacity-75 {
     opacity: 0.75;
 }
