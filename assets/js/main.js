@@ -95,7 +95,7 @@ function renderTurnstileWidget() {
 
     // Mostrar Turnstile, ocultar spinner
     const turnstileWidget = document.getElementById('cf-turnstile-widget');
-    const spinner = document.querySelector('.validation-spinner');
+    const spinner = document.getElementById('validation-spinner');
 
     if (spinner) spinner.style.display = 'none';
     if (turnstileWidget) turnstileWidget.style.display = 'flex';
@@ -128,7 +128,7 @@ function onTurnstileValidation(token) {
     console.log("✅ Turnstile verificado por usuario. Validando con backend...");
 
     // Mostrar spinner de "Validando..."
-    const spinner = document.querySelector('.validation-spinner');
+    const spinner = document.getElementById('validation-spinner');
     const turnstileWidget = document.getElementById('cf-turnstile-widget');
 
     if (spinner) spinner.style.display = 'flex';
