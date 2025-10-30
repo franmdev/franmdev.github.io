@@ -3,6 +3,7 @@
    Bloques reutilizables (SMACSS + BEM)
    ======================================== */
 
+
 /* ===== HERO SECTION ===== */
 .hero-section {
     display: flex;
@@ -34,6 +35,7 @@
     color: var(--secondary);
 }
 
+
 /* ===== SOCIAL LINKS ===== */
 .social-links {
     display: flex;
@@ -58,6 +60,7 @@
     width: 26px;
 }
 
+
 /* ===== PROJECTS SECTION ===== */
 .projects-section {
     padding: var(--gap) 0;
@@ -70,6 +73,7 @@
     margin: 0 0 32px 0;
 }
 
+
 /* ===== ARTICLE CARD (BEM Pattern) ===== */
 .article-card {
     position: relative;
@@ -79,7 +83,6 @@
     transition: transform 0.1s;
     border: 1px solid var(--border);
     background: var(--entry);
-    /* Aplicamos el fondo de entrada */
 }
 
 .article-card:active {
@@ -134,12 +137,12 @@
     font-size: 13px;
 }
 
+
 /* ===== TAGS/BADGES (Clase Semántica) ===== */
 .tags-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    /* Equivalente a gap-2 de Tailwind */
     margin-top: 16px;
 }
 
@@ -153,6 +156,7 @@
     font-weight: 500;
 }
 
+
 /* ===== LINK STYLES ===== */
 .link-coder {
     text-decoration: none;
@@ -162,6 +166,12 @@
 .link-coder:hover {
     text-decoration: underline;
 }
+
+.projects-section a.link-coder {
+    font-weight: 700;
+    font-size: 16px;
+}
+
 
 /* ===== UTILITY CLASSES ===== */
 .text-center {
@@ -180,11 +190,16 @@
     border-bottom: 1px solid var(--border);
 }
 
-/* ... al final de la regla .link-coder:hover ... */
 
-/* Estilo para el link "Ver todos los proyectos" */
-.projects-section a.link-coder {
-    font-weight: 700;
-    /* Reemplaza font-bold */
-    font-size: 16px;
+/* ===== ABOUT PAGE STYLES ===== */
+#skills {
+    margin-bottom: 48px;
+}
+
+#architecture {
+    margin-bottom: 48px;
+}
+
+.skill-card {
+    border: 1px solid var(--border);
 }
