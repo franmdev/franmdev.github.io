@@ -203,3 +203,50 @@
 .skill-card {
     border: 1px solid var(--border);
 }
+
+/* ===== FOOTER STYLES ===== */
+footer {
+    font-size: 12px;
+    background: var(--theme);
+    border-top: 1px solid var(--border);
+    color: var(--secondary);
+}
+
+.footer-container {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    margin: 0 auto;
+    padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
+    text-align: center;
+}
+
+.footer-content {
+    line-height: 24px;
+}
+
+.footer-links {
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.footer-links a {
+    color: var(--secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.footer-copyright {
+    margin: 12px 0;
+    font-size: 12px;
+}
+
+.footer-credit {
+    margin-top: 12px;
+    font-size: 12px;
+}
