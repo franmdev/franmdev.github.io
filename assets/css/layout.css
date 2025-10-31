@@ -3,6 +3,7 @@
    Layout de nav, main, footer
    ======================================== */
 
+
 /* ===== NAVBAR LAYOUT ===== */
 nav {
     position: sticky;
@@ -21,6 +22,7 @@ nav {
     padding: 0 var(--gap);
 }
 
+
 nav a {
     display: block;
     color: var(--primary);
@@ -28,10 +30,12 @@ nav a {
     transition: opacity 0.2s ease;
 }
 
+
 nav a:hover {
     opacity: 0.7;
     text-decoration: none;
 }
+
 
 /* ===== NAV LOGO ===== */
 nav .logo {
@@ -40,11 +44,13 @@ nav .logo {
     flex-wrap: inherit;
 }
 
+
 nav .logo a {
     font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
+
 
 /* ===== NAV MENU ===== */
 nav #menu {
@@ -56,14 +62,17 @@ nav #menu {
     margin: auto var(--gap);
 }
 
+
 nav #menu li+li {
     margin-inline-start: var(--gap);
 }
+
 
 nav #menu a {
     font-size: 16px;
     font-weight: 500;
 }
+
 
 /* ===== DARK MODE TOGGLE ===== */
 #dark-toggle {
@@ -81,9 +90,11 @@ nav #menu a {
     justify-content: center;
 }
 
+
 #dark-toggle:hover {
     opacity: 0.7;
 }
+
 
 /* ===== MOON/SUN ICON VISIBILITY ===== */
 #moon,
@@ -93,25 +104,30 @@ nav #menu a {
     height: 18px;
 }
 
+
 html.dark #moon {
     display: none !important;
     opacity: 0 !important;
 }
+
 
 html.dark #sun {
     display: block !important;
     opacity: 1 !important;
 }
 
+
 html:not(.dark) #moon {
     display: block !important;
     opacity: 1 !important;
 }
 
+
 html:not(.dark) #sun {
     display: none !important;
     opacity: 0 !important;
 }
+
 
 /* ===== MAIN CONTAINER ===== */
 main {
@@ -122,59 +138,6 @@ main {
     padding: var(--gap);
 }
 
-/* ===== FOOTER LAYOUT ===== */
-footer {
-    font-size: 12px;
-    max-width: calc(var(--main-width) + var(--gap) * 2);
-    margin: auto;
-    padding: calc((var(--footer-height) - var(--gap)) / 2) var(--gap);
-    text-align: center;
-    line-height: 24px;
-    background: var(--code-bg);
-    border-top: 1px solid var(--border);
-    color: var(--secondary);
-}
-
-footer p {
-    margin: 12px 0;
-    font-size: 14px;
-}
-
-footer p:last-child {
-    font-size: 12px;
-}
-
-footer a {
-    color: var(--secondary);
-    border-bottom: 1px solid var(--secondary);
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
-footer a:hover {
-    color: var(--primary);
-    border-bottom-color: var(--primary);
-    text-decoration: none;
-}
-
-/* Gris claro para modo light */
-body.list {
-    background: var(--code-bg);
-}
-
-/* Oscuro principal para modo dark */
-html.dark body.list {
-    background: var(--theme);
-}
-
-/* ===== DARK MODE OVERRIDES ===== */
-html.dark nav {
-    background: var(--theme);
-}
-
-html.dark footer {
-    background: var(--theme);
-}
 
 /* ===== FOOTER LAYOUT ===== */
 footer {
@@ -184,9 +147,6 @@ footer {
     color: var(--secondary);
 }
 
-html.dark footer {
-    background: var(--theme);
-}
 
 .footer-container {
     max-width: calc(var(--main-width) + var(--gap) * 2);
@@ -195,9 +155,11 @@ html.dark footer {
     text-align: center;
 }
 
+
 .footer-content {
     line-height: 24px;
 }
+
 
 .footer-links {
     margin-bottom: 12px;
@@ -206,23 +168,49 @@ html.dark footer {
     gap: 8px;
 }
 
+
 .footer-links a {
     color: var(--secondary);
     text-decoration: none;
     transition: all 0.2s ease;
 }
 
+
 .footer-links a:hover {
     color: var(--primary);
     text-decoration: underline;
 }
+
 
 .footer-copyright {
     margin: 12px 0;
     font-size: 12px;
 }
 
+
 .footer-credit {
     margin-top: 12px;
     font-size: 12px;
+}
+
+
+/* ===== BODY & GLOBAL BACKGROUND ===== */
+body.list {
+    background: var(--code-bg);
+}
+
+
+html.dark body.list {
+    background: var(--theme);
+}
+
+
+/* ===== DARK MODE OVERRIDES ===== */
+html.dark nav {
+    background: var(--theme);
+}
+
+
+html.dark footer {
+    background: var(--theme);
 }
