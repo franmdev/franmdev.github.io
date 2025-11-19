@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos - Francisco Mora</title>
+    <title>Sobre Mí - Francisco Mora</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,15 +28,15 @@
         <nav class="nav">
             <div class="logo">
                 <a href="/">franmdev</a>
-                <button class="theme-toggle">
+                <button id="dark-toggle">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                        stroke-linejoin="round" style="display: block;">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                     <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                        stroke-linejoin="round" style="display: none;">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -99,555 +99,261 @@
         </p>
     </div>
 
-    <!-- ======== BLOCKED MESSAGE ======== -->
-    <div id="blocked-message" style="display: none;">
-        <h2>Acceso Denegado</h2>
-        <p>
-            Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
-        </p>
-    </div>
     <main id="main-content">
         <!-- Header del proyecto -->
-        <div style="margin-bottom: 48px;">
-            <h1 style="font-size: 42px; line-height: 1.3; font-weight: 700; margin: 0 0 16px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
-                Este Portafolio: Full Stack Data System
-            </h1>
-            <p style="font-size: 18px; font-weight: 500; color: var(--color-primary); margin: 0;">
-                🏆 Demostración de arquitectura web empresarial, seguridad en producción y capacidades data engineering
-            </p>
-        </div>
+        <section class="project-header">
+            <h1>Este Portafolio: Full Stack Data System</h1>
+            <p class="project-subtitle">🏆 Demostración de arquitectura web empresarial, seguridad en producción y
+                capacidades data engineering</p>
+        </section>
 
         <!-- SECCIÓN 1: EL PROBLEMA -->
-        <article class="project-article" style="margin-bottom: 48px;">
-            <h2 style="font-size: 28px; font-weight: 600; margin: 0 0 16px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
-                📌 El Reto
-            </h2>
-
-            <p style="font-size: 16px; line-height: 1.8; margin-bottom: 16px;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                La mayoría de portafolios son <strong>estáticos y superficiales</strong>: screenshots bonitos, links a
-                proyectos,
-                pero <strong>sin demostrar verdadera capacidad técnica</strong> de producción.
+        <article class="project-article">
+            <h2>📌 El Reto</h2>
+            <p>La mayoría de portafolios son <strong>estáticos y superficiales</strong>: screenshots bonitos, links a
+                proyectos, pero <strong>sin demostrar verdadera capacidad técnica</strong> de producción.</p>
+            <blockquote class="project-quote">
+                "¿Cómo convencer a un Hunter TI o Tech Lead que sé de arquitectura web, seguridad y data engineering si
+                solo muestro screenshots?"
+            </blockquote>
+            <p>Respuesta: <strong>Haciendo que el portafolio MISMO sea el proyecto</strong>. Un sistema que demuestra:
             </p>
-
-            <div style="background: rgba(33, 128, 141, 0.1); border-left: 4px solid var(--color-primary); padding: 16px; margin: 24px 0; border-radius: 4px;"
-                class="border-pm-light-border dark:border-pm-primary">
-                <p style="margin: 0; font-style: italic;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    "¿Cómo convencer a un Hunter TI o Tech Lead que sé de arquitectura web, seguridad y data engineering
-                    si solo muestro screenshots?"
-                </p>
-            </div>
-
-            <p style="font-size: 16px; line-height: 1.8;" class="text-pm-light-secondary dark:text-pm-secondary">
-                Respuesta: <strong>Haciendo que el portafolio MISMO sea el proyecto</strong>. Un sistema que demuestra:
-            </p>
-
-            <ul style="list-style: none; padding: 0; margin: 24px 0;">
-                <li style="padding: 12px 0; border-bottom: 1px solid; display: flex; gap: 12px;"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <span style="color: var(--color-primary); font-weight: 700; min-width: 24px;">✓</span>
-                    <span class="text-pm-light-secondary dark:text-pm-secondary">
-                        <strong>Arquitectura escalable:</strong> Cero limitaciones, listo para millones de requests
-                    </span>
+            <ul class="project-features">
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>Arquitectura escalable:</strong> Cero limitaciones, listo para millones de
+                        requests</span>
                 </li>
-                <li style="padding: 12px 0; border-bottom: 1px solid; display: flex; gap: 12px;"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <span style="color: var(--color-primary); font-weight: 700; min-width: 24px;">✓</span>
-                    <span class="text-pm-light-secondary dark:text-pm-secondary">
-                        <strong>Seguridad en profundidad:</strong> No es checkbox, es arquitectura real de defensa
-                    </span>
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>Seguridad en profundidad:</strong> No es checkbox, es arquitectura real de
+                        defensa</span>
                 </li>
-                <li style="padding: 12px 0; border-bottom: 1px solid; display: flex; gap: 12px;"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <span style="color: var(--color-primary); font-weight: 700; min-width: 24px;">✓</span>
-                    <span class="text-pm-light-secondary dark:text-pm-secondary">
-                        <strong>Data platform:</strong> Estructura lista para integrar ML, BI, analytics
-                    </span>
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>Data platform:</strong> Estructura lista para integrar ML, BI, analytics</span>
                 </li>
-                <li style="padding: 12px 0; display: flex; gap: 12px;">
-                    <span style="color: var(--color-primary); font-weight: 700; min-width: 24px;">✓</span>
-                    <span class="text-pm-light-secondary dark:text-pm-secondary">
-                        <strong>Performance real:</strong> Cada decisión técnica optimizada, medida, documentada
-                    </span>
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>Performance real:</strong> Cada decisión técnica optimizada, medida,
+                        documentada</span>
                 </li>
             </ul>
         </article>
 
         <!-- SECCIÓN 2: LA SOLUCIÓN ARQUITECTÓNICA -->
-        <article class="project-article" style="margin-bottom: 48px;">
-            <h2 style="font-size: 28px; font-weight: 600; margin: 0 0 16px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
-                🏗️ La Arquitectura
-            </h2>
+        <article class="project-article">
+            <h2>🏗️ La Arquitectura</h2>
+            <p>Sistema enterprise con 4 componentes principales, cada uno optimizado para un propósito específico:</p>
 
-            <p style="font-size: 16px; line-height: 1.8; margin-bottom: 24px;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                Sistema enterprise con 4 componentes principales, cada uno optimizado para un propósito específico:
-            </p>
-
-            <!-- Componente 1: Frontend -->
-            <div style="background: var(--color-surface); border: 1px solid; padding: 20px; border-radius: 8px; margin-bottom: 16px;"
-                class="border-pm-light-border dark:border-pm-border">
-                <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;"
-                    class="text-pm-light-primary dark:text-pm-primary">
-                    <span style="color: var(--color-primary);">1️⃣</span> Frontend: GitHub Pages
-                </h3>
-                <p style="margin: 0 0 12px 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    <strong>Estático, CDN global, sin servidor</strong>
-                </p>
-                <p style="margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    CSS nativo (ITCSS) → 14 KB bundle (48% reducción vs Tailwind). Dark mode automático.
-                    Responsive perfecto. Por qué: control total sin dependencias, performance máxima,
-                    escalabilidad infinita.
-                </p>
+            <div class="architecture-component">
+                <h3><span class="component-badge">1️⃣</span> Frontend: GitHub Pages</h3>
+                <p class="component-label">Estático, CDN global, sin servidor</p>
+                <p>CSS nativo (ITCSS) → 14 KB bundle (48% reducción vs Tailwind). Dark mode automático. Responsive
+                    perfecto. Por qué: control total sin dependencias, performance máxima, escalabilidad infinita.</p>
             </div>
 
-            <!-- Componente 2: Backend -->
-            <div style="background: var(--color-surface); border: 1px solid; padding: 20px; border-radius: 8px; margin-bottom: 16px;"
-                class="border-pm-light-border dark:border-pm-border">
-                <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;"
-                    class="text-pm-light-primary dark:text-pm-primary">
-                    <span style="color: var(--color-primary);">2️⃣</span> Backend: Azure Functions (Serverless)
-                </h3>
-                <p style="margin: 0 0 12px 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    <strong>Python, validación inteligente, cero infraestructura</strong>
-                </p>
-                <p style="margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    Un endpoint `/api/validate` que maneja toda la lógica: validación en 5 capas,
-                    decisiones binarias (allow/deny), caché inteligente. Pay-per-use, auto-scaling automático.
-                </p>
+            <div class="architecture-component">
+                <h3><span class="component-badge">2️⃣</span> Backend: Azure Functions (Serverless)</h3>
+                <p class="component-label">Python, validación inteligente, cero infraestructura</p>
+                <p>Un endpoint `/api/validate` que maneja toda la lógica: validación en 5 capas, decisiones binarias
+                    (allow/deny), caché inteligente. Pay-per-use, auto-scaling automático.</p>
             </div>
 
-            <!-- Componente 3: Database -->
-            <div style="background: var(--color-surface); border: 1px solid; padding: 20px; border-radius: 8px; margin-bottom: 16px;"
-                class="border-pm-light-border dark:border-pm-border">
-                <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;"
-                    class="text-pm-light-primary dark:text-pm-primary">
-                    <span style="color: var(--color-primary);">3️⃣</span> Base de Datos: PostgreSQL Managed
-                </h3>
-                <p style="margin: 0 0 12px 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    <strong>ACID compliance, analytics en tiempo real, tier gratuito</strong>
-                </p>
-                <p style="margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    2 tablas optimizadas: `ip_lookup_cache` (validación rápida) y `visitors` (analytics).
-                    Índices estratégicos. TTL automático. Listo para crecer a millones de registros.
-                </p>
+            <div class="architecture-component">
+                <h3><span class="component-badge">3️⃣</span> Base de Datos: PostgreSQL Managed</h3>
+                <p class="component-label">ACID compliance, analytics en tiempo real, tier gratuito</p>
+                <p>2 tablas optimizadas: <code>ip_lookup_cache</code> (validación rápida) y <code>visitors</code>
+                    (analytics). Índices estratégicos. TTL automático. Listo para crecer a millones de registros.</p>
             </div>
 
-            <!-- Componente 4: Seguridad -->
-            <div style="background: var(--color-surface); border: 1px solid; padding: 20px; border-radius: 8px;"
-                class="border-pm-light-border dark:border-pm-border">
-                <h3 style="font-size: 18px; font-weight: 600; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px;"
-                    class="text-pm-light-primary dark:text-pm-primary">
-                    <span style="color: var(--color-primary);">4️⃣</span> Seguridad: Defensa en 5 Capas
-                </h3>
-                <p style="margin: 0 0 12px 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    <strong>Capa 1: Cloudflare WAF</strong> (bloquea 80% no-CL)<br>
-                    <strong>Capa 2: Rate Limiting</strong> (15 req/min por IP)<br>
-                    <strong>Capa 3: Turnstile</strong> (verifica humanidad)<br>
-                    <strong>Capa 4: VPN Detection</strong> (ipapi.is - 6 flags)<br>
-                    <strong>Capa 5: Caché DB</strong> (24h TTL para "Fast Pass")
-                </p>
-                <p style="margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    Resultado: 99.9% rechazo de tráfico malicioso sin afectar UX legítima.
-                </p>
+            <div class="architecture-component">
+                <h3><span class="component-badge">4️⃣</span> Seguridad: Defensa en 5 Capas</h3>
+                <p class="component-label">Capas de seguridad progresiva</p>
+                <p><strong>Capa 1: Cloudflare WAF</strong> (bloquea 80% no-CL)<br><strong>Capa 2: Rate Limiting</strong>
+                    (15 req/min por IP)<br><strong>Capa 3: Turnstile</strong> (verifica humanidad)<br><strong>Capa 4:
+                        VPN Detection</strong> (ipapi.is - 6 flags)<br><strong>Capa 5: Caché DB</strong> (24h TTL para
+                    "Fast Pass")</p>
+                <p>Resultado: 99.9% rechazo de tráfico malicioso sin afectar UX legítima.</p>
             </div>
         </article>
 
         <!-- SECCIÓN 3: RESULTADOS MEDIBLES -->
-        <article class="project-article" style="margin-bottom: 48px;">
-            <h2 style="font-size: 28px; font-weight: 600; margin: 0 0 16px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
-                📊 Resultados en Números
-            </h2>
-
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 24px;">
-                <!-- Métrica 1 -->
-                <div style="background: var(--color-surface); padding: 20px; border-radius: 8px; border-left: 4px solid var(--color-primary);"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <div style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px;">
-                        48%
-                    </div>
-                    <p style="margin: 0; font-size: 14px; font-weight: 600;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        Reducción CSS Bundle
-                    </p>
-                    <p style="margin: 8px 0 0 0; font-size: 13px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Tailwind: 27KB → ITCSS: 14KB
-                    </p>
+        <article class="project-article">
+            <h2>📊 Resultados en Números</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">48%</div>
+                    <p class="metric-title">Reducción CSS Bundle</p>
+                    <p class="metric-description">Tailwind: 27KB → ITCSS: 14KB</p>
                 </div>
-
-                <!-- Métrica 2 -->
-                <div style="background: var(--color-surface); padding: 20px; border-radius: 8px; border-left: 4px solid var(--color-primary);"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <div style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px;">
-                        90%
-                    </div>
-                    <p style="margin: 0; font-size: 14px; font-weight: 600;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        Cache Hit Rate
-                    </p>
-                    <p style="margin: 8px 0 0 0; font-size: 13px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Usuarios recurrentes sin validación
-                    </p>
+                <div class="metric-card">
+                    <div class="metric-value">90%</div>
+                    <p class="metric-title">Cache Hit Rate</p>
+                    <p class="metric-description">Usuarios recurrentes sin validación</p>
                 </div>
-
-                <!-- Métrica 3 -->
-                <div style="background: var(--color-surface); padding: 20px; border-radius: 8px; border-left: 4px solid var(--color-primary);"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <div style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px;">
-                        50-200ms
-                    </div>
-                    <p style="margin: 0; font-size: 14px; font-weight: 600;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        Response Time
-                    </p>
-                    <p style="margin: 8px 0 0 0; font-size: 13px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Promedio con validación completa
-                    </p>
+                <div class="metric-card">
+                    <div class="metric-value">50-200ms</div>
+                    <p class="metric-title">Response Time</p>
+                    <p class="metric-description">Promedio con validación completa</p>
                 </div>
-
-                <!-- Métrica 4 -->
-                <div style="background: var(--color-surface); padding: 20px; border-radius: 8px; border-left: 4px solid var(--color-primary);"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <div style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px;">
-                        ~$5
-                    </div>
-                    <p style="margin: 0; font-size: 14px; font-weight: 600;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        Costo Mensual
-                    </p>
-                    <p style="margin: 8px 0 0 0; font-size: 13px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Solo API (Azure + ipapi.is)
-                    </p>
+                <div class="metric-card">
+                    <div class="metric-value">~$5</div>
+                    <p class="metric-title">Costo Mensual</p>
+                    <p class="metric-description">Solo API (Azure + ipapi.is)</p>
                 </div>
-
-                <!-- Métrica 5 -->
-                <div style="background: var(--color-surface); padding: 20px; border-radius: 8px; border-left: 4px solid var(--color-primary);"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <div style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px;">
-                        0→∞
-                    </div>
-                    <p style="margin: 0; font-size: 14px; font-weight: 600;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        Escalabilidad
-                    </p>
-                    <p style="margin: 8px 0 0 0; font-size: 13px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Serverless auto-scale, sin config
-                    </p>
+                <div class="metric-card">
+                    <div class="metric-value">0→∞</div>
+                    <p class="metric-title">Escalabilidad</p>
+                    <p class="metric-description">Serverless auto-scale, sin config</p>
                 </div>
-
-                <!-- Métrica 6 -->
-                <div style="background: var(--color-surface); padding: 20px; border-radius: 8px; border-left: 4px solid var(--color-primary);"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <div style="font-size: 28px; font-weight: 700; color: var(--color-primary); margin-bottom: 8px;">
-                        99.9%
-                    </div>
-                    <p style="margin: 0; font-size: 14px; font-weight: 600;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        Rechazo Malicioso
-                    </p>
-                    <p style="margin: 8px 0 0 0; font-size: 13px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Tráfico bloqueado antes de llegar
-                    </p>
+                <div class="metric-card">
+                    <div class="metric-value">99.9%</div>
+                    <p class="metric-title">Rechazo Malicioso</p>
+                    <p class="metric-description">Tráfico bloqueado antes de llegar</p>
                 </div>
             </div>
         </article>
 
         <!-- SECCIÓN 4: QUÉ DEMUESTRA ESTO -->
-        <article class="project-article" style="margin-bottom: 48px;">
-            <h2 style="font-size: 28px; font-weight: 600; margin: 0 0 16px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
-                🎓 Por Qué Importa (Para Hunter TI)
-            </h2>
-
-            <p style="font-size: 16px; line-height: 1.8; margin-bottom: 24px;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                Este proyecto no es vanidad. Demuestra capacidades concretas que los Tech Leads buscan:
-            </p>
-
-            <div style="space-y: 16px;">
-                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid;"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        ✓ Full Stack Real
-                    </h4>
-                    <p style="margin: 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        Frontend (ITCSS), Backend (Python), Database (PostgreSQL), Infrastructure (Azure).
-                        No es un tutorial, es arquitectura de producción.
-                    </p>
+        <article class="project-article">
+            <h2>🎓 Por Qué Importa (Para Hunter TI)</h2>
+            <p>Este proyecto no es vanidad. Demuestra capacidades concretas que los Tech Leads buscan:</p>
+            <div class="capabilities-list">
+                <div class="capability-item">
+                    <h4>✓ Full Stack Real</h4>
+                    <p>Frontend (ITCSS), Backend (Python), Database (PostgreSQL), Infrastructure (Azure). No es un
+                        tutorial, es arquitectura de producción.</p>
                 </div>
-
-                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid;"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        ✓ Seguridad en Serio
-                    </h4>
-                    <p style="margin: 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        5 capas de defensa. No es "agregar un firewall", es arquitectura de seguridad defensiva.
-                        Conoces OWASP, WAF, rate limiting, crypto, validación de datos.
-                    </p>
+                <div class="capability-item">
+                    <h4>✓ Seguridad en Serio</h4>
+                    <p>5 capas de defensa. No es "agregar un firewall", es arquitectura de seguridad defensiva. Conoces
+                        OWASP, WAF, rate limiting, crypto, validación de datos.</p>
                 </div>
-
-                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid;"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        ✓ Data Engineering
-                    </h4>
-                    <p style="margin: 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        Schema optimizado, índices estratégicos, TTL automatizado, pipeline de analytics.
-                        Estructura lista para integrar ML, BI, dashboards.
-                    </p>
+                <div class="capability-item">
+                    <h4>✓ Data Engineering</h4>
+                    <p>Schema optimizado, índices estratégicos, TTL automatizado, pipeline de analytics. Estructura
+                        lista para integrar ML, BI, dashboards.</p>
                 </div>
-
-                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid;"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        ✓ Performance Obsession
-                    </h4>
-                    <p style="margin: 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        Cada decisión tiene métrica: CSS 48% más pequeño, Caché 90% hit rate, respuesta &lt;200ms.
-                        No es "lo suficientemente rápido", es optimizado y medido.
-                    </p>
+                <div class="capability-item">
+                    <h4>✓ Performance Obsession</h4>
+                    <p>Cada decisión tiene métrica: CSS 48% más pequeño, Caché 90% hit rate, respuesta &lt;200ms. No es
+                        "lo suficientemente rápido", es optimizado y medido.</p>
                 </div>
-
-                <div style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid;"
-                    class="border-pm-light-border dark:border-pm-border">
-                    <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        ✓ Cost Awareness
-                    </h4>
-                    <p style="margin: 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        $5/mes en producción. Serverless, tier gratuito, optimización de recursos.
-                        Conoces ROI, infraestructura económica, trade-offs.
-                    </p>
+                <div class="capability-item">
+                    <h4>✓ Cost Awareness</h4>
+                    <p>$5/mes en producción. Serverless, tier gratuito, optimización de recursos. Conoces ROI,
+                        infraestructura económica, trade-offs.</p>
                 </div>
-
-                <div>
-                    <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        ✓ Documentación Profesional
-                    </h4>
-                    <p style="margin: 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        No es un README genérico. Arquitectura detallada, decisiones técnicas justificadas,
-                        trade-offs explícitos. Muestra madurez profesional.
-                    </p>
+                <div class="capability-item">
+                    <h4>✓ Documentación Profesional</h4>
+                    <p>No es un README genérico. Arquitectura detallada, decisiones técnicas justificadas, trade-offs
+                        explícitos. Muestra madurez profesional.</p>
                 </div>
             </div>
         </article>
 
         <!-- SECCIÓN 5: STACK TÉCNICO -->
-        <article class="project-article" style="margin-bottom: 48px;">
-            <h2 style="font-size: 28px; font-weight: 600; margin: 0 0 16px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
-                🛠️ Stack Técnico
-            </h2>
-
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px;">
-                <div>
-                    <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 8px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Frontend
-                    </p>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• HTML5</li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• CSS3
-                            (ITCSS)
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• JavaScript
-                            ES6+
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• GitHub
-                            Pages
-                        </li>
+        <article class="project-article">
+            <h2>🛠️ Stack Técnico</h2>
+            <div class="stack-grid">
+                <div class="stack-section">
+                    <h4>Frontend</h4>
+                    <ul>
+                        <li>HTML5</li>
+                        <li>CSS3 (ITCSS)</li>
+                        <li>JavaScript ES6+</li>
+                        <li>GitHub Pages</li>
                     </ul>
                 </div>
-
-                <div>
-                    <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 8px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Backend
-                    </p>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Python 3.11
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Azure
-                            Functions
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• REST API
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Serverless
-                        </li>
+                <div class="stack-section">
+                    <h4>Backend</h4>
+                    <ul>
+                        <li>Python 3.11</li>
+                        <li>Azure Functions</li>
+                        <li>REST API</li>
+                        <li>Serverless</li>
                     </ul>
                 </div>
-
-                <div>
-                    <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 8px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Database
-                    </p>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• PostgreSQL
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Azure
-                            Managed
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Optimized
-                            Schema</li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Índices
-                            Strategic</li>
+                <div class="stack-section">
+                    <h4>Database</h4>
+                    <ul>
+                        <li>PostgreSQL</li>
+                        <li>Azure Managed</li>
+                        <li>Optimized Schema</li>
+                        <li>Strategic Indices</li>
                     </ul>
                 </div>
-
-                <div>
-                    <p style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; margin-bottom: 8px;"
-                        class="text-pm-light-secondary dark:text-pm-secondary">
-                        Seguridad
-                    </p>
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Cloudflare
-                            WAF
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Turnstile
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• Rate
-                            Limiting
-                        </li>
-                        <li style="padding: 4px 0;" class="text-pm-light-secondary dark:text-pm-secondary">• VPN
-                            Detection
-                        </li>
+                <div class="stack-section">
+                    <h4>Seguridad</h4>
+                    <ul>
+                        <li>Cloudflare WAF</li>
+                        <li>Turnstile</li>
+                        <li>Rate Limiting</li>
+                        <li>VPN Detection</li>
                     </ul>
                 </div>
             </div>
         </article>
 
         <!-- SECCIÓN 6: DOCUMENTACIÓN -->
-        <article class="project-article" style="margin-bottom: 48px;">
-            <h2 style="font-size: 28px; font-weight: 600; margin: 0 0 16px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
-                📚 Documentación Técnica Detallada
-            </h2>
-
-            <p style="font-size: 16px; line-height: 1.8; margin-bottom: 24px;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                Para who want more details, toda la arquitectura está documentada en el repositorio:
-            </p>
-
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 24px;">
-                <a href="https://github.com/yourusername/portafolio/blob/main/docs/SECURITY.md" target="_blank"
-                    style="background: var(--color-surface); padding: 16px; border-radius: 6px; text-decoration: none; border: 1px solid; transition: all 0.2s;"
-                    class="border-pm-light-border dark:border-pm-border hover:border-pm-light-primary">
-                    <p style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        🔐 SECURITY.md
-                    </p>
-                    <p style="font-size: 12px; margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        5 capas de validación, casos de uso, lógica completa
-                    </p>
+        <article class="project-article">
+            <h2>📚 Documentación Técnica Detallada</h2>
+            <p>Para who want more details, toda la arquitectura está documentada en el repositorio:</p>
+            <div class="docs-grid">
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/SECURITY.md" target="_blank"
+                    class="doc-card">
+                    <p class="doc-icon">🔐</p>
+                    <p class="doc-title">SECURITY.md</p>
+                    <p class="doc-description">5 capas de validación, casos de uso, lógica completa</p>
                 </a>
-
-                <a href="https://github.com/yourusername/portafolio/blob/main/docs/ARCHITECTURE.md" target="_blank"
-                    style="background: var(--color-surface); padding: 16px; border-radius: 6px; text-decoration: none; border: 1px solid; transition: all 0.2s;"
-                    class="border-pm-light-border dark:border-pm-border hover:border-pm-light-primary">
-                    <p style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        🏗️ ARCHITECTURE.md
-                    </p>
-                    <p style="font-size: 12px; margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        Decisiones técnicas justificadas, trade-offs
-                    </p>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/ARCHITECTURE.md" target="_blank"
+                    class="doc-card">
+                    <p class="doc-icon">🏗️</p>
+                    <p class="doc-title">ARCHITECTURE.md</p>
+                    <p class="doc-description">Decisiones técnicas justificadas, trade-offs</p>
                 </a>
-
-                <a href="https://github.com/yourusername/portafolio/blob/main/docs/DATABASE.md" target="_blank"
-                    style="background: var(--color-surface); padding: 16px; border-radius: 6px; text-decoration: none; border: 1px solid; transition: all 0.2s;"
-                    class="border-pm-light-border dark:border-pm-border hover:border-pm-light-primary">
-                    <p style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        💾 DATABASE.md
-                    </p>
-                    <p style="font-size: 12px; margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        Schema, índices, optimizaciones
-                    </p>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/DATABASE.md" target="_blank"
+                    class="doc-card">
+                    <p class="doc-icon">💾</p>
+                    <p class="doc-title">DATABASE.md</p>
+                    <p class="doc-description">Schema, índices, optimizaciones</p>
                 </a>
-
-                <a href="https://github.com/yourusername/portafolio/blob/main/docs/API.md" target="_blank"
-                    style="background: var(--color-surface); padding: 16px; border-radius: 6px; text-decoration: none; border: 1px solid; transition: all 0.2s;"
-                    class="border-pm-light-border dark:border-pm-border hover:border-pm-light-primary">
-                    <p style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        🔌 API.md
-                    </p>
-                    <p style="font-size: 12px; margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        Endpoints, request/response, testing
-                    </p>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/API.md" target="_blank"
+                    class="doc-card">
+                    <p class="doc-icon">🔌</p>
+                    <p class="doc-title">API.md</p>
+                    <p class="doc-description">Endpoints, request/response, testing</p>
                 </a>
-
-                <a href="https://github.com/yourusername/portafolio/blob/main/docs/CSS-MIGRATION.md" target="_blank"
-                    style="background: var(--color-surface); padding: 16px; border-radius: 6px; text-decoration: none; border: 1px solid; transition: all 0.2s;"
-                    class="border-pm-light-border dark:border-pm-border hover:border-pm-light-primary">
-                    <p style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        🎨 CSS-MIGRATION.md
-                    </p>
-                    <p style="font-size: 12px; margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        Por qué ITCSS, no Tailwind
-                    </p>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/CSS-MIGRATION.md" target="_blank"
+                    class="doc-card">
+                    <p class="doc-icon">🎨</p>
+                    <p class="doc-title">CSS-MIGRATION.md</p>
+                    <p class="doc-description">Por qué ITCSS, no Tailwind</p>
                 </a>
-
-                <a href="https://github.com/yourusername/portafolio/blob/main/docs/SETUP.md" target="_blank"
-                    style="background: var(--color-surface); padding: 16px; border-radius: 6px; text-decoration: none; border: 1px solid; transition: all 0.2s;"
-                    class="border-pm-light-border dark:border-pm-border hover:border-pm-light-primary">
-                    <p style="font-size: 14px; font-weight: 600; margin: 0 0 8px 0;"
-                        class="text-pm-light-primary dark:text-pm-primary">
-                        🚀 SETUP.md
-                    </p>
-                    <p style="font-size: 12px; margin: 0;" class="text-pm-light-secondary dark:text-pm-secondary">
-                        Instalación local, deployment Azure
-                    </p>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/SETUP.md" target="_blank"
+                    class="doc-card">
+                    <p class="doc-icon">🚀</p>
+                    <p class="doc-title">SETUP.md</p>
+                    <p class="doc-description">Instalación local, deployment Azure</p>
                 </a>
             </div>
         </article>
 
         <!-- CTA FINAL -->
-        <article class="project-article">
-            <h2 style="font-size: 28px; font-weight: 600; margin: 0 0 16px 0;"
-                class="text-pm-light-primary dark:text-pm-primary">
-                👉 Next Steps
-            </h2>
-
-            <div style="background: rgba(33, 128, 141, 0.08); padding: 24px; border-radius: 8px; margin: 24px 0;">
-                <div style="display: flex; gap: 12px; margin-bottom: 16px;">
-                    <a href="https://github.com/yourusername/portafolio" target="_blank"
-                        style="flex: 1; padding: 12px 20px; background: var(--color-primary); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; text-align: center; transition: all 0.2s;"
-                        class="hover:opacity-90">
-                        Ver Código en GitHub →
-                    </a>
-                </div>
-
-                <p style="margin: 0; font-size: 14px;" class="text-pm-light-secondary dark:text-pm-secondary">
-                    Clona el repo, corre localmente, explora el código. Toda la arquitectura está ahí para inspeccionar.
+        <article class="project-article project-cta">
+            <h2>👉 Next Steps</h2>
+            <div class="cta-box">
+                <a href="https://github.com/franmdev/franmdev.github.io" target="_blank" class="btn btn-primary">
+                    Ver Código en GitHub →
+                </a>
+                <p>Clona el repo, corre localmente, explora el código. Toda la arquitectura está ahí para inspeccionar.
                 </p>
             </div>
         </article>
     </main>
 
     <footer></footer>
-
     <script src="/assets/js/load-components.js"></script>
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/main.js"></script>
