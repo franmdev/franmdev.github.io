@@ -149,11 +149,18 @@
 .tag {
     font-size: 12px;
     padding: 6px 12px;
-    background: var(--code-bg);
+    background: var(--entry);
     color: var(--secondary);
     border-radius: var(--radius);
-    border: 1px solid var(--border);
+    border: none;
     font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    transition: background 0.18s;
+}
+
+.tag:hover {
+    background: var(--primary);
+    color: #fff;
 }
 
 
@@ -352,8 +359,14 @@
     background: var(--entry);
     padding: 1.25rem;
     border-radius: var(--radius);
-    border: 1px solid var(--border);
+    border: none;
+    box-shadow: 0 6px 32px 0 rgba(20, 30, 40, 0.12);
     border-left: 4px solid var(--primary);
+    transition: box-shadow 0.16s;
+}
+
+.metric-card:hover {
+    box-shadow: 0 12px 32px 0 rgba(33, 128, 141, 0.18);
 }
 
 .metric-value {
@@ -413,9 +426,12 @@
 
 .stack-section {
     background: var(--entry);
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: var(--radius);
-    border: 1px solid var(--border);
+    border: none;
+    box-shadow: 0 6px 32px 0 rgba(20, 30, 40, 0.12);
+    border-left: 4px solid var(--primary);
+    transition: box-shadow 0.16s;
 }
 
 .stack-section h4 {
@@ -455,12 +471,12 @@
 
 .doc-card {
     background: var(--entry);
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: var(--radius);
-    border: 1px solid var(--border);
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s;
+    border: none;
+    box-shadow: 0 6px 32px 0 rgba(20, 30, 40, 0.12);
+    border-left: 4px solid var(--primary);
+    transition: box-shadow 0.16s;
 }
 
 .doc-card:hover {
@@ -487,10 +503,13 @@
 
 /* CTA Box */
 .project-cta {
-    background: rgba(33, 128, 141, 0.05);
+    background: rgba(33, 128, 141, 0.10);
     padding: 2rem;
     border-radius: var(--radius);
-    border: 1px solid var(--border);
+    border: none;
+    /* Elimina borde */
+    box-shadow: 0 2px 22px rgba(33, 128, 141, 0.08);
+    margin-bottom: 3rem;
 }
 
 .cta-box {
@@ -502,18 +521,25 @@
 
 .cta-box a {
     display: inline-block;
-    padding: 0.75rem 1.25rem;
-    background: var(--primary);
-    color: white;
-    text-decoration: none;
+    min-width: 180px;
+    padding: 0.78rem 2.2rem;
+    background: var(--code-bg);
+    color: var(--secondary);
     border-radius: var(--radius);
-    font-weight: 600;
+    border: 1px solid var(--border);
+    font-weight: 500;
+    font-size: 1.1rem;
     text-align: center;
-    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: none;
+    transition: background 0.17s, color 0.17s, border 0.17s, transform 0.13s;
 }
 
 .cta-box a:hover {
-    opacity: 0.9;
+    background: var(--primary);
+    color: #fff;
+    border: 1px solid var(--primary);
+    transform: translateY(-2px) scale(1.03);
 }
 
 .cta-box p {
