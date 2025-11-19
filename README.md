@@ -56,7 +56,7 @@ Este **no es un portafolio convencional**. Es una demostración de ingeniería p
 | "Hice un sitio bonito" | "Hice arquitectura de defensa en profundidad" |
 | CSS por apariencia | CSS modular (ITCSS) por mantenibilidad |
 | Sin validación | 5 capas de seguridad en producción |
-| Caché = No entender | Caché inteligente: 90% menos queries |
+| Caché = Menos eficiente | Caché inteligente: 90% menos queries |
 | UX estática | UX diferenciada por geolocalización + riesgo |
 
 ---
@@ -178,7 +178,7 @@ Cada documento está optimizado para su audiencia:
 - ✅ Seguridad es evolución continua, no un checkbox
 
 ### De Negocio
-- ✅ Portafolio + Demostración técnica = mejor impresión
+- ✅ Portafolio + Demostración técnica
 - ✅ Pequeñas optimizaciones = grandes impactos
 
 ---
