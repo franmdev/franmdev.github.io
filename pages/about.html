@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Mí - Francisco Mora</title>
+    <title>Sobre mi - Francisco Mora</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,15 +28,15 @@
         <nav class="nav">
             <div class="logo">
                 <a href="/">franmdev</a>
-                <button id="dark-toggle">
+                <button class="theme-toggle">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" style="display: block;">
+                        stroke-linejoin="round">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                     <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" style="display: none;">
+                        stroke-linejoin="round">
                         <circle cx="12" cy="12" r="5"></circle>
                         <line x1="12" y1="1" x2="12" y2="3"></line>
                         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -89,6 +89,14 @@
 
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
+    </div>
+
+    <!-- ======== BLOCKED MESSAGE ======== -->
+    <div id="blocked-message" style="display: none;">
+        <h2>Acceso Denegado</h2>
+        <p>
+            Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
+        </p>
     </div>
 
     <!-- ======== BLOCKED MESSAGE ======== -->
