@@ -360,7 +360,6 @@
     padding: 1.25rem;
     border-radius: var(--radius);
     border: none;
-    /* Quita el borde blanco! */
     box-shadow: 0 6px 32px 0 rgba(20, 30, 40, 0.12);
     border-left: 4px solid var(--primary);
     transition: box-shadow 0.16s;
@@ -427,8 +426,12 @@
 
 .stack-section {
     background: var(--entry);
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: var(--radius);
+    border: none;
+    box-shadow: 0 6px 32px 0 rgba(20, 30, 40, 0.12);
+    border-left: 4px solid var(--primary);
+    transition: box-shadow 0.16s;
 }
 
 .stack-section h4 {
@@ -468,11 +471,12 @@
 
 .doc-card {
     background: var(--entry);
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: var(--radius);
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s;
+    border: none;
+    box-shadow: 0 6px 32px 0 rgba(20, 30, 40, 0.12);
+    border-left: 4px solid var(--primary);
+    transition: box-shadow 0.16s;
 }
 
 .doc-card:hover {
