@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyectos - Francisco Mora</title>
 
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+
     <!-- Único punto de entrada CSS. Sin bloque <style> embebido. -->
     <link rel="stylesheet" href="../assets/css/main.css">
+
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
@@ -20,11 +24,14 @@
         gtag('config', 'G-QVW5058EVE');
     </script>
 
+
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
 
+
 <body class="list" id="top">
+
 
     <header class="header">
         <nav class="nav">
@@ -60,6 +67,7 @@
     </header>
 
 
+
     <!-- ======== LOADER ======== -->
     <div id="loader-wrapper">
         <p>Validando conexión segura...</p>
@@ -69,6 +77,7 @@
                 stroke-dashoffset="0" class="spinner-circle"></circle>
         </svg>
     </div>
+
 
 
     <!-- VALIDATION MODAL — style="display:none" FUNCIONAL (main.js), no tocar -->
@@ -93,6 +102,7 @@
     </div>
 
 
+
     <!-- BLOCKED MESSAGE — style="display:none" FUNCIONAL (main.js), no tocar -->
     <div id="blocked-message" style="display: none;">
         <h2>Acceso Denegado</h2>
@@ -100,8 +110,10 @@
     </div>
 
 
+
     <!-- ======== MAIN CONTENT ======== -->
     <main id="main-content">
+
 
         <h1 class="projects-page-title">Proyectos</h1>
         <p class="projects-page-lead">
@@ -109,18 +121,22 @@
         </p>
 
 
+
         <!-- ================================================ -->
         <!-- PROYECTO 1: Este Portafolio                      -->
         <!-- ================================================ -->
         <article id="portfolio" class="article-card">
+
 
             <div class="project-card-header">
                 <time>2024-10-26</time>
                 <span class="project-status-badge project-status-badge--live">✓ En Producción</span>
             </div>
 
+
             <h2 class="project-card-title">Este Portafolio — Full Stack Data System</h2>
             <p class="card-meta">Arquitectura Web · Seguridad · Data Engineering · Azure</p>
+
 
             <p class="card-desc">
                 El sitio que estás viendo es, en sí mismo, un proyecto de producción. Combina un frontend estático
@@ -128,6 +144,7 @@
                 datos PostgreSQL para analytics en tiempo real. Incluye un sistema de seguridad multi-capa con
                 validación inteligente de visitas y "Fast Pass" para usuarios de confianza.
             </p>
+
 
             <div class="metrics-grid metrics-grid--sm">
                 <div class="metric-card">
@@ -152,6 +169,7 @@
                 </div>
             </div>
 
+
             <ul class="project-features">
                 <li>
                     <span class="feature-icon">▸</span>
@@ -175,6 +193,7 @@
                     reload; modal Turnstile centrado; fade-in del contenido post-validación.</span>
                 </li>
             </ul>
+
 
             <div class="stack-grid">
                 <div class="stack-section">
@@ -211,6 +230,7 @@
                 </div>
             </div>
 
+
             <div class="project-card-ctas">
                 <a href="https://github.com/franmdev/franmdev.github.io" target="_blank"
                     rel="noopener noreferrer" class="project-cta-primary">
@@ -221,6 +241,7 @@
                 </a>
             </div>
 
+
             <div class="tags-list">
                 <span class="tag">Azure Functions</span>
                 <span class="tag">PostgreSQL</span>
@@ -230,7 +251,9 @@
                 <span class="tag">Turnstile</span>
             </div>
 
+
         </article>
+
 
 
         <!-- ================================================ -->
@@ -238,13 +261,16 @@
         <!-- ================================================ -->
         <article id="b2b-pipeline" class="article-card">
 
+
             <div class="project-card-header">
                 <time>2025-01-15</time>
                 <span class="project-status-badge project-status-badge--wip">⚙ En Desarrollo</span>
             </div>
 
+
             <h2 class="project-card-title">B2B Lead Intelligence Pipeline</h2>
             <p class="card-meta">Data Engineering · MLOps · NLP · Infraestructura · ChatOps</p>
+
 
             <p class="card-desc">
                 Pipeline empresarial de 6 fases con arquitectura Medallion (Bronze → Silver → Gold) para
@@ -253,6 +279,7 @@
                 sincronización Zero-Trust a la nube. La capa Gold clasifica ofertas con BETO (Spanish BERT)
                 fine-tuned y loop de Active Learning.
             </p>
+
 
             <div class="metrics-grid metrics-grid--sm">
                 <div class="metric-card">
@@ -276,6 +303,7 @@
                     <div class="metric-description">Triage por incertidumbre + HITL Excel</div>
                 </div>
             </div>
+
 
             <ul class="project-features">
                 <li>
@@ -315,6 +343,7 @@
                     5 buckets exportado a Excel con formato condicional dinámico para QA.</span>
                 </li>
             </ul>
+
 
             <div class="stack-grid">
                 <div class="stack-section">
@@ -359,12 +388,14 @@
                 </div>
             </div>
 
+
             <div class="project-card-ctas">
                 <a href="/pages/about.html" class="project-cta-primary">
                     Ver Stack Completo en Sobre Mí →
                 </a>
                 <span class="cta-note">Repositorio público — próximamente en GitHub</span>
             </div>
+
 
             <div class="tags-list">
                 <span class="tag">Python</span>
@@ -378,7 +409,9 @@
                 <span class="tag">Active Learning</span>
             </div>
 
+
         </article>
+
 
 
         <!-- ================================================ -->
@@ -386,13 +419,16 @@
         <!-- ================================================ -->
         <article id="titulo" class="article-card">
 
+
             <div class="project-card-header">
                 <time>2024-03-01</time>
                 <span class="project-status-badge project-status-badge--soon">◷ Próximamente</span>
             </div>
 
+
             <h2 class="project-card-title">Proyecto de Titulación UTFSM — ML Aplicado</h2>
             <p class="card-meta">Machine Learning · Data Science · Python · Ingeniería Industrial</p>
+
 
             <p class="card-desc">
                 Proyecto de titulación de Ingeniería Civil Industrial e Informática en la Universidad Técnica
@@ -400,6 +436,7 @@
                 real, con pipeline de datos, modelado predictivo y análisis de resultados.
                 Detalles y código en preparación para publicación.
             </p>
+
 
             <div class="metrics-grid metrics-grid--sm">
                 <div class="metric-card">
@@ -419,6 +456,7 @@
                 </div>
             </div>
 
+
             <div class="tags-list">
                 <span class="tag">Python</span>
                 <span class="tag">Scikit-learn</span>
@@ -427,17 +465,23 @@
                 <span class="tag">UTFSM</span>
             </div>
 
+
         </article>
+
 
     </main>
 
 
+
     <footer></footer>
+
 
     <script src="/assets/js/load-components.js"></script>
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/main.js"></script>
 
+
 </body>
+
 
 </html>
