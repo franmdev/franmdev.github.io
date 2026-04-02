@@ -1,34 +1,47 @@
 /* ========================================
-   RESPONSIVE.CSS - Capa 7: Media Queries
-   Breakpoints y estilos responsive
+   RESPONSIVE.CSS - Capa 6: Media Queries
+   Breakpoints de componentes compartidos.
+
+   ALCANCE:
+   - Solo clases reutilizadas en 2+ páginas
+   - Breakpoints page-specific viven en pages.css
+   - Absorbió el @media de components.css (768px)
    ======================================== */
+
 
 /* ===== TABLET BREAKPOINT (768px) ===== */
 @media (max-width: 768px) {
+
+    /* Variables */
     :root {
         --gap: 14px;
     }
 
-    .hero-section {
-        min-height: 260px;
+    /* Layout */
+    main {
+        padding: var(--gap);
     }
 
     nav #menu {
         margin: 0;
     }
 
-    main {
-        padding: var(--gap);
+    /* Hero */
+    .hero-section {
+        min-height: 260px;
     }
 
+    /* Projects section (index) */
     .projects-section h2 {
         font-size: 28px;
     }
 
+    /* Article card */
     .article-card h3 {
         font-size: 20px;
     }
 
+    /* Modal */
     .validation-modal-content {
         padding: 32px 24px;
         width: 95%;
@@ -41,37 +54,82 @@
     .validation-text p {
         font-size: 14px;
     }
+
+    /* ── Absorbido desde components.css ── */
+
+    /* Project page header */
+    .project-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .project-subtitle {
+        font-size: 1rem;
+    }
+
+    /* Project article */
+    .project-article h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Grids → columna única */
+    .metrics-grid,
+    .stack-grid,
+    .docs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* CTA box */
+    .project-cta {
+        padding: 1.5rem;
+    }
+
+    /* Features list */
+    .project-features li {
+        font-size: 0.9rem;
+    }
+
+    /* Architecture component */
+    .architecture-component {
+        padding: 1rem;
+    }
 }
+
 
 /* ===== MOBILE BREAKPOINT (480px) ===== */
 @media (max-width: 480px) {
+
     body {
         font-size: 16px;
     }
 
+    /* Hero */
     .hero-content h1 {
         font-size: 36px;
     }
 
+    /* Projects section (index) */
     .projects-section h2 {
         font-size: 24px;
         margin-bottom: 20px;
     }
 
+    /* Article card */
     .article-card h3 {
         font-size: 18px;
     }
 
-    /* Ajuste semántico para los tags */
+    /* Tags */
     .tag {
         font-size: 11px;
         padding: 4px 8px;
     }
 
+    /* Layout */
     main {
         padding: 12px;
     }
 }
+
 
 /* ===== MOBILE MENU ===== */
 .mobile-menu-btn {
@@ -85,6 +143,7 @@
     padding: 8px;
 }
 
+
 .mobile-menu-btn span {
     width: 24px;
     height: 2px;
@@ -93,19 +152,23 @@
     border-radius: 2px;
 }
 
+
 .mobile-menu-btn.active span:nth-child(1) {
     transform: rotate(45deg) translate(10px, 10px);
 }
+
 
 .mobile-menu-btn.active span:nth-child(2) {
     opacity: 0;
 }
 
+
 .mobile-menu-btn.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
-/* Mobile Menu */
+
+/* Mobile menu panel */
 .mobile-menu {
     position: absolute;
     top: 60px;
@@ -120,26 +183,29 @@
     animation: slideDown 0.3s ease;
 }
 
+
 .mobile-menu.hidden {
     display: none;
 }
+
 
 @keyframes slideDown {
     from {
         opacity: 0;
         transform: translateY(-10px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
+
 .mobile-menu li {
     padding: 12px var(--gap);
     text-align: center;
 }
+
 
 .mobile-menu a {
     color: var(--primary);
@@ -147,12 +213,15 @@
     font-size: 16px;
 }
 
+
 .mobile-menu a:hover {
     opacity: 0.7;
 }
 
-/* Mostrar solo en móvil */
+
+/* Mostrar botón solo en móvil */
 @media (max-width: 768px) {
+
     .mobile-menu-btn {
         display: flex;
     }

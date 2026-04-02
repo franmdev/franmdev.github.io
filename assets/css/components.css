@@ -1,7 +1,14 @@
 /* ========================================
    COMPONENTS.CSS - Capa 4: Componentes BEM
-   Bloques reutilizables (SMACSS + BEM)
+   Bloques reutilizables entre todas las páginas
+
+   ARQUITECTURA:
+   - .social-links aquí = versión Hero (index.html)
+     La versión de contacto vive en pages.css como .contact-links
+   - Reglas de about.html (IDs page-specific) eliminadas → pages.css
+   - Breakpoints de componentes → responsive.css
    ======================================== */
+
 
 
 
@@ -16,6 +23,7 @@
 }
 
 
+
 .hero-content h1 {
     font-size: 42px;
     line-height: 1.3;
@@ -24,12 +32,14 @@
 }
 
 
+
 .hero-subtitle {
     font-size: 20px;
     font-weight: 400;
     margin: 12px 0;
     color: var(--secondary);
 }
+
 
 
 .hero-description {
@@ -41,12 +51,19 @@
 
 
 
-/* ===== SOCIAL LINKS ===== */
+
+/* ===== SOCIAL LINKS — Hero (index.html) =====
+   Iconos de redes sociales en la sección hero.
+   gap: 12px / display: inline-flex.
+   La versión de la sección contacto de about.html
+   se llama .contact-links y vive en pages.css.
+   ============================================= */
 .social-links {
     display: flex;
     gap: 12px;
     margin-top: 24px;
 }
+
 
 
 .social-links a {
@@ -57,10 +74,12 @@
 }
 
 
+
 .social-links a:hover {
     opacity: 0.7;
     text-decoration: none;
 }
+
 
 
 .social-links svg {
@@ -70,10 +89,12 @@
 
 
 
+
 /* ===== PROJECTS SECTION ===== */
 .projects-section {
     padding: var(--gap) 0;
 }
+
 
 
 .projects-section h2 {
@@ -82,6 +103,7 @@
     font-weight: 700;
     margin: 0 0 32px 0;
 }
+
 
 
 
@@ -97,9 +119,11 @@
 }
 
 
+
 .article-card:active {
     transform: scale(0.96);
 }
+
 
 
 .article-card time {
@@ -112,6 +136,7 @@
 }
 
 
+
 .article-card h3 {
     font-size: 24px;
     line-height: 1.3;
@@ -120,15 +145,18 @@
 }
 
 
+
 .article-card h3 a {
     color: var(--primary);
     text-decoration: none;
 }
 
 
+
 .article-card h3 a:hover {
     text-decoration: underline;
 }
+
 
 
 .article-card p {
@@ -137,6 +165,7 @@
     color: var(--secondary);
     margin: 8px 0;
 }
+
 
 
 .entry-content {
@@ -152,9 +181,11 @@
 }
 
 
+
 .entry-footer {
     font-size: 13px;
 }
+
 
 
 
@@ -165,6 +196,7 @@
     gap: 8px;
     margin-top: 16px;
 }
+
 
 
 .tag {
@@ -180,11 +212,13 @@
 }
 
 
+
 .tag:hover {
     background: var(--primary);
     color: var(--theme);
     border-color: transparent;
 }
+
 
 
 
@@ -195,9 +229,11 @@
 }
 
 
+
 .link-coder:hover {
     text-decoration: underline;
 }
+
 
 
 .projects-section a.link-coder {
@@ -207,10 +243,12 @@
 
 
 
+
 /* ===== UTILITY CLASSES ===== */
 .text-center {
     text-align: center;
 }
+
 
 
 .text-secondary {
@@ -218,9 +256,11 @@
 }
 
 
+
 .border-top {
     border-top: 1px solid var(--border);
 }
+
 
 
 .border-bottom {
@@ -229,25 +269,12 @@
 
 
 
-/* ===== ABOUT PAGE STYLES ===== */
-#skills {
-    margin-bottom: 48px;
-}
-
-
-#architecture {
-    margin-bottom: 48px;
-}
-
-
-.skill-card {
-    border: 1px solid var(--border);
-}
-
 
 /* ============================================
    PROJECT PAGE COMPONENTS (Portfolio)
+   Componentes usados en las páginas de proyecto.
    ============================================ */
+
 
 
 /* Project Header */
@@ -258,12 +285,14 @@
 }
 
 
+
 .project-header h1 {
     font-size: 2.625rem;
     line-height: 1.3;
     font-weight: 700;
     margin: 0 0 1rem 0;
 }
+
 
 
 .project-subtitle {
@@ -274,10 +303,12 @@
 }
 
 
+
 /* Project Article */
 .project-article {
     margin-bottom: 3rem;
 }
+
 
 
 .project-article h2 {
@@ -285,6 +316,7 @@
     font-weight: 600;
     margin: 0 0 1rem 0;
 }
+
 
 
 .project-article h3 {
@@ -297,11 +329,13 @@
 }
 
 
+
 .project-article h4 {
     font-size: 1rem;
     font-weight: 600;
     margin: 0 0 0.5rem 0;
 }
+
 
 
 .project-article p {
@@ -312,11 +346,13 @@
 }
 
 
+
 .project-article code {
     background: var(--code-bg);
     padding: 0.1rem 0.25rem;
     border-radius: 0.25rem;
 }
+
 
 
 /* Project Quote */
@@ -331,12 +367,14 @@
 }
 
 
+
 /* Features List */
 .project-features {
     list-style: none;
     padding: 0;
     margin: 1.5rem 0;
 }
+
 
 
 .project-features li {
@@ -348,9 +386,11 @@
 }
 
 
+
 .project-features li:last-child {
     border-bottom: none;
 }
+
 
 
 .feature-icon {
@@ -359,6 +399,7 @@
     min-width: 1.5rem;
     flex-shrink: 0;
 }
+
 
 
 /* Architecture Components */
@@ -371,6 +412,7 @@
 }
 
 
+
 .architecture-component h3 {
     font-size: 1.125rem;
     font-weight: 600;
@@ -378,9 +420,11 @@
 }
 
 
+
 .component-badge {
     color: var(--primary);
 }
+
 
 
 .component-label {
@@ -391,15 +435,18 @@
 }
 
 
+
 .architecture-component p {
     margin-bottom: 0.75rem;
     font-size: 0.95rem;
 }
 
 
+
 .architecture-component p:last-child {
     margin-bottom: 0;
 }
+
 
 
 /* Metrics Grid */
@@ -411,7 +458,8 @@
 }
 
 
-/* ── metric-card: superficie estática, sin hover de color ni sombra ── */
+
+/* metric-card: superficie estática, sin hover de color ni sombra */
 .metric-card {
     background: var(--card-surface);
     padding: 1.25rem;
@@ -420,6 +468,7 @@
     box-shadow: none;
     transition: none;
 }
+
 
 
 .metric-card:hover,
@@ -431,12 +480,14 @@
 }
 
 
+
 .metric-value {
     font-size: 1.75rem;
     font-weight: 700;
     color: var(--primary);
     margin-bottom: 0.5rem;
 }
+
 
 
 .metric-title {
@@ -446,11 +497,13 @@
 }
 
 
+
 .metric-description {
     margin: 0.5rem 0 0 0;
     font-size: 0.8125rem;
     color: var(--secondary);
 }
+
 
 
 /* Capabilities List */
@@ -461,15 +514,18 @@
 }
 
 
+
 .capability-item {
     padding-bottom: 1.25rem;
     border-bottom: 1px solid var(--border);
 }
 
 
+
 .capability-item:last-child {
     border-bottom: none;
 }
+
 
 
 .capability-item h4 {
@@ -479,11 +535,13 @@
 }
 
 
+
 .capability-item p {
     margin: 0;
     font-size: 0.875rem;
     line-height: 1.6;
 }
+
 
 
 /* Stack Grid */
@@ -495,7 +553,8 @@
 }
 
 
-/* ── stack-section: misma superficie estática ── */
+
+/* stack-section: misma superficie estática */
 .stack-section {
     background: var(--card-surface);
     padding: 1.25rem;
@@ -506,6 +565,7 @@
 }
 
 
+
 .stack-section:hover,
 .stack-section:focus {
     background: var(--card-surface);
@@ -513,6 +573,7 @@
     box-shadow: none;
     transform: none;
 }
+
 
 
 .stack-section h4 {
@@ -525,11 +586,13 @@
 }
 
 
+
 .stack-section ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
+
 
 
 .stack-section li {
@@ -539,11 +602,13 @@
 }
 
 
+
 .stack-section li:before {
     content: "• ";
     color: var(--primary);
     font-weight: 700;
 }
+
 
 
 /* Docs Grid */
@@ -553,6 +618,7 @@
     gap: 0.75rem;
     margin-top: 1.5rem;
 }
+
 
 
 .doc-card {
@@ -566,16 +632,19 @@
 }
 
 
+
 .doc-card:hover {
     border-color: var(--primary);
     transform: translateY(-2px);
 }
 
 
+
 .doc-icon {
     font-size: 1.5rem;
     margin: 0 0 0.5rem 0;
 }
+
 
 
 .doc-title {
@@ -585,11 +654,13 @@
 }
 
 
+
 .doc-description {
     font-size: 0.75rem;
     margin: 0;
     color: var(--secondary);
 }
+
 
 
 /* CTA Box */
@@ -598,10 +669,10 @@
     padding: 2rem;
     border-radius: var(--radius);
     border: none;
-    /* Elimina borde */
     box-shadow: 0 2px 22px rgba(33, 128, 141, 0.08);
     margin-bottom: 3rem;
 }
+
 
 
 .cta-box {
@@ -610,6 +681,7 @@
     gap: 1rem;
     margin-top: 1.5rem;
 }
+
 
 
 .cta-box a {
@@ -629,12 +701,14 @@
 }
 
 
+
 .cta-box a:hover {
     background: var(--primary);
     color: #fff;
     border: 1px solid var(--primary);
     transform: translateY(-2px) scale(1.03);
 }
+
 
 
 .cta-box p {
@@ -644,41 +718,8 @@
 }
 
 
-/* Responsive */
-@media (max-width: 768px) {
-    .project-header h1 {
-        font-size: 1.75rem;
-    }
 
-
-    .project-subtitle {
-        font-size: 1rem;
-    }
-
-
-    .project-article h2 {
-        font-size: 1.5rem;
-    }
-
-
-    .metrics-grid,
-    .stack-grid,
-    .docs-grid {
-        grid-template-columns: 1fr;
-    }
-
-
-    .project-cta {
-        padding: 1.5rem;
-    }
-
-
-    .project-features li {
-        font-size: 0.9rem;
-    }
-
-
-    .architecture-component {
-        padding: 1rem;
-    }
-}
+/* =============================================
+   Breakpoints de estos componentes están en
+   responsive.css — sección "Components 768px"
+   ============================================= */
