@@ -13,6 +13,7 @@
       5. Projects      → Estilos específicos proyectos
       6. Animations    → Keyframes, transiciones
       7. Responsive    → Media queries
+      8. Responsive    →estilos página Sobre Mí
       
       ESPECIFICIDAD: Incrementa gradualmente
       - Variables:   Especificidad 0
@@ -53,3 +54,6 @@
 
    /* CAPA 7: Responsive & Media Queries */
    @import url('./responsive.css');
+
+   /* CAPA 8: estilos página Sobre Mí */
+   @import url('./about.css');
