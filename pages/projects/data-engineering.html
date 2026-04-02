@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise B2B Data Pipeline — Francisco Mora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-QVW5058EVE');
+    </script>
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</head>
+<body class="list" id="top">
+
+    <header class="header">
+        <nav>
+            <div class="logo">
+                <a href="/">francisco.mora</a>
+                <button id="dark-toggle" aria-label="Cambiar tema">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+                </button>
+            </div>
+            <ul id="menu">
+                <li><a href="/"><span>Inicio</span></a></li>
+                <li><a href="/pages/projects.html"><span>Proyectos</span></a></li>
+                <li><a href="/pages/about.html"><span>Sobre Mí</span></a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="mobile-menu hidden" id="mobile-menu">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/pages/projects.html">Proyectos</a></li>
+                <li><a href="/pages/about.html">Sobre Mí</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Loader -->
+    <div id="loader-wrapper">
+        <p>Validando conexión segura...</p>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+            stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
+    </svg>
+    </div>
+
+    <!-- Validation Modal -->
+    <div id="validation-modal" style="display: none;">
+        <div class="validation-overlay"></div>
+        <div class="validation-modal-content">
+            <div class="validation-text">
+                <h2>Verificación de Seguridad</h2>
+                <p>Por favor, complete la verificación para continuar</p>
+            </div>
+            <div class="validation-spinner" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+            stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
+    </svg>
+                <p>Validando...</p>
+            </div>
+            <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
+        </div>
+    </div>
+
+    <!-- Blocked Message -->
+    <div id="blocked-message" style="display: none;">
+        <h2>Acceso Denegado</h2>
+        <p>Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.</p>
+    </div>
+
+<main id="main-content">
+
+    <!-- ══════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════ -->
+    <header class="project-header">
+        <h1>Enterprise B2B Data Pipeline</h1>
+        <p class="project-subtitle">MLOps · Data Engineering · NLP · Alta Disponibilidad</p>
+        <time datetime="2024-01" style="display:block; margin-top: 0.75rem; font-size: 0.875rem;
+            color: var(--secondary); text-transform: uppercase; letter-spacing: 0.5px;">
+            2024 – 2025 · En desarrollo activo
+        </time>
+    </header>
+
+    <!-- ══════════════════════════════════════
+         MÉTRICAS
+    ══════════════════════════════════════ -->
+    <section class="project-article">
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">6 Fases</div>
+                <p class="metric-title">Arquitectura Medallion</p>
+                <p class="metric-description">Bronze → Silver → Gold + Infra + ChatOps</p>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">BETO</div>
+                <p class="metric-title">Clasificador NLP</p>
+                <p class="metric-description">Fine-tuning Spanish BERT con Active Learning en 5 buckets</p>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">CUDA</div>
+                <p class="metric-title">GPU Local</p>
+                <p class="metric-description">TF-IDF coseno + MinHash/LSH para deduplicación semántica</p>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">$0</div>
+                <p class="metric-title">Costo Cloud Compute</p>
+                <p class="metric-description">Proxmox VE on-premise + rclone para sync OneDrive/S3</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         EL PROBLEMA
+    ══════════════════════════════════════ -->
+    <section class="project-article">
+        <h2>El Problema</h2>
+        <p>
+            El mercado B2B de recursos humanos genera miles de publicaciones diarias en plataformas
+            de empleo, pero la gran mayoría no son ofertas laborales reales: son ruido — avisos
+            de proveedores, contenido duplicado, publicaciones en otros idiomas o datos mal formateados
+            por SPAs que truncan el DOM antes del render completo.
+        </p>
+        <p>
+            Construir un sistema capaz de extraer, limpiar, deduplicar y clasificar ese volumen
+            de datos de forma confiable —sin infraestructura cloud cara y con resiliencia ante
+            fallos de red— requería más que un script de scraping. Requería una arquitectura.
+        </p>
+        <blockquote class="project-quote">
+            El objetivo: un pipeline capaz de operar de forma autónoma semanas seguidas,
+            reportar su propio estado, y alertar al operador solo cuando realmente importa.
+        </blockquote>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         ARQUITECTURA POR FASES
+    ══════════════════════════════════════ -->
+    <section class="project-article">
+        <h2>Arquitectura por Fases</h2>
+
+        <div class="architecture-component">
+            <h3>
+                <span class="component-badge">FASE 1</span>
+                Command &amp; Control — ChatOps
+            </h3>
+            <p class="component-label">Orquestación · Telemetría · Seguridad Operacional</p>
+            <p>
+                El cerebro del sistema: un <strong>Telegram Daemon</strong> con RBAC por
+                <code>TELEGRAM_ADMIN_IDS</code> que actúa como panel de control remoto desde
+                cualquier dispositivo. Implementa apagado graceful mediante flags IPC
+                (<code>stop_signal.flag</code>) y <code>os.fsync()</code> para bypass del caché
+                SMB/Windows. Telemetría en tiempo real desde <code>status.json</code> con
+                <code>FileLock</code> para acceso atómico. Screenshots forenses completos del
+                escritorio con PyAutoGUI.
+            </p>
+            <div class="tags-list" style="margin-top: 0.75rem;">
+                <span class="tag">Python</span>
+                <span class="tag">Telegram Bot API</span>
+                <span class="tag">PyAutoGUI</span>
+                <span class="tag">filelock</span>
+                <span class="tag">os.fsync()</span>
+                <span class="tag">python-dotenv</span>
+                <span class="tag">RBAC</span>
+            </div>
+        </div>
+
+        <div class="architecture-component">
+            <h3>
+                <span class="component-badge">FASE 2</span>
+                Data Collection — Extracción Biomimética
+            </h3>
+            <p class="component-label">Scraping · Anti-Bot · Session Management</p>
+            <p>
+                Motor de scraping sobre <strong>Selenium + Microsoft Edge con perfiles
+                persistentes</strong> del SO. El enfoque anti-bot es arquitectónico: hereda
+                cookies de sesión del perfil (no inyecta credenciales en runtime que detectaría
+                el WAF). Implementa <strong>distribución Normal gaussiana</strong> para delays
+                humanos eludiendo detección heurística. Self-healing ante Login Wall: detecta
+                redirección, pausa táctica, alerta HITL vía Telegram y auto-termina si persiste.
+                Workers paralelos por perfil de navegador.
+            </p>
+            <div class="tags-list" style="margin-top: 0.75rem;">
+                <span class="tag">Selenium</span>
+                <span class="tag">Microsoft Edge</span>
+                <span class="tag">Distribución Gaussiana</span>
+                <span class="tag">Session Hijacking Prevention</span>
+                <span class="tag">HITL Alerts</span>
+                <span class="tag">subprocess</span>
+            </div>
+        </div>
+
+        <div class="architecture-component">
+            <h3>
+                <span class="component-badge">FASE 3</span>
+                Bronze Layer — Ingesta Event-Driven
+            </h3>
+            <p class="component-label">Data Lake · Spooler Asíncrono · Merge Histórico</p>
+            <p>
+                Data Lake local en CSV con patrón <strong>Spooler asíncrono</strong>. El
+                collector agrega datos en staging y el processor los consolida al volumen base.
+                Incluye merge de datasets históricos y limpieza NLP agresiva: eliminación de
+                emojis, URLs, HTML y truncamientos de SPA. Deduplicación exacta por hash antes
+                de persisitir.
+            </p>
+            <div class="tags-list" style="margin-top: 0.75rem;">
+                <span class="tag">pandas</span>
+                <span class="tag">xxhash</span>
+                <span class="tag">CSV Data Lake</span>
+                <span class="tag">Event-Driven</span>
+                <span class="tag">NLP Cleaning</span>
+                <span class="tag">Merge Histórico</span>
+            </div>
+        </div>
+
+        <div class="architecture-component">
+            <h3>
+                <span class="component-badge">FASE 4</span>
+                High Availability &amp; Zero-Trust Sync
+            </h3>
+            <p class="component-label">Proxmox · LXC Air-Gapped · rclone Cloud Sync</p>
+            <p>
+                La fase más crítica de infraestructura. Resuelve el problema real de que el
+                kernel Linux bloquea procesos en <strong>Estado D (Uninterruptible Sleep)</strong>
+                cuando el punto de montaje SMB/CIFS desaparece abruptamente, paralizando el
+                hipervisor Proxmox completo. Solución en dos capas: Capa 1 (elegante) — flag
+                IPC + watchdog en LXC se apaga voluntariamente. Capa 2 (desfibrilador) — hook
+                Perl en Proxmox con <code>umount -f -l</code> + <code>pct stop</code> asíncrono
+                ante BSOD o corte eléctrico. rclone sincroniza a OneDrive/S3 con validación MD5
+                y backup incremental.
+            </p>
+            <div class="tags-list" style="margin-top: 0.75rem;">
+                <span class="tag">Proxmox VE</span>
+                <span class="tag">LXC Containers</span>
+                <span class="tag">rclone</span>
+                <span class="tag">SMB/CIFS</span>
+                <span class="tag">Perl Hooks</span>
+                <span class="tag">systemd</span>
+                <span class="tag">OneDrive / S3</span>
+                <span class="tag">MD5 Validation</span>
+            </div>
+        </div>
+
+        <div class="architecture-component">
+            <h3>
+                <span class="component-badge">FASE 5</span>
+                Silver Layer — MDM &amp; Data Engineering
+            </h3>
+            <p class="component-label">Deduplicación Semántica · Filtrado Idioma · Pipeline 5 Etapas</p>
+            <p>
+                Pipeline de deduplicación multicapa con <strong>dos algoritmos benchmarkeados</strong>:
+                TF-IDF + Coseno CUDA (O(n²) distribuido en GPU, mayor precisión semántica) vs.
+                MinHash + LSH (O(n), escalable, índice persistente en disco). Pipeline de 5 etapas:
+                ① deduplicación exacta por hash, ② filtrado heurístico por criterios B2B,
+                ③ near-duplicates semánticos, ④ verificación Levenshtein con difflib,
+                ⑤ exportación Silver + reporte de auditoría. Filtro de idioma con
+                <strong>voting ensemble de 5 capas</strong> (Lingua + langdetect + heurísticas).
+            </p>
+            <div class="tags-list" style="margin-top: 0.75rem;">
+                <span class="tag">TF-IDF CUDA</span>
+                <span class="tag">MinHash LSH</span>
+                <span class="tag">datasketch</span>
+                <span class="tag">difflib</span>
+                <span class="tag">Lingua</span>
+                <span class="tag">langdetect</span>
+                <span class="tag">xxhash</span>
+                <span class="tag">scikit-learn</span>
+            </div>
+        </div>
+
+        <div class="architecture-component">
+            <h3>
+                <span class="component-badge">FASE 6</span>
+                Gold Layer — MLOps &amp; NLP
+            </h3>
+            <p class="component-label">BETO Fine-tuning · Active Learning · WeightedTrainer</p>
+            <p>
+                Fine-tuning de <strong>BETO</strong> (<code>dccuchile/bert-base-spanish-wwm-cased</code>)
+                en modo air-gapped. <code>WeightedTrainer</code> con <code>class_weights</code>
+                automáticos para dataset desbalanceado. FP16 mixed precision + padding dinámico
+                para optimizar VRAM. Active Learning loop de 5 buckets por incertidumbre del modelo
+                (&lt;0.15 basura, 0.40–0.60 zona crítica QA, &gt;0.85 oferta confirmada).
+                Salida en <strong>Excel con formato condicional dinámico</strong> (openpyxl)
+                para revisión HITL visual. Dataset V2 construido integrando ground truth V1 +
+                batches revisados por Active Learning.
+            </p>
+            <div class="tags-list" style="margin-top: 0.75rem;">
+                <span class="tag">HuggingFace Transformers</span>
+                <span class="tag">BETO Spanish BERT</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">CUDA / FP16</span>
+                <span class="tag">Active Learning</span>
+                <span class="tag">WeightedTrainer</span>
+                <span class="tag">openpyxl</span>
+                <span class="tag">HITL</span>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════
+         STACK COMPLETO
+    ══════════════════════════════════════ -->
+    <section class="project-article">
+        <h2>Stack por Capa</h2>
+        <div class="stack-grid">
+            <div class="stack-section">
+                <h4>Orquestación</h4>
+                <ul>
+                    <li>Python 3.10</li>
+                    <li>Telegram Bot API</li>
+                    <li>PyAutoGUI · Pillow</li>
+                    <li>filelock · python-dotenv</li>
+                    <li>subprocess · os.fsync()</li>
+                </ul>
+            </div>
+            <div class="stack-section">
+                <h4>Scraping</h4>
+                <ul>
+                    <li>Selenium 4</li>
+                    <li>Microsoft Edge</li>
+                    <li>Perfiles persistentes SO</li>
+                    <li>Delay gaussiano</li>
+                    <li>requests</li>
+                </ul>
+            </div>
+            <div class="stack-section">
+                <h4>Data Engineering</h4>
+                <ul>
+                    <li>pandas · NumPy</li>
+                    <li>xxhash (3× vs hashlib)</li>
+                    <li>datasketch (MinHash)</li>
+                    <li>difflib · Levenshtein</li>
+                    <li>Lingua · langdetect</li>
+                </ul>
+            </div>
+            <div class="stack-section">
+                <h4>MLOps / NLP</h4>
+                <ul>
+                    <li>HuggingFace Transformers</li>
+                    <li>BETO (Spanish BERT)</li>
+                    <li>PyTorch · CUDA · FP16</li>
+                    <li>scikit-learn (TF-IDF)</li>
+                    <li>openpyxl</li>
+                </ul>
+            </div>
+            <div class="stack-section">
+                <h4>Infraestructura</h4>
+                <ul>
+                    <li>Proxmox VE</li>
+                    <li>LXC Containers</li>
+                    <li>rclone · SMB/CIFS</li>
+                    <li>systemd · Perl Hooks</li>
+                    <li>GitHub Actions CI/CD</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         DOCUMENTACIÓN POR FASE
+    ══════════════════════════════════════ -->
+    <section class="project-article">
+        <h2>Documentación Técnica</h2>
+        <p>
+            Cada fase tiene su propia documentación de arquitectura, decisiones de diseño
+            y snippets de código representativos en el repositorio público de GitHub.
+        </p>
+        <div class="docs-grid">
+            <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio/blob/main/docs/FASE_1_chatops.md"
+               target="_blank" rel="noopener noreferrer" class="doc-card" style="text-decoration:none;">
+                <div class="doc-icon">🤖</div>
+                <p class="doc-title">FASE 1 — ChatOps</p>
+                <p class="doc-description">Telegram Daemon, RBAC, IPC flags, telemetría</p>
+            </a>
+            <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio/blob/main/docs/FASE_2_collection.md"
+               target="_blank" rel="noopener noreferrer" class="doc-card" style="text-decoration:none;">
+                <div class="doc-icon">🕷️</div>
+                <p class="doc-title">FASE 2 — Collection</p>
+                <p class="doc-description">Selenium, Edge, biomimética, anti-bot</p>
+            </a>
+            <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio/blob/main/docs/FASE_3_bronze.md"
+               target="_blank" rel="noopener noreferrer" class="doc-card" style="text-decoration:none;">
+                <div class="doc-icon">🗃️</div>
+                <p class="doc-title">FASE 3 — Bronze</p>
+                <p class="doc-description">Data Lake, spooler asíncrono, merge histórico</p>
+            </a>
+            <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio/blob/main/docs/FASE_4_ha_sync.md"
+               target="_blank" rel="noopener noreferrer" class="doc-card" style="text-decoration:none;">
+                <div class="doc-icon">☁️</div>
+                <p class="doc-title">FASE 4 — HA &amp; Sync</p>
+                <p class="doc-description">Proxmox, LXC, rclone, Estado D fix</p>
+            </a>
+            <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio/blob/main/docs/FASE_5_silver.md"
+               target="_blank" rel="noopener noreferrer" class="doc-card" style="text-decoration:none;">
+                <div class="doc-icon">⚗️</div>
+                <p class="doc-title">FASE 5 — Silver MDM</p>
+                <p class="doc-description">Deduplicación CUDA, MinHash/LSH, filtro idioma</p>
+            </a>
+            <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio/blob/main/docs/FASE_6_mlops.md"
+               target="_blank" rel="noopener noreferrer" class="doc-card" style="text-decoration:none;">
+                <div class="doc-icon">🧠</div>
+                <p class="doc-title">FASE 6 — MLOps Gold</p>
+                <p class="doc-description">BETO fine-tuning, Active Learning, HITL</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         CTA
+    ══════════════════════════════════════ -->
+    <div class="project-cta">
+        <h2>¿Te interesa ver el código?</h2>
+        <p>
+            El repositorio público documenta la arquitectura completa, decisiones técnicas
+            y snippets de los patrones clave — sin exponer código propietario ni credenciales.
+        </p>
+        <div class="cta-box">
+            <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio"
+               target="_blank" rel="noopener noreferrer">
+                Ver Repositorio Público en GitHub →
+            </a>
+            <a href="/pages/projects.html">← Volver a Proyectos</a>
+        </div>
+    </div>
+
+</main>
+
+<footer id="footer"></footer>
+
+    <script src="../../assets/js/load-components.js"></script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/mobile-menu.js"></script>
+
+</body>
+</html>
