@@ -3,5 +3,135 @@
    Estilos específicos para páginas de proyectos
    ======================================== */
 
-/* Archivo reservado para estilos de proyectos futuros */
-/* Se agregará contenido cuando se desarrollen las páginas de proyectos */
+
+/* ── Meta de categoría/fase bajo el h2 del article-card ── */
+.card-meta {
+    font-size: 13px;
+    color: var(--secondary);
+    margin: 0 0 4px 0;
+    letter-spacing: 0.2px;
+}
+
+
+/* ── Badge de estado: En Producción / En Desarrollo / Próximamente ── */
+.project-status-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+}
+
+/* Verde - producción */
+.project-status-badge--live {
+    background: rgba(34, 197, 94, 0.10);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+html.dark .project-status-badge--live {
+    color: #4ade80;
+}
+
+/* Teal - en desarrollo */
+.project-status-badge--wip {
+    background: rgba(33, 128, 141, 0.10);
+    color: var(--primary);
+    border: 1px solid rgba(33, 128, 141, 0.30);
+}
+
+/* Gris - próximamente */
+.project-status-badge--soon {
+    background: rgba(108, 108, 108, 0.08);
+    color: var(--secondary);
+    border: 1px solid var(--border);
+}
+
+
+/* ── Fila superior de card: fecha a la izquierda, badge a la derecha ── */
+.project-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+
+/* ── CTAs al pie de cada card (GitHub / Demo / Docs) ── */
+.project-card-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+
+.project-card-ctas a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--code-bg);
+    color: var(--secondary);
+    text-decoration: none;
+    transition: background 0.17s, color 0.17s, border-color 0.17s;
+}
+
+.project-card-ctas a:hover {
+    background: var(--primary);
+    color: var(--theme);
+    border-color: transparent;
+}
+
+
+/* ── Sección de fases en la página de proyecto individual ── */
+.phase-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 0;
+    border-left: 2px solid var(--border);
+    padding-left: 1.5rem;
+}
+
+.phase-timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.phase-timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.phase-timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.625rem;
+    top: 0.35rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid var(--theme);
+    box-shadow: 0 0 0 2px var(--border);
+}
+
+.phase-timeline-item h4 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem 0;
+}
+
+.phase-timeline-item p {
+    font-size: 0.875rem;
+    color: var(--secondary);
+    margin: 0;
+    line-height: 1.6;
+}
