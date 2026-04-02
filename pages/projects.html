@@ -11,6 +11,84 @@
 
     <link rel="stylesheet" href="../assets/css/main.css">
 
+    <!-- ── Estilo Final: carbón neutro estático en cards, flip clásico en tags ── -->
+    <style>
+        /* ══ METRIC CARDS: reposo + hover idénticos → completamente estático ══ */
+        .metric-card,
+        .metric-card:hover,
+        .metric-card:focus {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.07) !important;
+            border-left: 1px solid rgba(255, 255, 255, 0.07) !important;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: none !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
+        /* ══ STACK SECTIONS: idéntico, sin hover ══ */
+        .stack-section,
+        .stack-section:hover,
+        .stack-section:focus {
+            background: rgba(255, 255, 255, 0.03) !important;
+            border: 1px solid rgba(255, 255, 255, 0.07) !important;
+            border-left: 1px solid rgba(255, 255, 255, 0.07) !important;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: none !important;
+            transform: none !important;
+            transition: none !important;
+        }
+
+        /* ══ TAGS en reposo ══ */
+        .tag {
+            background: rgba(255, 255, 255, 0.04) !important;
+            border: 1px solid rgba(255, 255, 255, 0.09) !important;
+            color: var(--secondary) !important;
+            border-radius: 6px;
+            box-shadow: none !important;
+            transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease !important;
+        }
+
+        /* ══ TAGS hover: flip oscuro → claro (original restaurado) ══ */
+        .tag:hover {
+            background: var(--primary) !important;
+            color: var(--theme) !important;
+            border-color: transparent !important;
+        }
+
+        /* ══ LIGHT MODE: misma lógica, valores claros ══ */
+        :root:not(.dark) .metric-card,
+        :root:not(.dark) .metric-card:hover,
+        :root:not(.dark) .metric-card:focus {
+            background: rgba(0, 0, 0, 0.02) !important;
+            border: 1px solid rgba(0, 0, 0, 0.06) !important;
+            border-left: 1px solid rgba(0, 0, 0, 0.06) !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+        :root:not(.dark) .stack-section,
+        :root:not(.dark) .stack-section:hover,
+        :root:not(.dark) .stack-section:focus {
+            background: rgba(0, 0, 0, 0.02) !important;
+            border: 1px solid rgba(0, 0, 0, 0.06) !important;
+            border-left: 1px solid rgba(0, 0, 0, 0.06) !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+        :root:not(.dark) .tag {
+            background: rgba(0, 0, 0, 0.03) !important;
+            border: 1px solid rgba(0, 0, 0, 0.08) !important;
+            color: var(--secondary) !important;
+        }
+        :root:not(.dark) .tag:hover {
+            background: var(--primary) !important;
+            color: var(--theme) !important;
+            border-color: transparent !important;
+        }
+    </style>
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -50,16 +128,14 @@
                 </button>
             </div>
             <ul id="menu">
-                <li><a href="/"><span>Inicio</span></a>
-                </li>
-                <li><a href="/pages/projects.html"><span>Proyectos</span></a>
-                </li>
-                <li><a href="/pages/about.html"><span>Sobre Mí</span></a>
-                </li>
+                <li><a href="/"><span>Inicio</span></a></li>
+                <li><a href="/pages/projects.html"><span>Proyectos</span></a></li>
+                <li><a href="/pages/about.html"><span>Sobre Mí</span></a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- ======== LOADER ======== -->
     <div id="loader-wrapper">
         <p>Validando conexión segura...</p>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
@@ -69,6 +145,7 @@
         </svg>
     </div>
 
+    <!-- ======== VALIDATION MODAL ======== -->
     <div id="validation-modal" style="display: none;">
         <div class="validation-overlay"></div>
         <div class="validation-modal-content">
@@ -76,9 +153,7 @@
                 <h2>Verificación de Seguridad</h2>
                 <p>Por favor, complete la verificación para continuar</p>
             </div>
-
-            <!-- Spinner de carga (visible si la API tarda) -->
-            <div class="validation-spinner" style="display: none;">
+            <div class="validation-spinner" style="display: none;" id="validation-spinner">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="15.7 62.8"
@@ -86,7 +161,6 @@
                 </svg>
                 <p>Validando...</p>
             </div>
-
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
     </div>
@@ -94,291 +168,377 @@
     <!-- ======== BLOCKED MESSAGE ======== -->
     <div id="blocked-message" style="display: none;">
         <h2>Acceso Denegado</h2>
-        <p>
-            Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
-        </p>
+        <p>Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.</p>
     </div>
 
-    <!-- ======== BLOCKED MESSAGE ======== -->
-    <div id="blocked-message" style="display: none;">
-        <h2>Acceso Denegado</h2>
-        <p>
-            Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
-        </p>
-    </div>
-
+    <!-- ======== MAIN CONTENT ======== -->
     <main id="main-content">
-        <h1 style="font-size: 42px; line-height: 1.3; font-weight: 700; margin: 0 0 32px 0;"
-            class="text-pm-light-primary dark:text-pm-primary">
-            Proyectos (Seccion pendiente)
+
+        <h1 style="font-size: 42px; line-height: 1.3; font-weight: 700; margin: 0 0 8px 0;">
+            Proyectos
         </h1>
+        <p style="font-size: 16px; line-height: 1.6; color: var(--secondary); margin: 0 0 40px 0;">
+            Proyectos de ingeniería end-to-end — desde arquitectura y seguridad hasta Machine Learning en producción.
+        </p>
 
-        <!-- Project 1: Este Portafolio -->
-        <article id="portfolio" class="project-article" style="border-bottom: 1px solid;"
-            class="border-pm-light-border dark:border-pm-border">
-            <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                2024-10-26
-            </time>
-            <h2 class="text-pm-light-primary dark:text-pm-primary">
-                Este Portafolio: Full Stack Data System
+        <!-- ================================================ -->
+        <!-- PROYECTO 1: Este Portafolio                      -->
+        <!-- ================================================ -->
+        <article id="portfolio" class="article-card" style="margin-bottom: 32px;">
+
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
+                <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--secondary);">
+                    2024-10-26
+                </time>
+                <span style="display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+                    letter-spacing: 0.5px; padding: 3px 10px; border-radius: 4px;
+                    background: rgba(34, 197, 94, 0.1); color: #4ade80;
+                    border: 1px solid rgba(34, 197, 94, 0.25);">
+                    ✓ En Producción
+                </span>
+            </div>
+
+            <h2 style="font-size: 28px; font-weight: 700; line-height: 1.3; margin: 12px 0 8px 0;">
+                Este Portafolio — Full Stack Data System
             </h2>
-            <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                Arquitectura Web | Seguridad | Data Pipeline
+            <p class="card-meta">Arquitectura Web · Seguridad · Data Engineering · Azure</p>
+
+            <p style="font-size: 15px; line-height: 1.7; color: var(--secondary); margin: 16px 0;">
+                El sitio que estás viendo es, en sí mismo, un proyecto de producción. Combina un frontend estático
+                desplegado globalmente en GitHub Pages con un backend serverless en Azure Functions y una base de
+                datos PostgreSQL para analytics en tiempo real. Incluye un sistema de seguridad multi-capa con
+                validación inteligente de visitas y "Fast Pass" para usuarios de confianza.
             </p>
 
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Problema
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                Construir un portafolio que no fuera solo una "vitrina", sino un proyecto demostrable
-                de arquitectura web full-stack, seguridad y data engineering.
-            </p>
+            <!-- Métricas -->
+            <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                <div class="metric-card">
+                    <div class="metric-value">&lt;200ms</div>
+                    <div class="metric-title">Response time</div>
+                    <div class="metric-description">Azure Functions serverless</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5 capas</div>
+                    <div class="metric-title">Defensa activa</div>
+                    <div class="metric-description">WAF + Turnstile + ipapi + Rate Limit + Caché</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">$0</div>
+                    <div class="metric-title">Costo operativo</div>
+                    <div class="metric-description">Optimizado a tiers gratuitos</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">RT</div>
+                    <div class="metric-title">Analytics</div>
+                    <div class="metric-description">PostgreSQL + datos de navegación en tiempo real</div>
+                </div>
+            </div>
 
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Solución
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 12px;">
-                Sistema completo con:
-            </p>
-            <ul class="text-pm-light-secondary dark:text-pm-secondary"
-                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
-                <li><strong>Frontend:</strong> GitHub Pages (estático, CDN global)</li>
-                <li><strong>Backend:</strong> Azure Functions (serverless Python)</li>
-                <li><strong>Base de datos:</strong> PostgreSQL en Azure (analytics en tiempo real)</li>
-                <li><strong>Seguridad:</strong> Defensa en 5 capas (Cloudflare WAF, Turnstile, ipapi.is, Rate Limit,
-                    Caché DB)</li>
-                <li><strong>Flujo dinámico:</strong> Validación inteligente con "Fast Pass" para usuarios de confianza
+            <!-- Features -->
+            <ul class="project-features" style="margin-top: 24px;">
+                <li>
+                    <span class="feature-icon">▸</span>
+                    <span><strong>Seguridad multi-capa:</strong> Cloudflare WAF bloquea amenazas en el edge;
+                    Turnstile valida humanos; ipapi.is filtra geografía sospechosa; Rate Limit en Azure;
+                    Caché DB para "Fast Pass" sin re-autenticar.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">▸</span>
+                    <span><strong>Backend serverless:</strong> Azure Functions Python con autenticación RBAC,
+                    registro de visitas con IP anonimizada y persistencia en PostgreSQL Azure.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">▸</span>
+                    <span><strong>Frontend estático:</strong> GitHub Pages con CDN global, carga de componentes
+                    modulares vía JS (navbar/footer), dark mode nativo sin frameworks.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">▸</span>
+                    <span><strong>UX sin fricciones:</strong> Flujo de validación con transiciones suaves sin
+                    reload; modal Turnstile centrado; fade-in del contenido post-validación.</span>
                 </li>
             </ul>
 
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Resultados
-            </h3>
-            <ul class="text-pm-light-secondary dark:text-pm-secondary"
-                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
-                <li>✅ Seguridad: 99.9% bloqueo de tráfico malicioso</li>
-                <li>✅ Performance: &lt;200ms response time</li>
-                <li>✅ Costo: Optimizado a tier gratuito (B1ms PostgreSQL)</li>
-                <li>✅ Analytics: Recolección en tiempo real de datos de navegación</li>
-            </ul>
+            <!-- Stack -->
+            <div class="stack-grid" style="margin-top: 24px;">
+                <div class="stack-section">
+                    <h4>Backend</h4>
+                    <ul>
+                        <li>Azure Functions (Python)</li>
+                        <li>PostgreSQL (Azure)</li>
+                        <li>REST API</li>
+                    </ul>
+                </div>
+                <div class="stack-section">
+                    <h4>Seguridad</h4>
+                    <ul>
+                        <li>Cloudflare WAF</li>
+                        <li>Turnstile CAPTCHA</li>
+                        <li>ipapi.is</li>
+                    </ul>
+                </div>
+                <div class="stack-section">
+                    <h4>Frontend</h4>
+                    <ul>
+                        <li>HTML/CSS/JS vanilla</li>
+                        <li>GitHub Pages CDN</li>
+                        <li>Dark mode nativo</li>
+                    </ul>
+                </div>
+                <div class="stack-section">
+                    <h4>DevOps</h4>
+                    <ul>
+                        <li>GitHub Actions</li>
+                        <li>Google Analytics 4</li>
+                        <li>Azure Monitor</li>
+                    </ul>
+                </div>
+            </div>
 
-            <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
-                <a href="https://github.com/tuusuario/portafolio" target="_blank"
-                    class="link-coder text-pm-light-primary dark:text-pm-primary hover:opacity-70"
-                    style="font-weight: 600; font-size: 16px;">
+            <!-- CTAs -->
+            <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="https://github.com/franmdev/franmdev.github.io" target="_blank" rel="noopener noreferrer"
+                    class="link-coder" style="font-weight: 600; font-size: 15px;">
                     Ver Código en GitHub →
                 </a>
-                <a href="/pages/about.html#architecture"
-                    class="link-coder text-pm-light-secondary dark:text-pm-secondary hover:opacity-70"
-                    style="font-size: 16px;">
+                <a href="/pages/about.html#architecture" class="link-coder"
+                    style="font-size: 15px; color: var(--secondary);">
                     Ver Arquitectura Completa →
                 </a>
             </div>
 
-            <div class="project-tags">
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Azure Functions</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">PostgreSQL</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Cloudflare</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Python</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">GitHub Pages</span>
+            <!-- Tags -->
+            <div class="tags-list" style="margin-top: 20px;">
+                <span class="tag">Azure Functions</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Cloudflare</span>
+                <span class="tag">Python</span>
+                <span class="tag">GitHub Pages</span>
+                <span class="tag">Turnstile</span>
             </div>
         </article>
 
-        <!-- Project 2: ML Título -->
-        <article id="ml" class="project-article" style="border-bottom: 1px solid;"
-            class="border-pm-light-border dark:border-pm-border">
-            <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                2024-09-15
-            </time>
-            <h2 class="text-pm-light-primary dark:text-pm-primary">
-                [Tu Proyecto de Título]: ML en Producción
+        <!-- ================================================ -->
+        <!-- PROYECTO 2: B2B Lead Intelligence Pipeline       -->
+        <!-- ================================================ -->
+        <article id="b2b-pipeline" class="article-card" style="margin-bottom: 32px;">
+
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
+                <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--secondary);">
+                    2025-01-15
+                </time>
+                <span style="display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+                    letter-spacing: 0.5px; padding: 3px 10px; border-radius: 4px;
+                    background: rgba(33, 128, 141, 0.1); color: var(--primary);
+                    border: 1px solid rgba(33, 128, 141, 0.3);">
+                    ⚙ En Desarrollo
+                </span>
+            </div>
+
+            <h2 style="font-size: 28px; font-weight: 700; line-height: 1.3; margin: 12px 0 8px 0;">
+                B2B Lead Intelligence Pipeline
             </h2>
-            <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                Machine Learning | Deployment | Python
+            <p class="card-meta">Data Engineering · MLOps · NLP · Infraestructura · ChatOps</p>
+
+            <p style="font-size: 15px; line-height: 1.7; color: var(--secondary); margin: 16px 0;">
+                Pipeline empresarial de 6 fases con arquitectura Medallion (Bronze → Silver → Gold) para
+                extracción, procesamiento y clasificación automática de leads B2B. Orquestado via Telegram Bot
+                (ChatOps RBAC) desde cualquier dispositivo, desplegado en Proxmox VE con LXC air-gapped y
+                sincronización Zero-Trust a la nube. La capa Gold clasifica ofertas con BETO (Spanish BERT)
+                fine-tuned y loop de Active Learning.
             </p>
 
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Problema
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                [Descripción del problema empresarial que resolviste con tu proyecto de título]
-            </p>
+            <!-- Métricas -->
+            <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                <div class="metric-card">
+                    <div class="metric-value">6 fases</div>
+                    <div class="metric-title">Pipeline Medallion</div>
+                    <div class="metric-description">Bronze → Silver → Gold</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2 algos</div>
+                    <div class="metric-title">Deduplicación</div>
+                    <div class="metric-description">CUDA TF-IDF vs MinHash LSH benchmarkeados</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">BETO</div>
+                    <div class="metric-title">Modelo NLP</div>
+                    <div class="metric-description">Spanish BERT fine-tuned FP16 + WeightedTrainer</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5 buckets</div>
+                    <div class="metric-title">Active Learning</div>
+                    <div class="metric-description">Triage por incertidumbre + HITL Excel</div>
+                </div>
+            </div>
 
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Solución ML
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                Modelo de Machine Learning deployado con pipeline automatizado, incluyendo validación cruzada,
-                tuning de hiperparámetros, y monitoreo en tiempo real de performance.
-            </p>
-
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Ingeniería de Producción
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                [Cómo deployaste el modelo, arquitectura, monitoreo, versionado, etc.]
-            </p>
-
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Resultados
-            </h3>
-            <ul class="text-pm-light-secondary dark:text-pm-secondary"
-                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
-                <li>Métrica 1: [Accuracy, F1-Score, etc.]</li>
-                <li>Métrica 2: [ROI, tiempo ahorrado, etc.]</li>
+            <!-- Features por fase -->
+            <ul class="project-features" style="margin-top: 24px;">
+                <li>
+                    <span class="feature-icon">F1</span>
+                    <span><strong>Command &amp; Control:</strong> Telegram Bot con RBAC, telemetría en tiempo real
+                    desde <code>status.json</code>, IPC por flags + <code>os.fsync()</code> para graceful
+                    shutdown Zero-Trust, capturas forenses con PyAutoGUI.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">F2</span>
+                    <span><strong>Extracción Biomimética:</strong> Selenium + Microsoft Edge con perfiles
+                    persistentes. Session hijacking prevention, delays gaussianos anti-detección bot,
+                    self-healing ante login walls con alerta HITL automática.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">F3</span>
+                    <span><strong>Bronze Layer:</strong> Ingesta event-driven con spooler asíncrono.
+                    Limpieza NLP (emojis, HTML, URLs, truncamientos SPA), merge histórico incremental
+                    y schema enforcement con pandas.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">F4</span>
+                    <span><strong>High Availability Zero-Trust:</strong> Solución al kernel Linux Estado D
+                    en Proxmox. Defensa en 2 capas: IPC elegante + hook Perl desfibrilador
+                    (<code>umount -f -l</code>). rclone a OneDrive/S3 con validación MD5.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">F5</span>
+                    <span><strong>Silver Layer MDM:</strong> Pipeline 5 fases — hash exacto (xxhash),
+                    filtro heurístico regex, near-duplicates CUDA/MinHash, verificación Levenshtein.
+                    Voting ensemble 5 capas para filtro de idioma español.</span>
+                </li>
+                <li>
+                    <span class="feature-icon">F6</span>
+                    <span><strong>Gold Layer MLOps:</strong> BETO fine-tuning con class weights automáticos
+                    para dataset desbalanceado, FP16 mixed precision, Active Learning con triage de
+                    5 buckets exportado a Excel con formato condicional dinámico para QA.</span>
+                </li>
             </ul>
 
-            <div style="margin-top: 24px;">
-                <a href="https://github.com/tuusuario/proyecto-titulo" target="_blank"
-                    class="link-coder text-pm-light-primary dark:text-pm-primary hover:opacity-70"
-                    style="font-weight: 600; font-size: 16px;">
-                    Ver Código en GitHub →
+            <!-- Stack -->
+            <div class="stack-grid" style="margin-top: 24px;">
+                <div class="stack-section">
+                    <h4>ML / NLP</h4>
+                    <ul>
+                        <li>PyTorch + CUDA FP16</li>
+                        <li>HuggingFace Transformers</li>
+                        <li>BETO (Spanish BERT)</li>
+                        <li>datasketch (MinHash)</li>
+                        <li>Lingua + langdetect</li>
+                    </ul>
+                </div>
+                <div class="stack-section">
+                    <h4>Data Eng</h4>
+                    <ul>
+                        <li>Pandas + NumPy</li>
+                        <li>xxhash + difflib</li>
+                        <li>Scikit-learn (TF-IDF)</li>
+                        <li>openpyxl</li>
+                        <li>python-dotenv</li>
+                    </ul>
+                </div>
+                <div class="stack-section">
+                    <h4>Infraestructura</h4>
+                    <ul>
+                        <li>Proxmox VE + LXC</li>
+                        <li>rclone OneDrive/S3</li>
+                        <li>SMB/CIFS + Perl Hooks</li>
+                        <li>systemd + filelock</li>
+                        <li>os.fsync() IPC</li>
+                    </ul>
+                </div>
+                <div class="stack-section">
+                    <h4>Automation</h4>
+                    <ul>
+                        <li>Selenium + Edge</li>
+                        <li>Telegram Bot API</li>
+                        <li>PyAutoGUI + Pillow</li>
+                        <li>subprocess IPC</li>
+                        <li>requests</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- CTAs -->
+            <div style="margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="/pages/about.html" class="link-coder"
+                    style="font-weight: 600; font-size: 15px;">
+                    Ver Stack Completo en Sobre Mí →
                 </a>
+                <span style="font-size: 14px; color: var(--secondary); display: flex; align-items: center;">
+                    Repositorio público — próximamente en GitHub
+                </span>
             </div>
 
-            <div class="project-tags">
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Python</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Scikit-learn</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">FastAPI</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Docker</span>
+            <!-- Tags -->
+            <div class="tags-list" style="margin-top: 20px;">
+                <span class="tag">Python</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">BETO / BERT</span>
+                <span class="tag">Selenium</span>
+                <span class="tag">Proxmox</span>
+                <span class="tag">rclone</span>
+                <span class="tag">Telegram Bot</span>
+                <span class="tag">MinHash LSH</span>
+                <span class="tag">Active Learning</span>
             </div>
         </article>
 
-        <!-- Project 3: ETL Pipeline -->
-        <article id="etl" class="project-article" style="border-bottom: 1px solid;"
-            class="border-pm-light-border dark:border-pm-border">
-            <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                2024-08-10
-            </time>
-            <h2 class="text-pm-light-primary dark:text-pm-primary">
-                ETL Pipeline Escalable
+        <!-- ================================================ -->
+        <!-- PROYECTO 3: Proyecto de Titulación UTFSM         -->
+        <!-- ================================================ -->
+        <article id="titulo" class="article-card" style="margin-bottom: 32px;">
+
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
+                <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--secondary);">
+                    2024-03-01
+                </time>
+                <span style="display: inline-block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+                    letter-spacing: 0.5px; padding: 3px 10px; border-radius: 4px;
+                    background: rgba(108, 108, 108, 0.1); color: var(--secondary);
+                    border: 1px solid var(--border);">
+                    ◷ Próximamente
+                </span>
+            </div>
+
+            <h2 style="font-size: 28px; font-weight: 700; line-height: 1.3; margin: 12px 0 8px 0;">
+                Proyecto de Titulación UTFSM — ML Aplicado
             </h2>
-            <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                Data Engineering | Apache Airflow | PySpark
+            <p class="card-meta">Machine Learning · Data Science · Python · Ingeniería Industrial</p>
+
+            <p style="font-size: 15px; line-height: 1.7; color: var(--secondary); margin: 16px 0;">
+                Proyecto de titulación de Ingeniería Civil Industrial e Informática en la Universidad Técnica
+                Federico Santa María. Aplicación de Machine Learning a un problema de ingeniería industrial
+                real, con pipeline de datos, modelado predictivo y análisis de resultados.
+                Detalles y código en preparación para publicación.
             </p>
 
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Problema
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                Procesamiento de 2.5M+ registros tardaba 6 horas, bloqueando análisis críticos y retrasando
-                decisiones de negocio.
-            </p>
-
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Solución
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                Pipeline orquestado con Apache Airflow + PySpark para procesamiento distribuido paralelo,
-                optimizando I/O y reduciendo compute time.
-            </p>
-
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Resultados
-            </h3>
-            <ul class="text-pm-light-secondary dark:text-pm-secondary"
-                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
-                <li>⏱️ Tiempo: 6h → 45min (86% reducción)</li>
-                <li>💰 Costo: Optimizado procesamiento paralelo</li>
-                <li>📈 Escalabilidad: Preparado para 10M+ registros</li>
-            </ul>
-
-            <div style="margin-top: 24px;">
-                <a href="https://github.com/tuusuario/etl-pipeline" target="_blank"
-                    class="link-coder text-pm-light-primary dark:text-pm-primary hover:opacity-70"
-                    style="font-weight: 600; font-size: 16px;">
-                    Ver Código en GitHub →
-                </a>
+            <!-- Métricas placeholder -->
+            <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                <div class="metric-card">
+                    <div class="metric-value" style="font-size: 1.1rem;">UTFSM</div>
+                    <div class="metric-title">Universidad</div>
+                    <div class="metric-description">Ingeniería Civil Industrial e Informática</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" style="font-size: 1.1rem;">ML</div>
+                    <div class="metric-title">Enfoque</div>
+                    <div class="metric-description">Modelado predictivo aplicado a industria</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" style="font-size: 1.1rem;">2024</div>
+                    <div class="metric-title">Año</div>
+                    <div class="metric-description">Diplomado en Análisis de Datos UDD complementario</div>
+                </div>
             </div>
 
-            <div class="project-tags">
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Apache Airflow</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">PySpark</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">PostgreSQL</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Python</span>
+            <!-- Tags -->
+            <div class="tags-list" style="margin-top: 24px;">
+                <span class="tag">Python</span>
+                <span class="tag">Scikit-learn</span>
+                <span class="tag">Machine Learning</span>
+                <span class="tag">Data Science</span>
+                <span class="tag">UTFSM</span>
             </div>
         </article>
 
-        <!-- Project 4: BI Dashboard -->
-        <article id="bi" class="project-article">
-            <time style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                2024-07-20
-            </time>
-            <h2 class="text-pm-light-primary dark:text-pm-primary">
-                Dashboard Analítico Interactivo
-            </h2>
-            <p style="font-size: 14px; font-style: italic; margin: 8px 0; line-height: 1.4;"
-                class="text-pm-light-secondary dark:text-pm-secondary">
-                Business Intelligence | Power BI | SQL
-            </p>
-
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Pregunta de Negocio
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">
-                [Qué quería saber el negocio - KPIs, métricas, comportamientos a analizar]
-            </p>
-
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Análisis
-            </h3>
-            <p class="text-pm-light-secondary dark:text-pm-secondary"
-                style="font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
-                Dashboard interactivo con Power BI mostrando insights en tiempo real, segmentación por métricas,
-                y drilldown capabilities para exploración profunda de datos.
-            </p>
-
-            <div style="margin: 24px 0; border: 1px solid; border-radius: 8px; overflow: hidden;"
-                class="border-pm-light-border dark:border-pm-border">
-                <iframe width="100%" height="600" src="[TU_POWER_BI_EMBED_URL]" frameborder="0" allowfullscreen="true">
-                </iframe>
-            </div>
-
-            <h3 class="text-pm-light-primary dark:text-pm-primary"
-                style="font-size: 18px; font-weight: 600; margin: 24px 0 12px 0;">
-                Insights Clave
-            </h3>
-            <ul class="text-pm-light-secondary dark:text-pm-secondary"
-                style="list-style: disc; margin-left: 20px; padding: 0; line-height: 1.8;">
-                <li>Insight 1: [Patrón o hallazgo importante]</li>
-                <li>Insight 2: [Otro patrón o recomendación]</li>
-                <li>Insight 3: [Impacto en negocio]</li>
-            </ul>
-
-            <div class="project-tags">
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Power BI</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">SQL</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">Python</span>
-                <span class="project-tag text-pm-light-secondary dark:text-pm-secondary">DAX</span>
-            </div>
-        </article>
     </main>
 
     <footer></footer>
