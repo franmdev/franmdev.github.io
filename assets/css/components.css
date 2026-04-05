@@ -717,7 +717,24 @@
     color: var(--secondary);
 }
 
+a.doc-card {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 
+.architecture-component .tags-list {
+    margin-top: 0.75rem;
+}
+
+.project-header time {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
 /* =============================================
    Breakpoints de estos componentes están en
