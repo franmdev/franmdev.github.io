@@ -5,6 +5,7 @@
 
 
 
+
 /* ===== NAVBAR LAYOUT ===== */
 nav {
     position: sticky;
@@ -25,6 +26,7 @@ nav {
 
 
 
+
 nav a {
     display: block;
     color: var(--primary);
@@ -34,10 +36,12 @@ nav a {
 
 
 
+
 nav a:hover {
     opacity: 0.7;
     text-decoration: none;
 }
+
 
 
 
@@ -50,11 +54,13 @@ nav .logo {
 
 
 
+
 nav .logo a {
     font-size: 24px;
     font-weight: 700;
     letter-spacing: -0.5px;
 }
+
 
 
 
@@ -70,9 +76,11 @@ nav #menu {
 
 
 
+
 nav #menu li+li {
     margin-inline-start: var(--gap);
 }
+
 
 
 
@@ -83,8 +91,9 @@ nav #menu a {
 
 
 
+
 /* ===== DARK MODE TOGGLE ===== */
-#dark-toggle {
+.theme-toggle {
     font-size: 26px;
     margin: auto 4px;
     padding: 0;
@@ -101,9 +110,11 @@ nav #menu a {
 
 
 
-#dark-toggle:hover {
+
+.theme-toggle:hover {
     opacity: 0.7;
 }
+
 
 
 
@@ -117,10 +128,12 @@ nav #menu a {
 
 
 
+
 html.dark #moon {
     display: none !important;
     opacity: 0 !important;
 }
+
 
 
 
@@ -131,6 +144,7 @@ html.dark #sun {
 
 
 
+
 html:not(.dark) #moon {
     display: block !important;
     opacity: 1 !important;
@@ -138,10 +152,12 @@ html:not(.dark) #moon {
 
 
 
+
 html:not(.dark) #sun {
     display: none !important;
     opacity: 0 !important;
 }
+
 
 
 
@@ -156,6 +172,7 @@ main {
 
 
 
+
 /* ===== FOOTER LAYOUT ===== */
 footer {
     font-size: 12px;
@@ -163,6 +180,7 @@ footer {
     border-top: 1px solid var(--border);
     color: var(--secondary);
 }
+
 
 
 
@@ -175,9 +193,11 @@ footer {
 
 
 
+
 .footer-content {
     line-height: 24px;
 }
+
 
 
 
@@ -190,11 +210,13 @@ footer {
 
 
 
+
 .footer-links a {
     color: var(--secondary);
     text-decoration: none;
     transition: all 0.2s ease;
 }
+
 
 
 
@@ -205,10 +227,12 @@ footer {
 
 
 
+
 .footer-copyright {
     margin: 12px 0;
     font-size: 12px;
 }
+
 
 
 
@@ -219,6 +243,7 @@ footer {
 
 
 
+
 /* ===== BODY & GLOBAL BACKGROUND ===== */
 body.list {
     background: var(--code-bg);
@@ -226,9 +251,11 @@ body.list {
 
 
 
+
 html.dark body.list {
     background: var(--theme);
 }
+
 
 
 
@@ -239,14 +266,17 @@ html.dark nav {
 
 
 
+
 html.dark footer {
     background: var(--theme);
 }
+
 
 /* ========================================
    (Absorbido de animations.css)
    Keyframes globales + UI de Validación
    ======================================== */
+
 
 
 
@@ -259,11 +289,13 @@ html.dark footer {
 
 
 
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
+
 
 
 
@@ -275,6 +307,7 @@ html.dark footer {
 
 
 
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -283,11 +316,13 @@ html.dark footer {
 
 
 
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
     }
 }
+
 
 
 
@@ -311,11 +346,13 @@ html.dark footer {
 
 
 
+
 #loader-wrapper p {
     color: var(--secondary);
     font-size: 18px;
     margin-bottom: 20px;
 }
+
 
 
 
@@ -328,15 +365,18 @@ html.dark footer {
 
 
 
+
 #loader-wrapper svg .opacity-25 {
     opacity: 0.25;
 }
 
 
 
+
 #loader-wrapper svg .opacity-75 {
     opacity: 0.75;
 }
+
 
 
 
@@ -353,6 +393,7 @@ html.dark footer {
 
 
 
+
 #validation-modal {
     position: fixed;
     top: 0;
@@ -364,6 +405,7 @@ html.dark footer {
     align-items: center;
     justify-content: center;
 }
+
 
 
 
@@ -383,6 +425,7 @@ html.dark footer {
 
 
 
+
 .validation-text h2 {
     color: var(--primary);
     font-size: 28px;
@@ -392,11 +435,13 @@ html.dark footer {
 
 
 
+
 .validation-text p {
     color: var(--secondary);
     font-size: 16px;
     margin-bottom: 32px;
 }
+
 
 
 
@@ -412,9 +457,11 @@ html.dark footer {
 
 
 
+
 #cf-turnstile-widget {
     animation: fadeInUp 0.4s ease;
 }
+
 
 
 
@@ -429,6 +476,7 @@ html.dark footer {
 
 
 
+
 .validation-spinner svg {
     width: 24px;
     height: 24px;
@@ -438,11 +486,13 @@ html.dark footer {
 
 
 
+
 .validation-spinner p {
     color: var(--secondary);
     font-size: 14px;
     margin-top: 12px;
 }
+
 
 
 
@@ -455,10 +505,12 @@ html.dark footer {
 
 
 
+
 #main-content.visible {
     display: block;
     opacity: 1;
 }
+
 
 
 
@@ -482,11 +534,13 @@ html.dark footer {
 
 
 
+
 #blocked-message h2 {
     color: var(--primary);
     font-size: 32px;
     margin-bottom: 20px;
 }
+
 
 
 

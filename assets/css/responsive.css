@@ -226,7 +226,7 @@
         display: flex;
     }
 
-    #menu {
+    nav #menu {
         display: none;
     }
 }

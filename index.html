@@ -31,41 +31,7 @@
 <body class="list" id="top">
 
 
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">
-                <a href="/">franmdev</a>
-                <button class="theme-toggle">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-            <ul id="menu">
-                <li><a href="/"><span>Inicio</span></a>
-                </li>
-                <li><a href="/pages/projects.html"><span>Proyectos</span></a>
-                </li>
-                <li><a href="/pages/about.html"><span>Sobre Mí</span></a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <header class="header"><!-- navbar cargado por load-components.js --></header>
 
 
     <div id="loader-wrapper">
@@ -88,7 +54,7 @@
 
 
             <!-- Spinner de carga (visible si la API tarda) -->
-            <div class="validation-spinner" style="display: none;">
+            <div id="validation-spinner" class="validation-spinner" style="display: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="15.7 62.8"
@@ -242,6 +208,7 @@
     <script src="/assets/js/load-components.js"></script>
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/mobile-menu.js"></script>
 </body>
 
 

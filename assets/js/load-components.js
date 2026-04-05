@@ -3,16 +3,20 @@
    Carga componentes HTML reutilizables
 ======================================== */
 
+
 async function loadComponent(selector, filePath) {
     try {
         const response = await fetch(filePath);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const html = await response.text();
         document.querySelector(selector).innerHTML = html;
+        // Notifica a dark-mode.js que el componente ya está en el DOM
+        document.dispatchEvent(new CustomEvent('componentLoaded', { detail: { selector } }));
     } catch (error) {
         console.error(`Error loading component ${filePath}:`, error);
     }
 }
+
 
 // Esperar a que el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isInPages = window.location.pathname.includes('/pages/');
     const isInProjectsSubfolder = window.location.pathname.includes('/pages/projects/');
 
+
     let basePath = '';
     if (isInProjectsSubfolder) {
         basePath = '../../';
@@ -28,8 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
         basePath = '../';
     }
 
+
     // Cargar nav y footer
     loadComponent('footer', `${basePath}components/footer.html`);
-    //loadComponent('nav', `${basePath}components/navbar.html`);
+    loadComponent('header.header', `${basePath}components/navbar.html`);
+
 
 });
