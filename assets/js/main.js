@@ -271,6 +271,7 @@ function initialIpCheck() {
             switch (data.status) {
                 case "known_good":
                     console.log("⚡ Acceso rápido (Caché DB - Limpio). Mostrando contenido...");
+                    localStorage.setItem('turnstilePassed', Date.now());
                     showMainContent();
                     renderSensitiveLinks(data.sensitiveLinks);
                     break;
