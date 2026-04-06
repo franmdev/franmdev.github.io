@@ -1,46 +1,35 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Francisco Mora — Data Engineer y MLOps. Pipelines Medallion end-to-end, NLP con BETO Spanish BERT, infraestructura serverless en Azure y arquitecturas Zero-Trust sobre Proxmox VE.">
     <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-    <title>Francisco Mora - Data Engineer & MLOps</title>
-
-
+    <title>Francisco Mora — Data Engineer · MLOps</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
     <link rel="stylesheet" href="assets/css/main.css">
-
-
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-QVW5058EVE');
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-QVW5058EVE');
     </script>
-
-
+    <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
-
-
 <body class="list" id="top">
     <header class="header"><!-- navbar cargado por load-components.js --></header>
     <div id="loader-wrapper">
         <p>Validando conexión segura...</p>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
             <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="15.7 62.8"
-                stroke-dashoffset="0" class="spinner-circle"></circle>
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
         </svg>
     </div>
-
-
+    <!-- VALIDATION MODAL — style="display:none" FUNCIONAL (main.js), no tocar -->
     <div id="validation-modal" style="display: none;">
         <div class="validation-overlay"></div>
         <div class="validation-modal-content">
@@ -48,73 +37,58 @@
                 <h2>Verificación de Seguridad</h2>
                 <p>Por favor, complete la verificación para continuar</p>
             </div>
-
-
-            <!-- Spinner de carga (visible si la API tarda) -->
+            <!-- style="display:none" FUNCIONAL (main.js), no tocar -->
             <div id="validation-spinner" class="validation-spinner" style="display: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="15.7 62.8"
-                        stroke-dashoffset="0" class="spinner-circle"></circle>
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                        stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
                 </svg>
                 <p>Validando...</p>
             </div>
-
-
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
     </div>
-
-
-    <!-- ======== BLOCKED MESSAGE ======== -->
+    <!-- BLOCKED MESSAGE — style="display:none" FUNCIONAL (main.js), no tocar -->
     <div id="blocked-message" style="display: none;">
         <h2>Acceso Denegado</h2>
-        <p>
-            Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
-        </p>
+        <p>Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.</p>
     </div>
-
-
     <main id="main-content">
+        <!-- HERO -->
         <article class="hero-section">
             <div class="hero-content">
                 <h1>Francisco Mora</h1>
-                <p class="hero-subtitle">Data Engineer & MLOps</p>
-                <!-- GLOSA: ver propuestas en README — opción seleccionada: B -->
-                <p class="hero-description">
-                    Construyo sistemas de datos que funcionan en producción. Pipelines Medallion end-to-end,
-                    modelos NLP con BERT español y orquestación Zero-Trust sobre infraestructura real.
-                </p>
-
-
+                <p class="hero-subtitle">Data Engineer &amp; MLOps</p>
+                <p class="hero-description">Construyo sistemas de datos que funcionan en producción.
+                Pipelines Medallion end-to-end, modelos NLP con BERT español y orquestación
+                Zero-Trust sobre infraestructura real.</p>
                 <div class="social-links">
-                    <a href="https://github.com/franmdev" target="_blank">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    <a href="https://github.com/franmdev" target="_blank" rel="noopener noreferrer"
+                       aria-label="GitHub de Francisco Mora">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                     </a>
-                    <a href="https://linkedin.com/in/mora-francisco" target="_blank">
-                        <svg fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    <a href="https://linkedin.com/in/mora-francisco" target="_blank" rel="noopener noreferrer"
+                       aria-label="LinkedIn de Francisco Mora">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                         </svg>
                     </a>
-                    <a href="mailto:contacto@franciscomora.dev">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <a href="mailto:contacto@franciscomora.dev"
+                       aria-label="Email a Francisco Mora">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
                     </a>
                 </div>
             </div>
         </article>
-
-
+        <!-- PROYECTOS -->
         <section class="projects-section">
             <h2>Proyectos Destacados</h2>
-
-
             <!-- PROYECTO 1: Este Portafolio -->
             <article class="article-card">
                 <div class="project-card-header">
@@ -123,25 +97,20 @@
                 </div>
                 <h3>
                     <a href="/pages/projects/portfolio.html" class="link-coder">
-                        Este Portafolio: Full Stack Data System
+                        Este Portafolio — Full Stack Data System
                     </a>
                 </h3>
                 <p class="card-meta">Arquitectura Web · Seguridad · Azure · Data Pipeline</p>
-
-
-                <p class="entry-content">
-                    Sistema completo con seguridad en 5 capas, Azure Functions serverless, PostgreSQL y
-                    Cloudflare WAF. Analytics en tiempo real con "Fast Pass" para usuarios de confianza.
-                </p>
+                <p class="entry-content">Sistema completo con pipeline de seguridad en 6 capas,
+                Azure Functions serverless, PostgreSQL y Cloudflare WAF. Analytics en tiempo real
+                con Fast Pass para usuarios de confianza (~50ms en caché).</p>
                 <div class="tags-list">
                     <span class="tag">Azure Functions</span>
                     <span class="tag">PostgreSQL</span>
                     <span class="tag">Cloudflare</span>
-                    <span class="tag">Python</span>
+                    <span class="tag">Python 3.11</span>
                 </div>
             </article>
-
-
             <!-- PROYECTO 2: B2B Lead Intelligence Pipeline -->
             <article class="article-card">
                 <div class="project-card-header">
@@ -154,13 +123,10 @@
                     </a>
                 </h3>
                 <p class="card-meta">Data Engineering · MLOps · NLP · ChatOps</p>
-
-
-                <p class="entry-content">
-                    Pipeline Medallion de 6 fases (Bronze → Silver → Gold) con scraping biomimético,
-                    deduplicación semántica CUDA/MinHash y clasificación NLP con BETO (Spanish BERT)
-                    + Active Learning. Orquestado vía Telegram Bot sobre Proxmox VE.
-                </p>
+                <p class="entry-content">Pipeline Medallion de 6 fases (Bronze → Silver → Gold)
+                con scraping biomimético, deduplicación semántica CUDA/MinHash y clasificación NLP
+                con BETO (Spanish BERT) + Active Learning. Orquestado vía Telegram Bot sobre
+                Proxmox VE con sincronización Zero-Trust a la nube.</p>
                 <div class="tags-list">
                     <span class="tag">PyTorch</span>
                     <span class="tag">BETO / BERT</span>
@@ -169,8 +135,6 @@
                     <span class="tag">MinHash LSH</span>
                 </div>
             </article>
-
-
             <!-- PROYECTO 3: Titulación UTFSM -->
             <article class="article-card">
                 <div class="project-card-header">
@@ -182,40 +146,28 @@
                         Proyecto de Titulación UTFSM — ML Aplicado
                     </a>
                 </h3>
-                <p class="card-meta">Machine Learning · Data Science · Python · Ingeniería Industrial</p>
-
-
-                <p class="entry-content">
-                    Aplicación de Machine Learning a un problema de ingeniería industrial real.
-                    Pipeline de datos, modelado predictivo y análisis de resultados.
-                    UTFSM — Ingeniería Civil Industrial e Informática.
-                </p>
+                <p class="card-meta">Machine Learning · Regresión Lineal Múltiple · Gradient Boosting · HPO</p>
+                <p class="entry-content">Optimización de tiempos de entrega en e-commerce con ML.
+                RLM como baseline con diagnóstico completo de supuestos (VIF, Breusch-Pagan,
+                Durbin-Watson), comparación de modelos ensemble y tuning bayesiano con Optuna.
+                UTFSM — Ingeniería Civil Industrial e Informática.</p>
                 <div class="tags-list">
-                    <span class="tag">Python</span>
-                    <span class="tag">Scikit-learn</span>
-                    <span class="tag">Machine Learning</span>
-                    <span class="tag">UTFSM</span>
+                    <span class="tag">scikit-learn</span>
+                    <span class="tag">XGBoost</span>
+                    <span class="tag">Optuna</span>
+                    <span class="tag">SHAP</span>
+                    <span class="tag">statsmodels</span>
                 </div>
             </article>
-
-
             <div class="view-all-projects">
-                <a href="/pages/projects.html" class="link-coder">
-                    Ver todos los proyectos →
-                </a>
+                <a href="/pages/projects.html" class="link-coder">Ver todos los proyectos →</a>
             </div>
         </section>
     </main>
-
-
     <footer></footer>
-
-
     <script src="/assets/js/load-components.js"></script>
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/mobile-menu.js"></script>
 </body>
-
-
 </html>
