@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Optimización de la cadena de suministro en e-commerce con Machine Learning — 113k pedidos Olist, Random Forest R²=68.06%, RMSE=5.14 días. Memoria de Título UTFSM · Francisco Mora.">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+    <title>ML para E-commerce · Titulación UTFSM · Francisco Mora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-QVW5058EVE');
+    </script>
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</head>
+<body class="list" id="top">
+    <header class="header"><!-- navbar cargado por load-components.js --></header>
+
+    <!-- LOADER -->
+    <div id="loader-wrapper">
+        <p>Validando conexión segura...</p>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
+        </svg>
+    </div>
+
+    <!-- VALIDATION MODAL — style="display:none" FUNCIONAL (main.js), no tocar -->
+    <div id="validation-modal" style="display: none;">
+        <div class="validation-overlay"></div>
+        <div class="validation-modal-content">
+            <div class="validation-text">
+                <h2>Verificación de Seguridad</h2>
+                <p>Por favor, complete la verificación para continuar</p>
+            </div>
+            <!-- style="display:none" FUNCIONAL (main.js), no tocar -->
+            <div id="validation-spinner" class="validation-spinner" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                        stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
+                </svg>
+                <p>Validando...</p>
+            </div>
+            <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
+        </div>
+    </div>
+
+    <!-- BLOCKED MESSAGE — style="display:none" FUNCIONAL (main.js), no tocar -->
+    <div id="blocked-message" style="display: none;">
+        <h2>Acceso Denegado</h2>
+        <p>Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.</p>
+    </div>
+
+    <main id="main-content">
+
+        <!-- ══════════════════════════════════════════════════
+             TOGGLE DE VISTAS — persiste en localStorage
+        ══════════════════════════════════════════════════ -->
+        <div class="pf-layout-toggle" role="group" aria-label="Seleccionar vista">
+            <span class="pf-toggle-label">Vista:</span>
+            <button class="pf-layout-btn active" data-panel="panel-a">
+                Detalle Técnico
+            </button>
+            <button class="pf-layout-btn" data-panel="panel-b">
+                Ejecutiva
+            </button>
+        </div>
+
+        <h1 class="projects-page-title">Optimización Logística con ML</h1>
+        <p class="projects-page-lead">
+            Predicción de tiempos de entrega en e-commerce sobre 113.140 pedidos reales de Olist (Brasil) —
+            pipeline completo desde regresión lineal OLS con diagnóstico estadístico hasta
+            Random Forest optimizado con búsqueda bayesiana. Memoria de Título UTFSM, nota 95/100.
+        </p>
+
+
+        <!-- ══════════════════════════════════════════════════
+             PANEL A — DETALLE TÉCNICO
+        ══════════════════════════════════════════════════ -->
+        <div class="pf-panel" id="panel-a">
+
+            <!-- A1: Overview y métricas -->
+            <article class="article-card">
+                <div class="project-card-header">
+                    <time datetime="2024-04-17">Abril 2024</time>
+                    <span class="project-status-badge project-status-badge--live">✓ Memoria Publicada</span>
+                </div>
+                <h2 class="project-card-title">
+                    Predicción de Tiempos de Entrega en E-commerce
+                    <span class="ml-grade-badge">Nota 95 / 100</span>
+                </h2>
+                <p class="card-meta">Machine Learning · Cadena de Suministro · Regresión · Optimización · UTFSM · Dpto. de Industrias</p>
+                <p class="card-desc">
+                    Dataset real de Olist, el mayor marketplace de Brasil (2016–2018).
+                    Se unificaron 8 tablas relacionales, se construyeron variables sintéticas
+                    (distancia Haversine, feriados nacionales, day-of-week por etapa logística),
+                    se validaron 5 transformaciones de RLM con diagnóstico completo de supuestos
+                    estadísticos y se compararon 7 modelos ML con 3 estrategias de optimización
+                    de hiperparámetros. El Random Forest con Optimización Bayesiana superó en
+                    +15 pp al baseline lineal.
+                </p>
+                <div class="metrics-grid metrics-grid--sm">
+                    <div class="metric-card">
+                        <div class="metric-value">113k</div>
+                        <div class="metric-title">Pedidos reales</div>
+                        <div class="metric-description">Olist · e-commerce brasileño 2016–2018</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">68.06%</div>
+                        <div class="metric-title">R² ajustado</div>
+                        <div class="metric-description">Random Forest + Optimización Bayesiana</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">5.14 d</div>
+                        <div class="metric-title">RMSE final</div>
+                        <div class="metric-description">Error cuadrático medio — modelo ganador</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">+15 pp</div>
+                        <div class="metric-title">Mejora vs. baseline</div>
+                        <div class="metric-description">Random Forest (68%) vs. Ridge Log-Lin (53%)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">7</div>
+                        <div class="metric-title">Modelos comparados</div>
+                        <div class="metric-description">OLS → Decision Tree → CatBoost → RF</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">3</div>
+                        <div class="metric-title">Estrategias HPO</div>
+                        <div class="metric-description">Grid Search · Random Search · Bayesiana</div>
+                    </div>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Python 3.10</span>
+                    <span class="tag">scikit-learn</span>
+                    <span class="tag">XGBoost</span>
+                    <span class="tag">LightGBM</span>
+                    <span class="tag">CatBoost</span>
+                    <span class="tag">statsmodels</span>
+                    <span class="tag">pandas</span>
+                    <span class="tag">NumPy</span>
+                    <span class="tag">Jupyter Notebook</span>
+                    <span class="tag">Olist Dataset</span>
+                </div>
+            </article>
+
+            <!-- A2: Dataset y Feature Engineering -->
+            <article class="article-card">
+                <h2 class="project-card-title">Dataset y Feature Engineering</h2>
+                <p class="card-meta">8 tablas relacionales · variables sintéticas · 9 categorías de producto consolidadas</p>
+                <p class="card-desc">
+                    El dataset original de Olist requería merge de 8 tablas relacionales (órdenes,
+                    ítems, clientes, vendedores, productos, pagos, reseñas, geolocalización) y
+                    construcción de variables que capturan la complejidad logística real del
+                    mercado brasileño.
+                </p>
+                <ul class="project-features">
+                    <li>
+                        <span class="feature-icon">GEO</span>
+                        <span><strong>Distancia Haversine (km):</strong> distancia geodésica entre coordenadas
+                        (lat/lon) del vendedor y del cliente. Reemplaza variables de estado/ciudad,
+                        condensando la información geográfica en un único predictor continuo con
+                        semántica física directa. Principal predictor del modelo.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">VOL</span>
+                        <span><strong>Volumen del producto (cm³):</strong>
+                        <code>largo × alto × ancho</code>. Complementa al peso como proxy de
+                        complejidad de manipulación y transporte. Correlación de Pearson débil
+                        (r = 0.08) pero estadísticamente significativa con n = 113k.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">DOW</span>
+                        <span><strong>Day-of-week por etapa logística:</strong> las 6 fechas clave
+                        del ciclo de entrega codificadas en one-hot (lunes–domingo):
+                        compra, aprobación, entrega al transportista, entrega al cliente,
+                        estimado y límite de envío del vendedor. Capturan patrones
+                        operativos semanales en cada nodo de la cadena.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">HOL</span>
+                        <span><strong>Indicadores de feriados nacionales brasileños:</strong>
+                        variable binaria <code>is_holiday</code> para cada una de las 6 fechas
+                        anteriores. Los feriados impactan el tiempo de procesamiento del vendedor
+                        y la disponibilidad del transportista — efecto confirmado en el EDA
+                        (Bloque 4).</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">CAT</span>
+                        <span><strong>Agrupación de categorías:</strong> el catálogo original de Olist
+                        tiene +70 categorías en portugués. Se consolidaron en 9 grupos temáticos
+                        con indicadores booleanos: Electronics (29.560), Furniture (28.024),
+                        Entertainment (13.504), Beauty &amp; Health (13.281), Home &amp; Garden (12.834),
+                        Fashion (9.722), entre otros.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">ELM</span>
+                        <span><strong>Eliminación por dependencia circular:</strong>
+                        variables como <code>delivery_time_estimate</code>,
+                        <code>approval_time_days</code> y <code>carrier_to_customer_days</code>
+                        son componentes directos del tiempo total — su inclusión inflaría
+                        artificialmente el R² sin valor predictivo real. Variables de
+                        estado/ciudad eliminadas al quedar capturadas por <code>distance_km</code>.</span>
+                    </li>
+                </ul>
+                <div class="tags-list">
+                    <span class="tag">Haversine</span>
+                    <span class="tag">One-Hot Encoding</span>
+                    <span class="tag">Feature Engineering</span>
+                    <span class="tag">pandas merge</span>
+                    <span class="tag">Feriados BR</span>
+                </div>
+            </article>
+
+            <!-- A3: EDA -->
+            <article class="article-card">
+                <h2 class="project-card-title">Análisis Exploratorio de Datos — 4 Bloques</h2>
+                <p class="card-meta">Distribuciones · Geografía · Outliers · PCA · Impacto de feriados</p>
+                <p class="card-desc">
+                    Hallazgo central: el tiempo estimado por Olist era de <strong>24.5 días promedio</strong>
+                    mientras el tiempo real era de <strong>12.4 días</strong>. Olist sobreestimaba
+                    casi el doble de forma sistemática — el modelo predictivo convierte esa ventaja
+                    oculta en un diferenciador de NPS.
+                </p>
+                <ul class="project-features">
+                    <li>
+                        <span class="feature-icon">B1</span>
+                        <span><strong>Entendiendo el tiempo de entrega:</strong>
+                        distribución con asimetría positiva marcada (media 12.4 días, mediana 10 días,
+                        máximo 208 días). La asimetría justifica las transformaciones de variable respuesta
+                        en el modelado. Relación distancia–tiempo confirmada visualmente;
+                        volumen muestra r = 0.08 (débil pero significativa con n = 113k).
+                        Variación clara por categoría de producto.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">B2</span>
+                        <span><strong>Factores geográficos y comparaciones:</strong>
+                        estados del norte de Brasil (AM, RR, AP) presentan tiempos 3–4× superiores
+                        a São Paulo. El tiempo estimado supera al real en todos los estados —
+                        la brecha es más costosa en entregas metropolitanas.
+                        Picos estacionales en Black Friday (noviembre) capturados parcialmente
+                        con indicadores de feriados.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">B3</span>
+                        <span><strong>Análisis profundo y outliers:</strong>
+                        box-plots por categoría revelaron pedidos con tiempos &gt; 60 días
+                        (regiones remotas con logística irregular). Se mantuvieron en el dataset
+                        general y se gestionaron en el modelado vía Distancia de Cook.
+                        Mapa de calor de correlaciones confirma <code>distance_km</code> como
+                        predictor dominante. PCA exploratorio: variables de ciclo logístico
+                        saturan CP1, producto/volumen lideran CP2.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">B4</span>
+                        <span><strong>Análisis predictivo y estratégico:</strong>
+                        pedidos aprobados o enviados en feriado registran tiempos significativamente
+                        mayores — variable con utilidad predictiva real confirmada.
+                        Pedidos aprobados en menos de 1 hora tienen menor tiempo de entrega promedio.
+                        El 90%+ de los pedidos llega antes de la fecha estimada,
+                        confirmando el sesgo conservador sistémico de Olist.</span>
+                    </li>
+                </ul>
+                <div class="tags-list">
+                    <span class="tag">EDA</span>
+                    <span class="tag">matplotlib</span>
+                    <span class="tag">seaborn</span>
+                    <span class="tag">PCA</span>
+                    <span class="tag">Correlación de Pearson</span>
+                    <span class="tag">Box-plot</span>
+                    <span class="tag">Heatmap</span>
+                </div>
+            </article>
+
+            <!-- A4: RLM y Tests estadísticos -->
+            <article class="article-card">
+                <h2 class="project-card-title">Regresión Lineal Múltiple — Baseline y Diagnóstico Estadístico</h2>
+                <p class="card-meta">5 transformaciones · VIF · Cook's Distance · Jarque-Bera · Goldfeld-Quandt · Breusch-Pagan · Durbin-Watson</p>
+                <p class="card-desc">
+                    Se evaluaron 5 transformaciones de la variable respuesta para adecuar el modelo a
+                    la distribución asimétrica del tiempo de entrega. La selección se hizo por AIC,
+                    R² ajustado y validación cruzada k=5. Log-Lin fue elegido como baseline por
+                    su equilibrio entre ajuste y estabilidad estadística (CV std = 0.0031).
+                    Con regularización Ridge: <strong>R² adj = 53.04%</strong>.
+                </p>
+
+                <!-- Tabla comparación transformaciones -->
+                <div class="ml-table-wrapper">
+                    <table class="ml-results-table">
+                        <thead>
+                            <tr>
+                                <th>Transformación</th>
+                                <th>R² adj inicial</th>
+                                <th>R² adj (sin atíp.)</th>
+                                <th>CV k=5</th>
+                                <th>CV std</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lin-Lin</td>
+                                <td>51.34%</td>
+                                <td>63.18%</td>
+                                <td>51.32%</td>
+                                <td>0.0067</td>
+                            </tr>
+                            <tr class="ml-row--winner">
+                                <td><strong>Log-Lin ★ baseline</strong></td>
+                                <td>46.00%</td>
+                                <td>53.32%</td>
+                                <td>45.97%</td>
+                                <td><strong>0.0031</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Raíz Cuadrada</td>
+                                <td>51.19%</td>
+                                <td>59.78%</td>
+                                <td>51.15%</td>
+                                <td>0.0035</td>
+                            </tr>
+                            <tr>
+                                <td>Inverso</td>
+                                <td>30.54%</td>
+                                <td>35.40%</td>
+                                <td>30.48%</td>
+                                <td>0.0023</td>
+                            </tr>
+                            <tr>
+                                <td>Box-Cox</td>
+                                <td>46.15%</td>
+                                <td>53.53%</td>
+                                <td>46.12%</td>
+                                <td>0.0031</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="ml-table-note">★ Log-Lin con Ridge: R² adj = 53.04%, MAE = 0.31, RMSE = 0.38 (escala log).</p>
+
+                <!-- Tests estadísticos -->
+                <ul class="project-features" style="margin-top:1.25rem">
+                    <li>
+                        <span class="feature-icon">VIF</span>
+                        <span><strong>Variance Inflation Factor — Multicolinealidad:</strong>
+                        umbral VIF &gt; 5 como señal de multicolinealidad moderada. Justificación: infla
+                        la varianza de los coeficientes OLS, haciéndolos inestables e ininterpretables.
+                        Resultado: <code>order_approved_at_dayofweek3</code> y <code>_dayofweek4</code>
+                        superaron el umbral — eliminadas iterativamente hasta VIF aceptable en todos los predictores.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">CD</span>
+                        <span><strong>Distancia de Cook + Residuos Estudentizados — Datos influyentes:</strong>
+                        umbral D_i &gt; 4/(n·p); residuos estudentizados externos |r*| &gt; 3.
+                        Justificación: en OLS, una observación con leverage alto desplaza significativamente
+                        los coeficientes. Resultado: eliminación de influyentes produjo mejoras de
+                        +10 pp (Lin-Lin: 51% → 63%) y +7 pp (Log-Lin: 46% → 53%) en R² ajustado.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">JB</span>
+                        <span><strong>Test de Jarque-Bera — Normalidad de residuos:</strong>
+                        evalúa asimetría (S) y curtosis (K): JB = n/6 · [S² + (K−3)²/4].
+                        Justificación: necesario para validez de intervalos de confianza y p-valores.
+                        Resultado: Log-Lin y Box-Cox alcanzaron los residuos más próximos a la normal
+                        (S ≈ −0.04, K ≈ 2.44) tras eliminación de atípicos.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">GQ</span>
+                        <span><strong>Test de Goldfeld-Quandt — Homocedasticidad:</strong>
+                        divide el dataset ordenado por un predictor en dos grupos extremos y compara
+                        sus varianzas residuales con estadístico F. H₀: varianzas iguales.
+                        Justificación: heterocedasticidad hace los errores estándar sesgados.
+                        Resultado: F calculado &lt; valor crítico en todos los modelos →
+                        no se rechaza H₀ → homocedasticidad confirmada.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">BP</span>
+                        <span><strong>Test de Breusch-Pagan — Homocedasticidad (alternativo):</strong>
+                        regresa los residuos cuadrados sobre los predictores con estadístico χ².
+                        Más general que Goldfeld-Quandt: detecta patrones no monotónicos.
+                        Justificación: complementario a GQ para heterocedasticidad de forma libre.
+                        Resultado: consistente con GQ; donde se detectó heterocedasticidad residual
+                        se aplicaron errores estándar robustos HC3.</span>
+                    </li>
+                    <li>
+                        <span class="feature-icon">DW</span>
+                        <span><strong>Test de Durbin-Watson — Autocorrelación:</strong>
+                        DW ≈ 2 indica ausencia; &lt; 2 autocorrelación positiva; &gt; 2 negativa.
+                        Justificación: autocorrelación en datos ordenados cronológicamente viola
+                        independencia OLS y sesga los errores estándar.
+                        Resultado: detectada en varios modelos → se aplicaron Ridge, Lasso y GLS
+                        como corrección. Log-Lin Ridge seleccionado como baseline final.</span>
+                    </li>
+                </ul>
+                <div class="tags-list">
+                    <span class="tag">statsmodels OLS</span>
+                    <span class="tag">VIF</span>
+                    <span class="tag">Cook's Distance</span>
+                    <span class="tag">Jarque-Bera</span>
+                    <span class="tag">Goldfeld-Quandt</span>
+                    <span class="tag">Breusch-Pagan</span>
+                    <span class="tag">Durbin-Watson</span>
+                    <span class="tag">Ridge · Lasso · GLS</span>
+                    <span class="tag">Box-Cox</span>
+                </div>
+            </article>
+
+            <!-- A5: Comparativa ML -->
+            <article class="article-card">
+                <h2 class="project-card-title">Comparativa de Modelos ML — Evaluación Inicial</h2>
+                <p class="card-meta">7 algoritmos · hiperparámetros por defecto · misma partición train/test · validación cruzada k=5</p>
+                <p class="card-desc">
+                    Con el baseline Log-Lin Ridge establecido (R² adj = 53.04%), se evaluaron
+                    7 algoritmos ML en condiciones idénticas. Decision Tree y SVR fueron excluidos
+                    de la optimización de hiperparámetros: el primero por sobreajuste severo sin poda,
+                    el segundo por costo computacional excesivo.
+                </p>
+                <div class="ml-table-wrapper">
+                    <table class="ml-results-table">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>R² adj</th>
+                                <th>CV k=5</th>
+                                <th>CV std</th>
+                                <th>MAE (días)</th>
+                                <th>RMSE (días)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="ml-row--winner">
+                                <td><strong>Random Forest ★</strong></td>
+                                <td><strong>65.26%</strong></td>
+                                <td>63.04%</td>
+                                <td>0.0110</td>
+                                <td>3.27</td>
+                                <td>5.36</td>
+                            </tr>
+                            <tr>
+                                <td>CatBoost</td>
+                                <td>63.81%</td>
+                                <td>61.36%</td>
+                                <td>0.0094</td>
+                                <td>3.61</td>
+                                <td>5.47</td>
+                            </tr>
+                            <tr>
+                                <td>XGBoost</td>
+                                <td>62.82%</td>
+                                <td>60.85%</td>
+                                <td>0.0106</td>
+                                <td>3.61</td>
+                                <td>5.55</td>
+                            </tr>
+                            <tr>
+                                <td>LightGBM</td>
+                                <td>60.79%</td>
+                                <td>59.03%</td>
+                                <td>0.0110</td>
+                                <td>3.81</td>
+                                <td>5.70</td>
+                            </tr>
+                            <tr>
+                                <td>GBM</td>
+                                <td>57.76%</td>
+                                <td>56.16%</td>
+                                <td>0.0122</td>
+                                <td>4.00</td>
+                                <td>5.91</td>
+                            </tr>
+                            <tr>
+                                <td>SVR</td>
+                                <td>54.91%</td>
+                                <td>52.27%</td>
+                                <td>0.0145</td>
+                                <td>3.69</td>
+                                <td>6.11</td>
+                            </tr>
+                            <tr>
+                                <td>Decision Tree</td>
+                                <td>24.97%</td>
+                                <td>26.13%</td>
+                                <td>0.0286</td>
+                                <td>4.12</td>
+                                <td>7.88</td>
+                            </tr>
+                            <tr class="ml-row--baseline">
+                                <td><em>RLM Log-Lin Ridge (baseline)</em></td>
+                                <td><em>53.04%</em></td>
+                                <td><em>53.29%</em></td>
+                                <td><em>0.0031</em></td>
+                                <td><em>0.31†</em></td>
+                                <td><em>0.38†</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="ml-table-note">† MAE/RMSE del baseline en escala logarítmica, no comparable directamente con ML (escala días).</p>
+                <div class="tags-list">
+                    <span class="tag">scikit-learn</span>
+                    <span class="tag">XGBoost</span>
+                    <span class="tag">LightGBM</span>
+                    <span class="tag">CatBoost</span>
+                    <span class="tag">Random Forest</span>
+                    <span class="tag">k-fold CV</span>
+                </div>
+            </article>
+
+            <!-- A6: HPO -->
+            <article class="article-card">
+                <h2 class="project-card-title">Optimización de Hiperparámetros — 3 Estrategias</h2>
+                <p class="card-meta">Grid Search · Random Search · Optimización Bayesiana · 5 modelos optimizados</p>
+                <p class="card-desc">
+                    Los 5 mejores modelos (Random Forest, GBM, XGBoost, LightGBM, CatBoost) fueron
+                    optimizados con tres estrategias comparadas en eficiencia y cobertura del espacio
+                    de hiperparámetros. La Optimización Bayesiana ganó en Random Forest
+                    (<code>n_estimators=1000, max_depth=44</code>) y LightGBM (<code>n_leaves=100, lr=0.106</code>).
+                    Random Search ganó en GBM, XGBoost y CatBoost por mejor cobertura de distribuciones continuas.
+                </p>
+                <div class="ml-table-wrapper">
+                    <table class="ml-results-table">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>Mejor HPO</th>
+                                <th>R² adj</th>
+                                <th>CV k=5</th>
+                                <th>CV std</th>
+                                <th>MAE (días)</th>
+                                <th>RMSE (días)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="ml-row--winner">
+                                <td><strong>Random Forest ★</strong></td>
+                                <td>Bayesiana</td>
+                                <td><strong>68.06%</strong></td>
+                                <td>64.45%</td>
+                                <td>0.0148</td>
+                                <td><strong>3.18</strong></td>
+                                <td><strong>5.14</strong></td>
+                            </tr>
+                            <tr>
+                                <td>CatBoost</td>
+                                <td>Random Search</td>
+                                <td>66.63%</td>
+                                <td>64.05%</td>
+                                <td>0.0112</td>
+                                <td>3.34</td>
+                                <td>5.26</td>
+                            </tr>
+                            <tr>
+                                <td>GBM</td>
+                                <td>Random Search</td>
+                                <td>66.24%</td>
+                                <td>63.22%</td>
+                                <td>0.0129</td>
+                                <td>3.36</td>
+                                <td>5.29</td>
+                            </tr>
+                            <tr>
+                                <td>XGBoost</td>
+                                <td>Random Search</td>
+                                <td>66.01%</td>
+                                <td>63.53%</td>
+                                <td>0.0125</td>
+                                <td>3.31</td>
+                                <td>5.30</td>
+                            </tr>
+                            <tr>
+                                <td>LightGBM</td>
+                                <td>Bayesiana</td>
+                                <td>65.08%</td>
+                                <td>62.96%</td>
+                                <td><strong>0.0088</strong></td>
+                                <td>3.41</td>
+                                <td>5.38</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="ml-table-note">LightGBM con Bayesiana obtuvo la menor variabilidad entre folds (CV std = 0.0088) —
+                opción preferible cuando la estabilidad es más crítica que la precisión puntual.</p>
+                <div class="tags-list">
+                    <span class="tag">GridSearchCV</span>
+                    <span class="tag">RandomizedSearchCV</span>
+                    <span class="tag">Optimización Bayesiana</span>
+                    <span class="tag">scikit-optimize</span>
+                    <span class="tag">n_estimators=1000</span>
+                </div>
+            </article>
+
+            <!-- A7: Stack y Docs -->
+            <article class="article-card">
+                <h2 class="project-card-title">Stack Tecnológico y Documentación</h2>
+                <p class="card-meta">Python 3.10 · statsmodels · scikit-learn · XGBoost · LightGBM · CatBoost · Jupyter</p>
+                <div class="stack-grid">
+                    <div class="stack-section">
+                        <h4>Datos y EDA</h4>
+                        <ul>
+                            <li>Python 3.10</li>
+                            <li>pandas · NumPy</li>
+                            <li>matplotlib · seaborn</li>
+                            <li>Jupyter Notebook</li>
+                            <li>gdown (carga automática)</li>
+                        </ul>
+                    </div>
+                    <div class="stack-section">
+                        <h4>Estadística / RLM</h4>
+                        <ul>
+                            <li>statsmodels (OLS, GLS)</li>
+                            <li>scipy (tests estadísticos)</li>
+                            <li>VIF · Jarque-Bera</li>
+                            <li>Goldfeld-Quandt</li>
+                            <li>Breusch-Pagan · DW</li>
+                        </ul>
+                    </div>
+                    <div class="stack-section">
+                        <h4>Machine Learning</h4>
+                        <ul>
+                            <li>scikit-learn</li>
+                            <li>XGBoost · LightGBM</li>
+                            <li>CatBoost</li>
+                            <li>Ridge · Lasso · GLS</li>
+                            <li>k-fold CV (k=5)</li>
+                        </ul>
+                    </div>
+                    <div class="stack-section">
+                        <h4>HPO</h4>
+                        <ul>
+                            <li>GridSearchCV</li>
+                            <li>RandomizedSearchCV</li>
+                            <li>Optimización Bayesiana</li>
+                            <li>AIC como criterio</li>
+                            <li>CV R² ± std</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="project-card-ctas">
+                    <a href="../../assets/docs/Proyecto-de-Titulo-Francisco-Mora.pdf"
+                        target="_blank" rel="noopener noreferrer" class="project-cta-primary">
+                        Descargar Memoria Completa →
+                    </a>
+                    <a href="/pages/projects.html" class="project-cta-secondary">
+                        ← Volver a Proyectos
+                    </a>
+                    <span class="cta-note">◷ Repositorio con notebooks en preparación</span>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Python 3.10</span>
+                    <span class="tag">statsmodels</span>
+                    <span class="tag">scikit-learn</span>
+                    <span class="tag">XGBoost</span>
+                    <span class="tag">LightGBM</span>
+                    <span class="tag">CatBoost</span>
+                    <span class="tag">Jupyter</span>
+                    <span class="tag">UTFSM 2024</span>
+                </div>
+            </article>
+
+        </div><!-- /panel-a -->
+
+
+        <!-- ══════════════════════════════════════════════════
+             PANEL B — EJECUTIVA
+        ══════════════════════════════════════════════════ -->
+        <div class="pf-panel" id="panel-b" style="display:none">
+
+            <article class="article-card">
+                <div class="project-card-header">
+                    <time datetime="2024-04-17">Abril 2024</time>
+                    <span class="project-status-badge project-status-badge--live">✓ Memoria Publicada</span>
+                </div>
+                <h2 class="project-card-title">
+                    Predicción de Tiempos de Entrega en E-commerce
+                    <span class="ml-grade-badge">Nota 95 / 100</span>
+                </h2>
+                <p class="card-meta">Machine Learning · Cadena de Suministro · UTFSM · Dpto. de Industrias</p>
+
+                <!-- TL;DR -->
+                <div class="pf-tldr">
+                    <strong>TL;DR —</strong> Pipeline end-to-end sobre 113k pedidos reales de Olist (Brasil):
+                    feature engineering geográfico y temporal, baseline estadístico con diagnóstico completo
+                    de supuestos OLS, comparativa de 7 modelos ML con validación cruzada k=5 y optimización
+                    bayesiana de hiperparámetros. Random Forest con Bayesiana alcanzó
+                    <strong>R² adj = 68.06%</strong> y <strong>RMSE = 5.14 días</strong>,
+                    superando en <strong>+15 pp</strong> al baseline lineal. Nota de defensa: <strong>95/100</strong>.
+                </div>
+
+                <!-- Métricas -->
+                <div class="metrics-grid metrics-grid--sm">
+                    <div class="metric-card">
+                        <div class="metric-value">113k</div>
+                        <div class="metric-title">Pedidos reales</div>
+                        <div class="metric-description">Olist · Brasil 2016–2018</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">68.06%</div>
+                        <div class="metric-title">R² ajustado final</div>
+                        <div class="metric-description">Random Forest + Bayesiana</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">5.14 d</div>
+                        <div class="metric-title">RMSE final</div>
+                        <div class="metric-description">Error en días — modelo ganador</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">+15 pp</div>
+                        <div class="metric-title">Mejora vs. baseline</div>
+                        <div class="metric-description">RF (68%) vs. Ridge Log-Lin (53%)</div>
+                    </div>
+                </div>
+
+                <!-- Pipeline ML visual (reutiliza clases existentes) -->
+                <p class="card-meta" style="margin-top:1.25rem">Pipeline metodológico — de datos crudos al modelo ganador:</p>
+                <div class="pf-pipeline-strip">
+                    <div class="pf-pipeline-step">
+                        <span class="pf-pipeline-badge">01</span>
+                        <span class="pf-pipeline-name">Data Prep</span>
+                        <span class="pf-pipeline-cost">8 tablas SQL</span>
+                    </div>
+                    <span class="pf-pipeline-arrow" aria-hidden="true">→</span>
+                    <div class="pf-pipeline-step">
+                        <span class="pf-pipeline-badge">02</span>
+                        <span class="pf-pipeline-name">Feature Eng.</span>
+                        <span class="pf-pipeline-cost">Haversine · HOL</span>
+                    </div>
+                    <span class="pf-pipeline-arrow" aria-hidden="true">→</span>
+                    <div class="pf-pipeline-step">
+                        <span class="pf-pipeline-badge">03</span>
+                        <span class="pf-pipeline-name">EDA</span>
+                        <span class="pf-pipeline-cost">4 bloques</span>
+                    </div>
+                    <span class="pf-pipeline-arrow" aria-hidden="true">→</span>
+                    <div class="pf-pipeline-step">
+                        <span class="pf-pipeline-badge">04</span>
+                        <span class="pf-pipeline-name">RLM Baseline</span>
+                        <span class="pf-pipeline-cost">6 tests OLS</span>
+                    </div>
+                    <span class="pf-pipeline-arrow" aria-hidden="true">→</span>
+                    <div class="pf-pipeline-step">
+                        <span class="pf-pipeline-badge">05</span>
+                        <span class="pf-pipeline-name">7 Modelos ML</span>
+                        <span class="pf-pipeline-cost">CV k=5</span>
+                    </div>
+                    <span class="pf-pipeline-arrow" aria-hidden="true">→</span>
+                    <div class="pf-pipeline-step">
+                        <span class="pf-pipeline-badge pf-pipeline-badge--cost">06</span>
+                        <span class="pf-pipeline-name">HPO</span>
+                        <span class="pf-pipeline-cost">3 estrategias</span>
+                    </div>
+                    <span class="pf-pipeline-arrow" aria-hidden="true">→</span>
+                    <div class="pf-pipeline-step">
+                        <span class="pf-pipeline-badge">★</span>
+                        <span class="pf-pipeline-name">Random Forest</span>
+                        <span class="pf-pipeline-cost">R²=68.06%</span>
+                    </div>
+                </div>
+
+                <!-- Decisiones clave -->
+                <p class="card-meta" style="margin-top:1.25rem">Decisiones metodológicas clave:</p>
+                <div class="pf-decision-grid">
+                    <div class="pf-decision-item">
+                        <strong>Log-Lin como baseline</strong>
+                        <span>CV std mínimo (0.0031) y residuos más normales (S≈−0.04, K≈2.44) entre las 5 transformaciones evaluadas</span>
+                    </div>
+                    <div class="pf-decision-item">
+                        <strong>Cook's Distance</strong>
+                        <span>Eliminación de datos influyentes mejoró R² adj en +10 pp (Lin-Lin) y +7 pp (Log-Lin) sobre el dataset completo</span>
+                    </div>
+                    <div class="pf-decision-item">
+                        <strong>Random Forest sobre boosting</strong>
+                        <span>68.06% vs 66.63% (CatBoost) — mayor R² ajustado post-HPO. LightGBM preferible si se prioriza estabilidad (CV std 0.0088)</span>
+                    </div>
+                    <div class="pf-decision-item">
+                        <strong>Bayesiana ganó en RF y LightGBM</strong>
+                        <span>Modela la distribución de hiperparámetros prometedores y dirige la búsqueda — más eficiente que Grid/Random en espacios continuos de alta dimensión</span>
+                    </div>
+                </div>
+
+                <!-- Tabla resumen ejecutivo -->
+                <p class="card-meta" style="margin-top:1.25rem">Resultados post-optimización — mejores modelos:</p>
+                <div class="ml-table-wrapper">
+                    <table class="ml-results-table">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>R² ajustado</th>
+                                <th>RMSE (días)</th>
+                                <th>MAE (días)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="ml-row--baseline">
+                                <td><em>RLM Log-Lin Ridge (baseline)</em></td>
+                                <td><em>53.04%</em></td>
+                                <td><em>—</em></td>
+                                <td><em>—</em></td>
+                            </tr>
+                            <tr>
+                                <td>XGBoost (opt.)</td>
+                                <td>66.01%</td>
+                                <td>5.30</td>
+                                <td>3.31</td>
+                            </tr>
+                            <tr>
+                                <td>CatBoost (opt.)</td>
+                                <td>66.63%</td>
+                                <td>5.26</td>
+                                <td>3.34</td>
+                            </tr>
+                            <tr class="ml-row--winner">
+                                <td><strong>Random Forest — Bayesiana ★</strong></td>
+                                <td><strong>68.06%</strong></td>
+                                <td><strong>5.14</strong></td>
+                                <td><strong>3.18</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="ml-table-note">Todos los modelos ML superan consistentemente el baseline lineal (+15 pp). Validación cruzada k=5 sobre el mismo split train/test.</p>
+
+                <!-- Stack compacto -->
+                <div class="stack-grid" style="margin-top:1.25rem">
+                    <div class="stack-section">
+                        <h4>Datos y EDA</h4>
+                        <ul>
+                            <li>Python 3.10 · pandas · NumPy</li>
+                            <li>matplotlib · seaborn · PCA</li>
+                            <li>Jupyter Notebook · gdown</li>
+                        </ul>
+                    </div>
+                    <div class="stack-section">
+                        <h4>Estadística / RLM</h4>
+                        <ul>
+                            <li>statsmodels OLS · GLS · Ridge</li>
+                            <li>scipy · VIF · Jarque-Bera</li>
+                            <li>Goldfeld-Quandt · Breusch-Pagan · DW</li>
+                        </ul>
+                    </div>
+                    <div class="stack-section">
+                        <h4>Machine Learning</h4>
+                        <ul>
+                            <li>scikit-learn · XGBoost · LightGBM</li>
+                            <li>CatBoost · Random Forest · SVR</li>
+                            <li>k-fold Cross Validation (k=5)</li>
+                        </ul>
+                    </div>
+                    <div class="stack-section">
+                        <h4>HPO</h4>
+                        <ul>
+                            <li>GridSearchCV · RandomizedSearchCV</li>
+                            <li>Optimización Bayesiana (scikit-optimize)</li>
+                            <li>AIC · CV R² ± std como criterio</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="project-card-ctas">
+                    <a href="../../assets/docs/Proyecto-de-Titulo-Francisco-Mora.pdf"
+                        target="_blank" rel="noopener noreferrer" class="project-cta-primary">
+                        Descargar Memoria Completa →
+                    </a>
+                    <a href="/pages/projects.html" class="project-cta-secondary">
+                        ← Volver a Proyectos
+                    </a>
+                    <span class="cta-note">◷ Repositorio con notebooks en preparación</span>
+                </div>
+                <div class="tags-list">
+                    <span class="tag">Python 3.10</span>
+                    <span class="tag">scikit-learn</span>
+                    <span class="tag">Random Forest</span>
+                    <span class="tag">XGBoost</span>
+                    <span class="tag">CatBoost</span>
+                    <span class="tag">statsmodels</span>
+                    <span class="tag">Optimización Bayesiana</span>
+                    <span class="tag">UTFSM 2024</span>
+                </div>
+            </article>
+
+        </div><!-- /panel-b -->
+
+    </main>
+
+    <footer></footer>
+    <script src="/assets/js/load-components.js"></script>
+    <script src="/assets/js/dark-mode.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/mobile-menu.js"></script>
+    <script>
+    /* ── Layout Toggle: persiste selección en localStorage ── */
+    (function () {
+        var STORAGE_KEY = 'pf-layout-ml';
+        var panels = {
+            'panel-a': document.getElementById('panel-a'),
+            'panel-b': document.getElementById('panel-b')
+        };
+        var buttons = document.querySelectorAll('.pf-layout-btn');
+
+        function activate(id) {
+            Object.keys(panels).forEach(function (k) {
+                panels[k].style.display = (k === id) ? '' : 'none';
+            });
+            buttons.forEach(function (btn) {
+                btn.classList.toggle('active', btn.dataset.panel === id);
+            });
+            try { localStorage.setItem(STORAGE_KEY, id); } catch(e) {}
+        }
+
+        buttons.forEach(function (btn) {
+            btn.addEventListener('click', function () { activate(btn.dataset.panel); });
+        });
+
+        var saved;
+        try { saved = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+        if (saved && panels[saved]) { activate(saved); } else { activate('panel-a'); }
+    })();
+    </script>
+</body>
+</html>

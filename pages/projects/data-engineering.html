@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pipeline de datos B2B con arquitectura Medallion de 6 fases, NLP con BETO Spanish BERT, deduplicación semántica CUDA y ChatOps sobre Proxmox VE — Francisco Mora, Data Engineer.">
     <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
     <title>Enterprise B2B Data Pipeline — Francisco Mora</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../../assets/css/main.css">
@@ -29,8 +29,6 @@
                 stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
         </svg>
     </div>
-
-
     <!-- Validation Modal -->
     <div id="validation-modal" style="display: none;">
         <div class="validation-overlay"></div>
@@ -51,104 +49,73 @@
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
     </div>
-
-
     <!-- Blocked Message -->
     <div id="blocked-message" style="display: none;">
         <h2>Acceso Denegado</h2>
         <p>Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.</p>
     </div>
-
-
     <main id="main-content">
-
-
-        <!-- ══════════════════════════════════════
-             HEADER
-        ══════════════════════════════════════ -->
+        <!-- HEADER -->
         <header class="project-header">
             <h1>Enterprise B2B Data Pipeline</h1>
-            <p class="project-subtitle">MLOps · Data Engineering · NLP · Alta Disponibilidad</p>
-            <!-- .project-header time → components.css -->
+            <p class="project-subtitle">Data Engineering · MLOps · NLP · Alta Disponibilidad</p>
             <time datetime="2024-01">2024 – 2025 · En desarrollo activo</time>
         </header>
-
-
-        <!-- ══════════════════════════════════════
-             MÉTRICAS
-        ══════════════════════════════════════ -->
+        <!-- MÉTRICAS -->
         <section class="project-article">
             <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-value">6 Fases</div>
                     <p class="metric-title">Arquitectura Medallion</p>
-                    <p class="metric-description">Bronze → Silver → Gold + Infra + ChatOps</p>
+                    <p class="metric-description">Bronze → Silver → Gold + Infraestructura + ChatOps</p>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">BETO</div>
-                    <p class="metric-title">Clasificador NLP</p>
-                    <p class="metric-description">Fine-tuning Spanish BERT con Active Learning en 5 buckets</p>
+                    <p class="metric-title">NLP Fine-tuning</p>
+                    <p class="metric-description">Spanish BERT · Active Learning en 5 buckets de incertidumbre</p>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">CUDA</div>
-                    <p class="metric-title">GPU Local</p>
-                    <p class="metric-description">TF-IDF coseno + MinHash/LSH para deduplicación semántica</p>
+                    <div class="metric-value">GPU</div>
+                    <p class="metric-title">Compute On-Premise</p>
+                    <p class="metric-description">CUDA FP16 · TF-IDF coseno y MinHash/LSH benchmarkeados</p>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">$0</div>
                     <p class="metric-title">Costo Cloud Compute</p>
-                    <p class="metric-description">Proxmox VE on-premise + rclone para sync OneDrive/S3</p>
+                    <p class="metric-description">Proxmox VE on-premise · sincronización rclone a OneDrive/S3</p>
                 </div>
             </div>
         </section>
-
-
-        <!-- ══════════════════════════════════════
-             EL PROBLEMA
-        ══════════════════════════════════════ -->
+        <!-- EL PROBLEMA -->
         <section class="project-article">
             <h2>El Problema</h2>
-            <p>
-                El mercado B2B de recursos humanos genera miles de publicaciones diarias en plataformas
-                de empleo, pero la gran mayoría no son ofertas laborales reales: son ruido — avisos
-                de proveedores, contenido duplicado, publicaciones en otros idiomas o datos mal formateados
-                por SPAs que truncan el DOM antes del render completo.
-            </p>
-            <p>
-                Construir un sistema capaz de extraer, limpiar, deduplicar y clasificar ese volumen
-                de datos de forma confiable —sin infraestructura cloud cara y con resiliencia ante
-                fallos de red— requería más que un script de scraping. Requería una arquitectura.
-            </p>
+            <p>El mercado B2B de recursos humanos genera miles de publicaciones diarias en plataformas
+            de empleo, pero la gran mayoría no son ofertas laborales reales: son ruido — avisos de
+            proveedores, contenido duplicado, publicaciones en otros idiomas o datos mal formateados
+            por SPAs que truncan el DOM antes del render completo.</p>
+            <p>Construir un sistema capaz de extraer, limpiar, deduplicar y clasificar ese volumen
+            de datos de forma confiable —sin infraestructura cloud cara y con resiliencia ante fallos
+            de red— requería más que un script de scraping. Requería una arquitectura.</p>
             <blockquote class="project-quote">
                 El objetivo: un pipeline capaz de operar de forma autónoma semanas seguidas,
                 reportar su propio estado, y alertar al operador solo cuando realmente importa.
             </blockquote>
         </section>
-
-
-        <!-- ══════════════════════════════════════
-             ARQUITECTURA POR FASES
-        ══════════════════════════════════════ -->
+        <!-- ARQUITECTURA POR FASES -->
         <section class="project-article">
             <h2>Arquitectura por Fases</h2>
-
-
             <div class="architecture-component">
                 <h3>
                     <span class="component-badge">FASE 1</span>
                     Command &amp; Control — ChatOps
                 </h3>
                 <p class="component-label">Orquestación · Telemetría · Seguridad Operacional</p>
-                <p>
-                    El cerebro del sistema: un <strong>Telegram Daemon</strong> con RBAC por
-                    <code>TELEGRAM_ADMIN_IDS</code> que actúa como panel de control remoto desde
-                    cualquier dispositivo. Implementa apagado graceful mediante flags IPC
-                    (<code>stop_signal.flag</code>) y <code>os.fsync()</code> para bypass del caché
-                    SMB/Windows. Telemetría en tiempo real desde <code>status.json</code> con
-                    <code>FileLock</code> para acceso atómico. Screenshots forenses completos del
-                    escritorio con PyAutoGUI.
-                </p>
-                <!-- .architecture-component .tags-list { margin-top: 0.75rem } → components.css -->
+                <p>El cerebro del sistema: un <strong>Telegram Daemon</strong> con RBAC por
+                <code>TELEGRAM_ADMIN_IDS</code> que actúa como panel de control remoto desde cualquier
+                dispositivo. Implementa apagado graceful mediante flags IPC (<code>stop_signal.flag</code>)
+                y <code>os.fsync()</code> para bypass del caché SMB/Windows. Telemetría en tiempo real
+                desde <code>status.json</code> con <code>FileLock</code> para acceso atómico.
+                Screenshots forenses completos del escritorio con PyAutoGUI.</p>
                 <div class="tags-list">
                     <span class="tag">Python</span>
                     <span class="tag">Telegram Bot API</span>
@@ -159,23 +126,18 @@
                     <span class="tag">RBAC</span>
                 </div>
             </div>
-
-
             <div class="architecture-component">
                 <h3>
                     <span class="component-badge">FASE 2</span>
                     Data Collection — Extracción Biomimética
                 </h3>
                 <p class="component-label">Scraping · Anti-Bot · Session Management</p>
-                <p>
-                    Motor de scraping sobre <strong>Selenium + Microsoft Edge con perfiles
-                    persistentes</strong> del SO. El enfoque anti-bot es arquitectónico: hereda
-                    cookies de sesión del perfil (no inyecta credenciales en runtime que detectaría
-                    el WAF). Implementa <strong>distribución Normal gaussiana</strong> para delays
-                    humanos eludiendo detección heurística. Self-healing ante Login Wall: detecta
-                    redirección, pausa táctica, alerta HITL vía Telegram y auto-termina si persiste.
-                    Workers paralelos por perfil de navegador.
-                </p>
+                <p>Motor de scraping sobre <strong>Selenium + Microsoft Edge con perfiles persistentes</strong>
+                del SO. El enfoque anti-bot es arquitectónico: hereda cookies de sesión del perfil en lugar
+                de inyectar credenciales en runtime, lo que detectaría el WAF. Implementa
+                <strong>distribución Normal gaussiana</strong> para delays humanos eludiendo detección
+                heurística. Self-healing ante Login Wall: detecta redirección, pausa táctica, alerta HITL
+                vía Telegram y auto-termina si persiste. Workers paralelos por perfil de navegador.</p>
                 <div class="tags-list">
                     <span class="tag">Selenium</span>
                     <span class="tag">Microsoft Edge</span>
@@ -185,21 +147,16 @@
                     <span class="tag">subprocess</span>
                 </div>
             </div>
-
-
             <div class="architecture-component">
                 <h3>
                     <span class="component-badge">FASE 3</span>
                     Bronze Layer — Ingesta Event-Driven
                 </h3>
                 <p class="component-label">Data Lake · Spooler Asíncrono · Merge Histórico</p>
-                <p>
-                    Data Lake local en CSV con patrón <strong>Spooler asíncrono</strong>. El
-                    collector agrega datos en staging y el processor los consolida al volumen base.
-                    Incluye merge de datasets históricos y limpieza NLP agresiva: eliminación de
-                    emojis, URLs, HTML y truncamientos de SPA. Deduplicación exacta por hash antes
-                    de persistir.
-                </p>
+                <p>Data Lake local en CSV con patrón <strong>Spooler asíncrono</strong>: el collector
+                agrega datos en staging y el processor los consolida al volumen base. Incluye merge de
+                datasets históricos y limpieza NLP agresiva: eliminación de emojis, URLs, HTML y
+                truncamientos de SPA. Deduplicación exacta por hash antes de persistir.</p>
                 <div class="tags-list">
                     <span class="tag">pandas</span>
                     <span class="tag">xxhash</span>
@@ -209,24 +166,19 @@
                     <span class="tag">Merge Histórico</span>
                 </div>
             </div>
-
-
             <div class="architecture-component">
                 <h3>
                     <span class="component-badge">FASE 4</span>
                     High Availability &amp; Zero-Trust Sync
                 </h3>
                 <p class="component-label">Proxmox · LXC Air-Gapped · rclone Cloud Sync</p>
-                <p>
-                    La fase más crítica de infraestructura. Resuelve el problema real de que el
-                    kernel Linux bloquea procesos en <strong>Estado D (Uninterruptible Sleep)</strong>
-                    cuando el punto de montaje SMB/CIFS desaparece abruptamente, paralizando el
-                    hipervisor Proxmox completo. Solución en dos capas: Capa 1 (elegante) — flag
-                    IPC + watchdog en LXC se apaga voluntariamente. Capa 2 (desfibrilador) — hook
-                    Perl en Proxmox con <code>umount -f -l</code> + <code>pct stop</code> asíncrono
-                    ante BSOD o corte eléctrico. rclone sincroniza a OneDrive/S3 con validación MD5
-                    y backup incremental.
-                </p>
+                <p>La fase más crítica de infraestructura. Resuelve el problema real del kernel Linux
+                bloqueando procesos en <strong>Estado D (Uninterruptible Sleep)</strong> cuando el punto
+                de montaje SMB/CIFS desaparece abruptamente, paralizando el hipervisor Proxmox completo.
+                Solución en dos capas: Capa 1 (elegante) — flag IPC + watchdog en LXC se apaga
+                voluntariamente antes de cualquier I/O peligroso. Capa 2 (desfibrilador) — hook Perl en
+                Proxmox con <code>umount -f -l</code> + <code>pct stop</code> asíncrono ante BSOD o
+                corte eléctrico. rclone sincroniza a OneDrive/S3 con validación MD5 y backup incremental.</p>
                 <div class="tags-list">
                     <span class="tag">Proxmox VE</span>
                     <span class="tag">LXC Containers</span>
@@ -238,23 +190,19 @@
                     <span class="tag">MD5 Validation</span>
                 </div>
             </div>
-
-
             <div class="architecture-component">
                 <h3>
                     <span class="component-badge">FASE 5</span>
                     Silver Layer — MDM &amp; Data Engineering
                 </h3>
                 <p class="component-label">Deduplicación Semántica · Filtrado Idioma · Pipeline 5 Etapas</p>
-                <p>
-                    Pipeline de deduplicación multicapa con <strong>dos algoritmos benchmarkeados</strong>:
-                    TF-IDF + Coseno CUDA (O(n²) distribuido en GPU, mayor precisión semántica) vs.
-                    MinHash + LSH (O(n), escalable, índice persistente en disco). Pipeline de 5 etapas:
-                    ① deduplicación exacta por hash, ② filtrado heurístico por criterios B2B,
-                    ③ near-duplicates semánticos, ④ verificación Levenshtein con difflib,
-                    ⑤ exportación Silver + reporte de auditoría. Filtro de idioma con
-                    <strong>voting ensemble de 5 capas</strong> (Lingua + langdetect + heurísticas).
-                </p>
+                <p>Pipeline de deduplicación multicapa con <strong>dos algoritmos benchmarkeados</strong>:
+                TF-IDF + Coseno CUDA (O(n²) distribuido en GPU, mayor precisión semántica) vs.
+                MinHash + LSH (O(n), escalable, índice persistente en disco). Pipeline de 5 etapas:
+                ① deduplicación exacta por hash, ② filtrado heurístico por criterios B2B,
+                ③ near-duplicates semánticos, ④ verificación Levenshtein con difflib,
+                ⑤ exportación Silver + reporte de auditoría. Filtro de idioma con
+                <strong>voting ensemble de 5 detectores</strong> (Lingua + langdetect + heurísticas).</p>
                 <div class="tags-list">
                     <span class="tag">TF-IDF CUDA</span>
                     <span class="tag">MinHash LSH</span>
@@ -266,24 +214,20 @@
                     <span class="tag">scikit-learn</span>
                 </div>
             </div>
-
-
             <div class="architecture-component">
                 <h3>
                     <span class="component-badge">FASE 6</span>
                     Gold Layer — MLOps &amp; NLP
                 </h3>
                 <p class="component-label">BETO Fine-tuning · Active Learning · WeightedTrainer</p>
-                <p>
-                    Fine-tuning de <strong>BETO</strong> (<code>dccuchile/bert-base-spanish-wwm-cased</code>)
-                    en modo air-gapped. <code>WeightedTrainer</code> con <code>class_weights</code>
-                    automáticos para dataset desbalanceado. FP16 mixed precision + padding dinámico
-                    para optimizar VRAM. Active Learning loop de 5 buckets por incertidumbre del modelo
-                    (&lt;0.15 basura, 0.40–0.60 zona crítica QA, &gt;0.85 oferta confirmada).
-                    Salida en <strong>Excel con formato condicional dinámico</strong> (openpyxl)
-                    para revisión HITL visual. Dataset V2 construido integrando ground truth V1 +
-                    batches revisados por Active Learning.
-                </p>
+                <p>Fine-tuning de <strong>BETO</strong> (<code>dccuchile/bert-base-spanish-wwm-cased</code>)
+                en modo air-gapped. <code>WeightedTrainer</code> con <code>class_weights</code> automáticos
+                para dataset desbalanceado. FP16 mixed precision + padding dinámico para optimizar VRAM.
+                Active Learning loop de 5 buckets por incertidumbre del modelo (&lt;0.15 descartado,
+                0.40–0.60 zona crítica QA, &gt;0.85 oferta confirmada). Salida en
+                <strong>Excel con formato condicional dinámico</strong> (openpyxl) para revisión HITL
+                visual. Dataset V2 construido integrando ground truth V1 + batches revisados por
+                Active Learning.</p>
                 <div class="tags-list">
                     <span class="tag">HuggingFace Transformers</span>
                     <span class="tag">BETO Spanish BERT</span>
@@ -295,14 +239,92 @@
                     <span class="tag">HITL</span>
                 </div>
             </div>
-
-
         </section>
-
-
-        <!-- ══════════════════════════════════════
-             STACK COMPLETO
-        ══════════════════════════════════════ -->
+        <!-- DECISIONES DE INGENIERÍA DE DATOS -->
+        <section class="project-article">
+            <h2>Decisiones de Ingeniería de Datos</h2>
+            <p>Cada decisión fue evaluada por impacto medible en producción o benchmarkeada localmente.
+            Estas cuatro son las más representativas del enfoque de diseño.</p>
+            <div class="architecture-component">
+                <h3>xxhash vs hashlib para deduplicación exacta</h3>
+                <p class="component-label">Rendimiento · Throughput · Fases 3 &amp; 5</p>
+                <p><strong>Alternativa evaluada:</strong> hashlib (SHA-256 / MD5) — estándar de librería,
+                sin dependencias adicionales, criptográficamente seguro.<br>
+                <strong>Decisión:</strong> xxhash. 3× más rápido en benchmarks locales para strings de
+                longitud variable (títulos + descripciones de empleo). No criptográfico, pero suficiente
+                para deduplicación por contenido donde el adversario no existe. El ahorro de ciclos
+                acumulado en millones de registros es significativo en CPU sin GPU dedicada para
+                esta tarea.</p>
+                <div class="tags-list">
+                    <span class="tag">xxhash</span>
+                    <span class="tag">hashlib</span>
+                    <span class="tag">Benchmark local</span>
+                    <span class="tag">Throughput</span>
+                </div>
+            </div>
+            <div class="architecture-component">
+                <h3>TF-IDF CUDA vs MinHash/LSH para near-duplicates</h3>
+                <p class="component-label">Precisión vs Escalabilidad · O(n²) vs O(n) · Fase 5</p>
+                <p><strong>Problema:</strong> near-duplicates semánticos no detectables por hash exacto —
+                el mismo anuncio con variaciones menores de texto.<br>
+                <strong>TF-IDF + Coseno CUDA:</strong> O(n²) sobre GPU, alta precisión semántica, índice
+                no persistente — requiere GPU disponible en cada ejecución.<br>
+                <strong>MinHash + LSH:</strong> O(n) aproximado, índice persistente en disco, escalable
+                sin GPU, tolerancia configurable por número de permutaciones.<br>
+                <strong>Decisión final:</strong> ambos disponibles como módulos intercambiables. TF-IDF
+                para runs de limpieza profunda con GPU disponible; MinHash/LSH para ejecución continua
+                sin GPU.</p>
+                <div class="tags-list">
+                    <span class="tag">TF-IDF</span>
+                    <span class="tag">Cosine Similarity</span>
+                    <span class="tag">MinHash LSH</span>
+                    <span class="tag">datasketch</span>
+                    <span class="tag">scikit-learn</span>
+                    <span class="tag">CUDA</span>
+                </div>
+            </div>
+            <div class="architecture-component">
+                <h3>IPC Flag vs SIGTERM para apagado graceful</h3>
+                <p class="component-label">Resiliencia · Estado D · Fases 1 &amp; 4</p>
+                <p><strong>Problema:</strong> el kernel Linux coloca procesos en Estado D
+                (Uninterruptible Sleep) cuando el punto de montaje SMB/CIFS desaparece. SIGTERM no
+                interrumpe Estado D — el proceso queda zombi y bloquea el hipervisor completo.<br>
+                <strong>Decisión:</strong> señalización mediante flag de archivo (<code>stop_signal.flag</code>)
+                con <code>os.fsync()</code> para garantizar escritura inmediata en filesystems de red.
+                El daemon Python lee el flag en cada iteración y ejecuta cleanup antes de cualquier
+                operación I/O peligrosa. SIGTERM queda como fallback únicamente en el hook Perl del
+                hipervisor ante fallos catastróficos.</p>
+                <div class="tags-list">
+                    <span class="tag">IPC Flag</span>
+                    <span class="tag">os.fsync()</span>
+                    <span class="tag">Estado D Linux</span>
+                    <span class="tag">SMB/CIFS</span>
+                    <span class="tag">Graceful Shutdown</span>
+                    <span class="tag">Proxmox VE</span>
+                </div>
+            </div>
+            <div class="architecture-component">
+                <h3>Active Learning vs etiquetado completo del dataset</h3>
+                <p class="component-label">MLOps · Calidad del dato · Dataset Versioning · Fase 6</p>
+                <p><strong>Problema:</strong> etiquetar manualmente miles de publicaciones es inviable.
+                Un clasificador entrenado sobre datos desbalanceados sin estrategia produce alta precisión
+                en la clase mayoritaria y bajo recall en la que importa (ofertas reales).<br>
+                <strong>Decisión:</strong> Active Learning loop de 5 buckets por probabilidad de
+                incertidumbre. Solo se revisan manualmente los registros en la zona crítica (0.40–0.60);
+                los extremos se etiquetan automáticamente. <code>WeightedTrainer</code> corrige el
+                desbalance con <code>class_weights</code> calculados desde la distribución real del dataset.
+                Dataset V2 = V1 + batches revisados, con trazabilidad completa de origen por registro.</p>
+                <div class="tags-list">
+                    <span class="tag">Active Learning</span>
+                    <span class="tag">WeightedTrainer</span>
+                    <span class="tag">class_weights</span>
+                    <span class="tag">BETO</span>
+                    <span class="tag">HITL</span>
+                    <span class="tag">Dataset Versioning</span>
+                </div>
+            </div>
+        </section>
+        <!-- STACK COMPLETO -->
         <section class="project-article">
             <h2>Stack por Capa</h2>
             <div class="stack-grid">
@@ -358,18 +380,11 @@
                 </div>
             </div>
         </section>
-
-
-        <!-- ══════════════════════════════════════
-             DOCUMENTACIÓN POR FASE
-        ══════════════════════════════════════ -->
+        <!-- DOCUMENTACIÓN POR FASE -->
         <section class="project-article">
             <h2>Documentación Técnica</h2>
-            <p>
-                Cada fase tiene su propia documentación de arquitectura, decisiones de diseño
-                y snippets de código representativos en el repositorio público de GitHub.
-            </p>
-            <!-- a.doc-card { text-decoration: none } → components.css -->
+            <p>Cada fase tiene su propia documentación de arquitectura, decisiones de diseño
+            y snippets de código representativos en el repositorio público de GitHub.</p>
             <div class="docs-grid">
                 <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio/blob/main/docs/FASE_1_chatops.md"
                    target="_blank" rel="noopener noreferrer" class="doc-card">
@@ -409,38 +424,22 @@
                 </a>
             </div>
         </section>
-
-
-        <!-- ══════════════════════════════════════
-             CTA
-        ══════════════════════════════════════ -->
+        <!-- CTA -->
         <div class="project-cta">
             <h2>¿Te interesa ver el código?</h2>
-            <p>
-                El repositorio público documenta la arquitectura completa, decisiones técnicas
-                y snippets de los patrones clave — sin exponer código propietario ni credenciales.
-            </p>
+            <p>El repositorio público documenta la arquitectura completa, decisiones técnicas
+            y snippets de los patrones clave — sin exponer código propietario ni credenciales.</p>
             <div class="cta-box">
                 <a href="https://github.com/franmdev/b2b-data-pipeline-portfolio"
-                   target="_blank" rel="noopener noreferrer">
-                    Ver Repositorio Público en GitHub →
-                </a>
+                   target="_blank" rel="noopener noreferrer">Ver Repositorio Público en GitHub →</a>
                 <a href="/pages/projects.html">← Volver a Proyectos</a>
             </div>
         </div>
-
-
     </main>
-
-
     <footer></footer>
-
-
     <script src="/assets/js/load-components.js"></script>
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/mobile-menu.js"></script>
-
-
 </body>
 </html>

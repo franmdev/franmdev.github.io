@@ -1,53 +1,35 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Francisco Mora — Ingeniero Civil Industrial e Informático UTFSM. Data Engineer con foco en MLOps, pipelines Medallion, NLP con BETO y arquitecturas serverless en Azure.">
     <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-    <title>Sobre mi - Francisco Mora</title>
-
-
-
+    <title>Sobre Mí — Francisco Mora</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-
     <link rel="stylesheet" href="../assets/css/main.css">
-
-
-
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-QVW5058EVE');
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-QVW5058EVE');
     </script>
-
-
-
+    <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
-
-
-
 <body class="list" id="top">
     <header class="header"><!-- navbar cargado por load-components.js --></header>
     <div id="loader-wrapper">
         <p>Validando conexión segura...</p>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
             <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="15.7 62.8"
-                stroke-dashoffset="0" class="spinner-circle"></circle>
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
         </svg>
     </div>
-
-
-
+    <!-- VALIDATION MODAL — style="display:none" FUNCIONAL (main.js), no tocar -->
     <div id="validation-modal" style="display: none;">
         <div class="validation-overlay"></div>
         <div class="validation-modal-content">
@@ -55,258 +37,215 @@
                 <h2>Verificación de Seguridad</h2>
                 <p>Por favor, complete la verificación para continuar</p>
             </div>
-
-
-
-            <!-- Spinner de carga (visible si la API tarda) -->
+            <!-- style="display:none" FUNCIONAL (main.js), no tocar -->
             <div id="validation-spinner" class="validation-spinner" style="display: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="15.7 62.8"
-                        stroke-dashoffset="0" class="spinner-circle"></circle>
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                        stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
                 </svg>
                 <p>Validando...</p>
             </div>
-
-
-
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
     </div>
-
-
-
-    <!-- FIX #1: Eliminado el segundo #blocked-message duplicado que existía aquí -->
+    <!-- BLOCKED MESSAGE — style="display:none" FUNCIONAL (main.js), no tocar -->
     <div id="blocked-message" style="display: none;">
         <h2>Acceso Denegado</h2>
-        <p>
-            Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.
-        </p>
+        <p>Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.</p>
     </div>
-
-
-
     <main id="main-content">
-        <h1 class="about-page-title">
-            Sobre Mí
-        </h1>
-
-
-
-        <!-- Bio Section -->
+        <h1 class="about-page-title">Sobre Mí</h1>
+        <!-- BIO -->
         <section class="about-bio">
             <div>
-                <p>
-                    Soy <strong>Ingeniero Civil Industrial</strong> e <strong>Ingeniero en Informática</strong>
-                    de la Universidad Técnica Federico Santa María (UTFSM), complementado con un
-                    <strong>Diplomado en Análisis de Datos</strong> de la Universidad del Desarrollo (UDD).
-                </p>
-
-
-
-                <p>
-                    Me posiciono como un <strong>Full Stack Data Professional</strong>, enfocando mi carrera
-                    en la intersección del <strong>Machine Learning</strong>, la <strong>Ingeniería de Datos</strong>
-                    y la <strong>Inteligencia de Negocios</strong>.
-                </p>
-
-
-
-                <p>
-                    Mi fortaleza radica en combinar una sólida base matemática y analítica con habilidades
-                    prácticas de ingeniería de software para construir soluciones de datos <strong>end-to-end</strong>:
-                    desde el modelado predictivo hasta su implementación en <strong>sistemas productivos escalables y
-                        seguros</strong>.
-                </p>
-
-
-                <!-- FIX #2: Frase nueva sobre el pipeline — misma estructura de párrafo -->
-                <p>
-                    Actualmente desarrollo un <strong>pipeline empresarial B2B de 6 fases</strong> con
-                    arquitectura Medallion (Bronze → Silver → Gold): scraping biomimético con Selenium,
-                    deduplicación semántica sobre CUDA/MinHash y clasificación NLP con
-                    <strong>BETO (Spanish BERT)</strong> y Active Learning, todo orquestado desde
-                    Telegram y desplegado en Proxmox VE con sincronización Zero-Trust a la nube.
-                </p>
+                <p>Soy <strong>Ingeniero Civil Industrial</strong> e <strong>Ingeniero en Informática</strong>
+                de la Universidad Técnica Federico Santa María (UTFSM), complementado con un
+                <strong>Diplomado en Análisis de Datos</strong> de la Universidad del Desarrollo (UDD).</p>
+                <p>Me especializo en la intersección del <strong>Machine Learning</strong>, la
+                <strong>Ingeniería de Datos</strong> y la <strong>Inteligencia de Negocios</strong>:
+                diseño y construyo pipelines de datos end-to-end que van desde la extracción y
+                transformación hasta el modelado predictivo en producción.</p>
+                <p>Mi fortaleza es combinar una sólida base matemática y analítica con habilidades
+                prácticas de ingeniería de software para construir soluciones <strong>escalables,
+                seguras y mantenibles</strong>: desde el schema de base de datos hasta el CI/CD
+                del modelo en Azure.</p>
+                <p>Actualmente desarrollo un <strong>pipeline empresarial B2B de 6 fases</strong> con
+                arquitectura Medallion (Bronze → Silver → Gold): scraping biomimético con Selenium,
+                deduplicación semántica sobre CUDA y MinHash/LSH, y clasificación NLP con
+                <strong>BETO (Spanish BERT)</strong> y Active Learning, orquestado desde Telegram Bot
+                y desplegado en Proxmox VE con sincronización Zero-Trust a la nube.</p>
             </div>
         </section>
-
-
-
-        <!-- Skills Section -->
-        <section id="skills" class="about-skills">
-            <h2 class="about-section-title">
-                Habilidades Técnicas
-            </h2>
-
-
-
+        <!-- FORMACIÓN -->
+        <section class="about-skills">
+            <h2 class="about-section-title">Formación</h2>
             <div class="skills-grid">
-
-
-                <!-- FIX #3a: Card ML actualizada — PyTorch "básico" → avanzado + HuggingFace + BETO -->
                 <div class="skill-card">
-                    <h3>
-                        ML & Data Science
-                    </h3>
+                    <h3>Ingeniería Civil Industrial e Informática</h3>
                     <ul>
-                        <li>• Python (Pandas, NumPy, Scikit-learn)</li>
-                        <li>• Modelos Predictivos (XGBoost, LGBM)</li>
+                        <li>• Universidad Técnica Federico Santa María</li>
+                        <li>• UTFSM — Valparaíso, Chile</li>
+                        <li>• Doble especialidad: Industrial + Informática</li>
+                        <li>• Tesis: ML para optimización logística en e-commerce</li>
+                        <li>• Año de titulación: 2024</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Diplomado en Análisis de Datos</h3>
+                    <ul>
+                        <li>• Universidad del Desarrollo (UDD)</li>
+                        <li>• Énfasis en modelado estadístico y visualización</li>
+                        <li>• Python · R · Power BI · Tableau</li>
+                        <li>• Machine Learning aplicado a negocios</li>
+                        <li>• Año: 2024</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- SKILLS -->
+        <section id="skills" class="about-skills">
+            <h2 class="about-section-title">Habilidades Técnicas</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>ML &amp; Data Science</h3>
+                    <ul>
+                        <li>• Python · pandas · NumPy · scikit-learn</li>
+                        <li>• XGBoost · LightGBM · Random Forest</li>
                         <li>• PyTorch · CUDA · FP16 Mixed Precision</li>
                         <li>• HuggingFace Transformers · BETO Fine-tuning</li>
                         <li>• Active Learning · WeightedTrainer</li>
                         <li>• TF-IDF · MinHash LSH (datasketch)</li>
-                        <li>• Feature Engineering · Análisis Estadístico (R)</li>
+                        <li>• Análisis estadístico · R · statsmodels</li>
                     </ul>
                 </div>
-
-
-
-                <!-- FIX #3b: Card Data Engineering actualizada — Medallion, xxhash, Lingua -->
                 <div class="skill-card">
-                    <h3>
-                        Data Engineering
-                    </h3>
+                    <h3>Data Engineering</h3>
                     <ul>
-                        <li>• SQL (PostgreSQL, MySQL)</li>
+                        <li>• SQL · PostgreSQL · MySQL</li>
                         <li>• ETL/ELT Pipelines end-to-end</li>
                         <li>• Arquitectura Medallion (Bronze/Silver/Gold)</li>
                         <li>• Apache Airflow · PySpark</li>
                         <li>• xxhash · difflib · Lingua · langdetect</li>
-                        <li>• Cloud (Azure, GCP)</li>
+                        <li>• Cloud: Azure · GCP</li>
                     </ul>
                 </div>
-
-
-
-                <!-- Sin cambios: BI & Visualization -->
                 <div class="skill-card">
-                    <h3>
-                        BI & Visualization
-                    </h3>
+                    <h3>BI &amp; Visualización</h3>
                     <ul>
-                        <li>• Power BI</li>
-                        <li>• Tableau</li>
-                        <li>• Dashboard Design</li>
-                        <li>• Storytelling con Datos</li>
-                        <li>• openpyxl (Excel condicional dinámico)</li>
+                        <li>• Power BI · Tableau</li>
+                        <li>• Dashboard design &amp; storytelling</li>
+                        <li>• openpyxl (formato condicional dinámico)</li>
+                        <li>• matplotlib · seaborn · Plotly</li>
+                        <li>• Google Analytics 4</li>
                     </ul>
                 </div>
-
-
-
-                <!-- FIX #3c: Card DevOps actualizada — Selenium, Telegram Bot, Cloudflare -->
                 <div class="skill-card">
-                    <h3>
-                        DevOps & Tools
-                    </h3>
+                    <h3>DevOps &amp; Automatización</h3>
                     <ul>
-                        <li>• Git & GitHub · CI/CD</li>
-                        <li>• Docker · GitHub Actions</li>
+                        <li>• Git · GitHub · CI/CD (GitHub Actions)</li>
+                        <li>• Docker · Azure Functions</li>
                         <li>• Selenium · Microsoft Edge (profiles)</li>
                         <li>• Telegram Bot API (ChatOps RBAC)</li>
                         <li>• Cloudflare WAF · Turnstile · ipapi.is</li>
-                        <li>• API REST · python-dotenv · filelock</li>
+                        <li>• REST API · python-dotenv · filelock</li>
                     </ul>
                 </div>
-
-
-                <!-- FIX #3d: Card NUEVA — Infraestructura -->
                 <div class="skill-card">
-                    <h3>
-                        Infraestructura
-                    </h3>
+                    <h3>Infraestructura</h3>
                     <ul>
                         <li>• Proxmox VE · LXC Containers</li>
-                        <li>• rclone · OneDrive / S3 sync</li>
-                        <li>• SMB/CIFS · Perl Hooks</li>
-                        <li>• systemd · os.fsync()</li>
-                        <li>• PyAutoGUI · Pillow</li>
-                        <li>• Azure Functions · Azure PostgreSQL</li>
+                        <li>• rclone · OneDrive / S3 sync (MD5)</li>
+                        <li>• SMB/CIFS · Perl Hooks · systemd</li>
+                        <li>• os.fsync() IPC · Estado D Linux</li>
+                        <li>• Azure PostgreSQL · Azure Monitor</li>
+                        <li>• Application Insights</li>
                     </ul>
                 </div>
-
-
             </div>
         </section>
-
-
-
-        <!-- Architecture Section -->
+        <!-- ARQUITECTURA DEL PORTAFOLIO -->
         <section id="architecture" class="about-architecture">
-            <h2 class="about-subsection-title">
-                Arquitectura de Este Portafolio
-            </h2>
-            <p>
-                Este sitio web es en sí mismo, un proyecto demostrativo de mis habilidades full-stack.
-                Combina un frontend estático desplegado globalmente con un backend serverless seguro
-                y una base de datos para analytics en tiempo real.
-            </p>
-
-
-
-            <div class="arch-diagram">
-                <img src="/assets/images/diagrama-arquitectura.png" alt="Arquitectura del Portafolio">
+            <h2 class="about-subsection-title">Arquitectura de Este Portafolio</h2>
+            <p>Este sitio es en sí mismo un proyecto de producción: frontend estático en GitHub Pages,
+            backend serverless en Azure Functions Python 3.11, base de datos PostgreSQL para analytics
+            en tiempo real y un pipeline de seguridad de 6 capas con Cloudflare, Turnstile e ipapi.is.
+            La documentación técnica completa está en el repositorio público:</p>
+            <div class="docs-grid">
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/SECURITY.md"
+                   target="_blank" rel="noopener noreferrer" class="doc-card">
+                    <div class="doc-icon">🔐</div>
+                    <p class="doc-title">SECURITY.md</p>
+                    <p class="doc-description">Pipeline de 6 capas, 9 casos, árbol de decisión</p>
+                </a>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/ARCHITECTURE.md"
+                   target="_blank" rel="noopener noreferrer" class="doc-card">
+                    <div class="doc-icon">🏗️</div>
+                    <p class="doc-title">ARCHITECTURE.md</p>
+                    <p class="doc-description">Decisiones técnicas justificadas, trade-offs</p>
+                </a>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/DATABASE.md"
+                   target="_blank" rel="noopener noreferrer" class="doc-card">
+                    <div class="doc-icon">💾</div>
+                    <p class="doc-title">DATABASE.md</p>
+                    <p class="doc-description">Schema, índices estratégicos, TTL automatizado</p>
+                </a>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/API.md"
+                   target="_blank" rel="noopener noreferrer" class="doc-card">
+                    <div class="doc-icon">🔌</div>
+                    <p class="doc-title">API.md</p>
+                    <p class="doc-description">Endpoints, contrato de respuesta, 9 casos</p>
+                </a>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/CSS-ARCHITECTURE.md"
+                   target="_blank" rel="noopener noreferrer" class="doc-card">
+                    <div class="doc-icon">🎨</div>
+                    <p class="doc-title">CSS-ARCHITECTURE.md</p>
+                    <p class="doc-description">ITCSS plano, tokens, dark mode, responsive</p>
+                </a>
+                <a href="https://github.com/franmdev/franmdev.github.io/blob/main/docs/SETUP.md"
+                   target="_blank" rel="noopener noreferrer" class="doc-card">
+                    <div class="doc-icon">🚀</div>
+                    <p class="doc-title">SETUP.md</p>
+                    <p class="doc-description">Setup local, deployment Azure, CI/CD</p>
+                </a>
             </div>
-
-
-
-            <!-- Arquitectura: link al repo del portafolio -->
             <div class="arch-cta">
-                <a href="https://github.com/franmdev/franciscomora.dev" target="_blank" class="link-coder">
-                    Leer documentación técnica completa (README) →
+                <a href="https://github.com/franmdev/franmdev.github.io"
+                   target="_blank" rel="noopener noreferrer" class="link-coder">
+                    Ver repositorio completo en GitHub →
                 </a>
             </div>
         </section>
-
-
-
-        <!-- Contact Section -->
+        <!-- CONTACTO -->
         <section id="contact" class="about-contact">
-            <h2 class="about-subsection-title">
-                Conectemos
-            </h2>
-            <p>
-                Disponible para oportunidades y colaboraciones.
-            </p>
-
-
-            <!-- FIX #5: Corregida la sintaxis markdown rota que se renderizaba como texto plano -->
+            <h2 class="about-subsection-title">Conectemos</h2>
+            <p>Disponible para oportunidades en Data Engineering, MLOps y posiciones full-stack
+            con componente analítico.</p>
             <p class="about-contact-email">
                 <a href="mailto:contacto@franciscomora.dev" class="link-coder">
                     contacto@franciscomora.dev
                 </a>
             </p>
-
             <div class="contact-links">
-                <a href="https://github.com/franmdev" target="_blank">
+                <a href="https://github.com/franmdev" target="_blank" rel="noopener noreferrer"
+                   aria-label="GitHub de Francisco Mora">
                     <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
                 </a>
-                <a href="https://linkedin.com/in/mora-francisco" target="_blank">
+                <a href="https://linkedin.com/in/mora-francisco" target="_blank" rel="noopener noreferrer"
+                   aria-label="LinkedIn de Francisco Mora">
                     <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
-                        <path
-                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                     </svg>
                 </a>
             </div>
         </section>
     </main>
-
-
-
     <footer></footer>
-
-
-
     <script src="/assets/js/load-components.js"></script>
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/mobile-menu.js"></script>
 </body>
-
-
-
 </html>

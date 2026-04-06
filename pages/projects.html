@@ -1,49 +1,34 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyectos de Data Engineering, MLOps y arquitectura cloud en producción — Francisco Mora, Ingeniero Civil Industrial e Informática UTFSM.">
     <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-    <title>Proyectos - Francisco Mora</title>
-
-
+    <title>Proyectos — Francisco Mora</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-    <!-- Único punto de entrada CSS. Sin bloque <style> embebido. -->
     <link rel="stylesheet" href="../assets/css/main.css">
-
-
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVW5058EVE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-QVW5058EVE');
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-QVW5058EVE');
     </script>
-
-
+    <!-- Cloudflare Turnstile -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
-
-
-
 <body class="list" id="top">
     <header class="header"><!-- navbar cargado por load-components.js --></header>
     <div id="loader-wrapper">
         <p>Validando conexión segura...</p>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
             <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
-            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="15.7 62.8"
-                stroke-dashoffset="0" class="spinner-circle"></circle>
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
         </svg>
     </div>
-
-
-
     <!-- VALIDATION MODAL — style="display:none" FUNCIONAL (main.js), no tocar -->
     <div id="validation-modal" style="display: none;">
         <div class="validation-overlay"></div>
@@ -56,75 +41,53 @@
             <div class="validation-spinner" style="display: none;" id="validation-spinner">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="spinner-icon">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" opacity="0.2"></circle>
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="15.7 62.8"
-                        stroke-dashoffset="0" class="spinner-circle"></circle>
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
+                        stroke-dasharray="15.7 62.8" stroke-dashoffset="0" class="spinner-circle"></circle>
                 </svg>
                 <p>Validando...</p>
             </div>
             <div id="cf-turnstile-widget" class="turnstile-widget-center"></div>
         </div>
     </div>
-
-
-
     <!-- BLOCKED MESSAGE — style="display:none" FUNCIONAL (main.js), no tocar -->
     <div id="blocked-message" style="display: none;">
         <h2>Acceso Denegado</h2>
         <p>Lo sentimos, no podemos mostrar el contenido desde esta ubicación por razones de seguridad.</p>
     </div>
-
-
-
-    <!-- ======== MAIN CONTENT ======== -->
     <main id="main-content">
-
-
         <h1 class="projects-page-title">Proyectos</h1>
         <p class="projects-page-lead">
             Proyectos de ingeniería end-to-end — desde arquitectura y seguridad hasta Machine Learning en producción.
         </p>
-
-
-
-        <!-- ================================================ -->
-        <!-- PROYECTO 1: Este Portafolio                      -->
-        <!-- ================================================ -->
+        <!-- ================================================
+             PROYECTO 1: Este Portafolio
+        ================================================ -->
         <article id="portfolio" class="article-card">
-
-
             <div class="project-card-header">
                 <time>2024-10-26</time>
                 <span class="project-status-badge project-status-badge--live">✓ En Producción</span>
             </div>
-
-
             <h2 class="project-card-title">Este Portafolio — Full Stack Data System</h2>
             <p class="card-meta">Arquitectura Web · Seguridad · Data Engineering · Azure</p>
-
-
-            <p class="card-desc">
-                El sitio que estás viendo es, en sí mismo, un proyecto de producción. Combina un frontend estático
-                desplegado globalmente en GitHub Pages con un backend serverless en Azure Functions y una base de
-                datos PostgreSQL para analytics en tiempo real. Incluye un sistema de seguridad multi-capa con
-                validación inteligente de visitas y "Fast Pass" para usuarios de confianza.
-            </p>
-
-
+            <p class="card-desc">El sitio que estás viendo es, en sí mismo, un proyecto de producción. Combina
+            un frontend estático desplegado globalmente en GitHub Pages con un backend serverless en Azure
+            Functions y una base de datos PostgreSQL para analytics en tiempo real. Incluye un pipeline de
+            seguridad de 6 capas con validación inteligente de visitas y Fast Pass para usuarios de confianza.</p>
             <div class="metrics-grid metrics-grid--sm">
                 <div class="metric-card">
                     <div class="metric-value">&lt;200ms</div>
                     <div class="metric-title">Response time</div>
-                    <div class="metric-description">Azure Functions serverless</div>
+                    <div class="metric-description">Azure Functions serverless · Fast Pass ~50ms</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">5 capas</div>
+                    <div class="metric-value">6 capas</div>
                     <div class="metric-title">Defensa activa</div>
-                    <div class="metric-description">WAF + Turnstile + ipapi + Rate Limit + Caché</div>
+                    <div class="metric-description">Session cache + WAF + Turnstile + ipapi + Rate Limit + DB</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-value">$0</div>
-                    <div class="metric-title">Costo operativo</div>
-                    <div class="metric-description">Optimizado a tiers gratuitos</div>
+                    <div class="metric-value">~$5/mes</div>
+                    <div class="metric-title">Costo total</div>
+                    <div class="metric-description">$0 compute · ~$5 validación VPN · tiers gratuitos</div>
                 </div>
                 <div class="metric-card">
                     <div class="metric-value">RT</div>
@@ -132,38 +95,38 @@
                     <div class="metric-description">PostgreSQL + datos de navegación en tiempo real</div>
                 </div>
             </div>
-
-
             <ul class="project-features">
                 <li>
                     <span class="feature-icon">▸</span>
-                    <span><strong>Seguridad multi-capa:</strong> Cloudflare WAF bloquea amenazas en el edge;
-                    Turnstile valida humanos; ipapi.is filtra geografía sospechosa; Rate Limit en Azure;
-                    Caché DB para "Fast Pass" sin re-autenticar.</span>
+                    <span><strong>Pipeline de seguridad en 6 capas:</strong> Session cache localStorage (0ms)
+                    elimina llamadas redundantes; Cloudflare WAF bloquea en el edge; Turnstile valida humanos
+                    sin CAPTCHA visible; ipapi.is detecta VPN/Proxy/Tor; Rate Limiting; caché PostgreSQL 24h
+                    para Fast Pass sin re-validar.</span>
                 </li>
                 <li>
                     <span class="feature-icon">▸</span>
-                    <span><strong>Backend serverless:</strong> Azure Functions Python con autenticación RBAC,
-                    registro de visitas con IP anonimizada y persistencia en PostgreSQL Azure.</span>
+                    <span><strong>Backend serverless:</strong> Azure Functions Python con registro de visitas,
+                    IP anonimizada y persistencia en PostgreSQL Azure. UPSERT idempotente y limpieza
+                    automática diaria vía Timer Trigger.</span>
                 </li>
                 <li>
                     <span class="feature-icon">▸</span>
-                    <span><strong>Frontend estático:</strong> GitHub Pages con CDN global, carga de componentes
-                    modulares vía JS (navbar/footer), dark mode nativo sin frameworks.</span>
+                    <span><strong>Frontend estático:</strong> GitHub Pages con CDN global, componentes
+                    dinámicos reutilizables (navbar/footer via fetch), dark mode nativo con IIFE síncrona
+                    para eliminar flash de color.</span>
                 </li>
                 <li>
                     <span class="feature-icon">▸</span>
-                    <span><strong>UX sin fricciones:</strong> Flujo de validación con transiciones suaves sin
-                    reload; modal Turnstile centrado; fade-in del contenido post-validación.</span>
+                    <span><strong>UX sin fricciones:</strong> Flujo de validación con transiciones CSS suaves
+                    sin reload de página; modal Turnstile responsive; fade-in del contenido
+                    post-validación en 400ms.</span>
                 </li>
             </ul>
-
-
             <div class="stack-grid">
                 <div class="stack-section">
                     <h4>Backend</h4>
                     <ul>
-                        <li>Azure Functions (Python)</li>
+                        <li>Azure Functions (Python 3.11)</li>
                         <li>PostgreSQL (Azure)</li>
                         <li>REST API</li>
                     </ul>
@@ -172,8 +135,8 @@
                     <h4>Seguridad</h4>
                     <ul>
                         <li>Cloudflare WAF</li>
-                        <li>Turnstile CAPTCHA</li>
-                        <li>ipapi.is</li>
+                        <li>Turnstile (anti-bot)</li>
+                        <li>ipapi.is (VPN detection)</li>
                     </ul>
                 </div>
                 <div class="stack-section">
@@ -187,25 +150,16 @@
                 <div class="stack-section">
                     <h4>DevOps</h4>
                     <ul>
-                        <li>GitHub Actions</li>
+                        <li>GitHub Actions CI/CD</li>
                         <li>Google Analytics 4</li>
                         <li>Azure Monitor</li>
                     </ul>
                 </div>
             </div>
-
-
             <div class="project-card-ctas">
                 <a href="https://github.com/franmdev/franmdev.github.io" target="_blank"
-                    rel="noopener noreferrer" class="project-cta-primary">
-                    Ver Código en GitHub →
-                </a>
-                <a href="/pages/about.html#architecture" class="project-cta-secondary">
-                    Ver Arquitectura Completa →
-                </a>
+                    rel="noopener noreferrer" class="project-cta-primary">Ver Código en GitHub →</a>
             </div>
-
-
             <div class="tags-list">
                 <span class="tag">Azure Functions</span>
                 <span class="tag">PostgreSQL</span>
@@ -214,37 +168,22 @@
                 <span class="tag">GitHub Pages</span>
                 <span class="tag">Turnstile</span>
             </div>
-
-
         </article>
-
-
-
-        <!-- ================================================ -->
-        <!-- PROYECTO 2: B2B Lead Intelligence Pipeline       -->
-        <!-- ================================================ -->
+        <!-- ================================================
+             PROYECTO 2: B2B Lead Intelligence Pipeline
+        ================================================ -->
         <article id="b2b-pipeline" class="article-card">
-
-
             <div class="project-card-header">
                 <time>2025-01-15</time>
                 <span class="project-status-badge project-status-badge--wip">⚙ En Desarrollo</span>
             </div>
-
-
             <h2 class="project-card-title">B2B Lead Intelligence Pipeline</h2>
             <p class="card-meta">Data Engineering · MLOps · NLP · Infraestructura · ChatOps</p>
-
-
-            <p class="card-desc">
-                Pipeline empresarial de 6 fases con arquitectura Medallion (Bronze → Silver → Gold) para
-                extracción, procesamiento y clasificación automática de leads B2B. Orquestado via Telegram Bot
-                (ChatOps RBAC) desde cualquier dispositivo, desplegado en Proxmox VE con LXC air-gapped y
-                sincronización Zero-Trust a la nube. La capa Gold clasifica ofertas con BETO (Spanish BERT)
-                fine-tuned y loop de Active Learning.
-            </p>
-
-
+            <p class="card-desc">Pipeline empresarial de 6 fases con arquitectura Medallion
+            (Bronze → Silver → Gold) para extracción, procesamiento y clasificación automática de leads B2B.
+            Orquestado vía Telegram Bot (ChatOps RBAC) desde cualquier dispositivo, desplegado en Proxmox VE
+            con LXC air-gapped y sincronización Zero-Trust a la nube. La capa Gold clasifica ofertas con
+            BETO (Spanish BERT) fine-tuned y loop de Active Learning.</p>
             <div class="metrics-grid metrics-grid--sm">
                 <div class="metric-card">
                     <div class="metric-value">6 fases</div>
@@ -267,13 +206,11 @@
                     <div class="metric-description">Triage por incertidumbre + HITL Excel</div>
                 </div>
             </div>
-
-
             <ul class="project-features">
                 <li>
                     <span class="feature-icon">F1</span>
-                    <span><strong>Command &amp; Control:</strong> Telegram Bot con RBAC, telemetría en tiempo real
-                    desde <code>status.json</code>, IPC por flags + <code>os.fsync()</code> para graceful
+                    <span><strong>Command &amp; Control:</strong> Telegram Bot con RBAC, telemetría en tiempo
+                    real desde <code>status.json</code>, IPC por flags + <code>os.fsync()</code> para graceful
                     shutdown Zero-Trust, capturas forenses con PyAutoGUI.</span>
                 </li>
                 <li>
@@ -290,15 +227,15 @@
                 </li>
                 <li>
                     <span class="feature-icon">F4</span>
-                    <span><strong>High Availability Zero-Trust:</strong> Solución al kernel Linux Estado D
-                    en Proxmox. Defensa en 2 capas: IPC elegante + hook Perl desfibrilador
+                    <span><strong>High Availability Zero-Trust:</strong> Solución al kernel Linux Estado D en
+                    Proxmox. Defensa en 2 capas: IPC elegante + hook Perl desfibrilador
                     (<code>umount -f -l</code>). rclone a OneDrive/S3 con validación MD5.</span>
                 </li>
                 <li>
                     <span class="feature-icon">F5</span>
-                    <span><strong>Silver Layer MDM:</strong> Pipeline 5 fases — hash exacto (xxhash),
+                    <span><strong>Silver Layer MDM:</strong> Pipeline 5 etapas — hash exacto (xxhash),
                     filtro heurístico regex, near-duplicates CUDA/MinHash, verificación Levenshtein.
-                    Voting ensemble 5 capas para filtro de idioma español.</span>
+                    Voting ensemble de 5 detectores para filtro de idioma español.</span>
                 </li>
                 <li>
                     <span class="feature-icon">F6</span>
@@ -307,8 +244,6 @@
                     5 buckets exportado a Excel con formato condicional dinámico para QA.</span>
                 </li>
             </ul>
-
-
             <div class="stack-grid">
                 <div class="stack-section">
                     <h4>ML / NLP</h4>
@@ -323,9 +258,9 @@
                 <div class="stack-section">
                     <h4>Data Eng</h4>
                     <ul>
-                        <li>Pandas + NumPy</li>
+                        <li>pandas + NumPy</li>
                         <li>xxhash + difflib</li>
-                        <li>Scikit-learn (TF-IDF)</li>
+                        <li>scikit-learn (TF-IDF)</li>
                         <li>openpyxl</li>
                         <li>python-dotenv</li>
                     </ul>
@@ -351,16 +286,12 @@
                     </ul>
                 </div>
             </div>
-
-
             <div class="project-card-ctas">
-                <a href="/pages/about.html" class="project-cta-primary">
-                    Ver Stack Completo en Sobre Mí →
+                <a href="/pages/projects/data-engineering.html" class="project-cta-primary">
+                    Ver Arquitectura Detallada →
                 </a>
                 <span class="cta-note">Repositorio público — próximamente en GitHub</span>
             </div>
-
-
             <div class="tags-list">
                 <span class="tag">Python</span>
                 <span class="tag">PyTorch</span>
@@ -372,36 +303,21 @@
                 <span class="tag">MinHash LSH</span>
                 <span class="tag">Active Learning</span>
             </div>
-
-
         </article>
-
-
-
-        <!-- ================================================ -->
-        <!-- PROYECTO 3: Proyecto de Titulación UTFSM         -->
-        <!-- ================================================ -->
+        <!-- ================================================
+             PROYECTO 3: Proyecto de Titulación UTFSM
+        ================================================ -->
         <article id="titulo" class="article-card">
-
-
             <div class="project-card-header">
                 <time>2024-03-01</time>
                 <span class="project-status-badge project-status-badge--soon">◷ Próximamente</span>
             </div>
-
-
             <h2 class="project-card-title">Proyecto de Titulación UTFSM — ML Aplicado</h2>
             <p class="card-meta">Machine Learning · Data Science · Python · Ingeniería Industrial</p>
-
-
-            <p class="card-desc">
-                Proyecto de titulación de Ingeniería Civil Industrial e Informática en la Universidad Técnica
-                Federico Santa María. Aplicación de Machine Learning a un problema de ingeniería industrial
-                real, con pipeline de datos, modelado predictivo y análisis de resultados.
-                Detalles y código en preparación para publicación.
-            </p>
-
-
+            <p class="card-desc">Proyecto de titulación de Ingeniería Civil Industrial e Informática en la
+            Universidad Técnica Federico Santa María. Aplicación de Machine Learning a un problema de
+            ingeniería industrial real, con pipeline de datos, modelado predictivo y análisis de resultados.
+            Detalles y código en preparación para publicación.</p>
             <div class="metrics-grid metrics-grid--sm">
                 <div class="metric-card">
                     <div class="metric-value metric-value--sm">UTFSM</div>
@@ -419,8 +335,6 @@
                     <div class="metric-description">Diplomado en Análisis de Datos UDD complementario</div>
                 </div>
             </div>
-
-
             <div class="tags-list">
                 <span class="tag">Python</span>
                 <span class="tag">Scikit-learn</span>
@@ -428,24 +342,12 @@
                 <span class="tag">Data Science</span>
                 <span class="tag">UTFSM</span>
             </div>
-
-
         </article>
-
-
     </main>
-
-
-
     <footer></footer>
-
-
     <script src="/assets/js/load-components.js"></script>
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/mobile-menu.js"></script>
-
 </body>
-
-
 </html>
