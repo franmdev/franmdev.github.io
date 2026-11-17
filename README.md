@@ -214,9 +214,9 @@ Cada documento está optimizado para su audiencia:
 
 ## 📧 Contacto
 
-- **Email:** pendiente
-- **LinkedIn:** pendiente
-- **GitHub:** pendiente
+- **Email:** [contacto@franciscomora.dev](mailto:contacto@franciscomora.dev)
+- **LinkedIn:** [linkedin.com/in/mora-francisco](https://linkedin.com/in/mora-francisco)
+- **GitHub:** [github.com/franmdev](https://github.com/franmdev)
 - **Portfolio:** [https://franciscomora.dev](https://franciscomora.dev)
 
 ---

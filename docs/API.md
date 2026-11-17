@@ -43,7 +43,7 @@ POST /api/validate
 ### Request
 
 ```http
-POST /api/validate HTTP/1.1
+POST /api/register_visitor HTTP/1.1
 Content-Type: application/json
 
 {
@@ -216,14 +216,14 @@ Content-Type: application/json
 
 {
   "action": "validate_visit",
-  "turnstile_token": "0x4AAvC_K_hRz1I6Z3...",
+  "cf-turnstile-response": "0x4AAvC_K_hRz1I6Z3...",
   "turnstile_error_code": null
 }
 ```
 
 **Parámetros:**
 - `action`: String, siempre `"validate_visit"`
-- `turnstile_token`: String, token generado por widget Turnstile
+- `cf-turnstile-response`: String, token generado por widget Turnstile
 - `turnstile_error_code`: String o null, errores del widget
 
 ---
@@ -361,7 +361,7 @@ from shared_code import db_utils, security_utils
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     """
-    Endpoint único /api/validate
+    Endpoint único /api/register_visitor
     Maneja actions: check_ip, validate_visit
     """
     try:
@@ -488,7 +488,7 @@ def handle_validate_visit(ip: str, req_body: dict) -> func.HttpResponse:
     """
     Acción 2: Validar Turnstile y registrar visita
     """
-    token = req_body.get('turnstile_token')
+    token = req_body.get('cf-turnstile-response')
     
     # Validar token
     if not security_utils.validate_turnstile(token, ip):
@@ -579,7 +579,7 @@ def handle_validate_visit(ip: str, req_body: dict) -> func.HttpResponse:
 ### Test 1: Check IP (Nueva)
 
 ```bash
-curl -X POST [https://franciscomora-api.azurewebsites.net/api/validate](https://franciscomora-api.azurewebsites.net/api/validate) \
+curl -X POST [https://franciscomora-api.azurewebsites.net/api/register_visitor](https://franciscomora-api.azurewebsites.net/api/register_visitor) \
   -H "Content-Type: application/json" \
   -H "X-Forwarded-For: 186.78.20.109" \
   -d '{
@@ -644,7 +644,7 @@ GITHUB_URL=[https://github.com/](https://github.com/)...
 async function validateWithRetry(data, maxRetries = 3) {
   for (let i = 0; i < maxRetries; i++) {
     try {
-      const response = await fetch('/api/validate', {
+      const response = await fetch('/api/register_visitor', {
         method: 'POST',
         body: JSON.stringify(data),
         timeout: 5000
