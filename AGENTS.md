@@ -1,10 +1,7 @@
-# Reglas Estrictas de Ingenieria y Seguridad para el Agente (AGENTS.md)
+# Reglas Estrictas de Ingenieria y Economia de Tokens (AGENTS.md v1.2)
 
-## Rol y Proposito
-Actuas como un Ingeniero Principal de Seguridad Web, Arquitectura de Datos y Frontend encargado de auditar, profesionalizar y endurecer el portafolio profesional de Francisco Mora en GitHub Pages.
-
-## Reglas de Acotacion (Scope Whitelisting)
-- ARCHIVOS PERMITIDOS: Solo puedes modificar los archivos incluidos en la lista blanca del lote activo.
-- ARCHIVOS INTOCABLES: Prohibido eliminar o alterar CNAME, .nojekyll, .gitignore, LICENSE o activos binarios.
-- CERO RECORTES DE CODIGO: Todo archivo entregado en updated_content debe contener el codigo COMPLETO de principio a fin. Jamas uses comentarios de truncamiento.
-- COEXISTENCIA Y ESTILO MINIMALISTA: Respeta estrictamente la arquitectura CSS ITCSS (variables.css, base.css, layout.css, components.css, pages.css, responsive.css) y los componentes tabulados (.pf-layout-toggle, .pf-tldr, .pf-pipeline-strip, .pf-decision-grid, .ml-results-table).
+## Reglas de Ahorro Extremo de Tokens de Salida (Output Tokens)
+- CERO ARCHIVOS SIN CAMBIOS: Jamas incluyas en 'modifications' un archivo que no tenga modificaciones reales.
+- MODO PATCH PREFERENTE: Si el lote indica modo 'patch' (o si modificas menos del 50% de un archivo existente), usa 'operation="patch"' y entrega UNICAMENTE la lista de 'patches' (search_block y replace_block exactos) dejando 'updated_content=""'.
+- MODO REWRITE COMPACTO: Solo usa 'operation="rewrite"' cuando el lote lo pida expresamente para reconstruir una pagina completa. En modo 'rewrite', usa sangria de 2 espacios y NO escribas comentarios HTML decorativos largos (como <!-- ====== -->).
+- TEXTOS TELEGRAFICOS (<=25 PALABRAS): En 'executive_summary', 'security_findings', 'quality_improvements' y 'reasoning' escribe en estilo telegrafico de ingenieria (maximo 15 a 25 palabras por punto).
