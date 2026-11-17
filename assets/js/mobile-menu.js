@@ -16,7 +16,7 @@ function bindMobileMenu() {
     const mobileLinks = mobileMenu.querySelectorAll('a');
     mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('hidden');
             menuBtn.classList.remove('active');
         });
     });
